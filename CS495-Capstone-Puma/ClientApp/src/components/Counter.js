@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export class Counter extends Component {
-  displayName = Counter.name
+  displayName = Counter.name;
 
   constructor(props) {
     super(props);
