@@ -11,19 +11,6 @@ export class CoolGuyCreator extends Component{
             .then(data => {
                 this.setState({ Name: data.name, Job : data.job, Age : data.age, Response : data.stringify});
             });
-        /*function SendUncoolGuy(){
-            fetch('api/ExampleClass/ConvertLoser', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    firstParam: 'yourValue',
-                    secondParam: 'yourOtherValue',
-                }).catch(error);
-            })
-        }*/
         
     }
     
