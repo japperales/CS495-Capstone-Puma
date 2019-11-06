@@ -18,7 +18,7 @@ namespace CS495_Capstone_Puma.Controllers
         [HttpPost("[action]")]
         public Person ConvertLoser()
         {
-            
+            return new Person("Ignore this for now", 0, "you heard me, ignore it");
         }
 
         public class Person
