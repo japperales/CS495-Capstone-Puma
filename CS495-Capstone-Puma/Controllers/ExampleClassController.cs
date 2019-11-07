@@ -21,7 +21,7 @@ namespace CS495_Capstone_Puma.Controllers
         [HttpPost]
         [Route("[action]")]
         [Consumes(MediaTypeNames.Application.Json)]
-        public  JsonResult ConvertLoser([FromBody] string name, [FromBody] int age, [FromBody] string job)
+        public  JsonResult ConvertLoser([FromForm] string name, [FromForm] int age, [FromForm] string job)
         {
            Person newCoolGuy = new Person(name, age, job);
            newCoolGuy.job = "Professional Cool Guy";
