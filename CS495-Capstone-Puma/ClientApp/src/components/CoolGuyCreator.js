@@ -22,6 +22,7 @@ export class CoolGuyCreator extends Component{
                   'Content-Type': 'application/json',
               },
               body: JSON.stringify({
+                  
                   name:'Cool King',
                   age: 45,
                   job : 'Burger Sommelier'
