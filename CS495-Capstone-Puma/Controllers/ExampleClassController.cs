@@ -20,10 +20,10 @@ namespace CS495_Capstone_Puma.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        [Consumes(MediaTypeNames.Application.Json)]
-        public  JsonResult ConvertLoser([FromForm] string name, [FromForm] int age, [FromForm] string job)
+        
+        public  JsonResult ConvertLoser([FromBody] Person person)
         {
-           Person newCoolGuy = new Person(name, age, job);
+            Person newCoolGuy = person;
            newCoolGuy.job = "Professional Cool Guy";
            return Json(newCoolGuy);
         }
