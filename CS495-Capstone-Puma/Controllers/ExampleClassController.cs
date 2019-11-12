@@ -23,9 +23,8 @@ namespace CS495_Capstone_Puma.Controllers
         
         public  JsonResult ConvertLoser([FromBody] Person person)
         {
-            Person newCoolGuy = person;
-           newCoolGuy.job = "Professional Cool Guy";
-           return Json(newCoolGuy);
+            person.job = "Professional Cool Guy";
+           return Json(person);
         }
 
         public class Person
