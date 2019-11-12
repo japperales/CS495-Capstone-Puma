@@ -10,6 +10,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Flurl" Version="3.0.0-pre1" />
+        <PackageReference Include="Flurl.Http" Version="3.0.0-pre1" />
         <PackageReference Include="Microsoft.AspNetCore" Version="2.1.7" />
         <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
@@ -24,6 +26,10 @@
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Test\ModelTest" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
