@@ -43,6 +43,11 @@ export class NavMenu extends Component {
               <Glyphicon glyph='save-file' /> Puma
             </NavItem>
           </LinkContainer>
+            <LinkContainer to={'/tabspage'}>
+              <NavItem>
+                <Glyphicon glyph='save-file' /> Tabs
+              </NavItem>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
