@@ -19,17 +19,12 @@
         <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.13" />
         <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
-        <PackageReference Include="xunit" Version="2.4.1" />
     </ItemGroup>
 
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Test\ModelTest" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
