@@ -1,32 +1,40 @@
 import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import {CurrentAccountInput} from "./CurrentAccountInput";
+import {PersonalInput} from "./PersonalInput";
 import {AccountHistoryInput} from "./AccountHistoryInput";
 import {AssetsInput} from "./AssetsInput";
-import ReactTable from "react-table";
+import {BondInput} from "./BondInput";
+import {MiscAssetInput} from "./MiscAssetInput";
 
 export class TabsPage extends React.Component {
-   
 
     render() {
         return(
             <div>
                 <Tabs>
                     <TabList>
-                        <Tab>Account Info</Tab>
+                        <Tab>Personal Info</Tab>
                         <Tab>Account History</Tab>
                         <Tab>Assets</Tab>
+                        <Tab>Bonds</Tab>
+                        <Tab>Miscellaneous Assets</Tab>
                     </TabList>
 
                     <TabPanel>
-                        <CurrentAccountInput />
+                        <PersonalInput />
                     </TabPanel>
                     <TabPanel>
                         <AccountHistoryInput />
                     </TabPanel>
                     <TabPanel>
                         <AssetsInput />
+                    </TabPanel>
+                    <TabPanel>
+                        <BondInput />
+                    </TabPanel>
+                    <TabPanel>
+                        <MiscAssetInput />
                     </TabPanel>
                 </Tabs>
                 <button>Submit Info</button>

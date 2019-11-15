@@ -17,7 +17,7 @@ export class AssetsInput extends React.Component{
         super(props);
         this.state = state;
         this.addAsset = this.addAsset.bind(this);
-        this.removeAsset = this.addAsset.bind(this);
+        this.removeAsset = this.removeAsset.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
     
@@ -63,12 +63,14 @@ export class AssetsInput extends React.Component{
             price: this.state.inputPrice, 
             quantity: this.state.inputQuantity
         };
-        this.setState({assets:this.state.assets.concat(newAsset),
-            inputName: "",
-            inputPrice: null,
-            inputQuantity: null
+        this.setState({assets:this.state.assets.concat(newAsset)
         })
     }
+    
+    removeAsset(){
+        this.setState({asset:this.state.assets.pop()})
+    }
+    
     render(){
         return(
             <div>
@@ -86,6 +88,7 @@ export class AssetsInput extends React.Component{
                 <label>Quantity</label>
                 <input type="number" name="inputQuantity" onChange={this.handleInputChange} value={this.state.inputQuantity}/>
                 <button onClick={this.addAsset}>Add Asset</button>
+                <button onClick={this.removeAsset}> Remove Asset</button>
                 <br/>
                 <br/>
             </div>
