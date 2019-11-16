@@ -6,6 +6,10 @@ import {AccountHistoryInput} from "./AccountHistoryInput";
 import {AssetsInput} from "./AssetsInput";
 import {BondInput} from "./BondInput";
 import {MiscAssetInput} from "./MiscAssetInput";
+import {LoanInput} from "./LoanInput";
+import {MutualFundInput} from "./MutualFundInput";
+import {StockInput} from "./StockInput";
+import {Propertyinput} from "./Propertyinput";
 
 export class TabsPage extends React.Component {
 
@@ -19,6 +23,10 @@ export class TabsPage extends React.Component {
                         <Tab>Assets</Tab>
                         <Tab>Bonds</Tab>
                         <Tab>Miscellaneous Assets</Tab>
+                        <Tab>Loans</Tab>
+                        <Tab>Mutual Funds</Tab>
+                        <Tab>Stocks</Tab>
+                        <Tab> Properties</Tab>
                     </TabList>
 
                     <TabPanel>
@@ -35,6 +43,18 @@ export class TabsPage extends React.Component {
                     </TabPanel>
                     <TabPanel>
                         <MiscAssetInput />
+                    </TabPanel>
+                    <TabPanel>
+                        <LoanInput />
+                    </TabPanel>
+                    <TabPanel>
+                        <MutualFundInput />
+                    </TabPanel>
+                    <TabPanel>
+                        <StockInput />
+                    </TabPanel>
+                    <TabPanel>
+                        <Propertyinput />
                     </TabPanel>
                 </Tabs>
                 <button>Submit Info</button>
