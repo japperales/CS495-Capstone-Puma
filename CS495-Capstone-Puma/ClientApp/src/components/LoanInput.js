@@ -5,7 +5,7 @@ let state = {assets: [
 
             incomePaymentMonth: 12345, incomePaymentDay: 54321, accrualMethodType: "annually",
 
-            PaymentFrequencyType: "monthly", incomePaymentFrequencyType: "Monthly", compoundingFrequencyType: "monthly", amortizationFrequencyType: "frequent", periodicPaymentAmount: 1000.000}
+            paymentFrequencyType: "monthly", incomePaymentFrequencyType: "Monthly", compoundingFrequencyType: "monthly", amortizationFrequencyType: "frequent", periodicPaymentAmount: 1000.000}
     ],
     inputName: null,
     inputPrice: null,
@@ -17,6 +17,7 @@ let state = {assets: [
     inputIncomePaymentDay: null,
     inputAccrualMethodType: null,
     inputPaymentFrequencyType: null,
+    inputIncomePaymentFrequencyType: null,
     inputCompoundingFrequencyType: null,
     inputAmortizationFrequencyType: null,
     inputPeriodicPaymentAmount: null
@@ -47,9 +48,9 @@ export class LoanInput extends React.Component{
         return this.state.assets.map((asset, index) => {
             const { name, price, quantity, dateOfIssue,
 
-                dateOfMaturity, incomePaymentMonth, incomePaymentDay,
+                dateOfMaturity, dateOfFirstPayment, incomePaymentMonth, incomePaymentDay,
 
-                accrualMethodType, callDate, callPrice, dateOfFirstPayment} = asset;
+                accrualMethodType, paymentFrequencyType, incomePaymentFrequencyType, compoundingFrequencyType, amortizationFrequencyType, periodicPaymentAmount} = asset;
             return (
                 <tr key={name}>
                     <td>{name}</td>
@@ -57,12 +58,15 @@ export class LoanInput extends React.Component{
                     <td>{quantity}</td>
                     <td>{dateOfIssue}</td>
                     <td>{dateOfMaturity}</td>
+                    <td>{dateOfFirstPayment}</td>
                     <td>{incomePaymentMonth}</td>
                     <td>{incomePaymentDay}</td>
                     <td>{accrualMethodType}</td>
-                    <td>{callDate}</td>
-                    <td>{callPrice}</td>
-                    <td>{dateOfFirstPayment}</td>
+                    <td>{paymentFrequencyType}</td>
+                    <td>{incomePaymentFrequencyType}</td>
+                    <td>{compoundingFrequencyType}</td>
+                    <td>{amortizationFrequencyType}</td>
+                    <td>{periodicPaymentAmount}</td>
                 </tr>
             )
         })
@@ -85,14 +89,17 @@ export class LoanInput extends React.Component{
             name: this.state.inputName,
             price: this.state.inputPrice,
             quantity: this.state.inputQuantity,
-            dateOfIssue: this.state.inputDateOfIssue,
+            dateOfIssue: this.state.inputDateOfIssue,//add asset part works fine
             dateOfMaturity: this.state.inputDateOfMaturity,
+            dateOfFirstPayment: this.state.inputDateOfFirstPayment,
             incomePaymentMonth: this.state.inputIncomePaymentMonth,
             incomePaymentDay: this.state.inputIncomePaymentDay,
             accrualMethodType: this.state.inputAccrualMethodType,
-            callDate: this.state.inputCallDate,
-            callPrice: this.state.inputCallPrice,
-            dateOfFirstPayment: this.state.inputDateOfFirstPayment
+            paymentFrequencyType: this.state.inputPaymentFrequencyType,
+            incomePaymentFrequencyType: this.state.inputIncomePaymentFrequencyType,
+            compoundingFrequencyType: this.state.inputCompoundingFrequencyType,
+            amortizationFrequencyType: this.state.inputAmortizationFrequencyType,
+            periodicPaymentAmount: this.state.inputPeriodicPaymentAmount
         };
         this.setState({assets:this.state.assets.concat(newAsset)})
     }
@@ -123,8 +130,11 @@ export class LoanInput extends React.Component{
                 <label>DateOfIssue</label>
                 <input type="date" name="inputDateOfIssue" onChange={this.handleInputChange} value={this.state.inputDateOfIssue}/>
                 <br />
-                <label>DateOfMaturity</label>
+                <label> DateOfMaturity</label>
                 <input type="date" name="inputDateOfMaturity" onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
+                <br />
+                <label>DateOfFirstPayment</label>
+                <input type="date" name="inputDateOfFirstPayment" onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
                 <br />
                 <label>IncomePaymentMonth</label>
                 <input type="number" name="inputIncomePaymentMonth" onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
@@ -135,14 +145,20 @@ export class LoanInput extends React.Component{
                 <label>AccrualMethodType</label>
                 <input type="text" name="inputAccrualMethodType" onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
                 <br />
-                <label>CallDate</label>
-                <input type="date" name="inputCallDate" onChange={this.handleInputChange} value={this.state.inputCallDate}/>
+                <label>PaymentFrequencyType</label>
+                <input type="text" name="inputPaymentFrequencyType" onChange={this.handleInputChange} value={this.state.inputPaymentFrequencyType}/>
                 <br />
-                <label>CallPrice</label>
-                <input type="date" name="inputCallPrice" onChange={this.handleInputChange} value={this.state.inputCallPrice}/>
+                <label>IncomePaymentFrequencyType</label>
+                <input type="text" name="inputIncomePaymentFrequencyType" onChange={this.handleInputChange} value={this.state.inputIncomePaymentFrequencyType}/>
                 <br />
-                <label>DateOfFirstPayment</label>
-                <input type="date" name="inputDateOfFirstPayment" onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
+                <label>CompoundingFrequencyType</label>
+                <input type="text" name="inputCompoundingFrequencyType" onChange={this.handleInputChange} value={this.state.inputCompoundingFrequencyType}/>
+                <br />
+                <label>AmortizationFrequencyType</label>
+                <input type="text" name="inputAmortizationFrequencyType" onChange={this.handleInputChange} value={this.state.inputAmortizationFrequencyType}/>
+                <br />
+                <label>PeriodicPaymentAmount</label>
+                <input type="number" name="inputPeriodicPaymentAmount" onChange={this.handleInputChange} value={this.state.inputPeriodicPaymentAmount}/>
                 <br />
                 <button onClick={this.addAsset}>Add Asset</button>
                 <button onClick={this.removeAsset}> Remove Asset</button>
