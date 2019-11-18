@@ -1,12 +1,9 @@
 import React from 'react'
 
-let state = {assets: [
-        { name: 'test1', price: '45.5', quantity: 21, dateOfIssue: "04/30/1997", dateOfMaturity: "01/01/2030", dateOfFirstPayment: "11/25/2005",
-
-            incomePaymentMonth: 12345, incomePaymentDay: 54321, accrualMethodType: "annually",
-
-            paymentFrequencyType: "monthly", incomePaymentFrequencyType: "Monthly", compoundingFrequencyType: "monthly", amortizationFrequencyType: "frequent", periodicPaymentAmount: 1000.000}
-    ],
+let state = {assets: [],
+    placeHolder: [{ name: 'test1', price: '45.5', quantity: 21, dateOfIssue: "04/30/1997", dateOfMaturity: "01/01/2030", dateOfFirstPayment: "11/25/2005",
+        incomePaymentMonth: 12345, incomePaymentDay: 54321, accrualMethodType: "annually",
+        paymentFrequencyType: "monthly", incomePaymentFrequencyType: "Monthly", compoundingFrequencyType: "monthly", amortizationFrequencyType: "frequent", periodicPaymentAmount: 1000.000}],
     inputName: null,
     inputPrice: null,
     inputQuantity: null,
@@ -38,7 +35,7 @@ export class LoanInput extends React.Component{
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.state.assets[0]);
+        let header = Object.keys(this.state.placeHolder[0]);
         return header.map((key, index) => {
             return <th key={index}>{key.toUpperCase()}</th>
         })
@@ -84,7 +81,8 @@ export class LoanInput extends React.Component{
 
     }
 
-    async addAsset(){
+    async addAsset(event){
+        event.preventDefault();
         const newAsset = {
             name: this.state.inputName,
             price: this.state.inputPrice,
@@ -113,56 +111,58 @@ export class LoanInput extends React.Component{
     render(){
         return(
             <div>
-                <h3 id='title'>Assets</h3>
+                <h3 id='title'>Loans</h3>
                 <table className='table' id='assets'>
                     <tbody>
                     <tr>{this.renderTableHeader()}</tr>
                     {this.renderTableData()}
                     </tbody>
                 </table>
+                <form onSubmit={this.addAsset}>
                 <label>Name</label>
-                <input type="text" name="inputName" onChange={this.handleInputChange} value={this.state.inputName}/>
+                <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
                 <br />
                 <label>Price</label>
-                <input type="number" name="inputPrice" onChange={this.handleInputChange} value={this.state.inputPrice}/>
+                <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
                 <br />
                 <label>Quantity</label>
-                <input type="number" name="inputQuantity" onChange={this.handleInputChange} value={this.state.inputQuantity}/>
+                <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
                 <br />
                 <label>DateOfIssue</label>
-                <input type="date" name="inputDateOfIssue" onChange={this.handleInputChange} value={this.state.inputDateOfIssue}/>
+                <input type="date" name="inputDateOfIssue" required onChange={this.handleInputChange} value={this.state.inputDateOfIssue}/>
                 <br />
                 <label>DateOfMaturity</label>
-                <input type="date" name="inputDateOfMaturity" onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
+                <input type="date" name="inputDateOfMaturity" required onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
                 <br />
                 <label>DateOfFirstPayment</label>
-                <input type="date" name="inputDateOfFirstPayment" onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
+                <input type="date" name="inputDateOfFirstPayment" required onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
                 <br />
                 <label>IncomePaymentMonth</label>
-                <input type="number" name="inputIncomePaymentMonth" onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
+                <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
                 <br />
                 <label>IncomePaymentDay</label>
-                <input type="number" name="inputIncomePaymentDay" onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
+                <input type="number" name="inputIncomePaymentDay" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
                 <br />
                 <label>AccrualMethodType</label>
-                <input type="text" name="inputAccrualMethodType" onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
+                <input type="text" name="inputAccrualMethodType" required onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
                 <br />
                 <label>PaymentFrequencyType</label>
-                <input type="text" name="inputPaymentFrequencyType" onChange={this.handleInputChange} value={this.state.inputPaymentFrequencyType}/>
+                <input type="text" name="inputPaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputPaymentFrequencyType}/>
                 <br />
                 <label>IncomePaymentFrequencyType</label>
-                <input type="text" name="inputIncomePaymentFrequencyType" onChange={this.handleInputChange} value={this.state.inputIncomePaymentFrequencyType}/>
+                <input type="text" name="inputIncomePaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentFrequencyType}/>
                 <br />
                 <label>CompoundingFrequencyType</label>
-                <input type="text" name="inputCompoundingFrequencyType" onChange={this.handleInputChange} value={this.state.inputCompoundingFrequencyType}/>
+                <input type="text" name="inputCompoundingFrequencyType" required onChange={this.handleInputChange} value={this.state.inputCompoundingFrequencyType}/>
                 <br />
                 <label>AmortizationFrequencyType</label>
-                <input type="text" name="inputAmortizationFrequencyType" onChange={this.handleInputChange} value={this.state.inputAmortizationFrequencyType}/>
+                <input type="text" name="inputAmortizationFrequencyType" required onChange={this.handleInputChange} value={this.state.inputAmortizationFrequencyType}/>
                 <br />
                 <label>PeriodicPaymentAmount</label>
-                <input type="number" name="inputPeriodicPaymentAmount" onChange={this.handleInputChange} value={this.state.inputPeriodicPaymentAmount}/>
+                <input type="number" name="inputPeriodicPaymentAmount" required onChange={this.handleInputChange} value={this.state.inputPeriodicPaymentAmount}/>
                 <br />
-                <button onClick={this.addAsset}>Add Asset</button>
+                <input type="submit" value="Add Asset" />
+                </form>
                 <button onClick={this.removeAsset}> Remove Asset</button>
                 <br/>
                 <br/>

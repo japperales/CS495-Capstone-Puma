@@ -58,11 +58,12 @@ export class PersonalInput extends React.Component{
                 
                 <label>Honorific</label>
                 <br />
-                <select name="inputHonorific" onChange={this.handleInputChange} defaultValue={""} value={this.state.inputHonorific}>
+                <select name="inputHonorific" onChange={this.handleInputChange}  value={this.state.inputHonorific}>
                     <option value="Mr">Mr</option>
                     <option value="Mrs">Mrs</option>
                     <option value="Ms">Ms</option>
                     <option value="Dr">Dr</option>
+                    <option value="" selected="selected"> </option>
                 </select>
                 <br />
                 <br />

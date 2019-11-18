@@ -7,6 +7,7 @@ import { Counter } from './components/Counter';
 import {CoolGuyCreator} from "./components/CoolGuyCreator";
 import {Puma} from "./components/Puma";
 import { TabsPage } from "./components/TabsPage"
+import {TestClient} from "./components/TestClient";
 
 export default class App extends Component {
   displayName = App.name
@@ -20,6 +21,7 @@ export default class App extends Component {
         <Route path='/coolguycreator' component={CoolGuyCreator} />
         <Route path='/puma' component={Puma} />
         <Route path='/tabspage' component={TabsPage} />
+        <Route path='/testclient' component={TestClient} />
       </Layout>
     );
   }
