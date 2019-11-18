@@ -1,12 +1,11 @@
 import React from 'react'
 
-let state = {assets: [
-        { name: 'test1', price: '45.5', quantity: 21, exchangeType: "good exchange",
-
-            earningsPerShareDiluted: 12345, earningsPerShareBasic: 54321, earningsPerShareEffectiveDate: "04-30-1997",
-
-            paymentFrequencyType: "nice frequency", sharesOutstanding: 45, isIncludedIn13F: "true", isRestrictedByRule144A: "false", calculatedMarketCapType: "neato cap"}
-    ],
+let state = {assets: [], 
+    
+    placeHolder: [{ name: 'test1', price: '45.5', quantity: 21, exchangeType: "good exchange",
+    earningsPerShareDiluted: 12345, earningsPerShareBasic: 54321, earningsPerShareEffectiveDate: "04-30-1997",
+    paymentFrequencyType: "nice frequency", sharesOutstanding: 45, isIncludedIn13F: "true", isRestrictedByRule144A: "false", calculatedMarketCapType: "neato cap"}], 
+    
     inputName: null,
     inputPrice: null,
     inputQuantity: null,
@@ -26,6 +25,7 @@ export class StockInput extends React.Component{
     constructor(props) {
         super(props);
         this.state = state;
+        
         this.addAsset = this.addAsset.bind(this);
         this.removeAsset = this.removeAsset.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -36,7 +36,7 @@ export class StockInput extends React.Component{
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.state.assets[0]);
+        let header = Object.keys(this.state.placeHolder[0]);
         return header.map((key, index) => {
             return <th key={index}>{key.toUpperCase()}</th>
         })
@@ -78,7 +78,8 @@ export class StockInput extends React.Component{
 
     }
 
-    addAsset(){
+    async addAsset(event){
+        event.preventDefault();
         const newAsset = {
             name: this.state.inputName,
             price: this.state.inputPrice,
@@ -94,66 +95,72 @@ export class StockInput extends React.Component{
             calculatedMarketCapType: this.state.inputCalculatedMarketCapType
             
         };
-        this.setState({assets:this.state.assets.concat(newAsset)})
+        await this.setState({assets: this.state.assets.concat(newAsset)});
+        this.props.stockCallback(this.state.assets);
     }
 
-    removeAsset(){
-        this.setState({asset:this.state.assets.pop()})
+    async removeAsset(){
+        await this.setState({asset: this.state.assets.pop()});
+        this.props.stockCallback(this.state.assets);
     }
 
     render(){
         return(
             <div>
-                <h3 id='title'>Assets</h3>
+                <h3 id='title'>Stocks</h3>
                 <table className='table' id='assets'>
                     <tbody>
                     <tr>{this.renderTableHeader()}</tr>
                     {this.renderTableData()}
                     </tbody>
                 </table>
+                <form onSubmit={this.addAsset}>
                 <label>Name</label>
-                <input type="text" name="inputName" onChange={this.handleInputChange} value={this.state.inputName}/>
+                <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
                 <br />
                 <label>Price</label>
-                <input type="number" name="inputPrice" onChange={this.handleInputChange} value={this.state.inputPrice}/>
+                <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
                 <br />
                 <label>Quantity</label>
-                <input type="number" name="inputQuantity" onChange={this.handleInputChange} value={this.state.inputQuantity}/>
+                <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
                 <br />
                 <label>ExchangeType</label>
-                <input type="text" name="inputExchangeType" onChange={this.handleInputChange} value={this.state.inputExchangeType}/>
+                <input type="text" name="inputExchangeType" required onChange={this.handleInputChange} value={this.state.inputExchangeType}/>
                 <br />
                 <label>EarningsPerShareDiluted</label>
-                <input type="number" name="inputEarningsPerShareDiluted" onChange={this.handleInputChange} value={this.state.inputEarningsPerShareDiluted}/>
+                <input type="number" name="inputEarningsPerShareDiluted" required onChange={this.handleInputChange} value={this.state.inputEarningsPerShareDiluted}/>
                 <br />
                 <label>EarningPerShareBasic</label>
-                <input type="number" name="inputEarningPerShareBasic" onChange={this.handleInputChange} value={this.state.inputEarningPerShareBasic}/>
+                <input type="number" name="inputEarningPerShareBasic" required onChange={this.handleInputChange} value={this.state.inputEarningPerShareBasic}/>
                 <br />
                 <label>EarningsPerShareEffectiveDate</label>
-                <input type="date" name="inputEarningsPerShareEffectiveDate" onChange={this.handleInputChange} value={this.state.inputEarningsPerShareEffectiveDate}/>
+                <input type="date" name="inputEarningsPerShareEffectiveDate" required onChange={this.handleInputChange} value={this.state.inputEarningsPerShareEffectiveDate}/>
                 <br />
                 <label>PaymentFrequencyType</label>
-                <input type="text" name="inputPaymentFrequencyType" onChange={this.handleInputChange} value={this.state.inputPaymentFrequencyType}/>
+                <input type="text" name="inputPaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputPaymentFrequencyType}/>
                 <br />
                 <label>SharesOutstanding</label>
-                <input type="number" name="inputSharesOutstanding" onChange={this.handleInputChange} value={this.state.inputSharesOutstanding}/>
+                <input type="number" name="inputSharesOutstanding" required onChange={this.handleInputChange} value={this.state.inputSharesOutstanding}/>
                 <br />
                 <label>IsIncludedIn13F</label>
-                <select name="inputIsIncludedIn13F" onChange={this.handleInputChange} value={this.state.inputIsIncludedIn13F}>
-                    <option value="true">true</option>
-                    <option value="false">false</option>
+                <select name="inputIsIncludedIn13F" required onChange={this.handleInputChange}  value={this.state.inputIsIncludedIn13F}>
+                    <option value="true" >true</option>
+                    <option value="false" >false</option>
+                    <option value="null" selected="selected"> </option>
                 </select>
                 <br />
                 <label>IsRestrictedByRule144A</label>
-                <select name="inputIsRestrictedByRule144A" onChange={this.handleInputChange} value={this.state.inputIsRestrictedByRule144A}>
-                    <option value="true">true</option>
-                    <option value="false">false</option>
+                <select name="inputIsRestrictedByRule144A" required onChange={this.handleInputChange} value={this.state.inputIsRestrictedByRule144A}>
+                    <option value="true" >true</option>
+                    <option value="false" >false</option>
+                    <option value="null" selected="selected"> </option>
                 </select>
                 <br />
                 <label>CalculatedMarketCapType</label>
-                <input type="text" name="inputCalculatedMarketCapType" onChange={this.handleInputChange} value={this.state.inputCalculatedMarketCapType}/>
+                <input type="text" name="inputCalculatedMarketCapType" required onChange={this.handleInputChange} value={this.state.inputCalculatedMarketCapType}/>
                 <br />
-                <button onClick={this.addAsset}>Add Asset</button>
+                <input type="submit" value="Add Asset"/>
+                </form>
                 <button onClick={this.removeAsset}> Remove Asset</button>
                 <br/>
                 <br/>
