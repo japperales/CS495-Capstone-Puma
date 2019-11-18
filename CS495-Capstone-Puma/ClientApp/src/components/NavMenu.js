@@ -40,12 +40,12 @@ export class NavMenu extends Component {
             </LinkContainer>
           <LinkContainer to={'/puma'}>
             <NavItem>
-              <Glyphicon glyph='save-file' /> Puma
+              <Glyphicon glyph='save-file' /> UI Test
             </NavItem>
           </LinkContainer>
             <LinkContainer to={'/tabspage'}>
               <NavItem>
-                <Glyphicon glyph='save-file' /> Tabs
+                <Glyphicon glyph='save-file' /> Puma - Tabs
               </NavItem>
             </LinkContainer>
           </Nav>
