@@ -1,0 +1,18 @@
+﻿POST http://localhost:5002/nameAndAddress/123
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:5002/nameAndAddress/123
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:5002/nameAndAddress
+Accept: */*
+Cache-Control: no-cache
+
+###
+
