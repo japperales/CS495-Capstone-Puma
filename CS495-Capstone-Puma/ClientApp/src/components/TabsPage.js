@@ -10,6 +10,7 @@ import {LoanInput} from "./LoanInput";
 import {MutualFundInput} from "./MutualFundInput";
 import {StockInput} from "./StockInput";
 import {Propertyinput} from "./Propertyinput";
+import {Results} from "./Results"
 
 export class TabsPage extends React.Component {
     
@@ -119,6 +120,7 @@ export class TabsPage extends React.Component {
                         <Tab>Mutual Funds</Tab>
                         <Tab>Stocks</Tab>
                         <Tab>Properties</Tab>
+                        <Tab>Results</Tab>
                     </TabList>
 
                     <TabPanel>
@@ -141,6 +143,9 @@ export class TabsPage extends React.Component {
                     </TabPanel>
                     <TabPanel>
                         <Propertyinput propertyCallback={this.propertyCallback}/>
+                    </TabPanel>
+                    <TabPanel>
+                        <Results />
                     </TabPanel>
                 </Tabs>
                 <button onClick={this.sendPortfolio}>Submit Info</button>
