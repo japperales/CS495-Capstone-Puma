@@ -1,3 +1,5 @@
+using CS495_Capstone_Puma.Temporary;
+using Flurl.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +15,8 @@ namespace CS495_Capstone_Puma
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            FlurlHttp.ConfigureClient("https://localhost:5002", cli =>
+                cli.Settings.HttpClientFactory = new UntrustedCertClientFactory());
         }
 
         public IConfiguration Configuration { get; }
