@@ -113,8 +113,6 @@ export class TabsPage extends React.Component {
                 <Tabs>
                     <TabList>
                         <Tab>Personal Info</Tab>
-                        <Tab>Account History</Tab>
-                        <Tab>Assets</Tab>
                         <Tab>Bonds</Tab>
                         <Tab>Miscellaneous Assets</Tab>
                         <Tab>Loans</Tab>
@@ -125,12 +123,6 @@ export class TabsPage extends React.Component {
 
                     <TabPanel>
                         <PersonalInput personalCallback={this.personalCallback}/>
-                    </TabPanel>
-                    <TabPanel>
-                        <AccountHistoryInput />
-                    </TabPanel>
-                    <TabPanel>
-                        <AssetsInput />
                     </TabPanel>
                     <TabPanel>
                         <BondInput bondCallback={this.bondCallback}/>
@@ -153,9 +145,16 @@ export class TabsPage extends React.Component {
                 </Tabs>
                 <button onClick={this.sendPortfolio}>Submit Info</button>
                 Here is my example of props and callbacks: currently, the first name is: {this.state.firstName}, the middle name is: {this.state.middleName}, the last name is: {this.state.lastName}, the honorific is: {this.state.honorific}, the email is: {this.state.emailAddress}
-            <br/> OUTPUT: {this.state.outputFirstName}, {this.state.outputMiddleName}, {this.state.outputLastName}, {this.state.outputHonorific}, {this.state.outputEmailAddress}
-                BONDS: {this.state.bonds.toString()}, MISC: {this.state.misc.toString()}, LOANS: {this.state.loans.toString()}, MUTUAL FUNDS: {this.state.mutualFunds.toString()}, STOCKS: {this.state.stocks.toString()}, PROPERTIES: {this.state.properties.toString()}
-                ASSETSLIST: {JSON.stringify(this.state.assets)}
+            <br/> OUTPUT: {this.state.outputFirstName}, <br/>
+                <br/>{this.state.outputMiddleName},
+                <br/>{this.state.outputLastName}, {this.state.outputHonorific}, {this.state.outputEmailAddress}
+                <br/><br/>BONDS: {JSON.stringify(this.state.bonds)},
+                <br/><br/>MISC: {JSON.stringify(this.state.misc)},
+                <br/><br/>LOANS: {JSON.stringify(this.state.loans)},
+                <br/><br/>MUTUAL FUNDS: {JSON.stringify(this.state.mutualFunds)},
+
+                <br/><br/>STOCKS: {JSON.stringify(this.state.stocks)},
+                <br/><br/>PROPERTIES: {JSON.stringify(this.state.properties)}
             </div>
         );
     }
