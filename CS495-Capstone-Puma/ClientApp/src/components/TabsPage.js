@@ -77,7 +77,7 @@ export class TabsPage extends React.Component {
     
     sendPortfolio(event) {
         event.preventDefault();
-        fetch('api/Puma/SendAndReceivePortfolio', {
+        fetch('api/Puma', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
