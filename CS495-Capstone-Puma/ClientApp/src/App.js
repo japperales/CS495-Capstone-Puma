@@ -5,8 +5,9 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import {CoolGuyCreator} from "./components/CoolGuyCreator";
-import {TestClient} from "./components/TestClient";
+import {Puma} from "./components/Puma";
 import { TabsPage } from "./components/TabsPage"
+import {TestClient} from "./components/TestClient";
 
 export default class App extends Component {
   displayName = App.name
@@ -18,8 +19,9 @@ export default class App extends Component {
         <Route path='/counter' component={Counter} />
         <Route path='/fetchdata' component={FetchData} />
         <Route path='/coolguycreator' component={CoolGuyCreator} />
-        <Route path='/puma' component={TestClient} />
+        <Route path='/puma' component={Puma} />
         <Route path='/tabspage' component={TabsPage} />
+        <Route path='/testclient' component={TestClient} />
       </Layout>
     );
   }

@@ -1,8 +1,7 @@
 import React from 'react'
 
-let state = {assets: [
-        { name: 'test1', price: '45.5', quantity: 21, incomePaymentFrequencyType: "pretty frequent", incomePaymentMonth: 74654893, incomePaymentDay: 2, realEstateParcelNumber: "123 north"}
-    ],
+let state = {assets: [],
+    placeHolder: [{ name: 'test1', price: '45.5', quantity: 21, incomePaymentFrequencyType: "pretty frequent", incomePaymentMonth: 74654893, incomePaymentDay: 2, realEstateParcelNumber: "123 north"}],
     inputName: null,
     inputPrice: null,
     inputQuantity: null,
@@ -26,7 +25,7 @@ export class Propertyinput extends React.Component{
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.state.assets[0]);
+        let header = Object.keys(this.state.placeHolder[0]);
         return header.map((key, index) => {
             return <th key={index}>{key.toUpperCase()}</th>
         })
@@ -61,7 +60,8 @@ export class Propertyinput extends React.Component{
 
     }
 
-    addAsset(){
+    async addAsset(event){
+        event.preventDefault();
         const newAsset = {
             name: this.state.inputName,
             price: this.state.inputPrice,
@@ -71,45 +71,49 @@ export class Propertyinput extends React.Component{
             incomePaymentDay: this.state.inputIncomePaymentDay,
             realEstateParcelNumber: this.state.inputRealEstateParcelNumber
         };
-        this.setState({assets:this.state.assets.concat(newAsset)})
+        await this.setState({assets:this.state.assets.concat(newAsset)});
+        this.props.propertyCallback(this.state.assets);
     }
 
-    removeAsset(){
-        this.setState({asset:this.state.assets.pop()})
+    async removeAsset(){
+        await this.setState({asset:this.state.assets.pop()});
+        this.props.propertyCallback(this.state.assets);
     }
 
     render(){
         return(
             <div>
-                <h3 id='title'>Assets</h3>
+                <h3 id='title'>Properties</h3>
                 <table className='table' id='assets'>
                     <tbody>
                     <tr>{this.renderTableHeader()}</tr>
                     {this.renderTableData()}
                     </tbody>
                 </table>
+                <form onSubmit={this.addAsset}>
                 <label>Name</label>
-                <input type="text" name="inputName" onChange={this.handleInputChange} value={this.state.inputName}/>
+                <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
                 <br />
                 <label>Price</label>
-                <input type="number" name="inputPrice" onChange={this.handleInputChange} value={this.state.inputPrice}/>
+                <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
                 <br />
                 <label>Quantity</label>
-                <input type="number" name="inputQuantity" onChange={this.handleInputChange} value={this.state.inputQuantity}/>
+                <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
                 <br />
                 <label>IncomePaymentFrequencyType</label>
-                <input type="text" name="inputIncomePaymentFrequencyType" onChange={this.handleInputChange} value={this.state.inputIncomePaymentFrequencyType}/>
+                <input type="text" name="inputIncomePaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentFrequencyType}/>
                 <br />
                 <label>IncomePaymentMonth</label>
-                <input type="number" name="inputIncomePaymentMonth" onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
+                <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
                 <br />
                 <label>IncomePaymentDay</label>
-                <input type="number" name="inputIncomePaymentDay" onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
+                <input type="number" name="inputIncomePaymentDay" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
                 <br />
                 <label>RealEstateParcelNumber</label>
-                <input type="text" name="inputRealEstateParcelNumber" onChange={this.handleInputChange} value={this.state.inputRealEstateParcelNumber}/>
+                <input type="text" name="inputRealEstateParcelNumber" required onChange={this.handleInputChange} value={this.state.inputRealEstateParcelNumber}/>
                 <br />
-                <button onClick={this.addAsset}>Add Asset</button>
+                <input type="submit" value="Add Asset" />
+                </form>
                 <button onClick={this.removeAsset}> Remove Asset</button>
                 <br/>
                 <br/>

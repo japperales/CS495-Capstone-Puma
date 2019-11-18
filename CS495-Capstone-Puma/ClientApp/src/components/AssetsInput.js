@@ -57,7 +57,8 @@ export class AssetsInput extends React.Component{
 
     }
     
-    addAsset(){
+    addAsset(event){
+        event.preventDefault();
         const newAsset = {
             name: this.state.inputName, 
             price: this.state.inputPrice, 

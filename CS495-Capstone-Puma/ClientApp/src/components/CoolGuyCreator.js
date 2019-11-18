@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {AssetsInput} from "./AssetsInput";
 
 export class CoolGuyCreator extends Component{
     
