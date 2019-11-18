@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CS495_Capstone_Puma.DataStructure.IdentityRecord
+namespace CS495_Capstone_Puma.DataStructure.NameAndAddress
 {
     public class RecipientBankInformation
     {
