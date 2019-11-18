@@ -35,7 +35,6 @@
         </e>
         <e p="Resources" t="Include">
           <e p="Account" t="Include">
-            <e p="0.json" t="Include" />
             <e p="2.json" t="Include" />
           </e>
           <e p="Asset" t="Include">
@@ -108,7 +107,6 @@
         </e>
         <e p="Controllers" t="Include">
           <e p="ExampleClassController.cs" t="Include" />
-          <e p="MainController.cs" t="Include" />
           <e p="PumaController.cs" t="Include" />
           <e p="SampleDataController.cs" t="Include" />
         </e>
@@ -177,7 +175,6 @@
         <e p="Properties" t="Include">
           <e p="launchsettings.json" t="Include" />
         </e>
-        <e p="Resources" t="Include" />
         <e p="Startup.cs" t="Include" />
         <e p="Temporary" t="Include">
           <e p="UntrustedCertClientFactory.cs" t="Include" />
