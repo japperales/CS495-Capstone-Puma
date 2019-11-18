@@ -1,9 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using CS495_Capstone_Puma.DataStructure;
+using CS495_Capstone_Puma.DataStructure.Account;
+using CS495_Capstone_Puma.DataStructure.Asset;
+using CS495_Capstone_Puma.DataStructure.Asset.AssetCategory;
+using CS495_Capstone_Puma.DataStructure.NameAndAddress;
+using CS495_Capstone_Puma.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CS495_Capstone_Puma.Controllers
@@ -12,30 +13,67 @@ namespace CS495_Capstone_Puma.Controllers
     public class PumaController : Controller
     {
         [HttpPost]
-        [Route("[action]")]
-        public  JsonResult SendAndReceivePortfolio([FromBody] PersonalData person)
+        public JsonResult ProcessPost([FromBody] UIObject uiObject)
         {
-            PersonalData newPersonalData = person;
-            newPersonalData.honorific = "Ganja-San";
-            return Json(newPersonalData);
-        }
-        public class PersonalData
-        {
-            public string firstName { get; set; }
-            public string middleName{ get; set; }
-            public string lastName { get; set; }
-            public string honorific { get; set; }
-            public string emailAddress { get; set; }
             
-            public PersonalData(string firstName, string middleName, string lastName, string honorific, string emailAddress)
+            CheetahHandler cheetah = new CheetahHandler();
+            IdentityRecord identityRecord = uiObject.IdentityRecordObj;
+            Account account = new Account(0, uiObject.IdentityRecordObj);
+            List<Asset> assets = buildAssetList(uiObject);
+
+            UIObject resp = cheetah.postAndReceive(identityRecord, account, assets).Result;
+
+            return Json(resp);
+        }
+        
+        private List<Asset> buildAssetList(UIObject uiObject)
+        {
+            List<Asset> assets = new List<Asset>();
+            int i = 0;
+            
+            foreach (Bond bond in uiObject.Bonds)
             {
-                this.firstName = firstName;
-                this.middleName = middleName;
-                this.lastName = lastName;
-                this.honorific = honorific;
-                this.emailAddress = emailAddress;
+                i++;
+                Asset asset = new Asset(i, "Bond", bond);
+                assets.Add(asset);
             }
             
+            foreach (Stock stock in uiObject.Stocks)
+            {
+                i++;
+                Asset asset = new Asset(i, "Stock", stock);
+                assets.Add(asset);
+            }
+            
+            foreach (Loan loan in uiObject.Loans)
+            {
+                i++;
+                Asset asset = new Asset(i, "Loan", loan);
+                assets.Add(asset);
+            }
+            
+            foreach (MutualFund mutualFund in uiObject.MutualFunds)
+            {
+                i++;
+                Asset asset = new Asset(i, "MutualFund", mutualFund);
+                assets.Add(asset);
+            }
+            
+            foreach (Property property in uiObject.Properties)
+            {
+                i++;
+                Asset asset = new Asset(i, "Property", property);
+                assets.Add(asset);
+            }
+            
+            foreach (CashEquivalent cashEquivalent in uiObject.CashEquivalents)
+            {
+                i++;
+                Asset asset = new Asset(i, "CashEquivalent", cashEquivalent);
+                assets.Add(asset);
+            }
+
+            return assets;
         }
     }
 }

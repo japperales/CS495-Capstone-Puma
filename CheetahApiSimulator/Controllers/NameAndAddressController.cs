@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using CS495_Capstone_Puma.DataStructure.IdentityRecord;
+using CS495_Capstone_Puma.DataStructure.NameAndAddress;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
