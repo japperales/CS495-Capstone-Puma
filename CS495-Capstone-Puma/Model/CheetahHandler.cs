@@ -1,25 +1,39 @@
-﻿namespace CS495_Capstone_Puma.Model
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using CS495_Capstone_Puma.DataStructure.IdentityRecord;
+using Flurl;
+using Flurl.Http;
+
+namespace CS495_Capstone_Puma.Model
 {
     public class CheetahHandler
     {
-        public Client convert(Client client)
+
+        //Send Name & Address POST to Cheetah
+        public IdentityRecord GetIdentityRecord(IdentityRecord identityRecord)
         {
-            //Placeholder code
-            Client converted = client;
-            converted.balance += 149.14;
-            return converted;
-            
-            //Send Name & Address POST to Cheetah
-            
-            //Send Account POST to Cheetah
-            
-            //Send Account GET to Cheetah
-            
-            //Send other GET requests to Cheetah
-            
-            //Assemble objects into a Client object
-            
-            //return converted Client object
+            Task<IdentityRecord> test = getIdentityRecord(identityRecord);
+            identityRecord = test.Result;
+            return identityRecord;
         }
+        public async Task<IdentityRecord> getIdentityRecord(IdentityRecord identityRecord)
+        {
+            IdentityRecord getResp = await "https://localhost:5002/api/v6/NameAndAddress".GetJsonAsync<IdentityRecord>();
+            Console.Out.WriteLine(getResp.DisplayName);
+            return getResp;
+        }
+            
+        //Send Account POST to Cheetah
+            
+        //Send Account GET to Cheetah
+        
+        //Send other GET requests to Cheetah
+
+        //Assemble objects into a Client object
+
+        //return converted Client object
+        
+        
     }
 }

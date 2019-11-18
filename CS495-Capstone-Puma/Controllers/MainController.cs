@@ -1,4 +1,7 @@
-﻿using CS495_Capstone_Puma.Model;
+﻿using System;
+using System.Threading.Tasks;
+using CS495_Capstone_Puma.DataStructure.IdentityRecord;
+using CS495_Capstone_Puma.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CS495_Capstone_Puma.Controllers
@@ -7,12 +10,11 @@ namespace CS495_Capstone_Puma.Controllers
     public class MainController : Controller
     {
         [HttpPost]
-        [Route("[action]")]
-        public JsonResult ConvertData([FromBody] Client client)
+        public JsonResult ConvertData([FromBody] IdentityRecord identityRecord)
         {
             CheetahHandler cheetah = new CheetahHandler();
-            Client converted = cheetah.convert(client);
-            return Json(converted);
+            Console.Out.WriteLine(identityRecord);
+            return Json(cheetah.GetIdentityRecord(identityRecord));
         }
     }
 }
