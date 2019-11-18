@@ -7,7 +7,7 @@
     public class IdentityRecord
     {
         [JsonProperty("IdentityRecordId")]
-        public long IdentityRecordId { get; set; }
+        public int IdentityRecordId { get; set; }
 
         [JsonProperty("Code")]
         public string Code { get; set; }
@@ -55,10 +55,10 @@
         public string ContactName { get; set; }
 
         [JsonProperty("DateOfBirth")]
-        public DateTimeOffset DateOfBirth { get; set; }
+        public DateTimeOffset? DateOfBirth { get; set; }
 
         [JsonProperty("DateOfDeath")]
-        public DateTimeOffset DateOfDeath { get; set; }
+        public DateTimeOffset? DateOfDeath { get; set; }
 
         [JsonProperty("PhoneNumbers")]
         public List<ContactMethod> PhoneNumbers { get; set; }
@@ -76,35 +76,41 @@
         public bool IsActive { get; set; }
 
         [JsonProperty("InstitutionIdentityRecordId")]
-        public long InstitutionIdentityRecordId { get; set; }
+        public long? InstitutionIdentityRecordId { get; set; }
+
+        public IdentityRecord()
+        {
+            IdentityRecordId = 0;
+            DisplayName = null;
+            Code = null;
+            PayeeName = null;
+            TaxIdStatusType = null;
+            TaxId = null;
+            TaxIdType = null;
+            DomainModelClass = null;
+            Comments = null;
+            SalutationType = null;
+            GenderType = null;
+            FirstNameLegalName = null;
+            MiddleName = null;
+            LastName = null;
+            Title = null;
+            ContactName = null;
+            DateOfBirth = null;
+            DateOfDeath = null;
+            PhoneNumbers = null;
+            Emails = null;
+            Addresses = null;
+            IdentityClassificationTypes = null;
+            IsActive = true;
+            InstitutionIdentityRecordId = null;
+        }
 
         [JsonConstructor]
-        public IdentityRecord(long identityRecordId, string code, string displayName, string payeeName, string taxIdStatusType, string taxId, string taxIdType, string domainModelClass, string comments, string salutationType, string genderType, string firstNameLegalName, string middleName, string lastName, string title, string contactName, DateTimeOffset dateOfBirth, DateTimeOffset dateOfDeath, List<ContactMethod> phoneNumbers, List<ContactMethod> emails, List<Address> addresses, List<string> identityClassificationTypes, bool isActive, long institutionIdentityRecordId)
+        public IdentityRecord(int identityRecordId, string displayName)
         {
             IdentityRecordId = identityRecordId;
-            Code = code;
             DisplayName = displayName;
-            PayeeName = payeeName;
-            TaxIdStatusType = taxIdStatusType;
-            TaxId = taxId;
-            TaxIdType = taxIdType;
-            DomainModelClass = domainModelClass;
-            Comments = comments;
-            SalutationType = salutationType;
-            GenderType = genderType;
-            FirstNameLegalName = firstNameLegalName;
-            MiddleName = middleName;
-            LastName = lastName;
-            Title = title;
-            ContactName = contactName;
-            DateOfBirth = dateOfBirth;
-            DateOfDeath = dateOfDeath;
-            PhoneNumbers = phoneNumbers;
-            Emails = emails;
-            Addresses = addresses;
-            IdentityClassificationTypes = identityClassificationTypes;
-            IsActive = isActive;
-            InstitutionIdentityRecordId = institutionIdentityRecordId;
         }
     }
 }

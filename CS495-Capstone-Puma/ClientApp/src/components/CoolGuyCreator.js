@@ -6,11 +6,6 @@ export class CoolGuyCreator extends Component{
         super(props);
         this.state={name : 'JP', job : 'Professional Coolest Guy', age : 22,
                             inputName: '', inputJob: '', inputAge: null};
-        /*fetch('api/ExampleClass/CoolGuyCreator')
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ name: data.name, job : data.job, age : data.age});
-            });*/
         this.SendLoser = this.SendLoser.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
