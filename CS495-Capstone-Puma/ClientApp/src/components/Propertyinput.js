@@ -61,7 +61,7 @@ export class Propertyinput extends React.Component{
 
     }
 
-    addAsset(){
+    async addAsset(){
         const newAsset = {
             name: this.state.inputName,
             price: this.state.inputPrice,
@@ -71,11 +71,13 @@ export class Propertyinput extends React.Component{
             incomePaymentDay: this.state.inputIncomePaymentDay,
             realEstateParcelNumber: this.state.inputRealEstateParcelNumber
         };
-        this.setState({assets:this.state.assets.concat(newAsset)})
+        await this.setState({assets:this.state.assets.concat(newAsset)});
+        this.props.propertyCallback(this.state.assets);
     }
 
-    removeAsset(){
-        this.setState({asset:this.state.assets.pop()})
+    async removeAsset(){
+        await this.setState({asset:this.state.assets.pop()});
+        this.props.propertyCallback(this.state.assets);
     }
 
     render(){
