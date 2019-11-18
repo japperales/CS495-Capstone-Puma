@@ -34,7 +34,9 @@ export class TabsPage extends React.Component {
             loans: [],
             mutualFunds: [],
             stocks: [],
-            properties: []
+            properties: [],
+            
+            outputIden: null
         };
         this.personalCallback = this.personalCallback.bind(this);
         this.bondCallback = this.bondCallback.bind(this);
@@ -103,7 +105,7 @@ export class TabsPage extends React.Component {
             })
         }).then(response => response.json())
             .then(data => {
-                this.setState({ outputFirstName: data.firstName, outputMiddleName: data.middleName, outputLastName: data.lastName, outputHonorific : data.honorific, outputEmailAddress: data.emailAddress});
+                this.setState({outputIden: JSON.stringify(data)});
             });
         
     }
@@ -145,7 +147,7 @@ export class TabsPage extends React.Component {
                         <Propertyinput propertyCallback={this.propertyCallback}/>
                     </TabPanel>
                     <TabPanel>
-                        <Results />
+                        <Results outputIden={this.state.outputIden}/>
                     </TabPanel>
                 </Tabs>
                 <button onClick={this.sendPortfolio}>Submit Info</button>

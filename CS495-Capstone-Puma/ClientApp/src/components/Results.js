@@ -1,15 +1,14 @@
 ﻿import React, {component} from 'react' ;
 
 export class Results extends React.Component{
-    displayName=Results.name
+    
     
     render() {
         return (
             <div>
                 <h2>Results</h2>
-                <textarea name="" id="" cols="50" rows="20"></textarea>
+                <p name="texta" id="4" cols="50" rows="20">{this.props.outputIden}test</p>
             </div>
-
         );
-    }   
+    }
 }
