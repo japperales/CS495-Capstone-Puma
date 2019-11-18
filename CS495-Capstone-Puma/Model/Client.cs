@@ -1,4 +1,6 @@
-﻿namespace CS495_Capstone_Puma.Model
+﻿using Newtonsoft.Json;
+
+namespace CS495_Capstone_Puma.Model
 {
     public class Client
     {
@@ -6,7 +8,15 @@
         public int age { get; set; }
         public double balance { get; set; }
 
-        public Client(string name, int age, double balance)
+        public Client() //Parameter-less constructor
+        {
+            name = "ja";
+            age = 100;
+            balance = 0;
+        }
+
+        [JsonConstructor]
+        public Client(string name, int age, double balance) //Constructor to be used with JSON POST
         {
             this.name = name;
             this.age = age;
