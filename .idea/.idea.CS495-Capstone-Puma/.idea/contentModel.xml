@@ -36,14 +36,17 @@
         <e p="Resources" t="Include">
           <e p="Account" t="Include">
             <e p="0.json" t="Include" />
+            <e p="2.json" t="Include" />
           </e>
           <e p="Asset" t="Include">
-            <e p="0.json" t="Include" />
+            <e p="2.json" t="Include" />
           </e>
           <e p="identity" t="Include">
             <e p="0.json" t="Include" />
             <e p="13.json" t="Include" />
+            <e p="2.json" t="Include" />
             <e p="4.json" t="Include" />
+            <e p="7.json" t="Include" />
           </e>
         </e>
         <e p="Startup.cs" t="Include" />
@@ -106,6 +109,7 @@
         <e p="Controllers" t="Include">
           <e p="ExampleClassController.cs" t="Include" />
           <e p="MainController.cs" t="Include" />
+          <e p="PumaController.cs" t="Include" />
           <e p="SampleDataController.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.csproj" t="IncludeRecursive" />
@@ -142,7 +146,7 @@
             <e p="PriceHistory.cs" t="Include" />
             <e p="QualityRatingHistory.cs" t="Include" />
           </e>
-          <e p="IdentityRecord" t="Include">
+          <e p="NameAndAddress" t="Include">
             <e p="Address.cs" t="Include" />
             <e p="ContactMethod.cs" t="Include" />
             <e p="IdentityRecord.cs" t="Include" />
@@ -151,6 +155,7 @@
           </e>
           <e p="Test.cs" t="Include" />
           <e p="Trade.cs" t="Include" />
+          <e p="UIObject.cs" t="Include" />
         </e>
         <e p="Model" t="Include">
           <e p="CheetahHandler.cs" t="Include" />
@@ -172,6 +177,7 @@
         <e p="Properties" t="Include">
           <e p="launchsettings.json" t="Include" />
         </e>
+        <e p="Resources" t="Include" />
         <e p="Startup.cs" t="Include" />
         <e p="Temporary" t="Include">
           <e p="UntrustedCertClientFactory.cs" t="Include" />
