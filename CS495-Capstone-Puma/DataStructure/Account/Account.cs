@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CS495_Capstone_Puma.DataStructure.NameAndAddress;
 using Newtonsoft.Json;
 
 namespace CS495_Capstone_Puma.DataStructure.Account
@@ -25,16 +26,16 @@ namespace CS495_Capstone_Puma.DataStructure.Account
         public string DisplayName { get; set; }
 
         [JsonProperty("DivisionIdentityRecordId")]
-        public long DivisionIdentityRecordId { get; set; }
+        public long? DivisionIdentityRecordId { get; set; }
 
         [JsonProperty("AccountCategoryId")]
-        public long AccountCategoryId { get; set; }
+        public long? AccountCategoryId { get; set; }
 
         [JsonProperty("DateOpened")]
-        public DateTimeOffset DateOpened { get; set; }
+        public DateTimeOffset? DateOpened { get; set; }
 
         [JsonProperty("DateEstablished")]
-        public DateTimeOffset DateEstablished { get; set; }
+        public DateTimeOffset? DateEstablished { get; set; }
 
         [JsonProperty("Country")]
         public string Country { get; set; }
@@ -55,7 +56,7 @@ namespace CS495_Capstone_Puma.DataStructure.Account
         public string Comments { get; set; }
 
         [JsonProperty("OfficerId")]
-        public long OfficerId { get; set; }
+        public long? OfficerId { get; set; }
 
         [JsonProperty("BeneficialOwnerTaxId")]
         public string BeneficialOwnerTaxId { get; set; }
@@ -72,31 +73,36 @@ namespace CS495_Capstone_Puma.DataStructure.Account
         [JsonProperty("InvestmentModelSettings")]
         public List<InvestmentModelSetting> InvestmentModelSettings { get; set; }
         
-        [JsonConstructor]
-        public Account(long accountId, bool failOnRelationshipLookup, string number, string code, string legalName, string displayName, long divisionIdentityRecordId, long accountCategoryId, DateTimeOffset dateOpened, DateTimeOffset dateEstablished, string country, string stateProvince, string taxIdStatusType, string taxId, string taxIdType, string comments, long officerId, string beneficialOwnerTaxId, AccountRelationship accountRelationship, AccountSettings accountSettings, FeeSetting feeSetting, List<InvestmentModelSetting> investmentModelSettings)
+        public Account()
         {
-            AccountId = accountId;
-            FailOnRelationshipLookup = failOnRelationshipLookup;
-            Number = number;
-            Code = code;
-            LegalName = legalName;
-            DisplayName = displayName;
-            DivisionIdentityRecordId = divisionIdentityRecordId;
-            AccountCategoryId = accountCategoryId;
-            DateOpened = dateOpened;
-            DateEstablished = dateEstablished;
-            Country = country;
-            StateProvince = stateProvince;
-            TaxIdStatusType = taxIdStatusType;
-            TaxId = taxId;
-            TaxIdType = taxIdType;
-            Comments = comments;
-            OfficerId = officerId;
-            BeneficialOwnerTaxId = beneficialOwnerTaxId;
-            AccountRelationship = accountRelationship;
-            AccountSettings = accountSettings;
-            FeeSetting = feeSetting;
-            InvestmentModelSettings = investmentModelSettings;
+            AccountId = 0;
+            FailOnRelationshipLookup = false;
+            Number = null;
+            Code = null;
+            LegalName = null;
+            DisplayName = null;
+            DivisionIdentityRecordId = null;
+            AccountCategoryId = null;
+            DateOpened = null;
+            DateEstablished = null;
+            Country = null;
+            StateProvince = null;
+            TaxIdStatusType = null;
+            TaxId = null;
+            TaxIdType = null;
+            Comments = null;
+            OfficerId = null;
+            BeneficialOwnerTaxId = null;
+            AccountRelationship = null;
+            AccountSettings = null;
+            FeeSetting = null;
+            InvestmentModelSettings = null;
+        }
+
+        public Account(int id, IdentityRecord identityRecord)
+        {
+            AccountId = id;
+            LegalName = identityRecord.FirstNameLegalName + " " + identityRecord.LastName;
         }
     }
 }
