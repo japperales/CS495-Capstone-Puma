@@ -78,7 +78,7 @@ export class StockInput extends React.Component{
 
     }
 
-    addAsset(){
+    async addAsset(){
         const newAsset = {
             name: this.state.inputName,
             price: this.state.inputPrice,
@@ -94,11 +94,13 @@ export class StockInput extends React.Component{
             calculatedMarketCapType: this.state.inputCalculatedMarketCapType
             
         };
-        this.setState({assets:this.state.assets.concat(newAsset)})
+        await this.setState({assets: this.state.assets.concat(newAsset)});
+        this.props.stockCallback(this.state.assets);
     }
 
-    removeAsset(){
-        this.setState({asset:this.state.assets.pop()})
+    async removeAsset(){
+        await this.setState({asset: this.state.assets.pop()});
+        this.props.stockCallback(this.state.assets);
     }
 
     render(){
@@ -139,13 +141,13 @@ export class StockInput extends React.Component{
                 <input type="number" name="inputSharesOutstanding" onChange={this.handleInputChange} value={this.state.inputSharesOutstanding}/>
                 <br />
                 <label>IsIncludedIn13F</label>
-                <select name="inputIsIncludedIn13F" onChange={this.handleInputChange} value={this.state.inputIsIncludedIn13F}>
+                <select name="inputIsIncludedIn13F" onChange={this.handleInputChange} defaultValue={"false"} value={this.state.inputIsIncludedIn13F}>
                     <option value="true">true</option>
                     <option value="false">false</option>
                 </select>
                 <br />
                 <label>IsRestrictedByRule144A</label>
-                <select name="inputIsRestrictedByRule144A" onChange={this.handleInputChange} value={this.state.inputIsRestrictedByRule144A}>
+                <select name="inputIsRestrictedByRule144A" onChange={this.handleInputChange} defaultValue={"false"} value={this.state.inputIsRestrictedByRule144A}>
                     <option value="true">true</option>
                     <option value="false">false</option>
                 </select>

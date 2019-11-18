@@ -84,12 +84,12 @@ export class LoanInput extends React.Component{
 
     }
 
-    addAsset(){
+    async addAsset(){
         const newAsset = {
             name: this.state.inputName,
             price: this.state.inputPrice,
             quantity: this.state.inputQuantity,
-            dateOfIssue: this.state.inputDateOfIssue,//add asset part works fine
+            dateOfIssue: this.state.inputDateOfIssue,
             dateOfMaturity: this.state.inputDateOfMaturity,
             dateOfFirstPayment: this.state.inputDateOfFirstPayment,
             incomePaymentMonth: this.state.inputIncomePaymentMonth,
@@ -101,11 +101,13 @@ export class LoanInput extends React.Component{
             amortizationFrequencyType: this.state.inputAmortizationFrequencyType,
             periodicPaymentAmount: this.state.inputPeriodicPaymentAmount
         };
-        this.setState({assets:this.state.assets.concat(newAsset)})
+        await this.setState({assets:this.state.assets.concat(newAsset)});
+        this.props.loanCallback(this.state.assets);
     }
 
-    removeAsset(){
-        this.setState({asset:this.state.assets.pop()})
+    async removeAsset(){
+        await this.setState({asset:this.state.assets.pop()});
+        this.props.loanCallback(this.state.assets);
     }
 
     render(){
@@ -130,7 +132,7 @@ export class LoanInput extends React.Component{
                 <label>DateOfIssue</label>
                 <input type="date" name="inputDateOfIssue" onChange={this.handleInputChange} value={this.state.inputDateOfIssue}/>
                 <br />
-                <label> DateOfMaturity</label>
+                <label>DateOfMaturity</label>
                 <input type="date" name="inputDateOfMaturity" onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
                 <br />
                 <label>DateOfFirstPayment</label>

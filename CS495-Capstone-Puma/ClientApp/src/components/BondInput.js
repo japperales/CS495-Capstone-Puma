@@ -78,7 +78,7 @@ export class BondInput extends React.Component{
 
     }
 
-    addAsset(){
+    async addAsset(){
         const newAsset = {
             name: this.state.inputName,
             price: this.state.inputPrice,
@@ -92,11 +92,13 @@ export class BondInput extends React.Component{
             callPrice: this.state.inputCallPrice,
             dateOfFirstPayment: this.state.inputDateOfFirstPayment
         };
-        this.setState({assets:this.state.assets.concat(newAsset)})
+        await this.setState({assets: this.state.assets.concat(newAsset)});
+        this.props.bondCallback(this.state.assets);
     }
 
-    removeAsset(){
-        this.setState({asset:this.state.assets.pop()})
+    async removeAsset(){
+        await this.setState({asset: this.state.assets.pop()});
+        this.props.bondCallback(this.state.assets);
     }
 
     render(){

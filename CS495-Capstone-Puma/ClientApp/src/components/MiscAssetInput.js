@@ -72,7 +72,7 @@ export class MiscAssetInput extends React.Component{
 
     }
 
-    addAsset(){
+    async addAsset(){
         const newAsset = {
             name: this.state.inputName,
             price: this.state.inputPrice,
@@ -83,11 +83,13 @@ export class MiscAssetInput extends React.Component{
             accrualMethodType: this.state.inputAccrualMethodType,
             compoundingFrequencyType: this.state.inputCompoundingFrequencyType
         };
-        this.setState({assets:this.state.assets.concat(newAsset)})
+        await this.setState({assets: this.state.assets.concat(newAsset)});
+        this.props.miscCallback(this.state.assets);
     }
 
-    removeAsset(){
-        this.setState({asset:this.state.assets.pop()})
+    async removeAsset(){
+        await this.setState({asset: this.state.assets.pop()});
+        this.props.miscCallback(this.state.assets);
     }
 
     render(){

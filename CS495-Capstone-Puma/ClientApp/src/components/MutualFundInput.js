@@ -92,7 +92,7 @@ export class MutualFundInput extends React.Component{
 
     }
 
-    addAsset(){
+    async addAsset(){
         const newAsset = {
             name: this.state.inputName,
             price: this.state.inputPrice,
@@ -110,11 +110,13 @@ export class MutualFundInput extends React.Component{
             shortTermRedemptionFeePercent: this.state.inputShortTermRedemptionFeePercent,
             shortTermHoldingPeriod: this.state.inputShortTermHoldingPeriod,
         };
-        this.setState({assets:this.state.assets.concat(newAsset)})
+        await this.setState({assets: this.state.assets.concat(newAsset)});
+        this.props.mutualFundCallback(this.state.assets);
     }
 
-    removeAsset(){
-        this.setState({asset:this.state.assets.pop()})
+    async removeAsset(){
+        await this.setState({asset: this.state.assets.pop()});
+        this.props.mutualFundCallback(this.state.assets);
     }
 
     render(){
@@ -143,7 +145,7 @@ export class MutualFundInput extends React.Component{
                 <input type="number" name="inputIncomePaymentDay" onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
                 <br />
                 <label>UseDailyFactor</label>
-                <select name="inputUseDailyFactor" onChange={this.handleInputChange} value={this.state.inputUseDailyFactor}>
+                <select name="inputUseDailyFactor" onChange={this.handleInputChange} defaultValue={"false"} value={this.state.inputUseDailyFactor}>
                     <option value="true">true</option>
                     <option value="false">false</option>
                 </select>
