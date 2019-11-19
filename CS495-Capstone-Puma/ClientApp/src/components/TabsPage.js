@@ -89,11 +89,11 @@ export class TabsPage extends React.Component {
             body: JSON.stringify({
 
                 IdentityRecord: {
-                    firstName: this.state.firstName,
+                    firstNameLegalName: this.state.firstName,
                     middleName: this.state.middleName,
                     lastName: this.state.lastName,
-                    honorific: this.state.honorific,
-                    emailAddress: this.state.emailAddress,
+                    salutationType: this.state.honorific,
+                    emails: [{emailAddress: this.state.emailAddress}],
                 },
                 BondList: this.state.bonds,
                 MiscList: this.state.misc,
