@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
+    "projectUniqueName": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
     "projectName": "CS495-Capstone-Puma.UnitTests",
-    "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
-    "outputPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\obj\\",
+    "projectPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
+    "outputPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13,13 +13,14 @@
       "netcoreapp3.0"
     ],
     "sources": {
+      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
       "netcoreapp3.0": {
         "projectReferences": {
-          "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
-            "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
+          "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+            "projectPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
           }
         }
       }
@@ -37,6 +38,12 @@
           "target": "Package",
           "version": "[16.2.0, )"
         },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[3.0.0, )",
+          "autoReferenced": true
+        },
         "coverlet.collector": {
           "target": "Package",
           "version": "[1.0.1, )"
@@ -51,12 +58,7 @@
         }
       },
       "imports": [
-        "net461",
-        "net462",
-        "net47",
-        "net471",
-        "net472",
-        "net48"
+        "net461"
       ],
       "assetTargetFallback": true,
       "warn": true

@@ -107,6 +107,14 @@
         }
 
         [JsonConstructor]
+        public IdentityRecord(string firstNameLegalName, string middleName, string lastName, string salutationType, List<ContactMethod> emails)
+        {
+            FirstNameLegalName = firstNameLegalName;
+            MiddleName = middleName;
+            LastName = lastName;
+            SalutationType = salutationType;
+            Emails = emails;
+        }
         public IdentityRecord(int identityRecordId, string displayName)
         {
             IdentityRecordId = identityRecordId;

@@ -12,20 +12,20 @@ namespace CheetahApiSimulator.Controllers
         [HttpGet] 
         public Asset Get() 
         {
-            return buildAsset(0);
+            return buildAsset(2);
         }
         
         [HttpGet("{id}")]
         public Asset Get(int id)
         {
-            return buildAsset(0);
+            return buildAsset(2);
 
         }
 
         [HttpPost]
         public Asset Post([FromBody] Asset asset)
         {
-            using (StreamWriter file = System.IO.File.CreateText(@"Resources\Identity\"+asset.AssetId+".json"))
+            using (StreamWriter file = System.IO.File.CreateText(@"Resources\Asset\"+asset.AssetId+".json"))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, asset);

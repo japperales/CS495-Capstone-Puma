@@ -9,48 +9,23 @@ export class NavMenu extends Component {
 
   render() {
     return (
-      <Navbar inverse fixedTop fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to={'/'}>CS495_Capstone_Puma</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <LinkContainer to={'/'} exact>
-              <NavItem>
-                <Glyphicon glyph='home' /> Home
-              </NavItem>
-            </LinkContainer>
-            <LinkContainer to={'/counter'}>
-              <NavItem>
-                <Glyphicon glyph='education' /> Counter
-              </NavItem>
-            </LinkContainer>
-            <LinkContainer to={'/fetchdata'}>
-              <NavItem>
-                <Glyphicon glyph='th-list' /> Fetch data
-              </NavItem>
-            </LinkContainer>
-            <LinkContainer to={'/coolguycreator'}>
-              <NavItem>
-                <Glyphicon glyph='th-list' /> Cool Guy
-              </NavItem>
-            </LinkContainer>
-          <LinkContainer to={'/puma'}>
-            <NavItem>
-              <Glyphicon glyph='save-file' /> UI Test
-            </NavItem>
-          </LinkContainer>
-            <LinkContainer to={'/tabspage'}>
-              <NavItem>
-                <Glyphicon glyph='save-file' /> Puma - Tabs
-              </NavItem>
-            </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+        <Navbar inverse fixedTop fluid collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to={'/'}>CS495_Capstone_Puma</Link>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              <LinkContainer to={'/tabspage'}>
+                <NavItem>
+                  <Glyphicon glyph='save-file' /> Puma - Tabs
+                </NavItem>
+              </LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
     );
   }
 }

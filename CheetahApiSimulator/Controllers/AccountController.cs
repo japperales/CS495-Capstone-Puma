@@ -12,7 +12,7 @@ namespace CheetahApiSimulator.Controllers
         [HttpGet]
         public Account Get()
         {
-            return buildAccount(0);
+            return buildAccount(2);
         }
         
         [HttpGet("{id}")]
@@ -24,7 +24,7 @@ namespace CheetahApiSimulator.Controllers
         [HttpPost]
         public Account Post([FromBody] Account account)
         {
-            using (StreamWriter file = System.IO.File.CreateText(@"Resources\Identity\"+account.AccountId+".json"))
+            using (StreamWriter file = System.IO.File.CreateText(@"Resources\Account\"+account.AccountId+".json"))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, account);
