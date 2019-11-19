@@ -46,10 +46,10 @@ namespace CS495_Capstone_Puma.Model
             await "https://localhost:5002/api/v6/Asset".PostJsonAsync(asset);
         }
         
-        //Send Account GET to Cheetah
+        //Send Asset GET to Cheetah
         private async Task<Asset> GetAsset(int id)
         {
-            string api = "https://localhost:5002/api/v6/Account/" + id;
+            string api = "https://localhost:5002/api/v6/Asset/" + id;
             Asset getResp = await api.GetJsonAsync<Asset>();
             
             return getResp;

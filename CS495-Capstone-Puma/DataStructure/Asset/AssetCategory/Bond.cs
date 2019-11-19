@@ -6,13 +6,13 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
     public class Bond
     {
         [JsonProperty("IndustryId")]
-        public long IndustryId { get; set; }
+        public long? IndustryId { get; set; }
 
         [JsonProperty("DateOfIssue")]
-        public DateTimeOffset DateOfIssue { get; set; }
+        public DateTimeOffset? DateOfIssue { get; set; }
 
         [JsonProperty("DateOfMaturity")]
-        public DateTimeOffset DateOfMaturity { get; set; }
+        public DateTimeOffset? DateOfMaturity { get; set; }
 
         [JsonProperty("IncomePaymentFrequencyType")]
         public string IncomePaymentFrequencyType { get; set; }
@@ -21,10 +21,10 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         public string IncomePaymentFrequencyTypeName { get; set; }
 
         [JsonProperty("IncomePaymentMonth")]
-        public long IncomePaymentMonth { get; set; }
+        public long? IncomePaymentMonth { get; set; }
 
         [JsonProperty("IncomePaymentDay")]
-        public long IncomePaymentDay { get; set; }
+        public long? IncomePaymentDay { get; set; }
 
         [JsonProperty("AmortizationFrequencyType")]
         public string AmortizationFrequencyType { get; set; }
@@ -39,10 +39,10 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         public string AccrualMethodTypeName { get; set; }
 
         [JsonProperty("CallDate")]
-        public DateTimeOffset CallDate { get; set; }
+        public DateTimeOffset? CallDate { get; set; }
 
         [JsonProperty("CallPrice")]
-        public long CallPrice { get; set; }
+        public long? CallPrice { get; set; }
 
         [JsonProperty("CallType")]
         public string CallType { get; set; }
@@ -51,10 +51,10 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         public string CallTypeName { get; set; }
 
         [JsonProperty("DateOfFirstPayment")]
-        public DateTimeOffset DateOfFirstPayment { get; set; }
+        public DateTimeOffset? DateOfFirstPayment { get; set; }
 
         [JsonProperty("OIDPrice")]
-        public long OidPrice { get; set; }
+        public long? OidPrice { get; set; }
 
         [JsonProperty("Insurer")]
         public string Insurer { get; set; }
@@ -68,7 +68,33 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         [JsonProperty("OddLastCouponTypeName")]
         public string OddLastCouponTypeName { get; set; }
 
-        [JsonConstructor]
+        
+        public Bond()
+        {
+            IndustryId = null;
+            DateOfIssue = null;
+            DateOfMaturity = null;
+            IncomePaymentFrequencyType = null;
+            IncomePaymentFrequencyTypeName = null;
+            IncomePaymentMonth = null;
+            IncomePaymentDay = null;
+            AmortizationFrequencyType = null;
+            AmortizationFrequencyTypeName = null;
+            AccrualMethodType = null;
+            AccrualMethodTypeName = null;
+            CallDate = null;
+            CallPrice = null;
+            CallType = null;
+            CallTypeName = null;
+            DateOfFirstPayment = null;
+            OidPrice = null;
+            Insurer = null;
+            InsurerRating = null;
+            OddLastCouponType = null;
+            OddLastCouponTypeName = null;
+        }
+        
+
         public Bond(long industryId, DateTimeOffset dateOfIssue, DateTimeOffset dateOfMaturity, string incomePaymentFrequencyType, string incomePaymentFrequencyTypeName, long incomePaymentMonth, long incomePaymentDay, string amortizationFrequencyType, string amortizationFrequencyTypeName, string accrualMethodType, string accrualMethodTypeName, DateTimeOffset callDate, long callPrice, string callType, string callTypeName, DateTimeOffset dateOfFirstPayment, long oidPrice, string insurer, string insurerRating, string oddLastCouponType, string oddLastCouponTypeName)
         {
             IndustryId = industryId;
@@ -92,6 +118,34 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
             InsurerRating = insurerRating;
             OddLastCouponType = oddLastCouponType;
             OddLastCouponTypeName = oddLastCouponTypeName;
+        }
+        
+        [JsonConstructor]
+        public Bond(int quantity, DateTimeOffset dateOfIssue,
+            DateTimeOffset dateOfMaturity, long incomeMonth, long incomeDay, string accrualMethodType,
+            DateTimeOffset callDate, long? callPrice, DateTimeOffset dateOfFirstPayment)
+        {
+            IndustryId = 0;
+            DateOfIssue = dateOfIssue;
+            DateOfMaturity = dateOfMaturity;
+            IncomePaymentFrequencyType = null;
+            IncomePaymentFrequencyTypeName = null;
+            IncomePaymentMonth = incomeMonth;
+            IncomePaymentDay = incomeDay;
+            AmortizationFrequencyType = null;
+            AmortizationFrequencyTypeName = null;
+            AccrualMethodType = accrualMethodType;
+            AccrualMethodTypeName = null;
+            CallDate = callDate;
+            CallPrice = callPrice;
+            CallType = null;
+            CallTypeName = null;
+            DateOfFirstPayment = dateOfFirstPayment;
+            OidPrice = null;
+            Insurer = null;
+            InsurerRating = null;
+            OddLastCouponType = null;
+            OddLastCouponTypeName = null;
         }
     }
 }

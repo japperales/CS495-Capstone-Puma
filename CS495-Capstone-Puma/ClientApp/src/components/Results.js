@@ -1,14 +1,14 @@
 ﻿import React, {component} from 'react' ;
+import ReactJson from 'react-json-view'
 
 export class Results extends React.Component{
-    
-    
     render() {
         return (
             <div>
-                <h2>Results</h2>
-                <p name="texta" id="4" cols="50" rows="20">{this.props.outputIden}test</p>
+                <h3>Results</h3>
+                <ReactJson src={this.props.outputIden} />
             </div>
+
         );
     }
 }

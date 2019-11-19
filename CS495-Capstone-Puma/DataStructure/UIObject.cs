@@ -34,16 +34,18 @@ namespace CS495_Capstone_Puma.DataStructure
         public UIObject()
         {
             IdentityRecordObj = null;
-            Bonds = null;
-            CashEquivalents = null;
-            Loans = null;
-            MutualFunds = null;
-            Stocks = null;
-            Properties = null;
+            Bonds = new List<Bond>();
+            CashEquivalents = new List<CashEquivalent>();
+            Loans = new List<Loan>();
+            MutualFunds = new List<MutualFund>();
+            Stocks = new List<Stock>();
+            Properties = new List<Property>();
         }
 
         [JsonConstructor]
-        public UIObject(IdentityRecord identityRecord, List<Bond> bonds, List<CashEquivalent> cashEquivalents, List<Loan> loans, List<MutualFund> mutualFunds, List<Stock> stocks, List<Property> properties)
+        public UIObject(IdentityRecord identityRecord, List<CashEquivalent> cashEquivalents = null, List<Loan> loans = null,
+            List<MutualFund> mutualFunds = null, List<Stock> stocks = null, List<Property> properties = null,
+            List<Bond> bonds = null)
         {
             IdentityRecordObj = identityRecord;
             Bonds = bonds;
