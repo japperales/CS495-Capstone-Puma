@@ -12,7 +12,7 @@ namespace CheetahApiSimulator.Controllers
         [HttpGet]
         public IdentityRecord Get()
         {
-            return buildIdentity(0);
+            return buildIdentity(2);
         }
         
         [HttpGet("{id}")]

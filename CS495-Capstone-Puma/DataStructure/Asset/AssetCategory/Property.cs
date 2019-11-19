@@ -11,10 +11,10 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         public string IncomePaymentFrequencyTypeName { get; set; }
 
         [JsonProperty("IncomePaymentMonth")]
-        public long IncomePaymentMonth { get; set; }
+        public long? IncomePaymentMonth { get; set; }
 
         [JsonProperty("IncomePaymentDay")]
-        public long IncomePaymentDay { get; set; }
+        public long? IncomePaymentDay { get; set; }
 
         [JsonProperty("RealEstateParcelNumber")]
         public string RealEstateParcelNumber { get; set; }
@@ -22,6 +22,15 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         [JsonProperty("InsurancePolicyNumber")]
         public string InsurancePolicyNumber { get; set; }
 
+        public Property()
+        {
+            IncomePaymentFrequencyType = null;
+            IncomePaymentFrequencyTypeName = null;
+            IncomePaymentMonth = null;
+            IncomePaymentDay = null;
+            RealEstateParcelNumber = null;
+            InsurancePolicyNumber = null;
+        }
         [JsonConstructor]
         public Property(string incomePaymentFrequencyType, string incomePaymentFrequencyTypeName, long incomePaymentMonth, long incomePaymentDay, string realEstateParcelNumber, string insurancePolicyNumber)
         {
