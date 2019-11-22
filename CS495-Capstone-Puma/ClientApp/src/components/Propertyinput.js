@@ -1,7 +1,7 @@
 import React from 'react'
 
-let state = {assets: [],
-    placeHolder: [{ name: 'test1', price: '45.5', quantity: 21, incomePaymentFrequencyType: "pretty frequent", incomePaymentMonth: 74654893, incomePaymentDay: 2, realEstateParcelNumber: "123 north"}],
+let state = {
+    assets: [],
     inputName: null,
     inputPrice: null,
     inputQuantity: null,
@@ -25,10 +25,12 @@ export class Propertyinput extends React.Component{
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.state.placeHolder[0]);
-        return header.map((key, index) => {
-            return <th key={index}>{key.toUpperCase()}</th>
-        })
+        if(this.state.assets.length>0) {
+            let header = Object.keys(this.state.assets[0]);
+            return header.map((key, index) => {
+                return <th key={index}>{key.toUpperCase()}</th>
+            })
+        }    
     }
 
     renderTableData() {

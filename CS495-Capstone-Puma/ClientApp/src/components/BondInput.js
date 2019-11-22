@@ -1,11 +1,7 @@
 import React from 'react'
 
-let state = {assets: [],
-    placeHolder: [{ name: 'test1', price: '45.5', quantity: 21, dateOfIssue: "04/30/1997", dateOfMaturity: "01/01/2030",
-
-        incomePaymentMonth: 12345, incomePaymentDay: 54321, accrualMethodType: "annually",
-
-        callDate: "12/12/2012", callPrice: "01/23/1245", dateOfFirstPayment: "11/25/2005"}],
+let state = {
+    assets: [],
     inputName: null,
     inputPrice: null,
     inputQuantity: null,
@@ -34,10 +30,12 @@ export class BondInput extends React.Component{
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.state.placeHolder[0]);
-        return header.map((key, index) => {
-            return <th key={index}>{key.toUpperCase()}</th>
-        })
+        if(this.state.assets.length>0) {
+            let header = Object.keys(this.state.assets[0]);
+            return header.map((key, index) => {
+                return <th key={index}>{key.toUpperCase()}</th>
+            })
+        }
     }
 
     renderTableData() {

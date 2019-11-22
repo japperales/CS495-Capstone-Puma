@@ -12,78 +12,7 @@ exports[`LoanInput Renders Correctly 1`] = `
     id="assets"
   >
     <tbody>
-      <tr>
-        <th
-          key="0"
-        >
-          NAME
-        </th>
-        <th
-          key="1"
-        >
-          PRICE
-        </th>
-        <th
-          key="2"
-        >
-          QUANTITY
-        </th>
-        <th
-          key="3"
-        >
-          DATEOFISSUE
-        </th>
-        <th
-          key="4"
-        >
-          DATEOFMATURITY
-        </th>
-        <th
-          key="5"
-        >
-          DATEOFFIRSTPAYMENT
-        </th>
-        <th
-          key="6"
-        >
-          INCOMEPAYMENTMONTH
-        </th>
-        <th
-          key="7"
-        >
-          INCOMEPAYMENTDAY
-        </th>
-        <th
-          key="8"
-        >
-          ACCRUALMETHODTYPE
-        </th>
-        <th
-          key="9"
-        >
-          PAYMENTFREQUENCYTYPE
-        </th>
-        <th
-          key="10"
-        >
-          INCOMEPAYMENTFREQUENCYTYPE
-        </th>
-        <th
-          key="11"
-        >
-          COMPOUNDINGFREQUENCYTYPE
-        </th>
-        <th
-          key="12"
-        >
-          AMORTIZATIONFREQUENCYTYPE
-        </th>
-        <th
-          key="13"
-        >
-          PERIODICPAYMENTAMOUNT
-        </th>
-      </tr>
+      <tr />
     </tbody>
   </table>
   <form

@@ -1,11 +1,7 @@
 import React from 'react'
 
-let state = {assets: [], 
-    
-    placeHolder: [{ name: 'test1', price: '45.5', quantity: 21, exchangeType: "good exchange",
-    earningsPerShareDiluted: 12345, earningsPerShareBasic: 54321, earningsPerShareEffectiveDate: "04-30-1997",
-    paymentFrequencyType: "nice frequency", sharesOutstanding: 45, isIncludedIn13F: "true", isRestrictedByRule144A: "false", calculatedMarketCapType: "neato cap"}], 
-    
+let state = {
+    assets: [],
     inputName: null,
     inputPrice: null,
     inputQuantity: null,
@@ -36,10 +32,12 @@ export class StockInput extends React.Component{
     }
 
     renderTableHeader() {
-        let header = Object.keys(this.state.placeHolder[0]);
-        return header.map((key, index) => {
-            return <th key={index}>{key.toUpperCase()}</th>
-        })
+        if(this.state.assets.length>0) {
+            let header = Object.keys(this.state.assets[0]);
+            return header.map((key, index) => {
+                return <th key={index}>{key.toUpperCase()}</th>
+            })
+        }    
     }
 
     renderTableData() {
