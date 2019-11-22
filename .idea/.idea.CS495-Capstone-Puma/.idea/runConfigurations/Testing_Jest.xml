@@ -1,0 +1,11 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Testing Jest" type="JavaScriptTestRunnerJest">
+    <node-interpreter value="project" />
+    <node-options value="" />
+    <jest-package value="$PROJECT_DIR$/CS495-Capstone-Puma/ClientApp/node_modules/react-scripts" />
+    <working-dir value="$PROJECT_DIR$/CS495-Capstone-Puma/ClientApp" />
+    <envs />
+    <scope-kind value="ALL" />
+    <method v="2" />
+  </configuration>
+</component>
