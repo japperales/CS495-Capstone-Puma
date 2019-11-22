@@ -12,68 +12,7 @@ exports[`PersonalInput Renders Correctly 1`] = `
     id="assets"
   >
     <tbody>
-      <tr>
-        <th
-          key="0"
-        >
-          NAME
-        </th>
-        <th
-          key="1"
-        >
-          PRICE
-        </th>
-        <th
-          key="2"
-        >
-          QUANTITY
-        </th>
-        <th
-          key="3"
-        >
-          EXCHANGETYPE
-        </th>
-        <th
-          key="4"
-        >
-          EARNINGSPERSHAREDILUTED
-        </th>
-        <th
-          key="5"
-        >
-          EARNINGSPERSHAREBASIC
-        </th>
-        <th
-          key="6"
-        >
-          EARNINGSPERSHAREEFFECTIVEDATE
-        </th>
-        <th
-          key="7"
-        >
-          PAYMENTFREQUENCYTYPE
-        </th>
-        <th
-          key="8"
-        >
-          SHARESOUTSTANDING
-        </th>
-        <th
-          key="9"
-        >
-          ISINCLUDEDIN13F
-        </th>
-        <th
-          key="10"
-        >
-          ISRESTRICTEDBYRULE144A
-        </th>
-        <th
-          key="11"
-        >
-          CALCULATEDMARKETCAPTYPE
-        </th>
-      </tr>
+      <tr />
     </tbody>
   </table>
   <form

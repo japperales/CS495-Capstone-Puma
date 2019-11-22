@@ -12,48 +12,7 @@ exports[`AccountHistoryInput Renders Correctly 1`] = `
     id="assets"
   >
     <tbody>
-      <tr>
-        <th
-          key="0"
-        >
-          NAME
-        </th>
-        <th
-          key="1"
-        >
-          PRICE
-        </th>
-        <th
-          key="2"
-        >
-          QUANTITY
-        </th>
-        <th
-          key="3"
-        >
-          INCOMEPAYMENTFREQUENCYTYPE
-        </th>
-        <th
-          key="4"
-        >
-          INCOMEPAYMENTMONTH
-        </th>
-        <th
-          key="5"
-        >
-          INCOMEPAYMENTDAY
-        </th>
-        <th
-          key="6"
-        >
-          ACCRUALMETHODTYPE
-        </th>
-        <th
-          key="7"
-        >
-          COMPOUNDINGFREQUENCYTYPE
-        </th>
-      </tr>
+      <tr />
     </tbody>
   </table>
   <form

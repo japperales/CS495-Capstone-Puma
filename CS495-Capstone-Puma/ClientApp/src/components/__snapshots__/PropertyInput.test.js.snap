@@ -12,43 +12,7 @@ exports[`PropertyInput Renders Correctly 1`] = `
     id="assets"
   >
     <tbody>
-      <tr>
-        <th
-          key="0"
-        >
-          NAME
-        </th>
-        <th
-          key="1"
-        >
-          PRICE
-        </th>
-        <th
-          key="2"
-        >
-          QUANTITY
-        </th>
-        <th
-          key="3"
-        >
-          INCOMEPAYMENTFREQUENCYTYPE
-        </th>
-        <th
-          key="4"
-        >
-          INCOMEPAYMENTMONTH
-        </th>
-        <th
-          key="5"
-        >
-          INCOMEPAYMENTDAY
-        </th>
-        <th
-          key="6"
-        >
-          REALESTATEPARCELNUMBER
-        </th>
-      </tr>
+      <tr />
     </tbody>
   </table>
   <form

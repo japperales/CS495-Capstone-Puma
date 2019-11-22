@@ -12,63 +12,7 @@ exports[`BondInput Renders Correctly 1`] = `
     id="assets"
   >
     <tbody>
-      <tr>
-        <th
-          key="0"
-        >
-          NAME
-        </th>
-        <th
-          key="1"
-        >
-          PRICE
-        </th>
-        <th
-          key="2"
-        >
-          QUANTITY
-        </th>
-        <th
-          key="3"
-        >
-          DATEOFISSUE
-        </th>
-        <th
-          key="4"
-        >
-          DATEOFMATURITY
-        </th>
-        <th
-          key="5"
-        >
-          INCOMEPAYMENTMONTH
-        </th>
-        <th
-          key="6"
-        >
-          INCOMEPAYMENTDAY
-        </th>
-        <th
-          key="7"
-        >
-          ACCRUALMETHODTYPE
-        </th>
-        <th
-          key="8"
-        >
-          CALLDATE
-        </th>
-        <th
-          key="9"
-        >
-          CALLPRICE
-        </th>
-        <th
-          key="10"
-        >
-          DATEOFFIRSTPAYMENT
-        </th>
-      </tr>
+      <tr />
     </tbody>
   </table>
   <form

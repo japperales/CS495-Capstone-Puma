@@ -144,17 +144,6 @@ export class TabsPage extends React.Component {
                     </TabPanel>
                 </Tabs>
                 <button onClick={this.sendPortfolio}>Submit Info</button>
-                Here is my example of props and callbacks: currently, the first name is: {this.state.firstName}, the middle name is: {this.state.middleName}, the last name is: {this.state.lastName}, the honorific is: {this.state.honorific}, the email is: {this.state.emailAddress}
-                <br/> OUTPUT: {this.state.outputFirstName}, <br/>
-                <br/>{this.state.outputMiddleName},
-                <br/>{this.state.outputLastName}, {this.state.outputHonorific}, {this.state.outputEmailAddress}
-                <br/><br/>BONDS: {JSON.stringify(this.state.bonds)},
-                <br/><br/>MISC: {JSON.stringify(this.state.misc)},
-                <br/><br/>LOANS: {JSON.stringify(this.state.loans)},
-                <br/><br/>MUTUAL FUNDS: {JSON.stringify(this.state.mutualFunds)},
-
-                <br/><br/>STOCKS: {JSON.stringify(this.state.stocks)},
-                <br/><br/>PROPERTIES: {JSON.stringify(this.state.properties)}
             </div>
         );
     }
