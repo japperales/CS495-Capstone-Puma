@@ -34,11 +34,9 @@
         </e>
         <e p="Resources" t="Include">
           <e p="Account" t="Include">
-            <e p="0.json" t="Include" />
             <e p="2.json" t="Include" />
           </e>
           <e p="Asset" t="Include">
-            <e p="1.json" t="Include" />
             <e p="2.json" t="Include" />
           </e>
           <e p="identity" t="Include">
@@ -59,7 +57,11 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="ClientApp" t="Include">
           <e p=".gitignore" t="Include" />
+          <e p="node_modules\@types" t="IncludeRecursive" />
           <e p="node_modules\bootstrap" t="IncludeRecursive" />
+          <e p="node_modules\enzyme" t="IncludeRecursive" />
+          <e p="node_modules\enzyme-adapter-react-16" t="IncludeRecursive" />
+          <e p="node_modules\enzyme-to-json" t="IncludeRecursive" />
           <e p="node_modules\prop-types" t="IncludeRecursive" />
           <e p="node_modules\react" t="IncludeRecursive" />
           <e p="node_modules\react-bootstrap" t="IncludeRecursive" />
@@ -70,6 +72,7 @@
           <e p="node_modules\react-scripts" t="IncludeRecursive" />
           <e p="node_modules\react-tabs" t="IncludeRecursive" />
           <e p="node_modules\rimraf" t="IncludeRecursive" />
+          <e p="node_modules\sinon" t="IncludeRecursive" />
           <e p="package-lock.json" t="Include" />
           <e p="package.json" t="Include" />
           <e p="public" t="Include">
@@ -80,11 +83,14 @@
           <e p="README.md" t="Include" />
           <e p="src" t="Include">
             <e p="App.js" t="Include" />
-            <e p="App.test.js" t="Include" />
             <e p="components" t="Include">
+              <e p="__snapshots__" t="Include">
+                <e p="BondInput.test.js.snap" t="Include" />
+              </e>
               <e p="AccountHistoryInput.js" t="Include" />
               <e p="AssetsInput.js" t="Include" />
               <e p="BondInput.js" t="Include" />
+              <e p="BondInput.test.js" t="Include" />
               <e p="CoolGuyCreator.js" t="Include" />
               <e p="Counter.js" t="Include" />
               <e p="FetchData.js" t="Include" />
@@ -106,6 +112,7 @@
             <e p="index.css" t="Include" />
             <e p="index.js" t="Include" />
             <e p="registerServiceWorker.js" t="Include" />
+            <e p="setupTests.js" t="Include" />
           </e>
         </e>
         <e p="Controllers" t="Include">
