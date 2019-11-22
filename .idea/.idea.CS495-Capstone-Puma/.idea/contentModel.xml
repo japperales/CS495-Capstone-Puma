@@ -34,9 +34,11 @@
         </e>
         <e p="Resources" t="Include">
           <e p="Account" t="Include">
+            <e p="0.json" t="Include" />
             <e p="2.json" t="Include" />
           </e>
           <e p="Asset" t="Include">
+            <e p="1.json" t="Include" />
             <e p="2.json" t="Include" />
           </e>
           <e p="identity" t="Include">
