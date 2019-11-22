@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BondInput Renders Correctly 1`] = `
+<div>
+  <h3
+    id="title"
+  >
+    Bonds
+  </h3>
+  <table
+    className="table"
+    id="assets"
+  >
+    <tbody>
+      <tr>
+        <th
+          key="0"
+        >
+          NAME
+        </th>
+        <th
+          key="1"
+        >
+          PRICE
+        </th>
+        <th
+          key="2"
+        >
+          QUANTITY
+        </th>
+        <th
+          key="3"
+        >
+          DATEOFISSUE
+        </th>
+        <th
+          key="4"
+        >
+          DATEOFMATURITY
+        </th>
+        <th
+          key="5"
+        >
+          INCOMEPAYMENTMONTH
+        </th>
+        <th
+          key="6"
+        >
+          INCOMEPAYMENTDAY
+        </th>
+        <th
+          key="7"
+        >
+          ACCRUALMETHODTYPE
+        </th>
+        <th
+          key="8"
+        >
+          CALLDATE
+        </th>
+        <th
+          key="9"
+        >
+          CALLPRICE
+        </th>
+        <th
+          key="10"
+        >
+          DATEOFFIRSTPAYMENT
+        </th>
+      </tr>
+    </tbody>
+  </table>
+  <form
+    onSubmit={[Function]}
+  >
+    <label>
+      Name
+    </label>
+    <input
+      name="inputName"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value={null}
+    />
+    <br />
+    <label>
+      Price
+    </label>
+    <input
+      name="inputPrice"
+      onChange={[Function]}
+      required={true}
+      type="number"
+      value={null}
+    />
+    <br />
+    <label>
+      Quantity
+    </label>
+    <input
+      name="inputQuantity"
+      onChange={[Function]}
+      required={true}
+      type="number"
+      value={null}
+    />
+    <br />
+    <label>
+      DateOfIssue
+    </label>
+    <input
+      name="inputDateOfIssue"
+      onChange={[Function]}
+      required={true}
+      type="date"
+      value={null}
+    />
+    <br />
+    <label>
+      DateOfMaturity
+    </label>
+    <input
+      name="inputDateOfMaturity"
+      onChange={[Function]}
+      required={true}
+      type="date"
+      value={null}
+    />
+    <br />
+    <label>
+      IncomePaymentMonth
+    </label>
+    <input
+      name="inputIncomePaymentMonth"
+      onChange={[Function]}
+      required={true}
+      type="number"
+      value={null}
+    />
+    <br />
+    <label>
+      IncomePaymentDay
+    </label>
+    <input
+      name="inputIncomePaymentDay"
+      onChange={[Function]}
+      required={true}
+      type="number"
+      value={null}
+    />
+    <br />
+    <label>
+      AccrualMethodType
+    </label>
+    <input
+      name="inputAccrualMethodType"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value={null}
+    />
+    <br />
+    <label>
+      CallDate
+    </label>
+    <input
+      name="inputCallDate"
+      onChange={[Function]}
+      required={true}
+      type="date"
+      value={null}
+    />
+    <br />
+    <label>
+      CallPrice
+    </label>
+    <input
+      name="inputCallPrice"
+      onChange={[Function]}
+      required={true}
+      type="date"
+      value={null}
+    />
+    <br />
+    <label>
+      DateOfFirstPayment
+    </label>
+    <input
+      name="inputDateOfFirstPayment"
+      onChange={[Function]}
+      required={true}
+      type="date"
+      value={null}
+    />
+    <br />
+    <input
+      type="submit"
+      value="Add Asset"
+    />
+  </form>
+  <button
+    onClick={[Function]}
+  >
+     Remove Asset
+  </button>
+  <br />
+  <br />
+</div>
+`;
