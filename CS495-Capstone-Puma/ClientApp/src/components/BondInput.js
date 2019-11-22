@@ -1,5 +1,5 @@
 import React from 'react'
-
+//Stored state for subsequent render memory
 let state = {
     assets: [],
     inputName: null,
@@ -24,11 +24,11 @@ export class BondInput extends React.Component{
         this.removeAsset = this.removeAsset.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-
+    //saving state for next render(s)
     componentWillUnmount() {
         state = this.state;
     }
-
+    //rendering Table Headers dynamically based on fields of asset objects
     renderTableHeader() {
         if(this.state.assets.length>0) {
             let header = Object.keys(this.state.assets[0]);
@@ -38,6 +38,7 @@ export class BondInput extends React.Component{
         }
     }
 
+    //rendering data of each asset iteratively
     renderTableData() {
         return this.state.assets.map((asset, index) => {
             const { name, price, quantity, dateOfIssue,
@@ -63,6 +64,7 @@ export class BondInput extends React.Component{
         })
     }
 
+    //assigning input of any changes in input fields to their corresponding input variables in state
     handleInputChange(event){
 
         const target = event.target;
@@ -75,6 +77,8 @@ export class BondInput extends React.Component{
 
     }
 
+    //Adding asset object to list of assets for this subcomponent from input variables,
+    //then updating parent component data accordingly
     async addAsset(event){
         event.preventDefault();
         const newAsset = {
@@ -93,7 +97,7 @@ export class BondInput extends React.Component{
         await this.setState({assets: this.state.assets.concat(newAsset)});
         this.props.bondCallback(this.state.assets);
     }
-
+    //pops last asset out of list, if there are any 
     async removeAsset(){
         await this.setState({asset: this.state.assets.pop()});
         this.props.bondCallback(this.state.assets);

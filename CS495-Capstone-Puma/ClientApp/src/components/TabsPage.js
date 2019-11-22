@@ -35,6 +35,7 @@ export class TabsPage extends React.Component {
             properties: [],
             outputIden: null                  
         };
+        //React Binding because of nebulous this references
         this.personalCallback = this.personalCallback.bind(this);
         this.bondCallback = this.bondCallback.bind(this);
         this.miscCallback = this.miscCallback.bind(this);
@@ -44,10 +45,12 @@ export class TabsPage extends React.Component {
         this.propertyCallback = this.propertyCallback.bind(this);
         this.sendPortfolio = this.sendPortfolio.bind(this);
     }
-
+    
+    //A group of callback functions, one passed into its corresponding subcomponent,
+    // to allow the subcomponent to send data back to the parent component.
+    
     personalCallback(firstName, middleName, lastName, honorific, emailAddress){
         this.setState({firstName: firstName, middleName: middleName, lastName: lastName, honorific: honorific, emailAddress: emailAddress});
-
     }
 
     bondCallback(assets){
@@ -73,7 +76,9 @@ export class TabsPage extends React.Component {
     propertyCallback(assets){
         this.setState({properties: assets});
     }
-
+    //Here we take the pulled list of assets from each child component along with the personal data,
+    //turn it into JSON, and send a Http request formatted for the Controller to understand. 
+    //The response is a JSON object that contains the personal data and a list of revised assets from Cheetah
     sendPortfolio(event) {
         event.preventDefault();
         fetch('api/Puma', {
@@ -102,10 +107,11 @@ export class TabsPage extends React.Component {
                 this.setState({outputIden: data});
             });
     }
-
+    //Each Tab in the TabsList navigates to a corresponding TabPanel
     render() {
         return(
             <div>
+                
                 <Tabs>
                     <TabList>
                         <Tab>Personal Info</Tab>
