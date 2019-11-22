@@ -85,9 +85,17 @@
             <e p="App.js" t="Include" />
             <e p="components" t="Include">
               <e p="__snapshots__" t="Include">
+                <e p="AccountHistoryInput.test.js.snap" t="Include" />
                 <e p="BondInput.test.js.snap" t="Include" />
+                <e p="LoanInput.test.js.snap" t="Include" />
+                <e p="MiscAssetInput.test.js.snap" t="Include" />
+                <e p="MutualFundInput.test.js.snap" t="Include" />
+                <e p="PersonalInput.test.js.snap" t="Include" />
+                <e p="PropertyInput.test.js.snap" t="Include" />
+                <e p="StockInput.test.js.snap" t="Include" />
               </e>
               <e p="AccountHistoryInput.js" t="Include" />
+              <e p="AccountHistoryInput.test.js" t="Include" />
               <e p="AssetsInput.js" t="Include" />
               <e p="BondInput.js" t="Include" />
               <e p="BondInput.test.js" t="Include" />
@@ -97,15 +105,21 @@
               <e p="Home.js" t="Include" />
               <e p="Layout.js" t="Include" />
               <e p="LoanInput.js" t="Include" />
+              <e p="LoanInput.test.js" t="Include" />
               <e p="MiscAssetInput.js" t="Include" />
+              <e p="MiscAssetInput.test.js" t="Include" />
               <e p="MutualFundInput.js" t="Include" />
+              <e p="MutualFundInput.test.js" t="Include" />
               <e p="NavMenu.css" t="Include" />
               <e p="NavMenu.js" t="Include" />
               <e p="PersonalInput.js" t="Include" />
+              <e p="PersonalInput.test.js" t="Include" />
               <e p="Propertyinput.js" t="Include" />
+              <e p="PropertyInput.test.js" t="Include" />
               <e p="Puma.js" t="Include" />
               <e p="Results.js" t="Include" />
               <e p="StockInput.js" t="Include" />
+              <e p="StockInput.test.js" t="Include" />
               <e p="TabsPage.js" t="Include" />
               <e p="TestClient.js" t="Include" />
             </e>

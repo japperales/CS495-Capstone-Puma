@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyInput Renders Correctly 1`] = `
+<div>
+  <h3
+    id="title"
+  >
+    Properties
+  </h3>
+  <table
+    className="table"
+    id="assets"
+  >
+    <tbody>
+      <tr>
+        <th
+          key="0"
+        >
+          NAME
+        </th>
+        <th
+          key="1"
+        >
+          PRICE
+        </th>
+        <th
+          key="2"
+        >
+          QUANTITY
+        </th>
+        <th
+          key="3"
+        >
+          INCOMEPAYMENTFREQUENCYTYPE
+        </th>
+        <th
+          key="4"
+        >
+          INCOMEPAYMENTMONTH
+        </th>
+        <th
+          key="5"
+        >
+          INCOMEPAYMENTDAY
+        </th>
+        <th
+          key="6"
+        >
+          REALESTATEPARCELNUMBER
+        </th>
+      </tr>
+    </tbody>
+  </table>
+  <form
+    onSubmit={[Function]}
+  >
+    <label>
+      Name
+    </label>
+    <input
+      name="inputName"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value={null}
+    />
+    <br />
+    <label>
+      Price
+    </label>
+    <input
+      name="inputPrice"
+      onChange={[Function]}
+      required={true}
+      type="number"
+      value={null}
+    />
+    <br />
+    <label>
+      Quantity
+    </label>
+    <input
+      name="inputQuantity"
+      onChange={[Function]}
+      required={true}
+      type="number"
+      value={null}
+    />
+    <br />
+    <label>
+      IncomePaymentFrequencyType
+    </label>
+    <input
+      name="inputIncomePaymentFrequencyType"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value={null}
+    />
+    <br />
+    <label>
+      IncomePaymentMonth
+    </label>
+    <input
+      name="inputIncomePaymentMonth"
+      onChange={[Function]}
+      required={true}
+      type="number"
+      value={null}
+    />
+    <br />
+    <label>
+      IncomePaymentDay
+    </label>
+    <input
+      name="inputIncomePaymentDay"
+      onChange={[Function]}
+      required={true}
+      type="number"
+    />
+    <br />
+    <label>
+      RealEstateParcelNumber
+    </label>
+    <input
+      name="inputRealEstateParcelNumber"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value={null}
+    />
+    <br />
+    <input
+      type="submit"
+      value="Add Asset"
+    />
+  </form>
+  <button
+    onClick={[Function]}
+  >
+     Remove Asset
+  </button>
+  <br />
+  <br />
+</div>
+`;
