@@ -1,37 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj": {}
+    "D:\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj": {}
   },
   "projects": {
-    "D:\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj": {
+    "D:\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
+        "projectUniqueName": "D:\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
         "projectName": "CheetahApiSimulator",
-        "projectPath": "D:\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
-        "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
-        "outputPath": "D:\\CS495-Capstone-Puma\\CheetahApiSimulator\\obj\\",
+        "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
+        "packagesPath": "C:\\Users\\rylan\\.nuget\\packages\\",
+        "outputPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\rylan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.0"
+          "netcoreapp2.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.0": {
+          "netcoreapp2.1": {
             "projectReferences": {
-              "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
-                "projectPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
+              "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+                "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
               }
             }
           }
@@ -43,44 +41,51 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.0": {
+        "netcoreapp2.1": {
           "dependencies": {
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.0.0, )",
+              "version": "[2.1.0, )",
               "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true
         }
       }
     },
-    "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+    "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
+        "projectUniqueName": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
         "projectName": "CS495-Capstone-Puma",
-        "projectPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
-        "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
-        "outputPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\obj\\",
+        "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
+        "packagesPath": "C:\\Users\\rylan\\.nuget\\packages\\",
+        "outputPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\rylan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -142,7 +147,12 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true

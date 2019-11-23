@@ -6,7 +6,7 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
     public class Option
     {
         [JsonProperty("IndustryId")]
-        public long IndustryId { get; set; }
+        public long? IndustryId { get; set; }
 
         [JsonProperty("ExchangeType")]
         public string ExchangeType { get; set; }
@@ -15,17 +15,27 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         public string ExchangeTypeName { get; set; }
 
         [JsonProperty("DateOfExpiration")]
-        public DateTimeOffset DateOfExpiration { get; set; }
+        public DateTimeOffset? DateOfExpiration { get; set; }
 
         [JsonProperty("AssociatedAssetId")]
-        public long AssociatedAssetId { get; set; }
+        public long? AssociatedAssetId { get; set; }
 
         [JsonProperty("AssociatedAssetCode")]
         public string AssociatedAssetCode { get; set; }
 
         [JsonProperty("StrikePriceAmount")]
-        public long StrikePriceAmount { get; set; }
+        public long? StrikePriceAmount { get; set; }
 
+        public Option()
+        {
+            IndustryId = null;
+            ExchangeType = null;
+            ExchangeTypeName = null;
+            DateOfExpiration = null;
+            AssociatedAssetId = null;
+            AssociatedAssetCode = null;
+            StrikePriceAmount = null;
+        }
         [JsonConstructor]
         public Option(long industryId, string exchangeType, string exchangeTypeName, DateTimeOffset dateOfExpiration, long associatedAssetId, string associatedAssetCode, long strikePriceAmount)
         {
