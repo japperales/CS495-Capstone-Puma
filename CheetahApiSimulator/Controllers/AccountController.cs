@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using CS495_Capstone_Puma.DataStructure.Account;
+using CheetahApiSimulator.DataStructure.Account;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

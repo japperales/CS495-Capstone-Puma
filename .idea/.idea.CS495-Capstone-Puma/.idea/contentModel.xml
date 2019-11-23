@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\John\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
+    <e p="C:\Users\rylan\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
-    <e p="C:\Users\John\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\John\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\John\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="C:\Users\John\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\John\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_CS495-Capstone-Puma.-1623170172.00" t="ExcludeRecursive" />
-    <e p="D:\CS495-Capstone-Puma" t="IncludeFlat">
+    <e p="C:\Users\rylan\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\rylan\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\rylan\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="C:\Users\rylan\.Rider2019.2\config\scratches" t="IncludeRecursive" />
+    <e p="C:\Users\rylan\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\rylan\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_CS495-Capstone-Puma.295587292.00" t="ExcludeRecursive" />
+    <e p="D:\RiderProjects\CS495-Capstone-Puma" t="IncludeFlat">
       <e p="CheetahApiSimulator" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
@@ -20,10 +22,54 @@
           <e p="AssetController.cs" t="Include" />
           <e p="NameAndAddressController.cs" t="Include" />
         </e>
+        <e p="DataStructure" t="Include">
+          <e p="Account" t="Include">
+            <e p="Account.cs" t="Include" />
+            <e p="AccountRelationship.cs" t="Include" />
+            <e p="AccountSettings.cs" t="Include" />
+            <e p="Fee" t="Include">
+              <e p="FeeCreditToTrustee.cs" t="Include" />
+              <e p="FeePaidFromAccountList.cs" t="Include" />
+              <e p="FeeSchedule.cs" t="Include" />
+              <e p="FeeSetting.cs" t="Include" />
+            </e>
+            <e p="InvestmentModelSetting.cs" t="Include" />
+            <e p="PerformanceExclusion.cs" t="Include" />
+          </e>
+          <e p="Asset" t="Include">
+            <e p="Asset.cs" t="Include" />
+            <e p="AssetCategory" t="Include">
+              <e p="Bond.cs" t="Include" />
+              <e p="CashEquivalent.cs" t="Include" />
+              <e p="Loan.cs" t="Include" />
+              <e p="MutualFund.cs" t="Include" />
+              <e p="Option.cs" t="Include" />
+              <e p="Property.cs" t="Include" />
+              <e p="Stock.cs" t="Include" />
+            </e>
+            <e p="AssetInstitutionSetting.cs" t="Include" />
+            <e p="AssetInstitutionSettingsCustomField.cs" t="Include" />
+            <e p="DividendEvent.cs" t="Include" />
+            <e p="Factor.cs" t="Include" />
+            <e p="InterestRate.cs" t="Include" />
+            <e p="PriceHistory.cs" t="Include" />
+            <e p="QualityRatingHistory.cs" t="Include" />
+          </e>
+          <e p="NameAndAddress" t="Include">
+            <e p="Address.cs" t="Include" />
+            <e p="ContactMethod.cs" t="Include" />
+            <e p="IdentityRecord.cs" t="Include" />
+            <e p="PhoneNumber.cs" t="Include" />
+            <e p="RecipientBankInformation.cs" t="Include" />
+          </e>
+          <e p="Test.cs" t="Include" />
+          <e p="Trade.cs" t="Include" />
+          <e p="UIObject.cs" t="Include" />
+        </e>
         <e p="FileStorage.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp3.0" t="Include">
+            <e p="netcoreapp2.1" t="Include">
               <e p="CheetahApiSimulator.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -34,9 +80,11 @@
         </e>
         <e p="Resources" t="Include">
           <e p="Account" t="Include">
+            <e p="0.json" t="Include" />
             <e p="2.json" t="Include" />
           </e>
           <e p="Asset" t="Include">
+            <e p="1.json" t="Include" />
             <e p="2.json" t="Include" />
           </e>
           <e p="identity" t="Include">
@@ -130,9 +178,7 @@
           </e>
         </e>
         <e p="Controllers" t="Include">
-          <e p="ExampleClassController.cs" t="Include" />
           <e p="PumaController.cs" t="Include" />
-          <e p="SampleDataController.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.csproj" t="IncludeRecursive" />
         <e p="DataStructure" t="Include">
@@ -181,7 +227,6 @@
         </e>
         <e p="Model" t="Include">
           <e p="CheetahHandler.cs" t="Include" />
-          <e p="Client.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -190,7 +235,6 @@
             </e>
           </e>
         </e>
-        <e p="package-lock.json" t="Include" />
         <e p="Pages" t="Include">
           <e p="_ViewImports.cshtml" t="Include" />
           <e p="Error.cshtml" t="Include" />

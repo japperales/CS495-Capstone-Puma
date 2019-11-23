@@ -11,7 +11,7 @@ namespace CS495_Capstone_Puma.Model
     public class CheetahHandler
     {
 
-        //Main Handler Call
+        //Coordinates the POST and GET HttpRequests required by the process.
         public async Task<UIObject> postAndReceive(IdentityRecord identityRecord, Account account, List<Asset> assets)
         {
             await PostIdentityRecord(identityRecord);
@@ -23,6 +23,7 @@ namespace CS495_Capstone_Puma.Model
                 await PostAsset(asset);
             }
             
+            //Hacked Methodology while using API simulation instead of actual Cheetah
             Asset adjustedAsset = GetAsset(2).Result;
             List<Asset> adjustedAssets = new List<Asset> {adjustedAsset};
 
@@ -54,12 +55,5 @@ namespace CS495_Capstone_Puma.Model
             
             return getResp;
         }
-        
-        //Send other GET requests to Cheetah
-
-        //Assemble objects into a Client object
-
-        //return converted Client object
-
     }
 }
