@@ -12,20 +12,23 @@ namespace CS495_Capstone_Puma.Controllers
     [Route("api/[controller]")]
     public class PumaController : Controller
     {
+        
+        //Receive POST request addressed to HostingAddress/api/Puma. Deserializes JSON in HttpRequest body into UIObject Data Structure.
         [HttpPost]
         public JsonResult ProcessPost([FromBody] UIObject uiObject)
         {
-            
+            //Instantiates class that communicates with Cheetah API
             CheetahHandler cheetah = new CheetahHandler();
             IdentityRecord identityRecord = uiObject.IdentityRecordObj;
             Account account = new Account(0, uiObject.IdentityRecordObj);
             List<Asset> assets = buildAssetList(uiObject);
 
+            //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
             UIObject resp = cheetah.postAndReceive(identityRecord, account, assets).Result;
-
             return Json(resp);
         }
         
+        //Iterates through each list of the asset categories. Assembles them into a unified Asset object list
         private List<Asset> buildAssetList(UIObject uiObject)
         {
             List<Asset> assets = new List<Asset>();

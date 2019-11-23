@@ -18,10 +18,10 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         public string IncomePaymentFrequencyTypeName { get; set; }
 
         [JsonProperty("IncomePaymentMonth")]
-        public long IncomePaymentMonth { get; set; }
+        public long? IncomePaymentMonth { get; set; }
 
         [JsonProperty("IncomePaymentDay")]
-        public long IncomePaymentDay { get; set; }
+        public long? IncomePaymentDay { get; set; }
 
         [JsonProperty("AmortizationFrequencyType")]
         public string AmortizationFrequencyType { get; set; }
@@ -42,7 +42,7 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         public string CompoundingFrequencyTypeName { get; set; }
 
         [JsonProperty("DepositoryIdentityRecordId")]
-        public long DepositoryIdentityRecordId { get; set; }
+        public long? DepositoryIdentityRecordId { get; set; }
 
         [JsonProperty("StableNAV", NullValueHandling = NullValueHandling.Ignore)]
         public bool? StableNav { get; set; }
@@ -58,7 +58,37 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
 
         [JsonProperty("OddLastCouponTypeName", NullValueHandling = NullValueHandling.Ignore)]
         public string OddLastCouponTypeName { get; set; }
-        
-        
+
+        public CashEquivalent(string qualityRating, DateTimeOffset? dateOfIssue, string incomePaymentFrequencyType, string incomePaymentFrequencyTypeName, long incomePaymentMonth, long incomePaymentDay, string amortizationFrequencyType, string amortizationFrequencyTypeName, string accrualMethodType, string accrualMethodTypeName, string compoundingFrequencyType, string compoundingFrequencyTypeName, long depositoryIdentityRecordId, bool? stableNav, DateTimeOffset? dateOfMaturity, DateTimeOffset? dateOfFirstPayment, string oddLastCouponType, string oddLastCouponTypeName)
+        {
+            QualityRating = null;
+            DateOfIssue = null;
+            IncomePaymentFrequencyType = null;
+            IncomePaymentFrequencyTypeName = null;
+            IncomePaymentMonth = null;
+            IncomePaymentDay = null;
+            AmortizationFrequencyType = null;
+            AmortizationFrequencyTypeName = null;
+            AccrualMethodType = null;
+            AccrualMethodTypeName = null;
+            CompoundingFrequencyType = null;
+            CompoundingFrequencyTypeName = null;
+            DepositoryIdentityRecordId = null;
+            StableNav = null;
+            DateOfMaturity = null;
+            DateOfFirstPayment = null;
+            OddLastCouponType = null;
+            OddLastCouponTypeName = null;
+        }
+
+        [JsonConstructor]
+        public CashEquivalent(string incomePaymentFrequencyType, int incomePaymentMonth, int incomePaymentDay, string accrualMethodType, string compoundingFrequencyType)
+        {
+            IncomePaymentFrequencyType = incomePaymentFrequencyType;
+            IncomePaymentMonth = incomePaymentDay;
+            IncomePaymentDay = incomePaymentDay;
+            AccrualMethodType = accrualMethodType;
+            CompoundingFrequencyType = compoundingFrequencyType;
+        }
     }
 }
