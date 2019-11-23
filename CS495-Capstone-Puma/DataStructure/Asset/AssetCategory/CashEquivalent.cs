@@ -59,7 +59,7 @@ namespace CS495_Capstone_Puma.DataStructure.Asset.AssetCategory
         [JsonProperty("OddLastCouponTypeName", NullValueHandling = NullValueHandling.Ignore)]
         public string OddLastCouponTypeName { get; set; }
 
-        public CashEquivalent(string qualityRating, DateTimeOffset? dateOfIssue, string incomePaymentFrequencyType, string incomePaymentFrequencyTypeName, long incomePaymentMonth, long incomePaymentDay, string amortizationFrequencyType, string amortizationFrequencyTypeName, string accrualMethodType, string accrualMethodTypeName, string compoundingFrequencyType, string compoundingFrequencyTypeName, long depositoryIdentityRecordId, bool? stableNav, DateTimeOffset? dateOfMaturity, DateTimeOffset? dateOfFirstPayment, string oddLastCouponType, string oddLastCouponTypeName)
+        public CashEquivalent()
         {
             QualityRating = null;
             DateOfIssue = null;

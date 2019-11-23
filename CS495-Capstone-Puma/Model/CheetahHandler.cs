@@ -18,11 +18,6 @@ namespace CS495_Capstone_Puma.Model
 
             await PostAccount(account);
 
-            foreach (Asset asset in assets)
-            {
-                await PostAsset(asset);
-            }
-            
             //Hacked Methodology while using API simulation instead of actual Cheetah
             Asset adjustedAsset = GetAsset(2).Result;
             List<Asset> adjustedAssets = new List<Asset> {adjustedAsset};
