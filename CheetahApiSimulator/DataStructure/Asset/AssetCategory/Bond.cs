@@ -42,7 +42,7 @@ namespace CheetahApiSimulator.DataStructure.Asset.AssetCategory
         public DateTimeOffset? CallDate { get; set; }
 
         [JsonProperty("CallPrice")]
-        public long? CallPrice { get; set; }
+        public DateTimeOffset? CallPrice { get; set; }
 
         [JsonProperty("CallType")]
         public string CallType { get; set; }
@@ -93,59 +93,25 @@ namespace CheetahApiSimulator.DataStructure.Asset.AssetCategory
             OddLastCouponType = null;
             OddLastCouponTypeName = null;
         }
-        
 
-        public Bond(long industryId, DateTimeOffset dateOfIssue, DateTimeOffset dateOfMaturity, string incomePaymentFrequencyType, string incomePaymentFrequencyTypeName, long incomePaymentMonth, long incomePaymentDay, string amortizationFrequencyType, string amortizationFrequencyTypeName, string accrualMethodType, string accrualMethodTypeName, DateTimeOffset callDate, long callPrice, string callType, string callTypeName, DateTimeOffset dateOfFirstPayment, long oidPrice, string insurer, string insurerRating, string oddLastCouponType, string oddLastCouponTypeName)
+        [JsonConstructor]
+        public Bond(DateTimeOffset? dateOfIssue, DateTimeOffset? dateOfMaturity, string incomePaymentFrequencyType, long? incomePaymentMonth, long? incomePaymentDay, string amortizationFrequencyType, string accrualMethodType, DateTimeOffset? callDate, DateTimeOffset? callPrice, string callType, DateTimeOffset? dateOfFirstPayment, long? oidPrice, string insurer, string insurerRating, string oddLastCouponType)
         {
-            IndustryId = industryId;
             DateOfIssue = dateOfIssue;
             DateOfMaturity = dateOfMaturity;
             IncomePaymentFrequencyType = incomePaymentFrequencyType;
-            IncomePaymentFrequencyTypeName = incomePaymentFrequencyTypeName;
             IncomePaymentMonth = incomePaymentMonth;
             IncomePaymentDay = incomePaymentDay;
             AmortizationFrequencyType = amortizationFrequencyType;
-            AmortizationFrequencyTypeName = amortizationFrequencyTypeName;
             AccrualMethodType = accrualMethodType;
-            AccrualMethodTypeName = accrualMethodTypeName;
             CallDate = callDate;
             CallPrice = callPrice;
             CallType = callType;
-            CallTypeName = callTypeName;
             DateOfFirstPayment = dateOfFirstPayment;
             OidPrice = oidPrice;
             Insurer = insurer;
             InsurerRating = insurerRating;
             OddLastCouponType = oddLastCouponType;
-            OddLastCouponTypeName = oddLastCouponTypeName;
-        }
-        
-        [JsonConstructor]
-        public Bond(int quantity, DateTimeOffset dateOfIssue,
-            DateTimeOffset dateOfMaturity, long incomeMonth, long incomeDay, string accrualMethodType,
-            DateTimeOffset callDate, long? callPrice, DateTimeOffset dateOfFirstPayment)
-        {
-            IndustryId = 0;
-            DateOfIssue = dateOfIssue;
-            DateOfMaturity = dateOfMaturity;
-            IncomePaymentFrequencyType = null;
-            IncomePaymentFrequencyTypeName = null;
-            IncomePaymentMonth = incomeMonth;
-            IncomePaymentDay = incomeDay;
-            AmortizationFrequencyType = null;
-            AmortizationFrequencyTypeName = null;
-            AccrualMethodType = accrualMethodType;
-            AccrualMethodTypeName = null;
-            CallDate = callDate;
-            CallPrice = callPrice;
-            CallType = null;
-            CallTypeName = null;
-            DateOfFirstPayment = dateOfFirstPayment;
-            OidPrice = null;
-            Insurer = null;
-            InsurerRating = null;
-            OddLastCouponType = null;
-            OddLastCouponTypeName = null;
         }
     }
 }
