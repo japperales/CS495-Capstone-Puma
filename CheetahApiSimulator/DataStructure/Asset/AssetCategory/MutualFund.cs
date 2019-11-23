@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace CheetahApiSimulator.DataStructure.Asset.AssetCategory
 {
@@ -11,13 +12,13 @@ namespace CheetahApiSimulator.DataStructure.Asset.AssetCategory
         public string IncomePaymentFrequencyTypeName { get; set; }
 
         [JsonProperty("IncomePaymentMonth")]
-        public long IncomePaymentMonth { get; set; }
+        public long? IncomePaymentMonth { get; set; }
 
         [JsonProperty("IncomePaymentDay")]
-        public long IncomePaymentDay { get; set; }
+        public long? IncomePaymentDay { get; set; }
 
         [JsonProperty("UseDailyFactor")]
-        public bool UseDailyFactor { get; set; }
+        public bool? UseDailyFactor { get; set; }
 
         [JsonProperty("AccrualMethodType")]
         public string AccrualMethodType { get; set; }
@@ -32,13 +33,13 @@ namespace CheetahApiSimulator.DataStructure.Asset.AssetCategory
         public string ExchangeTypeName { get; set; }
 
         [JsonProperty("EarningsPerShareDiluted")]
-        public long EarningsPerShareDiluted { get; set; }
+        public long? EarningsPerShareDiluted { get; set; }
 
         [JsonProperty("FundFamilyId")]
-        public long FundFamilyId { get; set; }
+        public long? FundFamilyId { get; set; }
 
         [JsonProperty("FundCategoryId")]
-        public long FundCategoryId { get; set; }
+        public long? FundCategoryId { get; set; }
 
         [JsonProperty("FundNumber")]
         public string FundNumber { get; set; }
@@ -50,29 +51,49 @@ namespace CheetahApiSimulator.DataStructure.Asset.AssetCategory
         public string FundStatusTypeName { get; set; }
 
         [JsonProperty("ShortTermRedemptionFeePercent")]
-        public long ShortTermRedemptionFeePercent { get; set; }
+        public long? ShortTermRedemptionFeePercent { get; set; }
 
         [JsonProperty("ShortTermHoldingPeriod")]
-        public long ShortTermHoldingPeriod { get; set; }
+        public long? ShortTermHoldingPeriod { get; set; }
+        
+        public MutualFund()
+        {
+            IncomePaymentFrequencyType = null;
+            IncomePaymentFrequencyTypeName = null;
+            IncomePaymentMonth = null;
+            IncomePaymentDay = null;
+            UseDailyFactor = null;
+            AccrualMethodType = null;
+            AccrualMethodTypeName = null;
+            ExchangeType = null;
+            ExchangeTypeName = null;
+            EarningsPerShareDiluted = null;
+            FundFamilyId = null;
+            FundCategoryId = null;
+            FundNumber = null;
+            FundStatusType = null;
+            FundStatusTypeName = null;
+            ShortTermRedemptionFeePercent = null;
+            ShortTermHoldingPeriod = null;
+        }
 
         [JsonConstructor]
-        public MutualFund(string incomePaymentFrequencyType, string incomePaymentFrequencyTypeName, long incomePaymentMonth, long incomePaymentDay, bool useDailyFactor, string accrualMethodType, string accrualMethodTypeName, string exchangeType, string exchangeTypeName, long earningsPerShareDiluted, long fundFamilyId, long fundCategoryId, string fundNumber, string fundStatusType, string fundStatusTypeName, long shortTermRedemptionFeePercent, long shortTermHoldingPeriod)
+        public MutualFund(int incomePaymentMonth, int incomePaymentDay, bool useDailyFactor, string accrualMethodType,
+            string exchangeType,
+            int earningsPerShareDiluted, int fundFamilyId, int fundCategoryId, string fundNumber, string fundStatusType,
+            int shortTermRedemptionFeePercent,
+            int shortTermHoldingPeriod)
         {
-            IncomePaymentFrequencyType = incomePaymentFrequencyType;
-            IncomePaymentFrequencyTypeName = incomePaymentFrequencyTypeName;
             IncomePaymentMonth = incomePaymentMonth;
             IncomePaymentDay = incomePaymentDay;
             UseDailyFactor = useDailyFactor;
             AccrualMethodType = accrualMethodType;
-            AccrualMethodTypeName = accrualMethodTypeName;
             ExchangeType = exchangeType;
-            ExchangeTypeName = exchangeTypeName;
             EarningsPerShareDiluted = earningsPerShareDiluted;
             FundFamilyId = fundFamilyId;
             FundCategoryId = fundCategoryId;
             FundNumber = fundNumber;
             FundStatusType = fundStatusType;
-            FundStatusTypeName = fundStatusTypeName;
             ShortTermRedemptionFeePercent = shortTermRedemptionFeePercent;
             ShortTermHoldingPeriod = shortTermHoldingPeriod;
         }

@@ -115,10 +115,5 @@
             SalutationType = salutationType;
             Emails = emails;
         }
-        public IdentityRecord(int identityRecordId, string displayName)
-        {
-            IdentityRecordId = identityRecordId;
-            DisplayName = displayName;
-        }
     }
 }
