@@ -50,3 +50,4 @@ D:\RiderProjects\CS495-Capstone-Puma\CheetahApiSimulator\bin\Debug\netcoreapp3.0
 D:\RiderProjects\CS495-Capstone-Puma\CheetahApiSimulator\bin\Debug\netcoreapp3.0\Resources\Identity\7.json
 D:\RiderProjects\CS495-Capstone-Puma\CheetahApiSimulator\bin\Debug\netcoreapp3.0\Resources\Identity\0.json
 D:\RiderProjects\CS495-Capstone-Puma\CheetahApiSimulator\bin\Debug\netcoreapp3.0\Resources\Account\0.json
+D:\RiderProjects\CS495-Capstone-Puma\CheetahApiSimulator\bin\Debug\netcoreapp3.0\Resources\Asset\1.json
