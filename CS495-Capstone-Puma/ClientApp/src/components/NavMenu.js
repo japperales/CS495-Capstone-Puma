@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import './NavMenu.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 export class NavMenu extends Component {
   displayName = NavMenu.name

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\rylan\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
+    <e p="C:\Users\thoma\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
-    <e p="C:\Users\rylan\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\rylan\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\rylan\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="C:\Users\rylan\.Rider2019.2\config\scratches" t="IncludeRecursive" />
-    <e p="C:\Users\rylan\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\rylan\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_CS495-Capstone-Puma.295587292.00" t="ExcludeRecursive" />
-    <e p="D:\RiderProjects\CS495-Capstone-Puma" t="IncludeFlat">
+    <e p="C:\Users\thoma\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\thoma\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\thoma\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="C:\Users\thoma\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\thoma\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CS495-Capstone-Puma.1635563868.00" t="ExcludeRecursive" />
+    <e p="C:\Users\thoma\RiderProjects\CS495-Capstone-Puma" t="IncludeFlat">
       <e p="CheetahApiSimulator" t="IncludeRecursive">
         <e p="app.config" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
@@ -80,11 +79,9 @@
         </e>
         <e p="Resources" t="Include">
           <e p="Account" t="Include">
-            <e p="0.json" t="Include" />
             <e p="2.json" t="Include" />
           </e>
           <e p="Asset" t="Include">
-            <e p="1.json" t="Include" />
             <e p="2.json" t="Include" />
           </e>
           <e p="identity" t="Include">
@@ -173,6 +170,7 @@
             </e>
             <e p="index.css" t="Include" />
             <e p="index.js" t="Include" />
+            <e p="materialize.css" t="Include" />
             <e p="registerServiceWorker.js" t="Include" />
             <e p="setupTests.js" t="Include" />
           </e>
@@ -232,6 +230,7 @@
           <e p="Debug" t="Include">
             <e p="netcoreapp2.1" t="Include">
               <e p="CS495-Capstone-Puma.AssemblyInfo.cs" t="Include" />
+              <e p="CS495-Capstone-Puma.RazorAssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>

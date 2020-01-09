@@ -149,7 +149,7 @@ export class TabsPage extends React.Component {
                         <Results outputIden={this.state.outputIden}/>
                     </TabPanel>
                 </Tabs>
-                <button onClick={this.sendPortfolio}>Submit Info</button>
+                <button class="waves-effect waves-light btn" onClick={this.sendPortfolio}>Submit Info</button>
             </div>
         );
     }

@@ -157,9 +157,9 @@ export class StockInput extends React.Component{
                 <label>CalculatedMarketCapType</label>
                 <input type="text" name="inputCalculatedMarketCapType" required onChange={this.handleInputChange} value={this.state.inputCalculatedMarketCapType}/>
                 <br />
-                <input type="submit" value="Add Asset"/>
+                    <input type="submit" value="Add Asset" className="waves-effect waves-light btn-small"/>
                 </form>
-                <button onClick={this.removeAsset}> Remove Asset</button>
+                <a onClick={this.removeAsset} className="waves-effect waves-light btn-small">Remove Asset</a>
                 <br/>
                 <br/>
             </div>

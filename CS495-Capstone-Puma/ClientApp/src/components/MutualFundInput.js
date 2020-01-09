@@ -175,9 +175,9 @@ export class MutualFundInput extends React.Component{
                 <label>ShortTermHoldingPeriod</label>
                 <input type="number" name="inputShortTermHoldingPeriod" required onChange={this.handleInputChange} value={this.state.inputShortTermHoldingPeriod}/>
                 <br />
-                <input type="submit" value={"Add Asset"} />
+                    <input type="submit" value="Add Asset" className="waves-effect waves-light btn-small"/>
                 </form>
-                <button onClick={this.removeAsset}> Remove Asset</button>
+                <a onClick={this.removeAsset} className="waves-effect waves-light btn-small">Remove Asset</a>
                 <br/>
                 <br/>
             </div>
