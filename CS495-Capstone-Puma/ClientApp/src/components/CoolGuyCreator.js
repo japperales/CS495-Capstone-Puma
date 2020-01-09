@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import M from 'materialize-css';
 
 export class CoolGuyCreator extends Component{
     

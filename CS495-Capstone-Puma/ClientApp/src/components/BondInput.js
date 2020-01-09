@@ -147,9 +147,9 @@ export class BondInput extends React.Component{
                 <label>DateOfFirstPayment</label>
                 <input type="date" name="inputDateOfFirstPayment" required onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
                 <br />
-                <input type="submit" value="Add Asset" />
-                </form>    
-                <button onClick={this.removeAsset}> Remove Asset</button>
+                    <input type="submit" value="Add Asset" className="waves-effect waves-light btn"/>
+                </form>
+                <a onClick={this.removeAsset} className="waves-effect waves-light btn">Remove Asset</a>
                 <br/>
                 <br/>
             </div>
