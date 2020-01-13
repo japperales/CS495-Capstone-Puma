@@ -8,7 +8,6 @@ import {LoanInput} from "./LoanInput";
 import {MutualFundInput} from "./MutualFundInput";
 import {StockInput} from "./StockInput";
 import {Propertyinput} from "./Propertyinput";
-import {CusipInput} from "./CusipInput";
 import {Results} from "./Results"
 
 export class TabsPage extends React.Component {
@@ -44,7 +43,6 @@ export class TabsPage extends React.Component {
         this.mutualFundCallback = this.mutualFundCallback.bind(this);
         this.stockCallback = this.stockCallback.bind(this);
         this.propertyCallback = this.propertyCallback.bind(this);
-        this.cusipCallback = this.cusipCallback.bind(this);
         this.sendPortfolio = this.sendPortfolio.bind(this);
     }
     
@@ -78,10 +76,7 @@ export class TabsPage extends React.Component {
     propertyCallback(assets){
         this.setState({properties: assets});
     }
-
-    cusipCallback(assets){
-        this.setState({properties: assets});
-    }
+    
     //Here we take the pulled list of assets from each child component along with the personal data,
     //turn it into JSON, and send a Http request formatted for the Controller to understand. 
     //The response is a JSON object that contains the personal data and a list of revised assets from Cheetah
@@ -107,7 +102,6 @@ export class TabsPage extends React.Component {
                 MutualFundList: this.state.mutualFunds,
                 StockList: this.state.stocks,
                 PropertyList: this.state.properties,
-                CusipList: this.state.cusips
             })
         }).then(response => response.json())
             .then(data => {
@@ -128,7 +122,6 @@ export class TabsPage extends React.Component {
                         <Tab>Mutual Funds</Tab>
                         <Tab>Stocks</Tab>
                         <Tab>Properties</Tab>
-                        <Tab>Cusip</Tab>
                         <Tab>Results</Tab>
                     </TabList>
 
@@ -152,9 +145,6 @@ export class TabsPage extends React.Component {
                     </TabPanel>
                     <TabPanel>
                         <Propertyinput propertyCallback={this.propertyCallback}/>
-                    </TabPanel>
-                    <TabPanel>
-                        <CusipInput cusipCallback={this.cusipCallback}/>
                     </TabPanel>
                     <TabPanel>
                         <Results outputIden={this.state.outputIden}/>
