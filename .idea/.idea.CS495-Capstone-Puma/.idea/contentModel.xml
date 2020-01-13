@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\thoma\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
+    <e p="C:\Users\knoll\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
-    <e p="C:\Users\thoma\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\thoma\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\thoma\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="C:\Users\thoma\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\thoma\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CS495-Capstone-Puma.1635563868.00" t="ExcludeRecursive" />
-    <e p="C:\Users\thoma\RiderProjects\CS495-Capstone-Puma" t="IncludeFlat">
+    <e p="C:\Users\knoll\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\knoll\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\knoll\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="C:\Users\knoll\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\knoll\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CS495-Capstone-Puma.-55332423.00" t="ExcludeRecursive" />
+    <e p="C:\Users\knoll\RiderProjects\CS495-Capstone-Puma" t="IncludeFlat">
       <e p="CheetahApiSimulator" t="IncludeRecursive">
         <e p="app.config" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
@@ -146,6 +146,8 @@
               <e p="BondInput.test.js" t="Include" />
               <e p="CoolGuyCreator.js" t="Include" />
               <e p="Counter.js" t="Include" />
+              <e p="CusipInput.js" t="Include" />
+              <e p="CusipInput.test.js" t="Include" />
               <e p="FetchData.js" t="Include" />
               <e p="Home.js" t="Include" />
               <e p="Layout.js" t="Include" />
