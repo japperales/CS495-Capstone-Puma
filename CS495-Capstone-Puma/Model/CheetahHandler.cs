@@ -1,4 +1,5 @@
-﻿﻿using System.Collections.Generic;
+﻿﻿using System;
+ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CS495_Capstone_Puma.DataStructure;
  using CS495_Capstone_Puma.DataStructure.Account;
@@ -12,8 +13,12 @@ namespace CS495_Capstone_Puma.Model
     {
 
         //Coordinates the POST and GET HttpRequests required by the process.
-        public async Task<UIObject> postAndReceive(IdentityRecord identityRecord, Account account, List<Asset> assets)
+        public async Task<UIObject> PostAndReceive(IdentityRecord identityRecord, Account account, List<Asset> assets)
         {
+            TokenResponse accessToken = await GetAccessToken();
+
+            Console.WriteLine(accessToken.Jwt);
+            
             await PostIdentityRecord(identityRecord);
 
             await PostAccount(account);
@@ -49,6 +54,19 @@ namespace CS495_Capstone_Puma.Model
             Asset getResp = await api.GetJsonAsync<Asset>();
             
             return getResp;
+        }
+
+        public static async Task<TokenResponse> GetAccessToken()
+        {
+
+            TokenResponse token = await "https://asctrustv57webapi.accutech-systems.net/Api/v6/Token"
+                .WithHeader("x-api-key",
+                    "mGamIPYtegnxNTXJcveWhWIJFIfOpM9ZDls33nrpTKfLvAhmSZRhkZvOwsUCWeryNvh8MCQOfVRNXAwNMJ6eRGK62rJJfXhW8RZHWcQvdFt2cki12t1YcvP4TgNvjL9V"
+                    )
+                .WithBasicAuth("INSERT USERNAME HERE", "INSERT PASSWORD HERE")
+                .GetJsonAsync<TokenResponse>();
+            return token;
+
         }
     }
 }

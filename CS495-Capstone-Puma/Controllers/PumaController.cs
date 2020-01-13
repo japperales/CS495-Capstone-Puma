@@ -24,7 +24,7 @@ namespace CS495_Capstone_Puma.Controllers
             List<Asset> assets = buildAssetList(uiObject);
 
             //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
-            UIObject resp = cheetah.postAndReceive(identityRecord, account, assets).Result;
+            UIObject resp = cheetah.PostAndReceive(identityRecord, account, assets).Result;
             return Json(resp);
         }
         
