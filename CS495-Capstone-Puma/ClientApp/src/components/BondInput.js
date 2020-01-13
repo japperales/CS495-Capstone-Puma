@@ -12,7 +12,8 @@ let state = {
     inputAccrualMethodType: null,
     inputCallDate: null,
     inputCallPrice: null,
-    inputDateOfFirstPayment: null
+    inputDateOfFirstPayment: null,
+    inputCusip: null
 };
 
 export class BondInput extends React.Component{
@@ -45,7 +46,7 @@ export class BondInput extends React.Component{
                 
                 dateOfMaturity, incomePaymentMonth, incomePaymentDay,
                 
-                accrualMethodType, callDate, callPrice, dateOfFirstPayment} = asset;
+                accrualMethodType, callDate, callPrice, dateOfFirstPayment, cusip} = asset;
             return (
                 <tr key={name}>
                     <td>{name}</td>
@@ -59,6 +60,7 @@ export class BondInput extends React.Component{
                     <td>{callDate}</td>
                     <td>{callPrice}</td>
                     <td>{dateOfFirstPayment}</td>
+                    <td>{cusip}</td>
                 </tr>
             )
         })
@@ -92,7 +94,8 @@ export class BondInput extends React.Component{
             accrualMethodType: this.state.inputAccrualMethodType,
             callDate: this.state.inputCallDate,
             callPrice: this.state.inputCallPrice,
-            dateOfFirstPayment: this.state.inputDateOfFirstPayment
+            dateOfFirstPayment: this.state.inputDateOfFirstPayment,
+            cusip: this.state.inputCusip
         };
         await this.setState({assets: this.state.assets.concat(newAsset)});
         this.props.bondCallback(this.state.assets);
@@ -129,6 +132,10 @@ export class BondInput extends React.Component{
                 <label>DateOfMaturity</label>
                 <input type="date" name="inputDateOfMaturity" required onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
                 <br />
+                <label>Cusip</label>
+                <input type="text" name="inputCusip" required onChange={this.handleInputChange} value={this.state.inputCusip}
+                       minlength="9" maxlength="9"/>
+                <br />    
                 <label>IncomePaymentMonth</label>
                 <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
                 <br />

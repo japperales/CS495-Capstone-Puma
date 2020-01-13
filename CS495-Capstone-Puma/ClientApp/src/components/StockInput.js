@@ -13,7 +13,8 @@ let state = {
     inputSharesOutstanding: null,
     inputIsIncludedIn13F: null,
     inputIsRestrictedByRule144A: null,
-    inputCalculatedMarketCapType: null
+    inputCalculatedMarketCapType: null,
+    inputCusip: null
 };
 
 export class StockInput extends React.Component{
@@ -44,7 +45,7 @@ export class StockInput extends React.Component{
         return this.state.assets.map((asset, index) => {
             const { name, price, quantity, exchangeType, earningsPerShareDiluted, earningsPerShareBasic, 
                 earningsPerShareEffectiveDate, paymentFrequencyType, sharesOutstanding, isIncludedIn13F, 
-                isRestrictedByRule144A, calculatedMarketCapType} = asset;
+                isRestrictedByRule144A, calculatedMarketCapType, cusip} = asset;
             return (
                 <tr key={name}>
                     <td>{name}</td>
@@ -59,6 +60,7 @@ export class StockInput extends React.Component{
                     <td>{isIncludedIn13F}</td>
                     <td>{isRestrictedByRule144A}</td>
                     <td>{calculatedMarketCapType}</td>
+                    <td>{cusip}</td>
                 </tr>
             )
         })
@@ -90,7 +92,8 @@ export class StockInput extends React.Component{
             sharesOutstanding: this.state.inputSharesOutstanding,
             isIncludedIn13F: this.state.inputIsIncludedIn13F,
             isRestrictedByRule144A: this.state.inputIsRestrictedByRule144A,
-            calculatedMarketCapType: this.state.inputCalculatedMarketCapType
+            calculatedMarketCapType: this.state.inputCalculatedMarketCapType,
+            cusip: this.state.inputCusip,
             
         };
         await this.setState({assets: this.state.assets.concat(newAsset)});
@@ -122,6 +125,10 @@ export class StockInput extends React.Component{
                 <label>Quantity</label>
                 <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
                 <br />
+                <label>Cusip</label>
+                <input type="text" name="inputCusip" required onChange={this.handleInputChange} value={this.state.inputCusip}
+                       minlength="9" maxlength="9"/>
+                <br />       
                 <label>ExchangeType</label>
                 <input type="text" name="inputExchangeType" required onChange={this.handleInputChange} value={this.state.inputExchangeType}/>
                 <br />
