@@ -1,69 +1,140 @@
-﻿﻿using System;
+﻿ ﻿using System;
  using System.Collections.Generic;
- using System.Net.Http;
- using System.Threading.Tasks;
-using CS495_Capstone_Puma.DataStructure;
+  using System.Linq;
+  using System.Threading.Tasks;
+ using CS495_Capstone_Puma.DataStructure;
  using CS495_Capstone_Puma.DataStructure.Account;
  using CS495_Capstone_Puma.DataStructure.Asset;
-using CS495_Capstone_Puma.DataStructure.NameAndAddress;
-using Flurl.Http;
-
-namespace CS495_Capstone_Puma.Controllers
-{
+ using CS495_Capstone_Puma.DataStructure.JsonTransmission;
+ using CS495_Capstone_Puma.DataStructure.JsonResponse;
+  using CS495_Capstone_Puma.DataStructure.JsonTransmission.NameAndAddress;
+  using CS495_Capstone_Puma.DataStructure.NameAndAddress;
+ using Flurl.Http;
+ using AccountRelationship = CS495_Capstone_Puma.DataStructure.JsonTransmission.AccountRelationshipPOST;
+  
+  namespace CS495_Capstone_Puma.Controllers 
+  {
     public class CheetahHandler
     {
 
         //Coordinates the POST and GET HttpRequests required by the process.
-        public async Task<UIObject> PostAndReceive(IdentityRecord identityRecord, Account account, List<Asset> assets)
+        public async Task PostAndReceive(IdentityRecord identityRecord, Account account, List<Asset> assets)
         {
             //POST Authentication
-            String accessToken = PostAccessToken().Result.Jwt;
+            String bearerToken = POSTAccessToken().Result.Jwt;
 
             //POST IdentityRecord & Account async
-            PostIdentityRecord(identityRecord);
-            PostAccount(account);
+            Task<NameAndAddressesResponse> postIdentityRecord = POSTIdentityRecord(bearerToken, identityRecord);
+            Task<AccountResponse> postAccount = POSTAccount(bearerToken, account);
             
-            //POST Owner & Admin relationships
+            //await completion and assign values when ready
+            List<Task> allTasks = new List<Task>{postAccount, postIdentityRecord};
+            int identityRecordId = 0;
+            int accountId = 0;
+            while (allTasks.Any())
+            {
+                Task finished = await Task.WhenAny(allTasks);
+                if (finished == postIdentityRecord)
+                {
+                    identityRecordId = postIdentityRecord.Result.IdentityRecordId;
+                }
+                else if (finished == postAccount)
+                {
+                    accountId = postAccount.Result.AccountId;
+                }
+                allTasks.Remove(finished);
+            }
+
+            //POST Owner relationship
+            Task postOwnerRelationship = POSTOwnerRelationship(bearerToken, accountId, identityRecordId);
+            allTasks.Add(postOwnerRelationship);
+            
+            //POST Open
             
             
             //POST Transactions (Assets already owned)
+              //Some kind of FOR loop
+              //Iterates to send a POST
+              //allTasks.Add(thatpost)
             
             
-            //***Cannot Analyze Yet**
+            //await completion
+            await Task.WhenAll(allTasks);
+
+            //***Cannot Analyze Yet***
             
             
             //GET Trades
             
-            
+
             //Return all trades
-
             
-            
-            
-            //OLD
-            
-            await PostIdentityRecord(identityRecord);
-
-            await PostAccount(account);
-
-            //Hacked Methodology while using API simulation instead of actual Cheetah
-            Asset adjustedAsset = GetAsset(2).Result;
-            List<Asset> adjustedAssets = new List<Asset> {adjustedAsset};
-
-            return new UIObject(identityRecord, adjustedAssets);
         }
         
-        //Send Name & Address POST to Cheetah
-        private async Task PostIdentityRecord(IdentityRecord identityRecord)
+        //POST Authentication Login and receive Bearer Token
+        public async Task<TokenResponse> POSTAccessToken()
         {
-            await "https://localhost:5002/api/v6/NameAndAddress".PostJsonAsync(identityRecord);
-        }
-        //Send Account POST to Cheetah
-        private async Task PostAccount(Account account)
+            TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Token"
+                .WithHeader("x-api-key", 
+                    "DELETE BEFORE VERSIONING"
+                    )
+                .WithBasicAuth("DELETE BEFORE VERSIONING", "DELETE BEFORE VERSIONING")
+                .PostAsync(null)
+                .ReceiveJson<TokenResponse>();
+                    
+            return postResp;
+        } 
+        
+        //POST Name & Address to IdentityRecord
+        public async Task<NameAndAddressesResponse> POSTIdentityRecord(string bearerToken, IdentityRecord identityRecord)
         {
-            await "https://localhost:5002/api/v6/Account".PostJsonAsync(account);
+            NameAndAddressesResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/NameAndAddresses"
+                .WithHeader("Content-Type", "application/json")
+                .WithOAuthBearerToken(bearerToken)
+                .PutJsonAsync(identityRecord)
+                .ReceiveJson<NameAndAddressesResponse>();
+                    
+            return postResp;
         }
         
+        //POST Account Information
+        private async Task<AccountResponse> POSTAccount(string bearerToken, Account account)
+        {
+            AccountResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Account"
+                .WithHeader("Content-Type", "application/json")
+                .WithOAuthBearerToken(bearerToken)
+                .PutJsonAsync(account)
+                .ReceiveJson<AccountResponse>();
+
+            return postResp;
+        }
+        
+        //POST the Administrator relationship on new account ~Currently Not Being Used~
+        public static async Task POSTAdminRelationship(string bearerToken, int accountId)
+        { 
+            AccountRelationship accountRelationship = new AccountRelationshipPOST(accountId);
+            
+            await "https://asctrustv57webapi.accutech-systems.net/api/v6/AccountRelationships"
+                .WithHeader("Content-Type", "application/json")
+                .WithOAuthBearerToken(bearerToken)
+                .PutJsonAsync(accountRelationship)
+                .ReceiveJson();
+        }
+        
+        //POST the Owner relationship on new account
+        public static async Task POSTOwnerRelationship(string bearerToken, int accountId, int identityRecordId)
+        {
+            AccountRelationshipPOST accountRelationship = new AccountRelationshipPOST(accountId, identityRecordId);
+            
+            await "https://asctrustv57webapi.accutech-systems.net/api/v6/AccountRelationships"
+                .WithHeader("Content-Type", "application/json")
+                .WithOAuthBearerToken(bearerToken)
+                .PutJsonAsync(accountRelationship)
+                .ReceiveJson();
+        }
+        
+        
+
         //Sent Asset POST to Cheetah
         private async Task PostAsset(Asset asset)
         {
@@ -75,21 +146,8 @@ namespace CS495_Capstone_Puma.Controllers
         {
             string api = "https://localhost:5002/api/v6/Asset/" + id;
             Asset getResp = await api.GetJsonAsync<Asset>();
-            
+
             return getResp;
-        }
-        
-        public static async Task<TokenResponse> PostAccessToken()
-        {
-            TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/Api/v6/Token"
-                .WithHeader("x-api-key",
-                    "DELETE BEFORE VERSIONING"
-                    )
-                .WithBasicAuth("DELETE BEFORE VERSIONING", "DELETE BEFORE VERSIONING")
-                .PostJsonAsync(new {})
-                .ReceiveJson<TokenResponse>();
-            
-            return postResp;
         }
     }
 }

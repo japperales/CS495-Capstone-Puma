@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using CS495_Capstone_Puma.DataStructure.JsonTransmission.NameAndAddress;
 using CS495_Capstone_Puma.DataStructure.NameAndAddress;
 using Newtonsoft.Json;
 using Xunit;
