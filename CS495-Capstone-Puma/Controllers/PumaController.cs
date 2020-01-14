@@ -3,7 +3,7 @@ using CS495_Capstone_Puma.DataStructure;
 using CS495_Capstone_Puma.DataStructure.Account;
 using CS495_Capstone_Puma.DataStructure.Asset;
 using CS495_Capstone_Puma.DataStructure.Asset.AssetCategory;
-using CS495_Capstone_Puma.DataStructure.NameAndAddress;
+using CS495_Capstone_Puma.DataStructure.JsonTransmission.NameAndAddress;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CS495_Capstone_Puma.Controllers
@@ -19,12 +19,12 @@ namespace CS495_Capstone_Puma.Controllers
             //Instantiates class that communicates with Cheetah API
             CheetahHandler cheetah = new CheetahHandler();
             IdentityRecord identityRecord = uiObject.IdentityRecordObj;
-            Account account = new Account(0, uiObject.IdentityRecordObj);
+            Account account = new Account();
             List<Asset> assets = buildAssetList(uiObject);
 
             //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
-            UIObject resp = cheetah.PostAndReceive(identityRecord, account, assets).Result;
-            return Json(resp);
+            cheetah.PostAndReceive(identityRecord, account, assets);
+            return Json("");
         }
         
         //Iterates through each list of the asset categories. Assembles them into a unified Asset object list

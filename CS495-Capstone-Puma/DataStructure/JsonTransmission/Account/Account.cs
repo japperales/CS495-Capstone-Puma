@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CS495_Capstone_Puma.DataStructure.JsonTransmission.NameAndAddress;
 using CS495_Capstone_Puma.DataStructure.NameAndAddress;
 using Newtonsoft.Json;
 
@@ -7,17 +8,8 @@ namespace CS495_Capstone_Puma.DataStructure.Account
 {
     public class Account
     {
-        [JsonProperty("AccountId")]
-        public long AccountId { get; set; }
-
         [JsonProperty("FailOnRelationshipLookup")]
         public bool FailOnRelationshipLookup { get; set; }
-
-        [JsonProperty("Number")]
-        public string Number { get; set; }
-
-        [JsonProperty("Code")]
-        public string Code { get; set; }
 
         [JsonProperty("LegalName")]
         public string LegalName { get; set; }
@@ -46,20 +38,8 @@ namespace CS495_Capstone_Puma.DataStructure.Account
         [JsonProperty("TaxIdStatusType")]
         public string TaxIdStatusType { get; set; }
 
-        [JsonProperty("TaxId")]
-        public string TaxId { get; set; }
-
-        [JsonProperty("TaxIdType")]
-        public string TaxIdType { get; set; }
-
-        [JsonProperty("Comments")]
-        public string Comments { get; set; }
-
         [JsonProperty("OfficerId")]
         public long? OfficerId { get; set; }
-
-        [JsonProperty("BeneficialOwnerTaxId")]
-        public string BeneficialOwnerTaxId { get; set; }
 
         [JsonProperty("AccountRelationship")]
         public AccountRelationship AccountRelationship { get; set; }
@@ -67,42 +47,42 @@ namespace CS495_Capstone_Puma.DataStructure.Account
         [JsonProperty("AccountSettings")]
         public AccountSettings AccountSettings { get; set; }
 
-        [JsonProperty("FeeSetting")]
-        public FeeSetting FeeSetting { get; set; }
-
         [JsonProperty("InvestmentModelSettings")]
         public List<InvestmentModelSetting> InvestmentModelSettings { get; set; }
         
         public Account()
         {
-            AccountId = 0;
             FailOnRelationshipLookup = false;
-            Number = null;
-            Code = null;
             LegalName = null;
             DisplayName = null;
-            DivisionIdentityRecordId = null;
+            DivisionIdentityRecordId = 2;
             AccountCategoryId = null;
-            DateOpened = null;
-            DateEstablished = null;
+            DateEstablished = DateTimeOffset.Now;
+            DateOpened = DateTimeOffset.Now;
             Country = null;
             StateProvince = null;
             TaxIdStatusType = null;
-            TaxId = null;
-            TaxIdType = null;
-            Comments = null;
-            OfficerId = null;
-            BeneficialOwnerTaxId = null;
+            OfficerId = 1636;
             AccountRelationship = null;
             AccountSettings = null;
-            FeeSetting = null;
             InvestmentModelSettings = null;
         }
 
-        public Account(int id, IdentityRecord identityRecord)
+        [JsonConstructor]
+        public Account(IdentityRecord identityRecord, int accountCategoryId, string country, string stateProvince,
+            int investmentObjectiveId, int investmentModelId)
         {
-            AccountId = id;
             LegalName = identityRecord.FirstNameLegalName + " " + identityRecord.LastName;
+            DisplayName = LegalName;
+            AccountCategoryId = accountCategoryId;
+            Country = country;
+            StateProvince = stateProvince;
+            AccountRelationship = new AccountRelationship(identityRecord.FirstNameLegalName, identityRecord.LastName, DisplayName);
+            AccountSettings = new AccountSettings(investmentObjectiveId);
+            InvestmentModelSettings = new List<InvestmentModelSetting>
+            {
+                new InvestmentModelSetting(investmentModelId, 7, 1)
+            };
         }
     }
 }

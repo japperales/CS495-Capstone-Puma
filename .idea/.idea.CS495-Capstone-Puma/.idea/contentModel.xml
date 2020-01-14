@@ -122,19 +122,6 @@
         </e>
         <e p="CS495-Capstone-Puma.csproj" t="IncludeRecursive" />
         <e p="DataStructure" t="Include">
-          <e p="Account" t="Include">
-            <e p="Account.cs" t="Include" />
-            <e p="AccountRelationship.cs" t="Include" />
-            <e p="AccountSettings.cs" t="Include" />
-            <e p="Fee" t="Include">
-              <e p="FeeCreditToTrustee.cs" t="Include" />
-              <e p="FeePaidFromAccountList.cs" t="Include" />
-              <e p="FeeSchedule.cs" t="Include" />
-              <e p="FeeSetting.cs" t="Include" />
-            </e>
-            <e p="InvestmentModelSetting.cs" t="Include" />
-            <e p="PerformanceExclusion.cs" t="Include" />
-          </e>
           <e p="Asset" t="Include">
             <e p="Asset.cs" t="Include" />
             <e p="AssetCategory" t="Include">
@@ -154,15 +141,27 @@
             <e p="PriceHistory.cs" t="Include" />
             <e p="QualityRatingHistory.cs" t="Include" />
           </e>
-          <e p="NameAndAddress" t="Include">
-            <e p="Address.cs" t="Include" />
-            <e p="ContactMethod.cs" t="Include" />
-            <e p="IdentityRecord.cs" t="Include" />
-            <e p="PhoneNumber.cs" t="Include" />
-            <e p="RecipientBankInformation.cs" t="Include" />
+          <e p="JsonResponse" t="Include">
+            <e p="AccountResponse.cs" t="Include" />
+            <e p="NameAndAddressesResponse.cs" t="Include" />
+            <e p="TokenResponse.cs" t="Include" />
           </e>
+          <e p="JsonTransmission" t="Include">
+            <e p="Account" t="Include">
+              <e p="Account.cs" t="Include" />
+              <e p="AccountRelationship.cs" t="Include" />
+              <e p="AccountSettings.cs" t="Include" />
+              <e p="InvestmentModelSetting.cs" t="Include" />
+              <e p="PerformanceExclusion.cs" t="Include" />
+            </e>
+            <e p="AccountRelationshipPOST.cs" t="Include" />
+            <e p="NameAndAddress" t="Include">
+              <e p="Address.cs" t="Include" />
+              <e p="IdentityRecord.cs" t="Include" />
+            </e>
+          </e>
+          <e p="RecipientBankInformation.cs" t="Include" />
           <e p="Test.cs" t="Include" />
-          <e p="TokenResponse.cs" t="Include" />
           <e p="Trade.cs" t="Include" />
           <e p="UIObject.cs" t="Include" />
         </e>
@@ -186,13 +185,13 @@
         <e p="Temporary" t="Include">
           <e p="UntrustedCertClientFactory.cs" t="Include" />
         </e>
-        <e p="XUnitTests" t="Include" />
       </e>
       <e p="CS495-Capstone-Puma.sln" t="IncludeFlat" />
       <e p="CS495-Capstone-Puma.UnitTests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="ControllersTest" t="Include">
           <e p="CheetahHandlerTest.cs" t="Include" />
+          <e p="sandbox.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.UnitTests.csproj" t="IncludeRecursive" />
         <e p="DataStructureTest" t="Include">

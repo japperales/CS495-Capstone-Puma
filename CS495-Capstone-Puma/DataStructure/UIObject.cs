@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
 using CS495_Capstone_Puma.DataStructure.Asset.AssetCategory;
-using Newtonsoft.Json;
+ using CS495_Capstone_Puma.DataStructure.JsonTransmission.NameAndAddress;
+ using Newtonsoft.Json;
 using CS495_Capstone_Puma.DataStructure.NameAndAddress;
 
 namespace CS495_Capstone_Puma.DataStructure
