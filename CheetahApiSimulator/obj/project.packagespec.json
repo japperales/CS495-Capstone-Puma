@@ -1,11 +1,14 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
+    "projectUniqueName": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
     "projectName": "CheetahApiSimulator",
-    "projectPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
-    "outputPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\obj\\",
+    "projectPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
+    "outputPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\obj\\",
     "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+    ],
     "originalTargetFrameworks": [
       "netcoreapp2.1"
     ],
@@ -16,8 +19,8 @@
     "frameworks": {
       "netcoreapp2.1": {
         "projectReferences": {
-          "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
-            "projectPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
+          "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+            "projectPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
           }
         }
       }

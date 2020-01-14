@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj": {}
+    "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj": {
+    "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
+        "projectUniqueName": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
         "projectName": "CheetahApiSimulator",
-        "projectPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
-        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\obj\\",
+        "projectPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\CheetahApiSimulator.csproj",
+        "packagesPath": "C:\\Users\\Tommy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CheetahApiSimulator\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tommy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,8 +30,8 @@
         "frameworks": {
           "netcoreapp2.1": {
             "projectReferences": {
-              "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
-                "projectPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
+              "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+                "projectPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
               }
             }
           }
@@ -67,17 +70,20 @@
         }
       }
     },
-    "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+    "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
+        "projectUniqueName": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
         "projectName": "CS495-Capstone-Puma",
-        "projectPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
-        "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\obj\\",
+        "projectPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
+        "packagesPath": "C:\\Users\\Tommy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tommy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
