@@ -1,7 +1,7 @@
 ﻿﻿using System.Collections.Generic;
  using Newtonsoft.Json;
 
- namespace CS495_Capstone_Puma.DataStructure.NameAndAddress
+ namespace CS495_Capstone_Puma.DataStructure.JsonTransmission.NameAndAddress
 {
     public class Address
     {
