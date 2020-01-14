@@ -165,6 +165,7 @@
               <e p="Results.js" t="Include" />
               <e p="StockInput.js" t="Include" />
               <e p="StockInput.test.js" t="Include" />
+              <e p="TabsPage.css" t="Include" />
               <e p="TabsPage.js" t="Include" />
               <e p="TestClient.js" t="Include" />
             </e>

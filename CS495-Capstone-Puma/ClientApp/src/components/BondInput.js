@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import M from 'materialize-css';
 //Stored state for subsequent render memory
 let state = {
     assets: [],
@@ -17,6 +18,11 @@ let state = {
 
 export class BondInput extends React.Component{
     
+    componentDidMount() {
+        console.log("component did mount")
+        M.AutoInit();
+    }
+
     constructor(props) {
         super(props);
         this.state = state;
@@ -114,40 +120,84 @@ export class BondInput extends React.Component{
                     </tbody>
                 </table>
                 <form onSubmit={this.addAsset}>
+                <div className="row">
+                <div className="input-field col s6">
                 <label>Name</label>
                 <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
-                <br />
+                </div>
+                </div>
+                    
+                <div className="row">
+                <div className="input-field col s6">    
                 <label>Price</label>
                 <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
-                <br />
+                </div>
+                </div>
+                    
+                <div className="row">
+                <div className="input-field col s6">
                 <label>Quantity</label>
                 <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
-                <br />
-                <label>DateOfIssue</label>
-                <input type="date" name="inputDateOfIssue" required onChange={this.handleInputChange} value={this.state.inputDateOfIssue}/>
-                <br />
-                <label>DateOfMaturity</label>
-                <input type="date" name="inputDateOfMaturity" required onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
-                <br />
-                <label>IncomePaymentMonth</label>
+                </div>
+                </div>
+
+                <div className="row">
+                <div className="input-field col s6">
+                <label>Date Of Issue</label>
+                <input type="text" className="datepicker" name="inputDateOfIssue" required onChange={this.handleInputChange} value={this.state.inputDateOfIssue}/>
+                </div>
+                </div>
+
+                <div className="row">
+                <div className="input-field col s6">
+                <label>Date Of Maturity</label>
+                <input type="text" className="datepicker" name="inputDateOfMaturity" required onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
+                </div>
+                </div>
+                
+                <div className="row">
+                <div className="input-field col s6">
+                <label>Income Payment Month</label>
                 <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
-                <br />
-                <label>IncomePaymentDay</label>
+                </div>
+                </div>
+                    
+                <div className="row">
+                <div className="input-field col s6">
+                <label>Income Payment Day</label>
                 <input type="number" name="inputIncomePaymentDay" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
-                <br />
-                <label>AccrualMethodType</label>
+                </div>
+                </div>
+                    
+                <div className="row">
+                <div className="input-field col s6">
+                <label>Accrual Method Type</label>
                 <input type="text" name="inputAccrualMethodType" required onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
-                <br />
-                <label>CallDate</label>
-                <input type="date" name="inputCallDate" required onChange={this.handleInputChange} value={this.state.inputCallDate}/>
-                <br />
-                <label>CallPrice</label>
-                <input type="date" name="inputCallPrice" required onChange={this.handleInputChange} value={this.state.inputCallPrice}/>
-                <br />
-                <label>DateOfFirstPayment</label>
-                <input type="date" name="inputDateOfFirstPayment" required onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
-                <br />
-                    <input type="submit" value="Add Asset" className="waves-effect waves-light btn"/>
+                </div>
+                </div>
+                    
+                <div className="row">
+                <div className="input-field col s6">
+                <label>Call Date</label>
+                <input type="date" className="datepicker" name="inputCallDate" required onChange={this.handleInputChange} value={this.state.inputCallDate}/>
+                </div>
+                </div>
+                   
+                <div className="row">
+                <div className="input-field col s6"> 
+                <label>Call Price</label>
+                <input type="text" className="datepicker" name="inputCallPrice" required onChange={this.handleInputChange} value={this.state.inputCallPrice}/>
+                </div>
+                </div>
+                    
+                <div className="row">
+                <div className="input-field col s6">
+                <label>Date Of First Payment</label>
+                <input type="text" className="datepicker" name="inputDateOfFirstPayment" required onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
+                </div>
+                </div>
+                    
+                <input type="submit" value="Add Asset" className="waves-effect waves-light btn"/>
                 </form>
                 <a onClick={this.removeAsset} className="waves-effect waves-light btn">Remove Asset</a>
                 <br/>
