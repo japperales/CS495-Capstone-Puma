@@ -2,77 +2,55 @@
  using System.Collections.Generic;
   using System.Linq;
   using System.Threading.Tasks;
- using CS495_Capstone_Puma.DataStructure;
- using CS495_Capstone_Puma.DataStructure.Account;
- using CS495_Capstone_Puma.DataStructure.Asset;
- using CS495_Capstone_Puma.DataStructure.JsonTransmission;
- using CS495_Capstone_Puma.DataStructure.JsonResponse;
-  using CS495_Capstone_Puma.DataStructure.JsonTransmission.NameAndAddress;
-  using CS495_Capstone_Puma.DataStructure.NameAndAddress;
- using Flurl.Http;
- using AccountRelationship = CS495_Capstone_Puma.DataStructure.JsonTransmission.AccountRelationshipPOST;
-  
+  using CS495_Capstone_Puma.DataStructure.Asset;
+  using CS495_Capstone_Puma.DataStructure.JsonRequest;
+  using CS495_Capstone_Puma.DataStructure.JsonResponse;
+  using Flurl;
+  using Flurl.Http;
+
   namespace CS495_Capstone_Puma.Controllers 
   {
     public class CheetahHandler
     {
 
         //Coordinates the POST and GET HttpRequests required by the process.
-        public async Task PostAndReceive(IdentityRecord identityRecord, Account account, List<Asset> assets)
+        public async Task<string> postTransactions(List<Asset> assets)
         {
             //POST Authentication
-            String bearerToken = POSTAccessToken().Result.Jwt;
-
-            //POST IdentityRecord & Account async
-            Task<NameAndAddressesResponse> postIdentityRecord = POSTIdentityRecord(bearerToken, identityRecord);
-            Task<AccountResponse> postAccount = POSTAccount(bearerToken, account);
+            String bearerToken = postAccessToken().Result.Jwt;
             
-            //await completion and assign values when ready
-            List<Task> allTasks = new List<Task>{postAccount, postIdentityRecord};
-            int identityRecordId = 0;
-            int accountId = 0;
-            while (allTasks.Any())
+            //POST TransactionBatch
+            int batchId = postTransactionBatch(bearerToken, new TransactionBatchRequest()).Result.transactionBatchId;
+
+            //POST Transactions (Assets already owned)
+            foreach (Asset asset in assets)
             {
-                Task finished = await Task.WhenAny(allTasks);
-                if (finished == postIdentityRecord)
-                {
-                    identityRecordId = postIdentityRecord.Result.IdentityRecordId;
-                }
-                else if (finished == postAccount)
-                {
-                    accountId = postAccount.Result.AccountId;
-                }
-                allTasks.Remove(finished);
+                //Lookup Asset in CheetahDB
+                //Map GetAssetValues to Hashmap and search against values
+                int assetId = 1; //Perform lookup
+                int units = 0; //Located in Asset somewhere
+                
+                //Once found, build request and POST to the batch
+                TransactionRequest transactionRequest = new TransactionRequest(534, batchId, 26,
+                    19, assetId, units);
+                await postTransaction(bearerToken, transactionRequest);
             }
 
-            //POST Owner relationship
-            Task postOwnerRelationship = POSTOwnerRelationship(bearerToken, accountId, identityRecordId);
-            allTasks.Add(postOwnerRelationship);
+            await postTransactionBatchProcessor(bearerToken, batchId, false);
+            await postTransactionBatchProcessor(bearerToken, batchId, true);
             
-            //POST Open
-            
-            
-            //POST Transactions (Assets already owned)
-              //Some kind of FOR loop
-              //Iterates to send a POST
-              //allTasks.Add(thatpost)
-            
-            
-            //await completion
-            await Task.WhenAll(allTasks);
+            //Cannot Analyze yet - have to make a second function
+            //return relevant info to keep using it
+            return bearerToken;
+        }
 
-            //***Cannot Analyze Yet***
-            
-            
-            //GET Trades
-            
-
-            //Return all trades
-            
+        public async Task getTradeProposal(string bearerToken, int accountId)
+        {
+            getTrades(bearerToken, accountId);
         }
         
-        //POST Authentication Login and receive Bearer Token
-        public async Task<TokenResponse> POSTAccessToken()
+        //POST Authentication login and receive Bearer Token
+        public async Task<TokenResponse> postAccessToken()
         {
             TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Token"
                 .WithHeader("x-api-key", 
@@ -85,69 +63,62 @@
             return postResp;
         } 
         
-        //POST Name & Address to IdentityRecord
-        public async Task<NameAndAddressesResponse> POSTIdentityRecord(string bearerToken, IdentityRecord identityRecord)
+        //POST TransactionBatch
+        public async Task<TransactionBatchResponse> postTransactionBatch(string bearerToken, TransactionBatchRequest request)
         {
-            NameAndAddressesResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/NameAndAddresses"
+            TransactionBatchResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/TransactionBatches"
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
-                .PutJsonAsync(identityRecord)
-                .ReceiveJson<NameAndAddressesResponse>();
-                    
-            return postResp;
-        }
-        
-        //POST Account Information
-        private async Task<AccountResponse> POSTAccount(string bearerToken, Account account)
-        {
-            AccountResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Account"
-                .WithHeader("Content-Type", "application/json")
-                .WithOAuthBearerToken(bearerToken)
-                .PutJsonAsync(account)
-                .ReceiveJson<AccountResponse>();
+                .PutJsonAsync(request)
+                .ReceiveJson<TransactionBatchResponse>();
 
             return postResp;
         }
         
-        //POST the Administrator relationship on new account ~Currently Not Being Used~
-        public static async Task POSTAdminRelationship(string bearerToken, int accountId)
-        { 
-            AccountRelationship accountRelationship = new AccountRelationshipPOST(accountId);
-            
-            await "https://asctrustv57webapi.accutech-systems.net/api/v6/AccountRelationships"
+        //POST Transaction
+        public async Task<TransactionResponse> postTransaction(string bearerToken, TransactionRequest request)
+        {
+            TransactionResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/TransactionBatches"
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
-                .PutJsonAsync(accountRelationship)
-                .ReceiveJson();
+                .PutJsonAsync(request)
+                .ReceiveJson<TransactionResponse>();
+
+            return postResp;
         }
-        
-        //POST the Owner relationship on new account
-        public static async Task POSTOwnerRelationship(string bearerToken, int accountId, int identityRecordId)
+
+        //POST TransactionBatch Ready & Post commands
+        public async Task postTransactionBatchProcessor(string bearerToken, int batchId, bool isReadied)
         {
-            AccountRelationshipPOST accountRelationship = new AccountRelationshipPOST(accountId, identityRecordId);
+            string urlSuffix = "";
             
-            await "https://asctrustv57webapi.accutech-systems.net/api/v6/AccountRelationships"
+            if (!isReadied)
+            {
+                urlSuffix = "/Ready?TransactionBatchIds=" + batchId;
+            }
+            else
+            {
+                urlSuffix = "/Post?TransactionBatchIds=" + batchId;
+            }
+            
+            await "https://asctrustv57webapi.accutech-systems.net/api/v6/TransactionBatches".AppendPathSegment(urlSuffix)
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
-                .PutJsonAsync(accountRelationship)
-                .ReceiveJson();
+                .PostAsync(null);
         }
         
-        
-
-        //Sent Asset POST to Cheetah
-        private async Task PostAsset(Asset asset)
+        //GET analyzed Trade suggestions
+        public async Task<TradeResponse> getTrades(string bearerToken, int accountId)
         {
-            await "https://localhost:5002/api/v6/Asset".PostJsonAsync(asset);
-        }
-        
-        //Send Asset GET to Cheetah
-        private async Task<Asset> GetAsset(int id)
-        {
-            string api = "https://localhost:5002/api/v6/Asset/" + id;
-            Asset getResp = await api.GetJsonAsync<Asset>();
+            TradeResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Accounts"
+                .AppendPathSegment(accountId)
+                .AppendPathSegment("Trades")
+                .WithHeader("Content-Type", "application/json")
+                .WithOAuthBearerToken(bearerToken)
+                .GetAsync()
+                .ReceiveJson<TradeResponse>();
 
-            return getResp;
+            return postResp;
         }
     }
 }
