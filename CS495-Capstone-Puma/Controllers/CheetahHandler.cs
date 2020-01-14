@@ -1,13 +1,14 @@
 ﻿﻿using System;
  using System.Collections.Generic;
-using System.Threading.Tasks;
+ using System.Net.Http;
+ using System.Threading.Tasks;
 using CS495_Capstone_Puma.DataStructure;
  using CS495_Capstone_Puma.DataStructure.Account;
  using CS495_Capstone_Puma.DataStructure.Asset;
 using CS495_Capstone_Puma.DataStructure.NameAndAddress;
 using Flurl.Http;
 
-namespace CS495_Capstone_Puma.Model
+namespace CS495_Capstone_Puma.Controllers
 {
     public class CheetahHandler
     {
@@ -15,9 +16,31 @@ namespace CS495_Capstone_Puma.Model
         //Coordinates the POST and GET HttpRequests required by the process.
         public async Task<UIObject> PostAndReceive(IdentityRecord identityRecord, Account account, List<Asset> assets)
         {
-            TokenResponse accessToken = await GetAccessToken();
+            //POST Authentication
+            String accessToken = PostAccessToken().Result.Jwt;
 
-            Console.WriteLine(accessToken.Jwt);
+            //POST IdentityRecord & Account async
+            PostIdentityRecord(identityRecord);
+            PostAccount(account);
+            
+            //POST Owner & Admin relationships
+            
+            
+            //POST Transactions (Assets already owned)
+            
+            
+            //***Cannot Analyze Yet**
+            
+            
+            //GET Trades
+            
+            
+            //Return all trades
+
+            
+            
+            
+            //OLD
             
             await PostIdentityRecord(identityRecord);
 
@@ -55,18 +78,18 @@ namespace CS495_Capstone_Puma.Model
             
             return getResp;
         }
-
-        public static async Task<TokenResponse> GetAccessToken()
+        
+        public static async Task<TokenResponse> PostAccessToken()
         {
-
-            TokenResponse token = await "https://asctrustv57webapi.accutech-systems.net/Api/v6/Token"
+            TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/Api/v6/Token"
                 .WithHeader("x-api-key",
-                    "***REMOVED***"
+                    "DELETE BEFORE VERSIONING"
                     )
-                .WithBasicAuth("INSERT USERNAME HERE", "INSERT PASSWORD HERE")
-                .GetJsonAsync<TokenResponse>();
-            return token;
-
+                .WithBasicAuth("DELETE BEFORE VERSIONING", "DELETE BEFORE VERSIONING")
+                .PostJsonAsync(new {})
+                .ReceiveJson<TokenResponse>();
+            
+            return postResp;
         }
     }
 }
