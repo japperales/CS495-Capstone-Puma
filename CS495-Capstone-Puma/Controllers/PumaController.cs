@@ -4,7 +4,6 @@ using CS495_Capstone_Puma.DataStructure.Account;
 using CS495_Capstone_Puma.DataStructure.Asset;
 using CS495_Capstone_Puma.DataStructure.Asset.AssetCategory;
 using CS495_Capstone_Puma.DataStructure.NameAndAddress;
-using CS495_Capstone_Puma.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CS495_Capstone_Puma.Controllers

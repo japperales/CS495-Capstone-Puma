@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS495-Capstone-Puma", "CS49
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS495-Capstone-Puma.UnitTests", "CS495-Capstone-Puma.UnitTests\CS495-Capstone-Puma.UnitTests.csproj", "{091298F2-1528-499D-8805-B4D54F4B9242}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheetahApiSimulator", "CheetahApiSimulator\CheetahApiSimulator.csproj", "{BB553802-BADA-4190-857F-446790E44825}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +18,5 @@ Global
 		{091298F2-1528-499D-8805-B4D54F4B9242}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{091298F2-1528-499D-8805-B4D54F4B9242}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{091298F2-1528-499D-8805-B4D54F4B9242}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB553802-BADA-4190-857F-446790E44825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB553802-BADA-4190-857F-446790E44825}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB553802-BADA-4190-857F-446790E44825}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB553802-BADA-4190-857F-446790E44825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
