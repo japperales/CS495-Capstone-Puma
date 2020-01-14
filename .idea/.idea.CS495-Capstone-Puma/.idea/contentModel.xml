@@ -141,29 +141,15 @@
             <e p="PriceHistory.cs" t="Include" />
             <e p="QualityRatingHistory.cs" t="Include" />
           </e>
+          <e p="JsonRequest" t="Include">
+            <e p="Trade.cs" t="Include" />
+            <e p="TransactionBatchRequest.cs" t="Include" />
+            <e p="TransactionRequest.cs" t="Include" />
+          </e>
           <e p="JsonResponse" t="Include">
-            <e p="AccountResponse.cs" t="Include" />
-            <e p="NameAndAddressesResponse.cs" t="Include" />
             <e p="TokenResponse.cs" t="Include" />
+            <e p="TransactionBatchResponse.cs" t="Include" />
           </e>
-          <e p="JsonTransmission" t="Include">
-            <e p="Account" t="Include">
-              <e p="Account.cs" t="Include" />
-              <e p="AccountRelationship.cs" t="Include" />
-              <e p="AccountSettings.cs" t="Include" />
-              <e p="InvestmentModelSetting.cs" t="Include" />
-              <e p="PerformanceExclusion.cs" t="Include" />
-            </e>
-            <e p="AccountRelationshipPOST.cs" t="Include" />
-            <e p="NameAndAddress" t="Include">
-              <e p="Address.cs" t="Include" />
-              <e p="IdentityRecord.cs" t="Include" />
-            </e>
-          </e>
-          <e p="RecipientBankInformation.cs" t="Include" />
-          <e p="Test.cs" t="Include" />
-          <e p="Trade.cs" t="Include" />
-          <e p="UIObject.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
