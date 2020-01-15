@@ -1,12 +1,16 @@
 ﻿ ﻿using System;
  using System.Collections.Generic;
   using System.Linq;
+  using System.Net.Http;
+  using System.Threading;
   using System.Threading.Tasks;
   using CS495_Capstone_Puma.DataStructure.Asset;
   using CS495_Capstone_Puma.DataStructure.JsonRequest;
   using CS495_Capstone_Puma.DataStructure.JsonResponse;
+  using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
   using Flurl;
   using Flurl.Http;
+  using Microsoft.CodeAnalysis.Operations;
 
   namespace CS495_Capstone_Puma.Controllers 
   {
@@ -14,7 +18,7 @@
     {
 
         //Coordinates the POST and GET HttpRequests required by the process.
-        public async Task<string> postTransactions(List<Asset> assets)
+        public async Task<string> PostTransactions(List<AssetInput> assets)
         {
             //POST Authentication
             String bearerToken = postAccessToken().Result.Jwt;
@@ -23,19 +27,14 @@
             int batchId = postTransactionBatch(bearerToken, new TransactionBatchRequest()).Result.transactionBatchId;
 
             //POST Transactions (Assets already owned)
-            foreach (Asset asset in assets)
-            {
-                //Lookup Asset in CheetahDB
-                //Map GetAssetValues to Hashmap and search against values
-                int assetId = 1; //Perform lookup
-                int units = 0; //Located in Asset somewhere
-                
-                //Once found, build request and POST to the batch
-                TransactionRequest transactionRequest = new TransactionRequest(534, batchId, 26,
-                    19, assetId, units);
-                await postTransaction(bearerToken, transactionRequest);
-            }
 
+            List<TransactionRequest> transactions = assembleTransactions(bearerToken, batchId, assets);
+            
+            foreach (TransactionRequest transaction in transactions)
+            {
+                await postTransaction(bearerToken, transaction);
+            }
+            
             await postTransactionBatchProcessor(bearerToken, batchId, false);
             await postTransactionBatchProcessor(bearerToken, batchId, true);
             
@@ -54,9 +53,9 @@
         {
             TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Token"
                 .WithHeader("x-api-key", 
-                    "DELETE BEFORE VERSIONING"
+                    "mGamIPYtegnxNTXJcveWhWIJFIfOpM9ZDls33nrpTKfLvAhmSZRhkZvOwsUCWeryNvh8MCQOfVRNXAwNMJ6eRGK62rJJfXhW8RZHWcQvdFt2cki12t1YcvP4TgNvjL9V"
                     )
-                .WithBasicAuth("DELETE BEFORE VERSIONING", "DELETE BEFORE VERSIONING")
+                .WithBasicAuth("rbabusiak", "P@ssw0rd1")
                 .PostAsync(null)
                 .ReceiveJson<TokenResponse>();
                     
@@ -69,46 +68,48 @@
             TransactionBatchResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/TransactionBatches"
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
-                .PutJsonAsync(request)
+                .PostJsonAsync(request)
                 .ReceiveJson<TransactionBatchResponse>();
 
             return postResp;
         }
         
         //POST Transaction
-        public async Task<TransactionResponse> postTransaction(string bearerToken, TransactionRequest request)
+        private async Task<TransactionResponse> postTransaction(string bearerToken, TransactionRequest request)
         {
-            TransactionResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/TransactionBatches"
+            TransactionResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Transactions/Pending"
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
-                .PutJsonAsync(request)
+                .PostJsonAsync(request)
                 .ReceiveJson<TransactionResponse>();
 
             return postResp;
         }
 
         //POST TransactionBatch Ready & Post commands
-        public async Task postTransactionBatchProcessor(string bearerToken, int batchId, bool isReadied)
+        private async Task postTransactionBatchProcessor(string bearerToken, int batchId, bool isReadied)
         {
             string urlSuffix = "";
             
             if (!isReadied)
             {
-                urlSuffix = "/Ready?TransactionBatchIds=" + batchId;
+                urlSuffix = "/Ready";
             }
             else
             {
-                urlSuffix = "/Post?TransactionBatchIds=" + batchId;
+                urlSuffix = "/Post";
             }
             
-            await "https://asctrustv57webapi.accutech-systems.net/api/v6/TransactionBatches".AppendPathSegment(urlSuffix)
+            await "https://asctrustv57webapi.accutech-systems.net/api/v6/TransactionBatches"
+                .AppendPathSegment(urlSuffix)
+                .SetQueryParam("TransactionBatchIds",batchId)
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
                 .PostAsync(null);
         }
         
         //GET analyzed Trade suggestions
-        public async Task<TradeResponse> getTrades(string bearerToken, int accountId)
+        private async Task<TradeResponse> getTrades(string bearerToken, int accountId)
         {
             TradeResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Accounts"
                 .AppendPathSegment(accountId)
@@ -117,6 +118,65 @@
                 .WithOAuthBearerToken(bearerToken)
                 .GetAsync()
                 .ReceiveJson<TradeResponse>();
+
+            return postResp;
+        }
+        
+        //Assemble list of Transactions from Assets list
+        private List<TransactionRequest> assembleTransactions(string bearerToken, int batchId, List<AssetInput> assets)
+        {
+            //Populate Dictionary of assets from Cheetah with a GET request
+            Dictionary<AssetIdentifier, int> allAssets = populateAssetsDictionary(bearerToken);
+            
+            //Instantiate TransactionRequest List
+            List<TransactionRequest> transactionRequests = new List<TransactionRequest>();
+            
+            //for each asset in assets, check for entry in Dict
+            foreach (AssetInput asset in assets)
+            {
+                try
+                {
+                    int assetId = allAssets[asset.assetIdentifier];
+                    
+                    //Once found, build request and POST to the batch
+                    transactionRequests.Add(new TransactionRequest(
+                        534, batchId, 26, 19, assetId, asset.units));
+                }
+                catch (KeyNotFoundException e)
+                {
+                    Console.WriteLine("Key not found");
+                }
+            }
+            return transactionRequests;
+        }
+
+        public Dictionary<AssetIdentifier, int> populateAssetsDictionary(string bearerToken)
+        {
+            Dictionary<AssetIdentifier, int> assetsDictionary =
+                new Dictionary<AssetIdentifier, int>(new AssetIdentifier.AssetEqualityComparer());
+            
+            List<AssetLookupResponse> assetLookupResponses = getLookupAssets(bearerToken).Result.items;
+            
+            foreach (AssetLookupResponse assetLookupResponse in assetLookupResponses)
+            {
+                try
+                {
+                    assetsDictionary.Add(assetLookupResponse.value, Int32.Parse(assetLookupResponse.id));
+                }
+                catch (ArgumentException){}
+                
+            }
+
+            return assetsDictionary;
+        }
+
+        private async Task<LookupResponse> getLookupAssets(string bearerToken)
+        {
+            LookupResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Lookup?LookupService=GetAssetValues"
+                .WithHeader("Content-Type", "application/json")
+                .WithOAuthBearerToken(bearerToken)
+                .GetAsync()
+                .ReceiveJson<LookupResponse>();
 
             return postResp;
         }
