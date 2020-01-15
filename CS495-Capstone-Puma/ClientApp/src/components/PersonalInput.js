@@ -1,5 +1,6 @@
 import React from 'react';
 import  './css/PersonalInput.css'
+import M from 'materialize-css'
 let state ={
     inputFirstName: null,
     inputMiddleName: null,
