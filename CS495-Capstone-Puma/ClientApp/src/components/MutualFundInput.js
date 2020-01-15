@@ -20,6 +20,10 @@ let state = {
 };
 
 export class MutualFundInput extends React.Component{
+    componentDidMount(){
+        console.log("component did mount")
+        M.AutoInit();
+    }
 
     constructor(props) {
         super(props);
@@ -126,46 +130,95 @@ export class MutualFundInput extends React.Component{
                     </tbody>
                 </table>
                 <form onSubmit={this.addAsset}>
-                <label>Name</label>
-                <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
-                <br />
-                <label>Price</label>
-                <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
-                <br />
-                <label>Quantity</label>
-                <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
-                <br />
-                <label>IncomePaymentMonth</label>
-                <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
-                <br />
-                <label>IncomePaymentDay</label>
-                <input type="number" name="inputIncomePaymentDay" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
-                <br />
-                <label>UseDailyFactor</label>
-                <select name="inputUseDailyFactor" required onChange={this.handleInputChange} value={this.state.inputUseDailyFactor}>
-                    <option value="true">true</option>
-                    <option value="false">false</option>
-                    <option value="null" selected="selected"> </option>
-                </select>
-                <br />
-                <label>AccrualMethodType</label>
-                <input type="text" name="inputAccrualMethodType" required onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
-                <br />
-                <label>ExchangeType</label>
-                <input type="text" name="inputExchangeType" required onChange={this.handleInputChange} value={this.state.inputExchangeType}/>
-                <br />
-                <label>EarningsPerShareDiluted</label>
-                <input type="number" name="inputEarningsPerShareDiluted" required onChange={this.handleInputChange} value={this.state.inputEarningsPerShareDiluted}/>
-                <br />
-                <label>FundFamilyId</label>
-                <input type="number" name="inputFundFamilyId" required onChange={this.handleInputChange} value={this.state.inputFundFamilyId}/>
-                <br />
-                <label>FundCategoryId</label>
-                <input type="number" name="inputFundCategoryId" required onChange={this.handleInputChange} value={this.state.inputFundCategoryId}/>
-                <br />
+                    
+                <div className="row">
+                    <div className = "input-field col s6">    
+                        <label>Name</label>
+                        <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
+                    </div>
+                </div>
+                
+                <div className = "row">
+                    <div className = "input-field col s6">
+                        <label>Price</label>
+                        <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
+                    </div>
+                </div>
+                
+                <div className = "row">
+                    <div className = "input-field col s6">    
+                        <label>Quantity</label>
+                        <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
+                    </div>
+                </div>
+                   
+                <div className = "row">
+                    <div className = "input-field col s6">    
+                        <label>IncomePaymentMonth</label>
+                        <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
+                    </div>
+                </div>
+                    
+                <div className = "row">
+                    <div className = "input-field col s6">    
+                        <label>IncomePaymentDay</label>
+                        <input type="number" name="inputIncomePaymentDay" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
+                    </div>
+                </div>
+                    
+                <div className="row">
+                    <div className = "input-field col s6">
+                        <select name="inputUseDailyFactor" required onChange={this.handleInputChange} value={this.state.inputUseDailyFactor}>
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                            <option value="null" selected="selected"> </option>
+                        </select>
+                        <label>UseDailyFactor</label>
+                    </div>
+                </div>
+                    
+                <div className = "row">
+                    <div className = "input-field col s6">    
+                        <label>AccrualMethodType</label>
+                        <input type="text" name="inputAccrualMethodType" required onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
+                    </div>
+                </div>
+                    
+                <div className = "row">
+                    <div className = "input-field col s6">    
+                        <label>ExchangeType</label>
+                        <input type="text" name="inputExchangeType" required onChange={this.handleInputChange} value={this.state.inputExchangeType}/>
+                    </div>
+                </div>
+                    
+                <div>
+                    <div>    
+                        <label>EarningsPerShareDiluted</label>
+                        <input type="number" name="inputEarningsPerShareDiluted" required onChange={this.handleInputChange} value={this.state.inputEarningsPerShareDiluted}/>
+                    </div>
+                </div>
+                
+                <div>
+                    <div>    
+                        <label>FundFamilyId</label>
+                        <input type="number" name="inputFundFamilyId" required onChange={this.handleInputChange} value={this.state.inputFundFamilyId}/>
+                    </div>
+                </div>
+                
+                <div>
+                    <div>    
+                        <label>FundCategoryId</label>
+                        <input type="number" name="inputFundCategoryId" required onChange={this.handleInputChange} value={this.state.inputFundCategoryId}/>
+                    </div>
+                </div>
+                
+                <div>
+                    <div>    
                 <label>FundNumber</label>
                 <input type="number" name="inputFundNumber" required onChange={this.handleInputChange} value={this.state.inputFundNumber}/>
-                <br />
+                    </div>
+                </div>
+                
                 <label>FundStatusType</label>
                 <input type="text" name="inputFundStatusType" required onChange={this.handleInputChange} value={this.state.inputFundStatusType}/>
                 <br />
