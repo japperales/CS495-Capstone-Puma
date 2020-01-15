@@ -31,51 +31,55 @@ export class PersonalInput extends React.Component{
         });
         this.props.personalCallback(this.state.inputFirstName, this.state.inputMiddleName, this.state.inputLastName, this.state.inputHonorific, this.state.inputEmailAddress);
     }
-    
+
     render(){
         return(
             <div>
-                <h3>Account Holder Information</h3> 
+                <h3>Account Holder Information</h3>
                 <br />
-                
-                <label>First Name</label>
-                <br />
-                <input type="text" name="inputFirstName" onChange={this.handleInputChange} value={this.state.inputFirstName}/>
-                <br />
-                <br />
-                
-                <label>Middle Name</label>
-                <br />
-                <input type="text" name="inputMiddleName" onChange={this.handleInputChange} value={this.state.inputMiddleName}/>
-                <br />
-                <br />
-                
-                <label>Last Name</label>
-                <br />
-                <input type="text" name="inputLastName" onChange={this.handleInputChange} value={this.state.inputLastName}/>
-                <br />
-                <br />
-                
-                <label>Honorific</label>
-                <br />
-                <select name="inputHonorific" onChange={this.handleInputChange}  value={this.state.inputHonorific}>
-                    <option value="Mr">Mr</option>
-                    <option value="Mrs">Mrs</option>
-                    <option value="Ms">Ms</option>
-                    <option value="Dr">Dr</option>
-                    <option value="" selected="selected"> </option>
-                </select>
-                <br />
-                <br />
-                
-                <label>Email</label>
-                <br />
-                <input type="text" name="inputEmailAddress" onChange={this.handleInputChange} value={this.state.inputEmailAddress}/>
-                <br />
-                <br />
-                <hr />
+                <div className = "row">
+                    <div className = "input-field col s6">
+                        <label>First Name</label>
+                        <input type="text" name="inputFirstName" onChange={this.handleInputChange} value={this.state.inputFirstName}/>
+                    </div>
+                </div>
+
+                <div className = "row">
+                    <div className = "input-field col s6">
+                        <label>Middle Name</label>
+                        <input type="text" name="inputMiddleName" onChange={this.handleInputChange} value={this.state.inputMiddleName}/>
+                    </div>
+                </div>
+
+                <div className = "row">
+                    <div className = "input-field col s6">
+                        <label>Last Name</label>
+                        <input type="text" name="inputLastName" onChange={this.handleInputChange} value={this.state.inputLastName}/>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className = "input-field col s6">
+                        <select name="inputHonorific" onChange={this.handleInputChange}  value={this.state.inputHonorific}>
+                            <option value="" disabled selected> </option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Ms">Ms</option>
+                            <option value="Dr">Dr</option>
+
+                        </select>
+                        <label>Honorific</label>
+                    </div>
+                </div>
+
+                <div className = "row">
+                    <div className = "input-field col s6">
+                        <label>Email</label>
+                        <input type="text" name="inputEmailAddress" onChange={this.handleInputChange} value={this.state.inputEmailAddress}/>
+                    </div>
+                </div>
             </div>
         );
     }
-    
+
 }
