@@ -9,6 +9,10 @@ let state ={
 };
 
 export class PersonalInput extends React.Component{
+    componentDidMount(){
+        console.log("component did mount")
+        M.AutoInit();
+    }
     
     constructor(props){
         super(props);
