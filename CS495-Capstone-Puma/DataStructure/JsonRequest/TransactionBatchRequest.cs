@@ -4,7 +4,7 @@ namespace CS495_Capstone_Puma.DataStructure.JsonRequest
 {
     public class TransactionBatchRequest
     {
-        [JsonProperty("InstitutionRecordId")]
+        [JsonProperty("InstitutionIdentityRecordId")]
         public int institutionRecordId { get; }
         
         [JsonProperty("Code")]
@@ -16,8 +16,16 @@ namespace CS495_Capstone_Puma.DataStructure.JsonRequest
         public TransactionBatchRequest()
         {
             institutionRecordId = 1;
-            code = "123456789";
+            code = "0";
             name = "PumaApi";
+        }
+
+        [JsonConstructor]
+        public TransactionBatchRequest(int institutionRecordId, string code, string name)
+        {
+            this.institutionRecordId = institutionRecordId;
+            this.code = code;
+            this.name = name;
         }
     }
 }

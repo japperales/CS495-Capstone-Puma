@@ -142,13 +142,21 @@
             <e p="QualityRatingHistory.cs" t="Include" />
           </e>
           <e p="JsonRequest" t="Include">
-            <e p="Trade.cs" t="Include" />
             <e p="TransactionBatchRequest.cs" t="Include" />
             <e p="TransactionRequest.cs" t="Include" />
           </e>
           <e p="JsonResponse" t="Include">
+            <e p="Asset" t="Include">
+              <e p="AssetIdentifier.cs" t="Include" />
+              <e p="AssetInput.cs" t="Include" />
+              <e p="AssetLookupResponse.cs" t="Include" />
+              <e p="LookupResponse.cs" t="Include" />
+            </e>
             <e p="TokenResponse.cs" t="Include" />
+            <e p="Trade.cs" t="Include" />
+            <e p="TradeResponse.cs" t="Include" />
             <e p="TransactionBatchResponse.cs" t="Include" />
+            <e p="TransactionResponse.cs" t="Include" />
           </e>
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -177,12 +185,10 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="ControllersTest" t="Include">
           <e p="CheetahHandlerTest.cs" t="Include" />
+          <e p="FullFunctionTest.cs" t="Include" />
           <e p="sandbox.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.UnitTests.csproj" t="IncludeRecursive" />
-        <e p="DataStructureTest" t="Include">
-          <e p="IdentityRecordTest.cs" t="Include" />
-        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">

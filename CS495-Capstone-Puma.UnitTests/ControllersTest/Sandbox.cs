@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CS495_Capstone_Puma.DataStructure.Asset;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+using Newtonsoft.Json.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -58,6 +59,18 @@ namespace CS495_Capstone_Puma.UnitTests.ControllersTest
                 output.WriteLine(allTasks.Count.ToString());
             }
             output.WriteLine("Done");
+        }
+
+
+        [Fact]
+        public void testjsonConvert()
+        {
+            string str =
+                "{\"AssetCode\":\"09700PES3\",\"Symbol\":\"09700PES3\",\"Issue\":\"M T N TRANCHE # TR 00113 4.050 11/15/2009\",\"Issuer\":\"BOEING CAP CORP\"}";
+            
+            JObject json = JObject.Parse(str);
+            
+            output.WriteLine(json.ToString());
         }
     }
 }
