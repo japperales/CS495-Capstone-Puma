@@ -1,14 +1,18 @@
 ﻿﻿using System;
+ using System.Collections;
  using System.Collections.Generic;
+ using System.Linq;
  using System.Net.Http;
  using System.Threading.Tasks;
 using CS495_Capstone_Puma.DataStructure;
  using CS495_Capstone_Puma.DataStructure.Account;
  using CS495_Capstone_Puma.DataStructure.Asset;
 using CS495_Capstone_Puma.DataStructure.NameAndAddress;
-using Flurl.Http;
+ using CS495_Capstone_Puma.DataStructure.ResponseShards;
+ using Flurl.Http;
+ using Newtonsoft.Json.Linq;
 
-namespace CS495_Capstone_Puma.Controllers
+ namespace CS495_Capstone_Puma.Controllers
 {
     public class CheetahHandler
     {
@@ -21,10 +25,10 @@ namespace CS495_Capstone_Puma.Controllers
             //Console.WriteLine("Hey look it's an access token! its right here: " + accessToken);
             //POST IdentityRecord & Account async
 
-            RetrieveTradeProposal(accessToken);
+            IList<HoldingsShard> originalPortfolio = RetrieveOriginalPortfolio(accessToken).Result;
             
-            PostIdentityRecord(identityRecord);
-            PostAccount(account);
+            //PostIdentityRecord(identityRecord);
+            //PostAccount(account);
             
             //POST Owner & Admin relationships
             
@@ -45,15 +49,15 @@ namespace CS495_Capstone_Puma.Controllers
             
             //OLD
             
-            await PostIdentityRecord(identityRecord);
+            //await PostIdentityRecord(identityRecord);
 
-            await PostAccount(account);
+            //await PostAccount(account);
 
             //Hacked Methodology while using API simulation instead of actual Cheetah
-            Asset adjustedAsset = GetAsset(2).Result;
-            List<Asset> adjustedAssets = new List<Asset> {adjustedAsset};
+            //Asset adjustedAsset = GetAsset(2).Result;
+            //List<Asset> adjustedAssets = new List<Asset> {adjustedAsset};
 
-            return new UIObject(identityRecord, adjustedAssets);
+            return null;
         }
         
         //Send Name & Address POST to Cheetah
@@ -95,10 +99,48 @@ namespace CS495_Capstone_Puma.Controllers
             return response;
         }
 
-        public static async Task<string> RetrieveTradeProposal(string jwt)
+        public static async Task<IList<HoldingsShard>> RetrieveOriginalPortfolio(string jwt)
         {
-            //string response = await 
-            return null;
+            var response = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Accounts/1/Holdings"
+                .WithOAuthBearerToken(jwt)
+                .GetStringAsync();
+
+            IList<HoldingsShard> holdings = ConvertHoldingTokenList(response);
+            
+            return holdings;
+        }
+
+        private static IList<HoldingsShard> ConvertHoldingTokenList(string jsonHoldingsString)
+        {
+            IList<HoldingsShard> holdingShardList = new List<HoldingsShard>();
+
+            JArray parsedResponse = JArray.Parse(jsonHoldingsString);
+            var unarrayedHoldingsJson = parsedResponse[0];
+            IList<JToken> holdingTokenList = unarrayedHoldingsJson["Holdings"].Children().ToList();
+            
+            foreach (JToken holdingToken in holdingTokenList)
+            {
+                HoldingsShard holdingShard = holdingToken.ToObject<HoldingsShard>();
+                IList<JToken> lotTokenList = holdingToken["Lots"].Children().ToList();
+                holdingShard.LotList = ConvertLotTokenList(lotTokenList);
+                Console.WriteLine(holdingShard.AssetId);
+                holdingShardList.Add(holdingShard);
+            }
+
+            return holdingShardList;
+        }
+
+        private static IList<LotShard> ConvertLotTokenList(IList<JToken> lotTokenList)
+        {
+            IList<LotShard> lotList = new List<LotShard>();
+            
+            foreach (JToken lotToken in lotTokenList)
+            {
+                LotShard lotObject = lotToken.ToObject<LotShard>();
+                lotList.Add(lotObject);
+            }
+
+            return lotList;
         }
     }
 }
