@@ -17,9 +17,12 @@ namespace CS495_Capstone_Puma.Controllers
         public async Task<UIObject> PostAndReceive(IdentityRecord identityRecord, Account account, List<Asset> assets)
         {
             //POST Authentication
-            String accessToken = PostAccessToken().Result.Jwt;
-
+            string accessToken = GetAccessToken().Result.Jwt;
+            //Console.WriteLine("Hey look it's an access token! its right here: " + accessToken);
             //POST IdentityRecord & Account async
+
+            RetrieveTradeProposal(accessToken);
+            
             PostIdentityRecord(identityRecord);
             PostAccount(account);
             
@@ -79,17 +82,23 @@ namespace CS495_Capstone_Puma.Controllers
             return getResp;
         }
         
-        public static async Task<TokenResponse> PostAccessToken()
-        {
-            TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/Api/v6/Token"
+        public static async Task<TokenResponse> GetAccessToken()
+        {    //"DELETE BEFORE VERSIONING"
+            TokenResponse response = await "https://asctrustv57webapi.accutech-systems.net/Api/v6/Token"
                 .WithHeader("x-api-key",
-                    "DELETE BEFORE VERSIONING"
+                    "***REMOVED***"
                     )
-                .WithBasicAuth("DELETE BEFORE VERSIONING", "DELETE BEFORE VERSIONING")
+                .WithBasicAuth("***REMOVED***", "***REMOVED***")
                 .PostJsonAsync(new {})
                 .ReceiveJson<TokenResponse>();
             
-            return postResp;
+            return response;
+        }
+
+        public static async Task<string> RetrieveTradeProposal(string jwt)
+        {
+            //string response = await 
+            return null;
         }
     }
 }
