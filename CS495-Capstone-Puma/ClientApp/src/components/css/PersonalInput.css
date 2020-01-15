@@ -1,7 +1,17 @@
-﻿body {
+﻿.materialize-input{
     text-align: center;
+}
+
+body {
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 form{
     text-align: center;
+}
+
+h3{
+    font-family: Calibri;
 }

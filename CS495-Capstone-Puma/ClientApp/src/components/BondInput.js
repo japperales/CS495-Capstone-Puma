@@ -120,77 +120,77 @@ export class BondInput extends React.Component{
                     </tbody>
                 </table>
                 <form onSubmit={this.addAsset}>
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Name</label>
                             <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Price</label>
                             <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Quantity</label>
                             <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Date Of Issue</label>
                             <input type="text" className="datepicker" name="inputDateOfIssue" required onChange={this.handleInputChange} value={this.state.inputDateOfIssue}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Date Of Maturity</label>
                             <input type="text" className="datepicker" name="inputDateOfMaturity" required onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Income Payment Month</label>
                             <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Income Payment Day</label>
                             <input type="number" name="inputIncomePaymentDay" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Accrual Method Type</label>
                             <input type="text" name="inputAccrualMethodType" required onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Call Date</label>
-                            <input type="date" className="datepicker" name="inputCallDate" required onChange={this.handleInputChange} value={this.state.inputCallDate}/>
+                            <input type="text" className="datepicker" name="inputCallDate" required onChange={this.handleInputChange} value={this.state.inputCallDate}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Call Price</label>
                             <input type="text" className="datepicker" name="inputCallPrice" required onChange={this.handleInputChange} value={this.state.inputCallPrice}/>
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="center-align">
                         <div className="input-field col s6">
                             <label>Date Of First Payment</label>
                             <input type="text" className="datepicker" name="inputDateOfFirstPayment" required onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
