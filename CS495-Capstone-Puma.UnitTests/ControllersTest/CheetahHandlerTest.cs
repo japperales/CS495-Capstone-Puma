@@ -3,6 +3,7 @@ using System.Net.Http;
 using Flurl.Http.Testing;
 using CS495_Capstone_Puma.Controllers;
 using CS495_Capstone_Puma.DataStructure;
+using CS495_Capstone_Puma.DataStructure.JsonResponse;
 using Xunit;
 
 namespace CS495_Capstone_Puma.UnitTests.ControllersTest
