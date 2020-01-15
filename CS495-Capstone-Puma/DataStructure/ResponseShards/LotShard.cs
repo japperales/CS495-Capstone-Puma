@@ -2,8 +2,6 @@
 {
     public class LotShard
     {
-        public int AssetId;
-
         public float UnitsActual;
 
         public float AssetPrice;

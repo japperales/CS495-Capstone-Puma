@@ -94,6 +94,7 @@
         <e p="Controllers" t="Include">
           <e p="CheetahHandler.cs" t="Include" />
           <e p="PumaController.cs" t="Include" />
+          <e p="TradeProposal.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.csproj" t="IncludeRecursive" />
         <e p="DataStructure" t="Include">
@@ -139,6 +140,7 @@
           <e p="ResponseShards" t="Include">
             <e p="HoldingsShard.cs" t="Include" />
             <e p="LotShard.cs" t="Include" />
+            <e p="TradeShard.cs" t="Include" />
           </e>
           <e p="Test.cs" t="Include" />
           <e p="TokenResponse.cs" t="Include" />
