@@ -101,30 +101,63 @@ export class MiscAssetInput extends React.Component{
                     </tbody>
                 </table>
                 <form onSubmit={this.addAsset}>
-                <label>Name</label>
-                <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
-                <br />
-                <label>Price</label>
-                <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
-                <br />
-                <label>Quantity</label>
-                <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
-                <br />
-                <label>IncomePaymentFrequencyType</label>
-                <input type="text" name="inputIncomePaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentFrequencyType}/>
-                <br />
-                <label>IncomePaymentMonth</label>
-                <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
-                <br />
-                <label>IncomePaymentDay</label>
-                <input type="number" name="inputIncomePaymentDay" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
-                <br />
-                <label>AccrualMethodType</label>
-                <input type="text" name="inputAccrualMethodType" required onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
-                <br />
-                <label>CompoundingFrequencyType</label>
-                <input type="text" name="inputCompoundingFrequencyType" required onChange={this.handleInputChange} value={this.state.inputCompoundingFrequencyType}/>
-                <br />
+                    
+                <div className = "center-align">
+                    <div className = "input-field col s6">    
+                        <label>Name</label>
+                        <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
+                    </div>
+                </div>
+                    
+                <div className = "center-align">
+                    <div className = "input-field col s6">    
+                        <label>Price</label>
+                        <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
+                    </div>
+                </div>
+                
+                <div className = "center-align">
+                    <div className = "input-field col s6">    
+                        <label>Quantity</label>
+                        <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
+                    </div>
+                </div>
+                
+                <div className = "center-align">
+                    <div className = "input-field col s6">    
+                        <label>IncomePaymentFrequencyType</label>
+                        <input type="text" name="inputIncomePaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentFrequencyType}/>
+                    </div>
+                </div>
+                
+                <div className = "center-align">
+                    <div className = "input-field col s6">    
+                        <label>IncomePaymentMonth</label>
+                        <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
+                    </div>
+                </div>
+                
+                <div className = "center-align">
+                    <div className = "input-field col s6">
+                        <label>IncomePaymentDay</label>
+                        <input type="number" name="inputIncomePaymentDay" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
+                    </div>
+                </div>
+                
+                <div className = "center-align">
+                    <div className = "input-field col s6">    
+                        <label>AccrualMethodType</label>
+                        <input type="text" name="inputAccrualMethodType" required onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
+                    </div>
+                </div>
+                
+                <div className = "center-align">
+                    <div className = "input-field col s6">    
+                        <label>CompoundingFrequencyType</label>
+                        <input type="text" name="inputCompoundingFrequencyType" required onChange={this.handleInputChange} value={this.state.inputCompoundingFrequencyType}/>
+                    </div>
+                </div>
+                    
                 <input type="submit" value="Add Asset" className="waves-effect waves-light btn-small"/>
                 </form>
                 <a onClick={this.removeAsset} className="waves-effect waves-light btn-small">Remove Asset</a>
