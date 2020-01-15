@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace CS495_Capstone_Puma.DataStructure
+namespace CS495_Capstone_Puma.DataStructure.JsonResponse
 {
     public class Trade
     {
@@ -86,12 +86,6 @@ namespace CS495_Capstone_Puma.DataStructure
         [JsonProperty("ExecuteInSingleBlock")]
         public bool ExecuteInSingleBlock { get; set; }
 
-        [JsonProperty("StopPriceAmount")]
-        public long StopPriceAmount { get; set; }
-
-        [JsonProperty("LimitPriceAmount")]
-        public long LimitPriceAmount { get; set; }
-
         [JsonProperty("UnitShares")]
         public long UnitShares { get; set; }
 
@@ -101,9 +95,6 @@ namespace CS495_Capstone_Puma.DataStructure
         [JsonProperty("UseIncomeCash")]
         public bool UseIncomeCash { get; set; }
 
-        [JsonProperty("AccruedInterestAmount")]
-        public long AccruedInterestAmount { get; set; }
-
         [JsonProperty("BrokerIdentityRecordId")]
         public long BrokerIdentityRecordId { get; set; }
 
@@ -112,9 +103,6 @@ namespace CS495_Capstone_Puma.DataStructure
 
         [JsonProperty("SecFee")]
         public long SecFee { get; set; }
-
-        [JsonProperty("OtherFee")]
-        public long OtherFee { get; set; }
 
         [JsonProperty("RegistrationTypeId")]
         public long RegistrationTypeId { get; set; }
@@ -131,36 +119,6 @@ namespace CS495_Capstone_Puma.DataStructure
         [JsonProperty("DivisionIdentityRecordId")]
         public long DivisionIdentityRecordId { get; set; }
 
-        [JsonProperty("TransactionNarrativeId")]
-        public long TransactionNarrativeId { get; set; }
-
-        [JsonProperty("Narrative")]
-        public string Narrative { get; set; }
-
-        [JsonProperty("ProcessingExceptionType")]
-        public string ProcessingExceptionType { get; set; }
-
-        [JsonProperty("ProcessingExceptionTypeName")]
-        public string ProcessingExceptionTypeName { get; set; }
-
-        [JsonProperty("TradeProposalId")]
-        public long TradeProposalId { get; set; }
-
-        [JsonProperty("TradeProposalName")]
-        public string TradeProposalName { get; set; }
-
-        [JsonProperty("TradeProposalSourceType")]
-        public string TradeProposalSourceType { get; set; }
-
-        [JsonProperty("TradeProposalSourceTypeName")]
-        public string TradeProposalSourceTypeName { get; set; }
-
-        [JsonProperty("TradeProposalStatusType")]
-        public string TradeProposalStatusType { get; set; }
-
-        [JsonProperty("TradeProposalStatusTypeName")]
-        public string TradeProposalStatusTypeName { get; set; }
-
         [JsonProperty("CreatedDate")]
         public DateTimeOffset CreatedDate { get; set; }
 
@@ -170,8 +128,53 @@ namespace CS495_Capstone_Puma.DataStructure
         [JsonProperty("ModifiedBy")]
         public string ModifiedBy { get; set; }
 
+        public Trade()
+        {
+            TradeId = 0;
+            TradeBlockId = 0;
+            TradeBlockName = "";
+            AccountId = 0;
+            TradeGroupKey = "";
+            AccountNumber = "";
+            AssetId = 0;
+            AssetCode = "";
+            OverrideTaxLotHarvestingType = "";
+            OverrideTaxLotHarvestingTypeName = "";
+            UseSpecifiedLot = "";
+            TradeType = "";
+            TradeTypeName = "";
+            TradeDurationType = "";
+            TradeDurationTypeName = "";
+            TradePriceType = "";
+            TradePriceTypeName = "";
+            TradeBasisOptionType = "";
+            TradeBasisOptionTypeName = "";
+            TradeStatusType = "";
+            TradeStatusTypeName = "";
+            TradeBlockHold = false;
+            TradedPriceAmount = 0;
+            DateTraded = DateTimeOffset.Now;
+            DateSettled = DateTimeOffset.Now;
+            TaxYear = 2020;
+            ExecuteInSingleBlock = false;
+            UnitShares = 200;
+            NetAmount = 20199;
+            UseIncomeCash = false;
+            BrokerIdentityRecordId = 19;
+            CommissionFee = 0;
+            SecFee = 2;
+            RegistrationTypeId = 1;
+            RegistrationTypeName = "";
+            LocationTypeId = 1;
+            LocationTypeName = "";
+            DivisionIdentityRecordId = 24;
+            CreatedDate = DateTimeOffset.Now;
+            ModifiedDate = DateTimeOffset.Now;
+            ModifiedBy = "";
+        }
+        
         [JsonConstructor]
-        public Trade(long tradeId, long tradeBlockId, string tradeBlockName, long accountId, string tradeGroupKey, string accountNumber, long assetId, string assetCode, string overrideTaxLotHarvestingType, string overrideTaxLotHarvestingTypeName, string useSpecifiedLot, string tradeType, string tradeTypeName, string tradeDurationType, string tradeDurationTypeName, string tradePriceType, string tradePriceTypeName, string tradeBasisOptionType, string tradeBasisOptionTypeName, string tradeStatusType, string tradeStatusTypeName, bool tradeBlockHold, long tradedPriceAmount, DateTimeOffset dateTraded, DateTimeOffset dateSettled, long taxYear, bool executeInSingleBlock, long stopPriceAmount, long limitPriceAmount, long unitShares, long netAmount, bool useIncomeCash, long accruedInterestAmount, long brokerIdentityRecordId, long commissionFee, long secFee, long otherFee, long registrationTypeId, string registrationTypeName, long locationTypeId, string locationTypeName, long divisionIdentityRecordId, long transactionNarrativeId, string narrative, string processingExceptionType, string processingExceptionTypeName, long tradeProposalId, string tradeProposalName, string tradeProposalSourceType, string tradeProposalSourceTypeName, string tradeProposalStatusType, string tradeProposalStatusTypeName, DateTimeOffset createdDate, DateTimeOffset modifiedDate, string modifiedBy)
+        public Trade(long tradeId, long tradeBlockId, string tradeBlockName, long accountId, string tradeGroupKey, string accountNumber, long assetId, string assetCode, string overrideTaxLotHarvestingType, string overrideTaxLotHarvestingTypeName, string useSpecifiedLot, string tradeType, string tradeTypeName, string tradeDurationType, string tradeDurationTypeName, string tradePriceType, string tradePriceTypeName, string tradeBasisOptionType, string tradeBasisOptionTypeName, string tradeStatusType, string tradeStatusTypeName, bool tradeBlockHold, long tradedPriceAmount, DateTimeOffset dateTraded, DateTimeOffset dateSettled, long taxYear, bool executeInSingleBlock, long unitShares, long netAmount, bool useIncomeCash, long brokerIdentityRecordId, long commissionFee, long secFee, long registrationTypeId, string registrationTypeName, long locationTypeId, string locationTypeName, long divisionIdentityRecordId, DateTimeOffset createdDate, DateTimeOffset modifiedDate, string modifiedBy)
         {
             TradeId = tradeId;
             TradeBlockId = tradeBlockId;
@@ -200,31 +203,17 @@ namespace CS495_Capstone_Puma.DataStructure
             DateSettled = dateSettled;
             TaxYear = taxYear;
             ExecuteInSingleBlock = executeInSingleBlock;
-            StopPriceAmount = stopPriceAmount;
-            LimitPriceAmount = limitPriceAmount;
             UnitShares = unitShares;
             NetAmount = netAmount;
             UseIncomeCash = useIncomeCash;
-            AccruedInterestAmount = accruedInterestAmount;
             BrokerIdentityRecordId = brokerIdentityRecordId;
             CommissionFee = commissionFee;
             SecFee = secFee;
-            OtherFee = otherFee;
             RegistrationTypeId = registrationTypeId;
             RegistrationTypeName = registrationTypeName;
             LocationTypeId = locationTypeId;
             LocationTypeName = locationTypeName;
             DivisionIdentityRecordId = divisionIdentityRecordId;
-            TransactionNarrativeId = transactionNarrativeId;
-            Narrative = narrative;
-            ProcessingExceptionType = processingExceptionType;
-            ProcessingExceptionTypeName = processingExceptionTypeName;
-            TradeProposalId = tradeProposalId;
-            TradeProposalName = tradeProposalName;
-            TradeProposalSourceType = tradeProposalSourceType;
-            TradeProposalSourceTypeName = tradeProposalSourceTypeName;
-            TradeProposalStatusType = tradeProposalStatusType;
-            TradeProposalStatusTypeName = tradeProposalStatusTypeName;
             CreatedDate = createdDate;
             ModifiedDate = modifiedDate;
             ModifiedBy = modifiedBy;
