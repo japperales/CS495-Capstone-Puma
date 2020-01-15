@@ -62,6 +62,11 @@
               <e p="BondInput.test.js" t="Include" />
               <e p="CoolGuyCreator.js" t="Include" />
               <e p="Counter.js" t="Include" />
+              <e p="css" t="Include">
+                <e p="NavMenu.css" t="Include" />
+                <e p="PersonalInput.css" t="Include" />
+                <e p="TabsPage.css" t="Include" />
+              </e>
               <e p="FetchData.js" t="Include" />
               <e p="Home.js" t="Include" />
               <e p="Layout.js" t="Include" />
@@ -71,7 +76,6 @@
               <e p="MiscAssetInput.test.js" t="Include" />
               <e p="MutualFundInput.js" t="Include" />
               <e p="MutualFundInput.test.js" t="Include" />
-              <e p="NavMenu.css" t="Include" />
               <e p="NavMenu.js" t="Include" />
               <e p="PersonalInput.js" t="Include" />
               <e p="PersonalInput.test.js" t="Include" />
@@ -98,19 +102,6 @@
         </e>
         <e p="CS495-Capstone-Puma.csproj" t="IncludeRecursive" />
         <e p="DataStructure" t="Include">
-          <e p="Account" t="Include">
-            <e p="Account.cs" t="Include" />
-            <e p="AccountRelationship.cs" t="Include" />
-            <e p="AccountSettings.cs" t="Include" />
-            <e p="Fee" t="Include">
-              <e p="FeeCreditToTrustee.cs" t="Include" />
-              <e p="FeePaidFromAccountList.cs" t="Include" />
-              <e p="FeeSchedule.cs" t="Include" />
-              <e p="FeeSetting.cs" t="Include" />
-            </e>
-            <e p="InvestmentModelSetting.cs" t="Include" />
-            <e p="PerformanceExclusion.cs" t="Include" />
-          </e>
           <e p="Asset" t="Include">
             <e p="Asset.cs" t="Include" />
             <e p="AssetCategory" t="Include">
@@ -130,22 +121,28 @@
             <e p="PriceHistory.cs" t="Include" />
             <e p="QualityRatingHistory.cs" t="Include" />
           </e>
-          <e p="NameAndAddress" t="Include">
-            <e p="Address.cs" t="Include" />
-            <e p="ContactMethod.cs" t="Include" />
-            <e p="IdentityRecord.cs" t="Include" />
-            <e p="PhoneNumber.cs" t="Include" />
-            <e p="RecipientBankInformation.cs" t="Include" />
+          <e p="JsonRequest" t="Include">
+            <e p="TransactionBatchRequest.cs" t="Include" />
+            <e p="TransactionRequest.cs" t="Include" />
+          </e>
+          <e p="JsonResponse" t="Include">
+            <e p="Asset" t="Include">
+              <e p="AssetIdentifier.cs" t="Include" />
+              <e p="AssetInput.cs" t="Include" />
+              <e p="AssetLookupResponse.cs" t="Include" />
+              <e p="LookupResponse.cs" t="Include" />
+            </e>
+            <e p="TokenResponse.cs" t="Include" />
+            <e p="Trade.cs" t="Include" />
+            <e p="TradeResponse.cs" t="Include" />
+            <e p="TransactionBatchResponse.cs" t="Include" />
+            <e p="TransactionResponse.cs" t="Include" />
           </e>
           <e p="ResponseShards" t="Include">
             <e p="HoldingsShard.cs" t="Include" />
             <e p="LotShard.cs" t="Include" />
             <e p="TradeShard.cs" t="Include" />
           </e>
-          <e p="Test.cs" t="Include" />
-          <e p="TokenResponse.cs" t="Include" />
-          <e p="Trade.cs" t="Include" />
-          <e p="UIObject.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -168,18 +165,16 @@
         <e p="Temporary" t="Include">
           <e p="UntrustedCertClientFactory.cs" t="Include" />
         </e>
-        <e p="XUnitTests" t="Include" />
       </e>
       <e p="CS495-Capstone-Puma.sln" t="IncludeFlat" />
       <e p="CS495-Capstone-Puma.UnitTests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="ControllersTest" t="Include">
           <e p="CheetahHandlerTest.cs" t="Include" />
+          <e p="FullFunctionTest.cs" t="Include" />
+          <e p="Sandbox.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.UnitTests.csproj" t="IncludeRecursive" />
-        <e p="DataStructureTest" t="Include">
-          <e p="IdentityRecordTest.cs" t="Include" />
-        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">

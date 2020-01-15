@@ -1,16 +1,11 @@
 ﻿﻿using System;
- using System.Collections;
  using System.Collections.Generic;
  using System.Linq;
- using System.Net.Http;
  using System.Threading.Tasks;
-using CS495_Capstone_Puma.DataStructure;
- using CS495_Capstone_Puma.DataStructure.Account;
  using CS495_Capstone_Puma.DataStructure.Asset;
-using CS495_Capstone_Puma.DataStructure.NameAndAddress;
+ using CS495_Capstone_Puma.DataStructure.JsonResponse;
  using CS495_Capstone_Puma.DataStructure.ResponseShards;
  using Flurl.Http;
- using Microsoft.Extensions.Logging;
  using Newtonsoft.Json.Linq;
 
  namespace CS495_Capstone_Puma.Controllers
@@ -19,16 +14,13 @@ using CS495_Capstone_Puma.DataStructure.NameAndAddress;
     {
 
         //Coordinates the POST and GET HttpRequests required by the process.
-        public async Task<Object[]> PostAndReceive(IdentityRecord identityRecord, Account account, List<Asset> assets)
+        public async Task<Object[]> PostAndReceive(List<Asset> assets)
         {
             //POST Authentication
             string accessToken = GetAccessToken().Result.Jwt;
-            //Console.WriteLine("Hey look it's an access token! its right here: " + accessToken);
-            //POST IdentityRecord & Account async
 
             IList<HoldingsShard> originalPortfolio = RetrieveOriginalPortfolio(accessToken).Result;
-
-
+            
             IList<TradeShard> tradeProposal = RetrieveTradeProposal(accessToken).Result;
             
             Object[] responseArray = new Object[4];
@@ -38,65 +30,8 @@ using CS495_Capstone_Puma.DataStructure.NameAndAddress;
             responseArray[3] = 5891.01;
 
             return responseArray;
-            //PostIdentityRecord(identityRecord);
-            //PostAccount(account);
-            
-            //POST Owner & Admin relationships
-            
-            
-            //POST Transactions (Assets already owned)
-            
-            
-            //***Cannot Analyze Yet**
-            
-            
-            //GET Trades
-            
-            
-            //Return all trades
+        }
 
-            
-            
-            
-            //OLD
-            
-            //await PostIdentityRecord(identityRecord);
-
-            //await PostAccount(account);
-
-            //Hacked Methodology while using API simulation instead of actual Cheetah
-            //Asset adjustedAsset = GetAsset(2).Result;
-            //List<Asset> adjustedAssets = new List<Asset> {adjustedAsset};
-
-            return null;
-        }
-        
-        //Send Name & Address POST to Cheetah
-        private async Task PostIdentityRecord(IdentityRecord identityRecord)
-        {
-            await "https://localhost:5002/api/v6/NameAndAddress".PostJsonAsync(identityRecord);
-        }
-        //Send Account POST to Cheetah
-        private async Task PostAccount(Account account)
-        {
-            await "https://localhost:5002/api/v6/Account".PostJsonAsync(account);
-        }
-        
-        //Sent Asset POST to Cheetah
-        private async Task PostAsset(Asset asset)
-        {
-            await "https://localhost:5002/api/v6/Asset".PostJsonAsync(asset);
-        }
-        
-        //Send Asset GET to Cheetah
-        private async Task<Asset> GetAsset(int id)
-        {
-            string api = "https://localhost:5002/api/v6/Asset/" + id;
-            Asset getResp = await api.GetJsonAsync<Asset>();
-            
-            return getResp;
-        }
-        
         public static async Task<TokenResponse> GetAccessToken()
         {    //"DELETE BEFORE VERSIONING"
             TokenResponse response = await "https://asctrustv57webapi.accutech-systems.net/Api/v6/Token"
@@ -229,5 +164,4 @@ using CS495_Capstone_Puma.DataStructure.NameAndAddress;
         }
 
     }
-    
 }
