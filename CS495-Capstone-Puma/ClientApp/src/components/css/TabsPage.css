@@ -1,4 +1,12 @@
-﻿﻿.react-tabs {
+﻿h3{
+    font-family: Calibri;
+}
+
+.body {
+    text-align: center;
+}
+
+﻿.react-tabs {
     -webkit-tap-highlight-color: transparent;
     text-align: center;
 }
