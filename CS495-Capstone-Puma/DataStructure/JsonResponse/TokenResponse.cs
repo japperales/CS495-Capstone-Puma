@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CS495_Capstone_Puma.DataStructure
+namespace CS495_Capstone_Puma.DataStructure.JsonResponse
 {
     public class TokenResponse
     {
