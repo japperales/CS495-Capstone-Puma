@@ -87,6 +87,11 @@
               <e p="BondInput.test.js" t="Include" />
               <e p="CoolGuyCreator.js" t="Include" />
               <e p="Counter.js" t="Include" />
+              <e p="css" t="Include">
+                <e p="NavMenu.css" t="Include" />
+                <e p="PersonalInput.css" t="Include" />
+                <e p="TabsPage.css" t="Include" />
+              </e>
               <e p="FetchData.js" t="Include" />
               <e p="Home.js" t="Include" />
               <e p="Layout.js" t="Include" />
@@ -96,7 +101,6 @@
               <e p="MiscAssetInput.test.js" t="Include" />
               <e p="MutualFundInput.js" t="Include" />
               <e p="MutualFundInput.test.js" t="Include" />
-              <e p="NavMenu.css" t="Include" />
               <e p="NavMenu.js" t="Include" />
               <e p="PersonalInput.js" t="Include" />
               <e p="PersonalInput.test.js" t="Include" />
