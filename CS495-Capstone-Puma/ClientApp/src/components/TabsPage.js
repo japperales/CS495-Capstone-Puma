@@ -9,7 +9,7 @@ import {MutualFundInput} from "./MutualFundInput";
 import {StockInput} from "./StockInput";
 import {Propertyinput} from "./Propertyinput";
 import {Results} from "./Results"
-import  './TabsPage.css'
+import  './css/TabsPage.css'
 
 export class TabsPage extends React.Component {
 
