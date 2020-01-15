@@ -21,6 +21,7 @@
         "projectReferences": {
           "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
             "projectPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
+
           }
         }
       }
@@ -67,6 +68,7 @@
         }
       },
       "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+
     }
   }
 }
