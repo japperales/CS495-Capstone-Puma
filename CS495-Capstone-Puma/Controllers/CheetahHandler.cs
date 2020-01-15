@@ -53,9 +53,8 @@
         {
             TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Token"
                 .WithHeader("x-api-key", 
-                    "mGamIPYtegnxNTXJcveWhWIJFIfOpM9ZDls33nrpTKfLvAhmSZRhkZvOwsUCWeryNvh8MCQOfVRNXAwNMJ6eRGK62rJJfXhW8RZHWcQvdFt2cki12t1YcvP4TgNvjL9V"
-                    )
-                .WithBasicAuth("rbabusiak", "P@ssw0rd1")
+                    "")
+                .WithBasicAuth("UpdateThis", "DontCommit")
                 .PostAsync(null)
                 .ReceiveJson<TokenResponse>();
                     
