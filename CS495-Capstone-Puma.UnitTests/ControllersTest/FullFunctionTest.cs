@@ -31,7 +31,7 @@ namespace CS495_Capstone_Puma.UnitTests.ControllersTest
             inputs.Add(new AssetInput(
                 new AssetIdentifier("2342","NKE","asd","asdf"), 129));
 
-            output.WriteLine(cheetah.PostTransactions(inputs).Result);
+            //output.WriteLine(cheetah.PostTransactions(inputs).Result);
         }
     }
 }
