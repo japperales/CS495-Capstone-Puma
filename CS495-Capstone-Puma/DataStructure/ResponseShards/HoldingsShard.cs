@@ -8,7 +8,7 @@ namespace CS495_Capstone_Puma.DataStructure.ResponseShards
 
         public string AssetCategoryName;
 
-        public List<LotShard> LotList;
+        public IList<LotShard> LotList;
 
     }
 }
