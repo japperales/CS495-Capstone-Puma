@@ -1,4 +1,5 @@
 import React from 'react'
+import M from 'materialize-css'
 
 let state = {
     assets: [],
@@ -17,6 +18,11 @@ let state = {
 };
 
 export class StockInput extends React.Component{
+    
+    componentDidMount(){
+        console.log("component did mount")
+        M.AutoInit();
+    }
 
     constructor(props) {
         super(props);
@@ -113,50 +119,99 @@ export class StockInput extends React.Component{
                     </tbody>
                 </table>
                 <form onSubmit={this.addAsset}>
-                <label>Name</label>
-                <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
-                <br />
-                <label>Price</label>
-                <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
-                <br />
-                <label>Quantity</label>
-                <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
-                <br />
-                <label>ExchangeType</label>
-                <input type="text" name="inputExchangeType" required onChange={this.handleInputChange} value={this.state.inputExchangeType}/>
-                <br />
-                <label>EarningsPerShareDiluted</label>
-                <input type="number" name="inputEarningsPerShareDiluted" required onChange={this.handleInputChange} value={this.state.inputEarningsPerShareDiluted}/>
-                <br />
-                <label>EarningPerShareBasic</label>
-                <input type="number" name="inputEarningPerShareBasic" required onChange={this.handleInputChange} value={this.state.inputEarningPerShareBasic}/>
-                <br />
-                <label>EarningsPerShareEffectiveDate</label>
-                <input type="date" name="inputEarningsPerShareEffectiveDate" required onChange={this.handleInputChange} value={this.state.inputEarningsPerShareEffectiveDate}/>
-                <br />
-                <label>PaymentFrequencyType</label>
-                <input type="text" name="inputPaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputPaymentFrequencyType}/>
-                <br />
-                <label>SharesOutstanding</label>
-                <input type="number" name="inputSharesOutstanding" required onChange={this.handleInputChange} value={this.state.inputSharesOutstanding}/>
-                <br />
-                <label>IsIncludedIn13F</label>
-                <select name="inputIsIncludedIn13F" required onChange={this.handleInputChange}  value={this.state.inputIsIncludedIn13F}>
-                    <option value="true" >true</option>
-                    <option value="false" >false</option>
-                    <option value="null" selected="selected"> </option>
-                </select>
-                <br />
-                <label>IsRestrictedByRule144A</label>
-                <select name="inputIsRestrictedByRule144A" required onChange={this.handleInputChange} value={this.state.inputIsRestrictedByRule144A}>
-                    <option value="true" >true</option>
-                    <option value="false" >false</option>
-                    <option value="null" selected="selected"> </option>
-                </select>
-                <br />
-                <label>CalculatedMarketCapType</label>
-                <input type="text" name="inputCalculatedMarketCapType" required onChange={this.handleInputChange} value={this.state.inputCalculatedMarketCapType}/>
-                <br />
+                    
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>Name</label>
+                        <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>Price</label>
+                        <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>Quantity</label>
+                        <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">
+                        <label>ExchangeType</label>
+                        <input type="text" name="inputExchangeType" required onChange={this.handleInputChange} value={this.state.inputExchangeType}/>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>EarningsPerShareDiluted</label>
+                        <input type="number" name="inputEarningsPerShareDiluted" required onChange={this.handleInputChange} value={this.state.inputEarningsPerShareDiluted}/>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>EarningPerShareBasic</label>
+                        <input type="number" name="inputEarningPerShareBasic" required onChange={this.handleInputChange} value={this.state.inputEarningPerShareBasic}/>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>EarningsPerShareEffectiveDate</label>
+                        <input type="text" className="datepicker" name="inputEarningsPerShareEffectiveDate" required onChange={this.handleInputChange} value={this.state.inputEarningsPerShareEffectiveDate}/>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>PaymentFrequencyType</label>
+                        <input type="text" name="inputPaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputPaymentFrequencyType}/>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>SharesOutstanding</label>
+                        <input type="number" name="inputSharesOutstanding" required onChange={this.handleInputChange} value={this.state.inputSharesOutstanding}/>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>IsIncludedIn13F</label>
+                        <select name="inputIsIncludedIn13F" required onChange={this.handleInputChange}  value={this.state.inputIsIncludedIn13F}>
+                            <option value="true" >true</option>
+                            <option value="false" >false</option>
+                            <option value="null" selected="selected"> </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>IsRestrictedByRule144A</label>
+                        <select name="inputIsRestrictedByRule144A" required onChange={this.handleInputChange} value={this.state.inputIsRestrictedByRule144A}>
+                            <option value="true" >true</option>
+                            <option value="false" >false</option>
+                            <option value="null" selected="selected"> </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div className="center-align">
+                    <div className = "input-field col s6">    
+                        <label>CalculatedMarketCapType</label>
+                        <input type="text" name="inputCalculatedMarketCapType" required onChange={this.handleInputChange} value={this.state.inputCalculatedMarketCapType}/>
+                    </div>
+                </div>
+                    
                     <input type="submit" value="Add Asset" className="waves-effect waves-light btn-small"/>
                 </form>
                 <a onClick={this.removeAsset} className="waves-effect waves-light btn-small">Remove Asset</a>

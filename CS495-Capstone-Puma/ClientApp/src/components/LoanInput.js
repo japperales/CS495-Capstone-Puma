@@ -1,4 +1,5 @@
 import React from 'react'
+import M from "materialize-css";
 
 let state = {
     assets: [],
@@ -19,7 +20,10 @@ let state = {
 };
 
 export class LoanInput extends React.Component{
-
+    componentDidMount(){
+        console.log("component did mount")
+        M.AutoInit();
+    }
     constructor(props) {
         super(props);
         this.state = state;
@@ -119,48 +123,103 @@ export class LoanInput extends React.Component{
                     </tbody>
                 </table>
                 <form onSubmit={this.addAsset}>
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>Name</label>
                 <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
-                <br />
+                    </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>Price</label>
                 <input type="number" name="inputPrice" required onChange={this.handleInputChange} value={this.state.inputPrice}/>
-                <br />
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>Quantity</label>
                 <input type="number" name="inputQuantity" required onChange={this.handleInputChange} value={this.state.inputQuantity}/>
-                <br />
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>DateOfIssue</label>
-                <input type="date" name="inputDateOfIssue" required onChange={this.handleInputChange} value={this.state.inputDateOfIssue}/>
-                <br />
+                <input type="text" className="datepicker" name="inputDateOfIssue" required onChange={this.handleInputChange} value={this.state.inputDateOfIssue}/>
+                        </div> 
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>DateOfMaturity</label>
-                <input type="date" name="inputDateOfMaturity" required onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
-                <br />
+                <input type="text" className="datepicker" name="inputDateOfMaturity" required onChange={this.handleInputChange} value={this.state.inputDateOfMaturity}/>
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>DateOfFirstPayment</label>
-                <input type="date" name="inputDateOfFirstPayment" required onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
-                <br />
+                <input type="text" className="datepicker" name="inputDateOfFirstPayment" required onChange={this.handleInputChange} value={this.state.inputDateOfFirstPayment}/>
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>IncomePaymentMonth</label>
                 <input type="number" name="inputIncomePaymentMonth" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentMonth}/>
-                <br />
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>IncomePaymentDay</label>
                 <input type="number" name="inputIncomePaymentDay" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentDay}/>
-                <br />
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>AccrualMethodType</label>
                 <input type="text" name="inputAccrualMethodType" required onChange={this.handleInputChange} value={this.state.inputAccrualMethodType}/>
-                <br />
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>PaymentFrequencyType</label>
                 <input type="text" name="inputPaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputPaymentFrequencyType}/>
-                <br />
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>IncomePaymentFrequencyType</label>
                 <input type="text" name="inputIncomePaymentFrequencyType" required onChange={this.handleInputChange} value={this.state.inputIncomePaymentFrequencyType}/>
-                <br />
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>CompoundingFrequencyType</label>
                 <input type="text" name="inputCompoundingFrequencyType" required onChange={this.handleInputChange} value={this.state.inputCompoundingFrequencyType}/>
-                <br />
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>AmortizationFrequencyType</label>
                 <input type="text" name="inputAmortizationFrequencyType" required onChange={this.handleInputChange} value={this.state.inputAmortizationFrequencyType}/>
-                <br />
+                        </div>
+                    </div>
+
+                    <div className="center-align">
+                        <div className="input-field col s6">
                 <label>PeriodicPaymentAmount</label>
                 <input type="number" name="inputPeriodicPaymentAmount" required onChange={this.handleInputChange} value={this.state.inputPeriodicPaymentAmount}/>
-                <br />
+                        </div>
+                    </div>
                 <input type="submit" value="Add Asset" className="waves-effect waves-light btn-small"/>
                 </form>
                 <a onClick={this.removeAsset} className="waves-effect waves-light btn-small">Remove Asset</a>
