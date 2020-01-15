@@ -1,5 +1,5 @@
 import React from 'react';
-
+import  './css/PersonalInput.css'
 let state ={
     inputFirstName: null,
     inputMiddleName: null,
@@ -35,6 +35,7 @@ export class PersonalInput extends React.Component{
     render(){
         return(
             <div>
+                <form className="col-s12">
                 <h3>Account Holder Information</h3>
                 <br />
                 <div className = "row">
@@ -78,6 +79,7 @@ export class PersonalInput extends React.Component{
                         <input type="text" name="inputEmailAddress" onChange={this.handleInputChange} value={this.state.inputEmailAddress}/>
                     </div>
                 </div>
+                </form>
             </div>
         );
     }
