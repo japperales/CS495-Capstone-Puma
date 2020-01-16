@@ -1,16 +1,14 @@
  using System;
  using System.Collections.Generic;
   using System.Linq;
-  using System.Net.Http;
-  using System.Threading;
-  using System.Threading.Tasks;
+ using System.Threading.Tasks;
   using CS495_Capstone_Puma.DataStructure.Asset;
   using CS495_Capstone_Puma.DataStructure.JsonRequest;
   using CS495_Capstone_Puma.DataStructure.JsonResponse;
   using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
-  using Flurl;
+ using CS495_Capstone_Puma.DataStructure.ResponseShards;
+ using Flurl;
   using Flurl.Http;
-  using Microsoft.CodeAnalysis.Operations;
  using Newtonsoft.Json.Linq;
 
  namespace CS495_Capstone_Puma.Controllers 
@@ -43,9 +41,21 @@
             return bearerToken;
         }
 
-        public async Task getTradeProposal(string bearerToken, int accountId)
+        public async Task<Object[]> getTradeProposal(string bearerToken, int accountId)
         {
-            getTrades(bearerToken, accountId);
+            //await getTrades(bearerToken, accountId);
+            
+            IList<HoldingsShard> originalPortfolio = RetrieveOriginalPortfolio(bearerToken).Result;
+            
+            IList<TradeShard> tradeProposal = RetrieveTradeProposal(bearerToken).Result;
+            
+            Object[] responseArray = new Object[4];
+            responseArray[0] = originalPortfolio;
+            responseArray[1] = tradeProposal;
+            responseArray[2] = 484934.46;
+            responseArray[3] = 5891.01;
+
+            return responseArray;
         }
         
         //POST Authentication login and receive Bearer Token
@@ -53,8 +63,8 @@
         {
             TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Token"
                 .WithHeader("x-api-key", 
-                    "")
-                .WithBasicAuth("UpdateThis", "DontCommit")
+                    "mGamIPYtegnxNTXJcveWhWIJFIfOpM9ZDls33nrpTKfLvAhmSZRhkZvOwsUCWeryNvh8MCQOfVRNXAwNMJ6eRGK62rJJfXhW8RZHWcQvdFt2cki12t1YcvP4TgNvjL9V")
+                .WithBasicAuth("rbabusiak", "P@ssw0rd1")
                 .PostAsync(null)
                 .ReceiveJson<TokenResponse>();
                     
@@ -163,9 +173,7 @@
                     assetsDictionary.Add(assetLookupResponse.value, Int32.Parse(assetLookupResponse.id));
                 }
                 catch (ArgumentException){}
-                
             }
-
             return assetsDictionary;
         }
 
@@ -179,38 +187,7 @@
 
             return postResp;
         }
-        
-        public async Task<Object[]> PostAndReceive(List<Asset> assets)
-        {
-            //POST Authentication
-            string accessToken = GetAccessToken().Result.Jwt;
 
-            IList<HoldingsShard> originalPortfolio = RetrieveOriginalPortfolio(accessToken).Result;
-            
-            IList<TradeShard> tradeProposal = RetrieveTradeProposal(accessToken).Result;
-            
-            Object[] responseArray = new Object[4];
-            responseArray[0] = originalPortfolio;
-            responseArray[1] = tradeProposal;
-            responseArray[2] = 484934.46;
-            responseArray[3] = 5891.01;
-
-            return responseArray;
-        }
-
-        public static async Task<TokenResponse> GetAccessToken()
-        {    //"DELETE BEFORE VERSIONING"
-            TokenResponse response = await "https://asctrustv57webapi.accutech-systems.net/Api/v6/Token"
-                .WithHeader("x-api-key",
-                    "xx"
-                    )
-                .WithBasicAuth("xx", "xx")
-                .PostJsonAsync(new {})
-                .ReceiveJson<TokenResponse>();
-            
-            return response;
-        }
-        
         private static async Task<IList<HoldingsShard>> RetrieveOriginalPortfolio(string jwt)
         {
             var response = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Accounts/1/Holdings"
