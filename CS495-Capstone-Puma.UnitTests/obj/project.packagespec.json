@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
+    "projectUniqueName": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
     "projectName": "CS495-Capstone-Puma.UnitTests",
-    "projectPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
-    "outputPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\obj\\",
+    "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
+    "outputPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13,15 +13,13 @@
       "netcoreapp3.0"
     ],
     "sources": {
-      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
       "netcoreapp3.0": {
         "projectReferences": {
-          "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
-            "projectPath": "C:\\Users\\Tommy\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
-
+          "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+            "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
           }
         }
       }
@@ -61,14 +59,7 @@
         "net48"
       ],
       "assetTargetFallback": true,
-      "warn": true,
-      "frameworkReferences": {
-        "Microsoft.NETCore.App": {
-          "privateAssets": "all"
-        }
-      },
-      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
-
+      "warn": true
     }
   }
 }

@@ -19,30 +19,6 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="ClientApp" t="Include">
           <e p=".gitignore" t="Include" />
-          <e p="build" t="Include">
-            <e p="asset-manifest.json" t="Include" />
-            <e p="favicon.ico" t="Include" />
-            <e p="index.html" t="Include" />
-            <e p="manifest.json" t="Include" />
-            <e p="service-worker.js" t="Include" />
-            <e p="static" t="Include">
-              <e p="css" t="Include">
-                <e p="main.ecd70f67.css" t="Include" />
-                <e p="main.ecd70f67.css.map" t="Include" />
-              </e>
-              <e p="js" t="Include">
-                <e p="main.b0a4d983.js" t="Include" />
-                <e p="main.b0a4d983.js.map" t="Include" />
-              </e>
-              <e p="media" t="Include">
-                <e p="glyphicons-halflings-regular.448c34a5.woff2" t="Include" />
-                <e p="glyphicons-halflings-regular.89889688.svg" t="Include" />
-                <e p="glyphicons-halflings-regular.e18bbf61.ttf" t="Include" />
-                <e p="glyphicons-halflings-regular.f4769f9b.eot" t="Include" />
-                <e p="glyphicons-halflings-regular.fa277232.woff" t="Include" />
-              </e>
-            </e>
-          </e>
           <e p="node_modules\@types" t="IncludeRecursive" />
           <e p="node_modules\bootstrap" t="IncludeRecursive" />
           <e p="node_modules\enzyme" t="IncludeRecursive" />
@@ -123,6 +99,7 @@
         <e p="Controllers" t="Include">
           <e p="CheetahHandler.cs" t="Include" />
           <e p="PumaController.cs" t="Include" />
+          <e p="TradeProposal.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.csproj" t="IncludeRecursive" />
         <e p="DataStructure" t="Include">
@@ -162,6 +139,11 @@
             <e p="TransactionBatchResponse.cs" t="Include" />
             <e p="TransactionResponse.cs" t="Include" />
           </e>
+          <e p="ResponseShards" t="Include">
+            <e p="HoldingsShard.cs" t="Include" />
+            <e p="LotShard.cs" t="Include" />
+            <e p="TradeShard.cs" t="Include" />
+          </e>
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -180,9 +162,6 @@
           <e p="launchsettings.json" t="Include" />
         </e>
         <e p="Startup.cs" t="Include" />
-        <e p="Temporary" t="Include">
-          <e p="UntrustedCertClientFactory.cs" t="Include" />
-        </e>
       </e>
       <e p="CS495-Capstone-Puma.sln" t="IncludeFlat" />
       <e p="CS495-Capstone-Puma.UnitTests" t="IncludeRecursive">

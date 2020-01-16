@@ -1,13 +1,10 @@
-using CS495_Capstone_Puma.Temporary;
-using Flurl.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.SpaServices.Extensions;
+
 namespace CS495_Capstone_Puma
 {
     public class Startup
@@ -15,8 +12,6 @@ namespace CS495_Capstone_Puma
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            FlurlHttp.ConfigureClient("https://localhost:5002", cli =>
-                cli.Settings.HttpClientFactory = new UntrustedCertClientFactory());
         }
 
         public IConfiguration Configuration { get; }

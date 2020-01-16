@@ -8,15 +8,15 @@ namespace CS495_Capstone_Puma.UnitTests.ControllersTest
 {
     public class FullFunctionTest
     {
-        private readonly ITestOutputHelper output;
+        private readonly ITestOutputHelper _output;
 
         public FullFunctionTest(ITestOutputHelper output)
         {
-            this.output = output;
+            this._output = output;
         }
 
         [Fact]
-        public void testFullFunctionality()
+        public void TestFullFunctionality()
         {
             CheetahHandler cheetah = new CheetahHandler();
 
@@ -31,7 +31,7 @@ namespace CS495_Capstone_Puma.UnitTests.ControllersTest
             inputs.Add(new AssetInput(
                 new AssetIdentifier("2342","NKE","asd","asdf"), 129));
 
-            output.WriteLine(cheetah.PostTransactions(inputs).Result);
+            _output.WriteLine(cheetah.PostTransactions(inputs).Result);
         }
     }
 }
