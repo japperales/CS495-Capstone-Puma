@@ -1,6 +1,6 @@
 ﻿import React, {component} from 'react' ;
 import ReactJson from 'react-json-view'
-
+import EditableTable from "./EditableTable";
 export class Results extends React.Component{
     render() {
         return (
