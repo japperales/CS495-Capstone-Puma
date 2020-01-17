@@ -254,7 +254,7 @@
             foreach (HoldingsShard holding in holdingsShards)
             {
                 holding.AssetName = GetHoldingAssetName(holding.AssetId, jwt).Result;
-                Console.WriteLine(holding.AssetName);
+                
             }
 
             return holdingsShards;
@@ -265,7 +265,7 @@
             foreach (TradeShard tradeShard in tradeShards)
             {
                 tradeShard.AssetName = GetHoldingAssetName(tradeShard.AssetId, jwt).Result;
-                Console.WriteLine(tradeShard.AssetName);
+                
             }
 
             return tradeShards;
