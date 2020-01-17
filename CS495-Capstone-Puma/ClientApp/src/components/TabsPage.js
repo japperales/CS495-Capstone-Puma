@@ -2,15 +2,10 @@ import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import {PersonalInput} from "./PersonalInput";
-import {BondInput} from "./BondInput";
-import {MiscAssetInput} from "./MiscAssetInput";
-import {LoanInput} from "./LoanInput";
-import {MutualFundInput} from "./MutualFundInput";
-import {StockInput} from "./StockInput";
-import {Propertyinput} from "./Propertyinput";
 import {Results} from "./Results"
 import  './css/TabsPage.css'
-
+import EditableTable from "./EditableTable";
+import {bondColumns, loanColumns, mutualFundColumns, stockColumns, propertyColumns, miscColumns} from './TableColumns.js'
 export class TabsPage extends React.Component {
 
     constructor(props){
@@ -72,6 +67,7 @@ export class TabsPage extends React.Component {
 
     stockCallback(assets){
         this.setState({stocks: assets});
+        console.log(this.state.stocks);
     }
 
     propertyCallback(assets){
@@ -117,11 +113,11 @@ export class TabsPage extends React.Component {
                     <TabList>
                         <Tab>Personal Info</Tab>
                         <Tab>Bonds</Tab>
-                        <Tab>Miscellaneous Assets</Tab>
                         <Tab>Loans</Tab>
                         <Tab>Mutual Funds</Tab>
                         <Tab>Stocks</Tab>
                         <Tab>Properties</Tab>
+                        <Tab>Miscellaneous Assets</Tab>
                         <Tab>Results</Tab>
                     </TabList>
 
@@ -129,28 +125,33 @@ export class TabsPage extends React.Component {
                         <PersonalInput personalCallback={this.personalCallback}/>
                     </TabPanel>
                     <TabPanel>
-                        <BondInput bondCallback={this.bondCallback}/>
+                        <h3>Bonds</h3>
+                        <EditableTable columns={bondColumns} data={this.state.bonds} setParentData={this.bondCallback} />
                     </TabPanel>
                     <TabPanel>
-                        <MiscAssetInput miscCallback={this.miscCallback}/>
+                        <h3>Loans</h3>
+                        <EditableTable columns={loanColumns} data={this.state.loans} setParentData={this.loanCallback} />
                     </TabPanel>
                     <TabPanel>
-                        <LoanInput loanCallback={this.loanCallback}/>
+                        <h3>Mutual Funds</h3>
+                        <EditableTable columns={mutualFundColumns} data={this.state.mutualFunds} setParentData={this.mutualFundCallback} />
                     </TabPanel>
                     <TabPanel>
-                        <MutualFundInput mutualFundCallback={this.mutualFundCallback}/>
+                        <h3>Stocks</h3>
+                        <EditableTable columns={stockColumns} data={this.state.stocks} setParentData={this.stockCallback} />
                     </TabPanel>
                     <TabPanel>
-                        <StockInput stockCallback={this.stockCallback}/>
+                        <h3>Properties</h3>
+                        <EditableTable columns={propertyColumns} data={this.state.properties} setParentData={this.propertyCallback}/>
                     </TabPanel>
                     <TabPanel>
-                        <Propertyinput propertyCallback={this.propertyCallback}/>
+                        <h3>Miscellaneous Assets</h3>
+                        <EditableTable columns={miscColumns} data={this.state.misc} setParentData={this.miscCallback} />
                     </TabPanel>
                     <TabPanel>
-                        <Results outputIden={this.state.outputIden}/>
+                        <Results outputIden={this.state.outputIden} sendPortfolio={this.sendPortfolio}/>
                     </TabPanel>
                 </Tabs>
-                <button class="waves-effect waves-light btn" onClick={this.sendPortfolio}>Submit Info</button>
             </div>
         );
     }

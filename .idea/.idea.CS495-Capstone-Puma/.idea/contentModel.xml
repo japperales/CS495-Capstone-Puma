@@ -20,15 +20,18 @@
           <e p=".gitignore" t="Include" />
           <e p="node_modules\@types" t="IncludeRecursive" />
           <e p="node_modules\bootstrap" t="IncludeRecursive" />
+          <e p="node_modules\color-name" t="IncludeRecursive" />
           <e p="node_modules\enzyme" t="IncludeRecursive" />
           <e p="node_modules\enzyme-adapter-react-16" t="IncludeRecursive" />
           <e p="node_modules\enzyme-to-json" t="IncludeRecursive" />
+          <e p="node_modules\jquery" t="IncludeRecursive" />
           <e p="node_modules\materialize-css" t="IncludeRecursive" />
           <e p="node_modules\prop-types" t="IncludeRecursive" />
           <e p="node_modules\react" t="IncludeRecursive" />
           <e p="node_modules\react-bootstrap" t="IncludeRecursive" />
           <e p="node_modules\react-dom" t="IncludeRecursive" />
           <e p="node_modules\react-json-view" t="IncludeRecursive" />
+          <e p="node_modules\react-loadingg" t="IncludeRecursive" />
           <e p="node_modules\react-router-bootstrap" t="IncludeRecursive" />
           <e p="node_modules\react-router-dom" t="IncludeRecursive" />
           <e p="node_modules\react-scripts" t="IncludeRecursive" />
@@ -46,49 +49,21 @@
           <e p="src" t="Include">
             <e p="App.js" t="Include" />
             <e p="components" t="Include">
-              <e p="__snapshots__" t="Include">
-                <e p="AccountHistoryInput.test.js.snap" t="Include" />
-                <e p="BondInput.test.js.snap" t="Include" />
-                <e p="LoanInput.test.js.snap" t="Include" />
-                <e p="MiscAssetInput.test.js.snap" t="Include" />
-                <e p="MutualFundInput.test.js.snap" t="Include" />
-                <e p="PersonalInput.test.js.snap" t="Include" />
-                <e p="PropertyInput.test.js.snap" t="Include" />
-                <e p="StockInput.test.js.snap" t="Include" />
-              </e>
-              <e p="AccountHistoryInput.js" t="Include" />
-              <e p="AccountHistoryInput.test.js" t="Include" />
-              <e p="AssetsInput.js" t="Include" />
-              <e p="BondInput.js" t="Include" />
-              <e p="BondInput.test.js" t="Include" />
-              <e p="CoolGuyCreator.js" t="Include" />
-              <e p="Counter.js" t="Include" />
               <e p="css" t="Include">
                 <e p="NavMenu.css" t="Include" />
                 <e p="PersonalInput.css" t="Include" />
+                <e p="ResultsStylesheet.css" t="Include" />
                 <e p="TabsPage.css" t="Include" />
               </e>
               <e p="EditableTable.js" t="Include" />
-              <e p="FetchData.js" t="Include" />
-              <e p="Home.js" t="Include" />
               <e p="Layout.js" t="Include" />
-              <e p="LoanInput.js" t="Include" />
-              <e p="LoanInput.test.js" t="Include" />
-              <e p="MiscAssetInput.js" t="Include" />
-              <e p="MiscAssetInput.test.js" t="Include" />
-              <e p="MutualFundInput.js" t="Include" />
-              <e p="MutualFundInput.test.js" t="Include" />
+              <e p="LoadingSpinner.js" t="Include" />
               <e p="NavMenu.js" t="Include" />
               <e p="PersonalInput.js" t="Include" />
-              <e p="PersonalInput.test.js" t="Include" />
-              <e p="Propertyinput.js" t="Include" />
-              <e p="PropertyInput.test.js" t="Include" />
-              <e p="Puma.js" t="Include" />
               <e p="Results.js" t="Include" />
-              <e p="StockInput.js" t="Include" />
-              <e p="StockInput.test.js" t="Include" />
+              <e p="ResultsParsing.js" t="Include" />
+              <e p="TableColumns.js" t="Include" />
               <e p="TabsPage.js" t="Include" />
-              <e p="TestClient.js" t="Include" />
             </e>
             <e p="index.css" t="Include" />
             <e p="index.js" t="Include" />
