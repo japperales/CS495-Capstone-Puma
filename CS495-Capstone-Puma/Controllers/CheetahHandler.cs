@@ -1,14 +1,17 @@
  using System;
  using System.Collections.Generic;
-  using System.Linq;
+ using System.IO;
+ using System.Linq;
  using System.Threading.Tasks;
-  using CS495_Capstone_Puma.DataStructure.Asset;
+ using CS495_Capstone_Puma.DataStructure;
+ using CS495_Capstone_Puma.DataStructure.Asset;
   using CS495_Capstone_Puma.DataStructure.JsonRequest;
   using CS495_Capstone_Puma.DataStructure.JsonResponse;
   using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
  using CS495_Capstone_Puma.DataStructure.ResponseShards;
  using Flurl;
   using Flurl.Http;
+ using Newtonsoft.Json;
  using Newtonsoft.Json.Linq;
 
  namespace CS495_Capstone_Puma.Controllers 
@@ -61,15 +64,23 @@
         //POST Authentication login and receive Bearer Token
         public async Task<TokenResponse> postAccessToken()
         {
+            Login login = new Login();
+            using (StreamReader file = File.OpenText(@".\\login.json"))
+            
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                login = (Login) serializer.Deserialize(file, typeof(Login));
+            }
+
             TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Token"
-                .WithHeader("x-api-key", 
-                    "***REMOVED***")
-                .WithBasicAuth("***REMOVED***", "***REMOVED***")
+                .WithHeader("x-api-key", login.XApiKey
+                )
+                .WithBasicAuth(login.Username, login.Password)
                 .PostAsync(null)
                 .ReceiveJson<TokenResponse>();
                     
             return postResp;
-        } 
+        }
         
         //POST TransactionBatch
         public async Task<TransactionBatchResponse> postTransactionBatch(string bearerToken, TransactionBatchRequest request)
@@ -243,7 +254,7 @@
             foreach (HoldingsShard holding in holdingsShards)
             {
                 holding.AssetName = GetHoldingAssetName(holding.AssetId, jwt).Result;
-                Console.WriteLine(holding.AssetName);
+                
             }
 
             return holdingsShards;
@@ -254,7 +265,7 @@
             foreach (TradeShard tradeShard in tradeShards)
             {
                 tradeShard.AssetName = GetHoldingAssetName(tradeShard.AssetId, jwt).Result;
-                Console.WriteLine(tradeShard.AssetName);
+                
             }
 
             return tradeShards;

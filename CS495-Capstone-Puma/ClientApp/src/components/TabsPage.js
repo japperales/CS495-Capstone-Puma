@@ -84,21 +84,16 @@ export class TabsPage extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json; charset=UTF-8',
             },
-            body: JSON.stringify({
-                IdentityRecord: {
-                    firstNameLegalName: this.state.firstName,
-                    middleName: this.state.middleName,
-                    lastName: this.state.lastName,
-                    salutationType: this.state.honorific,
-                    emails: [{emailAddress: this.state.emailAddress}],
-                },
-                BondList: this.state.bonds,
-                MiscList: this.state.misc,
-                LoanList: this.state.loans,
-                MutualFundList: this.state.mutualFunds,
-                StockList: this.state.stocks,
-                PropertyList: this.state.properties
-            })
+            body: JSON.stringify([{
+                AssetIdentifier:
+                    {
+                        AssetCode: this.state.firstName,
+                        Symbol: this.state.middleName,
+                        Issue: this.state.lastName,
+                        Issuer: this.state.honorific
+                    },
+                    Units: parseInt(this.state.emailAddress, 10)
+            }])
         }).then(response => response.json())
             .then(data => {
                 this.setState({outputIden: data});

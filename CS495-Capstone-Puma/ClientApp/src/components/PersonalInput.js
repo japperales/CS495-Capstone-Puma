@@ -81,7 +81,7 @@ export class PersonalInput extends React.Component{
                     <div className = "center-align">
                         <div className = "input-field col s6">
                             <label>Email</label>
-                            <input type="text" name="inputEmailAddress" onChange={this.handleInputChange} value={this.state.inputEmailAddress}/>
+                            <input type="number" name="inputEmailAddress" onChange={this.handleInputChange} value={this.state.inputEmailAddress}/>
                         </div>
                     </div>
                 </form>
