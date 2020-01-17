@@ -1,23 +1,35 @@
 import React from 'react'
 import M from 'materialize-css'
+import MaterialTable from "material-table";
 
 let state = {
-    assets: [],
-    inputName: null,
-    inputPrice: null,
-    inputQuantity: null,
-    inputIncomePaymentMonth: null,
-    inputIncomePaymentDay: null,
-    inputUseDailyFactor: null,
-    inputAccrualMethodType: null,
-    inputExchangeType: null,
-    inputEarningsPerShareDiluted: null,
-    inputFundFamilyId: null,
-    inputFundCategoryId: null,
-    inputFundNumber: null,
-    inputFundStatusType: null,
-    inputShortTermRedemptionFeePercent: null,
-    inputShortTermHoldingPeriod: null
+    data: [],
+    columns: [
+        { title: 'Name', field: 'name', initialEditValue: 'name' },
+        { title: 'Price', field: 'price', initialEditValue: '0', type: 'numeric' },
+        { title: 'Quantity', field: 'quantity', initialEditValue: '1', type: 'numeric' },
+        { title: 'Income Payment Frequency', field: 'incomePaymentFrequencyType', initialEditValue: '0', type: 'numeric' },
+        { title: 'Income (Day)', field: 'incomePaymentDay', initialEditValue: '0', type: 'numeric' },
+        { title: 'Income (Month)', field: 'incomePaymentMonth', initialEditValue: '0', type: 'numeric' },
+        {
+            title: 'Uses Daily Factor', field: 'usesDailyFactor', initialEditValue: 'False', 
+            lookup: { 34: 'True', 63: 'False' }
+        },
+        { title: 'Accrual Method', field: 'accrualMethod', initialEditValue: 'Type' },
+        { title: 'Exchange Type', field: 'exchangeType', initialEditValue: 'Type' },
+        { title: 'Earning Per Share', field: 'earningsPerShareDiluted', type: 'numeric' },
+        { title: 'Fund Family', field: 'fundFamilyId' },
+        { title: 'Fund Category', field: 'fundFamilyId' },
+        { title: 'Fund Number', field: 'fundNumber', initialEditValue: '0', type: 'numeric'},
+        { title: 'Fund Status', field: 'fundStatusType', initialEditValue: 'Type' },
+        { title: 'Short Term Redemption Fee %', field: 'shortTermRedemptionFeePercent', initialEditValue: 'Type', type: 'numeric' },
+        { title: 'Short Term Holding Period', field: 'shortTermHoldingPeriod', initialEditValue: 'Type', type: 'numeric' },
+        { title: 'Call Price', field: 'callPrice', initialEditValue: '0', type: 'numeric' },
+        {
+            title: 'Date of First Payment', field: 'dateOfIssue', type: 'date'
+            //lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
+        },
+    ]
 };
 
 export class MutualFundInput extends React.Component{
@@ -29,108 +41,67 @@ export class MutualFundInput extends React.Component{
     constructor(props) {
         super(props);
         this.state = state;
-        this.addAsset = this.addAsset.bind(this);
-        this.removeAsset = this.removeAsset.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     componentWillUnmount() {
         state = this.state;
     }
-
-    renderTableHeader() {
-        if(this.state.assets.length>0) {
-            let header = Object.keys(this.state.assets[0]);
-            return header.map((key, index) => {
-                return <th key={index}>{key.toUpperCase()}</th>
-            })
-        }
-    }
-
-    renderTableData() {
-        return this.state.assets.map((asset, index) => {
-            const { name, price, quantity, incomePaymentMonth, 
-                
-                incomePaymentDay, useDailyFactor, accrualMethodType, 
-                
-                exchangeType, earningsPerShareDiluted, fundFamilyId, 
-                
-                fundCategoryId, fundNumber, fundStatusType, 
-                
-                shortTermRedemptionFeePercent, shortTermHoldingPeriod} = asset;
-            return (
-                <tr key={name}>
-                    <td>{name}</td>
-                    <td>{price}</td>
-                    <td>{quantity}</td>
-                    <td>{incomePaymentMonth}</td>
-                    <td>{incomePaymentDay}</td>
-                    <td>{useDailyFactor}</td>
-                    <td>{accrualMethodType}</td>
-                    <td>{exchangeType}</td>
-                    <td>{earningsPerShareDiluted}</td>
-                    <td>{fundFamilyId}</td>
-                    <td>{fundCategoryId}</td>
-                    <td>{fundNumber}</td>
-                    <td>{fundStatusType}</td>
-                    <td>{shortTermRedemptionFeePercent}</td>
-                    <td>{shortTermHoldingPeriod}</td>
-                </tr>
-            )
-        })
-    }
-
-    handleInputChange(event){
-
-        const target = event.target;
-        const value = event.target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-
-    }
-
-    async addAsset(event){
-        event.preventDefault();
-        const newAsset = {
-            name: this.state.inputName,
-            price: this.state.inputPrice,
-            quantity: this.state.inputQuantity,
-            incomePaymentMonth: this.state.inputIncomePaymentMonth,
-            incomePaymentDay: this.state.inputIncomePaymentDay,
-            useDailyFactor: this.state.inputUseDailyFactor,
-            accrualMethodType: this.state.inputAccrualMethodType,
-            exchangeType: this.state.inputExchangeType,
-            earningsPerShareDiluted: this.state.inputEarningsPerShareDiluted,
-            fundFamilyId: this.state.inputFundFamilyId,
-            fundCategoryId: this.state.inputFundCategoryId,
-            fundNumber: this.state.inputFundNumber,
-            fundStatusType: this.state.inputFundStatusType,
-            shortTermRedemptionFeePercent: this.state.inputShortTermRedemptionFeePercent,
-            shortTermHoldingPeriod: this.state.inputShortTermHoldingPeriod,
-        };
-        await this.setState({assets: this.state.assets.concat(newAsset)});
-        this.props.mutualFundCallback(this.state.assets);
-    }
-
-    async removeAsset(){
-        await this.setState({asset: this.state.assets.pop()});
-        this.props.mutualFundCallback(this.state.assets);
-    }
-
+    
     render(){
         return(
             <div>
                 <h3 id='title'>Mutual Funds</h3>
-                <table className='table' id='assets'>
-                    <tbody>
-                    <tr>{this.renderTableHeader()}</tr>
-                    {this.renderTableData()}
-                    </tbody>
-                </table>
-                <form onSubmit={this.addAsset}>
+                <MaterialTable
+                    title="Mutual Fund Table"
+                    columns={this.state.columns}
+                    data={this.state.data}
+                    editable={{
+                        onRowAdd: newData =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        data.push(newData);
+                                        console.log("new data array is now: " + JSON.stringify(data));
+                                        this.setState({ data }, () => resolve());
+                                        console.log("state is now: " + JSON.stringify(this.state.data))
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                        onRowUpdate: (newData, oldData) =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        const index = data.indexOf(oldData);
+                                        data[index] = newData;
+                                        this.setState({ data }, () => resolve());
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                        onRowDelete: oldData =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        const index = data.indexOf(oldData);
+                                        data.splice(index, 1);
+                                        this.setState({ data }, () => resolve());
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                    }}
+
+                />
+                
+            </div>
+        );
+    }
+
+    /*<form onSubmit={this.addAsset}>
                     
                 <div className="center-align">
                     <div className = "input-field col s6">    
@@ -246,8 +217,6 @@ export class MutualFundInput extends React.Component{
                 <a onClick={this.removeAsset} className="waves-effect waves-light btn-small">Remove Asset</a>
                 <br/>
                 <br/>
-            </div>
-        );
-    }
-
+                
+     */
 }
