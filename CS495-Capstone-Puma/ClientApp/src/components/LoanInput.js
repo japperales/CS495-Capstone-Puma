@@ -1,128 +1,93 @@
 import React from 'react'
 import M from "materialize-css";
+import MaterialTable from "material-table";
 
 let state = {
-    assets: [],
-    inputName: null,
-    inputPrice: null,
-    inputQuantity: null,
-    inputDateOfIssue: null,
-    inputDateOfMaturity: null,
-    inputDateOfFirstPayment: null,
-    inputIncomePaymentMonth: null,
-    inputIncomePaymentDay: null,
-    inputAccrualMethodType: null,
-    inputPaymentFrequencyType: null,
-    inputIncomePaymentFrequencyType: null,
-    inputCompoundingFrequencyType: null,
-    inputAmortizationFrequencyType: null,
-    inputPeriodicPaymentAmount: null
+    data: [],
+    columns: [
+        { title: 'Name', field: 'name', initialEditValue: 'name' },
+        { title: 'Price', field: 'price', initialEditValue: '0', type: 'numeric' },
+        { title: 'Quantity', field: 'quantity', initialEditValue: '1', type: 'numeric' },
+        { title: 'Date of Issue', field: 'dateOfIssue', type: 'date' },
+        { title: 'Date of Maturity', field: 'dateOfMaturity', type: 'date' },
+        { title: 'Date of First Payment', field: 'dateOfFirstPayment', type: 'date' },
+        { title: 'Income (Month)', field: 'incomePaymentMonth', initialEditValue: '0', type: 'numeric' },
+        { title: 'Income (Day)', field: 'incomePaymentDay', initialEditValue: '0', type: 'numeric' },
+        { title: 'Accrual Method', field: 'accrualMethod', initialEditValue: 'Type' },
+        { title: 'Payment Frequency', field: 'paymentFrequencyType', initialEditValue: 'Type' },
+        { title: 'Compounding Frequency Type', field: 'compoundingFrequencyType', initialEditValue: 'Type' },
+        { title: 'Amortization Frequency Type', field: 'amortizationFrequencyType', initialEditValue: 'Type' },
+        { title: 'Call Date', field: 'callDate', type: 'date' }
+    ]
 };
 
 export class LoanInput extends React.Component{
     componentDidMount(){
-        console.log("component did mount")
+        console.log("component did mount");
         M.AutoInit();
     }
     constructor(props) {
         super(props);
         this.state = state;
-        this.addAsset = this.addAsset.bind(this);
-        this.removeAsset = this.removeAsset.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     componentWillUnmount() {
         state = this.state;
     }
-
-    renderTableHeader() {
-        if(this.state.assets.length>0) {
-            let header = Object.keys(this.state.assets[0]);
-            return header.map((key, index) => {
-                return <th key={index}>{key.toUpperCase()}</th>
-            })
-        }
-    }
-
-    renderTableData() {
-        return this.state.assets.map((asset, index) => {
-            const { name, price, quantity, dateOfIssue,
-
-                dateOfMaturity, dateOfFirstPayment, incomePaymentMonth, incomePaymentDay,
-
-                accrualMethodType, paymentFrequencyType, incomePaymentFrequencyType, compoundingFrequencyType, amortizationFrequencyType, periodicPaymentAmount} = asset;
-            return (
-                <tr key={name}>
-                    <td>{name}</td>
-                    <td>{price}</td>
-                    <td>{quantity}</td>
-                    <td>{dateOfIssue}</td>
-                    <td>{dateOfMaturity}</td>
-                    <td>{dateOfFirstPayment}</td>
-                    <td>{incomePaymentMonth}</td>
-                    <td>{incomePaymentDay}</td>
-                    <td>{accrualMethodType}</td>
-                    <td>{paymentFrequencyType}</td>
-                    <td>{incomePaymentFrequencyType}</td>
-                    <td>{compoundingFrequencyType}</td>
-                    <td>{amortizationFrequencyType}</td>
-                    <td>{periodicPaymentAmount}</td>
-                </tr>
-            )
-        })
-    }
-
-    handleInputChange(event){
-
-        const target = event.target;
-        const value = event.target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-
-    }
-
-    async addAsset(event){
-        event.preventDefault();
-        const newAsset = {
-            name: this.state.inputName,
-            price: this.state.inputPrice,
-            quantity: this.state.inputQuantity,
-            dateOfIssue: this.state.inputDateOfIssue,
-            dateOfMaturity: this.state.inputDateOfMaturity,
-            dateOfFirstPayment: this.state.inputDateOfFirstPayment,
-            incomePaymentMonth: this.state.inputIncomePaymentMonth,
-            incomePaymentDay: this.state.inputIncomePaymentDay,
-            accrualMethodType: this.state.inputAccrualMethodType,
-            paymentFrequencyType: this.state.inputPaymentFrequencyType,
-            incomePaymentFrequencyType: this.state.inputIncomePaymentFrequencyType,
-            compoundingFrequencyType: this.state.inputCompoundingFrequencyType,
-            amortizationFrequencyType: this.state.inputAmortizationFrequencyType,
-            periodicPaymentAmount: this.state.inputPeriodicPaymentAmount
-        };
-        await this.setState({assets:this.state.assets.concat(newAsset)});
-        this.props.loanCallback(this.state.assets);
-    }
-
-    async removeAsset(){
-        await this.setState({asset:this.state.assets.pop()});
-        this.props.loanCallback(this.state.assets);
-    }
-
+    
     render(){
         return(
             <div>
                 <h3 id='title'>Loans</h3>
-                <table className='table' id='assets'>
-                    <tbody>
-                    <tr>{this.renderTableHeader()}</tr>
-                    {this.renderTableData()}
-                    </tbody>
-                </table>
-                <form onSubmit={this.addAsset}>
+                <MaterialTable
+                    title="Loans Table"
+                    columns={this.state.columns}
+                    data={this.state.data}
+                    editable={{
+                        onRowAdd: newData =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        data.push(newData);
+                                        console.log("new data array is now: " + JSON.stringify(data));
+                                        this.setState({ data }, () => resolve());
+                                        console.log("state is now: " + JSON.stringify(this.state.data))
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                        onRowUpdate: (newData, oldData) =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        const index = data.indexOf(oldData);
+                                        data[index] = newData;
+                                        this.setState({ data }, () => resolve());
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                        onRowDelete: oldData =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        const index = data.indexOf(oldData);
+                                        data.splice(index, 1);
+                                        this.setState({ data }, () => resolve());
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                    }}
+
+                />
+            </div>
+        );
+    }
+/*<form onSubmit={this.addAsset}>
                     <div className="center-align">
                         <div className="input-field col s6">
                 <label>Name</label>
@@ -225,8 +190,6 @@ export class LoanInput extends React.Component{
                 <a onClick={this.removeAsset} className="waves-effect waves-light btn-small">Remove Asset</a>
                 <br/>
                 <br/>
-            </div>
-        );
-    }
-
+                
+ */
 }

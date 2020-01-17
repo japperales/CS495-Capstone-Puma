@@ -1,13 +1,17 @@
 import React from 'react'
+import MaterialTable from "material-table";
 
 let state = {
-    assets: [],
-    inputName: null,
-    inputPrice: null,
-    inputQuantity: null,
-    inputIncomePaymentFrequencyType: null,
-    inputIncomePaymentMonth: null,
-    inputRealEstateParcelNumber: null
+    data: [],
+    columns: [
+        { title: 'Name', field: 'name', initialEditValue: 'name' },
+        { title: 'Price', field: 'price', initialEditValue: '0', type: 'numeric' },
+        { title: 'Quantity', field: 'quantity', initialEditValue: '1', type: 'numeric' },
+        { title: 'Payment Frequency', field: 'paymentFrequencyType', initialEditValue: 'Type' },
+        { title: 'Income Payment (Month)', field: 'incomePaymentMonth', initialEditValue: '0', type: 'numeric' },
+        { title: 'Income Payment (Day)', field: 'incomePaymentDay', initialEditValue: '0', type: 'numeric' },
+        { title: 'Parcel Number', field: 'realEstateParcelNumber', initialEditValue: '0', type: 'numeric' },
+    ]
 };
 
 export class Propertyinput extends React.Component{
@@ -15,84 +19,64 @@ export class Propertyinput extends React.Component{
     constructor(props) {
         super(props);
         this.state = state;
-        this.addAsset = this.addAsset.bind(this);
-        this.removeAsset = this.removeAsset.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     componentWillUnmount() {
         state = this.state;
     }
-
-    renderTableHeader() {
-        if(this.state.assets.length>0) {
-            let header = Object.keys(this.state.assets[0]);
-            return header.map((key, index) => {
-                return <th key={index}>{key.toUpperCase()}</th>
-            })
-        }    
-    }
-
-    renderTableData() {
-        return this.state.assets.map((asset, index) => {
-            const { name, price, quantity, incomePaymentFrequencyType, incomePaymentMonth, incomePaymentDay, realEstateParcelNumber} = asset;
-            return (
-                <tr key={name}>
-                    <td>{name}</td>
-                    <td>{price}</td>
-                    <td>{quantity}</td>
-                    <td>{incomePaymentFrequencyType}</td>
-                    <td>{incomePaymentMonth}</td>
-                    <td>{incomePaymentDay}</td>
-                    <td>{realEstateParcelNumber}</td>
-                </tr>
-            )
-        })
-    }
-
-    handleInputChange(event){
-
-        const target = event.target;
-        const value = event.target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-
-    }
-
-    async addAsset(event){
-        event.preventDefault();
-        const newAsset = {
-            name: this.state.inputName,
-            price: this.state.inputPrice,
-            quantity: this.state.inputQuantity,
-            incomePaymentFrequencyType: this.state.inputIncomePaymentFrequencyType,
-            incomePaymentMonth: this.state.inputIncomePaymentMonth,
-            incomePaymentDay: this.state.inputIncomePaymentDay,
-            realEstateParcelNumber: this.state.inputRealEstateParcelNumber
-        };
-        await this.setState({assets:this.state.assets.concat(newAsset)});
-        this.props.propertyCallback(this.state.assets);
-    }
-
-    async removeAsset(){
-        await this.setState({asset:this.state.assets.pop()});
-        this.props.propertyCallback(this.state.assets);
-    }
-
+    
     render(){
         return(
             <div>
                 <h3 id='title'>Properties</h3>
-                <table className='table' id='assets'>
-                    <tbody>
-                    <tr>{this.renderTableHeader()}</tr>
-                    {this.renderTableData()}
-                    </tbody>
-                </table>
-                <form onSubmit={this.addAsset}>
+                <MaterialTable
+                    title="Property Table"
+                    columns={this.state.columns}
+                    data={this.state.data}
+                    editable={{
+                        onRowAdd: newData =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        data.push(newData);
+                                        console.log("new data array is now: " + JSON.stringify(data));
+                                        this.setState({ data }, () => resolve());
+                                        console.log("state is now: " + JSON.stringify(this.state.data))
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                        onRowUpdate: (newData, oldData) =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        const index = data.indexOf(oldData);
+                                        data[index] = newData;
+                                        this.setState({ data }, () => resolve());
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                        onRowDelete: oldData =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        const index = data.indexOf(oldData);
+                                        data.splice(index, 1);
+                                        this.setState({ data }, () => resolve());
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                    }}
+                />
+            </div>
+        );
+    }
+/*<form onSubmit={this.addAsset}>
                     
                 <div className="center-align">
                     <div className = "input-field col s6">    
@@ -148,8 +132,6 @@ export class Propertyinput extends React.Component{
                 <a onClick={this.removeAsset} className="waves-effect waves-light btn-small">Remove Asset</a>
                 <br/>
                 <br/>
-            </div>
-        );
-    }
-
+                
+ */
 }

@@ -1,20 +1,28 @@
 import React from 'react'
 import M from 'materialize-css'
+import MaterialTable from "material-table";
 
 let state = {
-    assets: [],
-    inputName: null,
-    inputPrice: null,
-    inputQuantity: null,
-    inputExchangeType: null,
-    inputEarningsPerShareDiluted: null,
-    inputEarningPerShareBasic: null,
-    inputEarningsPerShareEffectiveDate: null,
-    inputPaymentFrequencyType: null,
-    inputSharesOutstanding: null,
-    inputIsIncludedIn13F: null,
-    inputIsRestrictedByRule144A: null,
-    inputCalculatedMarketCapType: null
+    data: [],
+    columns: [
+        { title: 'Name', field: 'name', initialEditValue: 'name' },
+        { title: 'Price', field: 'price', initialEditValue: '0', type: 'numeric' },
+        { title: 'Quantity', field: 'quantity', initialEditValue: '1', type: 'numeric' },
+        { title: 'Exchange Type', field: 'exchangeType', initialEditValue: 'Type' },
+        { title: 'Earning Per Share', field: 'earningsPerShareDiluted', initialEditValue: '0', type: 'numeric' },
+        { title: 'Earning Per Share Effective Date', field: 'earningsPerShareEffectiveDate', type: 'date' },
+        { title: 'Payment Frequency Type', field: 'paymentFrequencyType', initialEditValue: 'Type' },
+        { title: 'Shares Outstanding', field: 'sharesOutstanding', initialEditValue: '0', type: 'numeric' },
+        {
+            title: 'Is Included In 13F', field: 'isIncludedIn13F', initialEditValue: 'False',
+            lookup: { 34: 'True', 63: 'False' }
+        },
+        {
+            title: 'Is Restricted By 144A', field: 'isRestrictedByRule144A', initialEditValue: 'False',
+            lookup: { 34: 'True', 63: 'False' }
+        },
+        { title: 'Calculated Market Cap Type', field: 'calculatedMarketCapType', initialEditValue: 'Type'  }
+    ]
 };
 
 export class StockInput extends React.Component{
@@ -27,100 +35,66 @@ export class StockInput extends React.Component{
     constructor(props) {
         super(props);
         this.state = state;
-        
-        this.addAsset = this.addAsset.bind(this);
-        this.removeAsset = this.removeAsset.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     componentWillUnmount() {
         state = this.state;
     }
 
-    renderTableHeader() {
-        if(this.state.assets.length>0) {
-            let header = Object.keys(this.state.assets[0]);
-            return header.map((key, index) => {
-                return <th key={index}>{key.toUpperCase()}</th>
-            })
-        }    
-    }
-
-    renderTableData() {
-        return this.state.assets.map((asset, index) => {
-            const { name, price, quantity, exchangeType, earningsPerShareDiluted, earningsPerShareBasic, 
-                earningsPerShareEffectiveDate, paymentFrequencyType, sharesOutstanding, isIncludedIn13F, 
-                isRestrictedByRule144A, calculatedMarketCapType} = asset;
-            return (
-                <tr key={name}>
-                    <td>{name}</td>
-                    <td>{price}</td>
-                    <td>{quantity}</td>
-                    <td>{exchangeType}</td>
-                    <td>{earningsPerShareDiluted}</td>
-                    <td>{earningsPerShareBasic}</td>
-                    <td>{earningsPerShareEffectiveDate}</td>
-                    <td>{paymentFrequencyType}</td>
-                    <td>{sharesOutstanding}</td>
-                    <td>{isIncludedIn13F}</td>
-                    <td>{isRestrictedByRule144A}</td>
-                    <td>{calculatedMarketCapType}</td>
-                </tr>
-            )
-        })
-    }
-
-    handleInputChange(event){
-
-        const target = event.target;
-        const value = event.target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-
-    }
-
-    async addAsset(event){
-        event.preventDefault();
-        const newAsset = {
-            name: this.state.inputName,
-            price: this.state.inputPrice,
-            quantity: this.state.inputQuantity,
-            exchangeType: this.state.inputExchangeType,
-            earningsPerShareDiluted: this.state.inputEarningsPerShareDiluted,
-            earningsPerShareBasic: this.state.inputEarningPerShareBasic,
-            earningsPerShareEffectiveDate: this.state.inputEarningsPerShareEffectiveDate,
-            paymentFrequencyType: this.state.inputPaymentFrequencyType,
-            sharesOutstanding: this.state.inputSharesOutstanding,
-            isIncludedIn13F: this.state.inputIsIncludedIn13F,
-            isRestrictedByRule144A: this.state.inputIsRestrictedByRule144A,
-            calculatedMarketCapType: this.state.inputCalculatedMarketCapType
-            
-        };
-        await this.setState({assets: this.state.assets.concat(newAsset)});
-        this.props.stockCallback(this.state.assets);
-    }
-
-    async removeAsset(){
-        await this.setState({asset: this.state.assets.pop()});
-        this.props.stockCallback(this.state.assets);
-    }
-
     render(){
         return(
             <div>
                 <h3 id='title'>Stocks</h3>
-                <table className='table' id='assets'>
-                    <tbody>
-                    <tr>{this.renderTableHeader()}</tr>
-                    {this.renderTableData()}
-                    </tbody>
-                </table>
-                <form onSubmit={this.addAsset}>
-                    
-                <div className="center-align">
+                <MaterialTable
+                    title="Mutual Fund Table"
+                    columns={this.state.columns}
+                    data={this.state.data}
+                    editable={{
+                        onRowAdd: newData =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        data.push(newData);
+                                        console.log("new data array is now: " + JSON.stringify(data));
+                                        this.setState({ data }, () => resolve());
+                                        console.log("state is now: " + JSON.stringify(this.state.data))
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                        onRowUpdate: (newData, oldData) =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        const index = data.indexOf(oldData);
+                                        data[index] = newData;
+                                        this.setState({ data }, () => resolve());
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                        onRowDelete: oldData =>
+                            new Promise((resolve, reject) => {
+                                setTimeout(() => {
+                                    {
+                                        let data =[...this.state.data];
+                                        const index = data.indexOf(oldData);
+                                        data.splice(index, 1);
+                                        this.setState({ data }, () => resolve());
+                                    }
+                                    resolve()
+                                }, 1000)
+                            }),
+                    }}
+
+                />
+                
+            </div>
+        );
+    }
+/*<div className="center-align">
                     <div className = "input-field col s6">    
                         <label>Name</label>
                         <input type="text" name="inputName" required onChange={this.handleInputChange} value={this.state.inputName}/>
@@ -213,12 +187,10 @@ export class StockInput extends React.Component{
                 </div>
                     
                     <input type="submit" value="Add Asset" className="waves-effect waves-light btn-small"/>
-                </form>
+                
                 <a onClick={this.removeAsset} className="waves-effect waves-light btn-small">Remove Asset</a>
                 <br/>
                 <br/>
-            </div>
-        );
-    }
-
+                
+ */
 }
