@@ -5,40 +5,22 @@ import MaterialTable from 'material-table';
 export default class EditableTable extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            columns: [
-                { title: 'Name', field: 'name' },
-                { title: 'Surname', field: 'surname', initialEditValue: 'initial edit value' },
-                { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-                {
-                    title: 'Birth Place',
-                    field: 'birthCity',
-                    lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
-                },
-            ],
-            data: [
-                { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-                { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34 },
-            ]
-        }
     }
 
     render() {
         return (
             <MaterialTable
-                title="Editable Preview"
-                columns={this.state.columns}
-                data={this.state.data}
+                title=" "
+                columns={this.props.columns}
+                data={this.props.data}
                 editable={{
                     onRowAdd: newData =>
                         new Promise((resolve, reject) => {
                             setTimeout(() => {
                                 {
-                                    let data =[...this.state.data];
+                                    let data =[...this.props.data];
                                     data.push(newData);
-                                    console.log("new data array is now: " + JSON.stringify(data));
-                                    this.setState({ data }, () => resolve());
-                                    console.log("state is now: " + JSON.stringify(this.state.data))
+                                    this.props.setParentData(data);
                                 }
                                 resolve()
                             }, 1000)
@@ -47,10 +29,10 @@ export default class EditableTable extends React.Component {
                         new Promise((resolve, reject) => {
                             setTimeout(() => {
                                 {
-                                    let data =[...this.state.data];
+                                    let data =[...this.props.data];
                                     const index = data.indexOf(oldData);
                                     data[index] = newData;
-                                    this.setState({ data }, () => resolve());
+                                    this.props.setParentData(data);
                                 }
                                 resolve()
                             }, 1000)
@@ -62,12 +44,29 @@ export default class EditableTable extends React.Component {
                                     let data =[...this.state.data];
                                     const index = data.indexOf(oldData);
                                     data.splice(index, 1);
-                                    this.setState({ data }, () => resolve());
+                                    this.props.setParentData(data);
                                 }
                                 resolve()
                             }, 1000)
                         }),
                 }}
+                options={{
+                    rowStyle: {
+                        fontSize: '14px',
+                        fontFamily: 'sans-serif',
+                        textAlign: 'center',
+                        backgroundColor: 'aliceblue'
+                    },
+
+                    headerStyle: {
+                        backgroundColor: 'skyblue',
+                        color: '#FFF',
+                        fontSize: '14px',
+                        fontFamily: 'sans-serif',
+                        borderRadius: '0px',
+                    }
+                }
+                }
             />
         )
     }

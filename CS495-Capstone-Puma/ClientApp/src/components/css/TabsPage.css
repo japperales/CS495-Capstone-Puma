@@ -27,12 +27,30 @@
     padding: 6px 12px;
     cursor: pointer;
     font-family: Calibri;
+    
+}
+
+
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.react-tabs__tab:hover{
+    background: lightblue;
+    transition-duration: .25s;
+    color: white;
 }
 
 .react-tabs__tab--selected {
-    background: #00116a;
+    background: skyblue;
     border-color: #000000;
-    color: whitesmoke;
+    color: black;
     border-radius: 0 0 0 0;
 }
 
@@ -59,6 +77,9 @@
 
 .react-tabs__tab-panel {
     display: none;
+    animation: fadeInAnimation ease .4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 .react-tabs__tab-panel--selected {
