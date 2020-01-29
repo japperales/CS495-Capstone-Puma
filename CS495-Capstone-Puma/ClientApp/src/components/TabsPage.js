@@ -78,7 +78,7 @@ export class TabsPage extends React.Component {
     //The response is a JSON object that contains the personal data and a list of revised assets from Cheetah
     sendPortfolio(event) {
         event.preventDefault();
-        fetch('api/Puma', {
+        fetch('api/Puma/PostLogin', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

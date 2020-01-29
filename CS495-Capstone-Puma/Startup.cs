@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace CS495_Capstone_Puma
 {
     public class Startup
-    {
+    {    
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
