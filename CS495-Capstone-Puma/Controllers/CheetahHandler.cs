@@ -4,10 +4,9 @@
  using System.Linq;
  using System.Threading.Tasks;
  using CS495_Capstone_Puma.DataStructure;
- using CS495_Capstone_Puma.DataStructure.Asset;
-  using CS495_Capstone_Puma.DataStructure.JsonRequest;
-  using CS495_Capstone_Puma.DataStructure.JsonResponse;
-  using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
+ using CS495_Capstone_Puma.DataStructure.JsonRequest;
+ using CS495_Capstone_Puma.DataStructure.JsonResponse;
+ using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
  using CS495_Capstone_Puma.DataStructure.ResponseShards;
  using Flurl;
   using Flurl.Http;
@@ -18,39 +17,54 @@
   {
     public class CheetahHandler
     {
-        //Coordinates the POST and GET HttpRequests required by the process.
-        public async Task<string> PostTransactions(List<AssetInput> assets)
+        private static readonly CheetahConfig CheetahConfig = DeserializeApiKey(@".\\cheetah-config.json");
+
+        private static CheetahConfig DeserializeApiKey(string configFilePath)
         {
-            //POST Authentication
-            String bearerToken = postAccessToken().Result.Jwt;
+            Console.WriteLine("THIS IS THE BEGINNING OF THE DESERIALIZE API KEY CALL");
             
+            using (StreamReader file = File.OpenText(configFilePath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                CheetahConfig cheetahConfig = (CheetahConfig) serializer.Deserialize(file, typeof(CheetahConfig));
+                Console.WriteLine("url root is: " + cheetahConfig.ApiUrlRoot);
+                Console.WriteLine("xapikey is: " + cheetahConfig.XApiKey);
+                return cheetahConfig;
+            }
+        }
+
+        //Coordinates the POST and GET HttpRequests required by the process.
+        public async Task<string> PostTransactions(List<AssetInput> assets, string jwt )
+        {    Console.WriteLine(CheetahConfig);
+            //POST Authentication
+            //String bearerToken = PostAccessToken().Result.Jwt;
+            Console.WriteLine("PostTransactions has been called");
             //POST TransactionBatch
-            int batchId = postTransactionBatch(bearerToken, new TransactionBatchRequest()).Result.transactionBatchId;
+            int batchId = postTransactionBatch(jwt, new TransactionBatchRequest()).Result.transactionBatchId;
 
             //POST Transactions (Assets already owned)
 
-            List<TransactionRequest> transactions = assembleTransactions(bearerToken, batchId, assets);
+            List<TransactionRequest> transactions = AssembleTransactions(jwt, batchId, assets);
             
             foreach (TransactionRequest transaction in transactions)
             {
-                await postTransaction(bearerToken, transaction);
+                await postTransaction(jwt, transaction);
             }
             
-            await postTransactionBatchProcessor(bearerToken, batchId, false);
-            await postTransactionBatchProcessor(bearerToken, batchId, true);
-            
+            await postTransactionBatchProcessor(jwt, batchId, false);
+            await postTransactionBatchProcessor(jwt, batchId, true);
             //Cannot Analyze yet - have to make a second function
             //return relevant info to keep using it
-            return bearerToken;
+            return jwt;
         }
 
-        public async Task<Object[]> getTradeProposal(string bearerToken, int accountId)
+        public async Task<Object[]> getTradeProposal(string bearerToken, string accountId)
         {
             //await getTrades(bearerToken, accountId);
             
-            IList<HoldingsShard> originalPortfolio = RetrieveOriginalPortfolio(bearerToken).Result;
+            IList<HoldingsShard> originalPortfolio = RetrieveOriginalPortfolio(bearerToken, accountId).Result;
             
-            IList<TradeShard> tradeProposal = RetrieveTradeProposal(bearerToken).Result;
+            IList<TradeShard> tradeProposal = RetrieveTradeProposal(bearerToken, accountId).Result;
             
             Object[] responseArray = new Object[4];
             responseArray[0] = originalPortfolio;
@@ -62,19 +76,10 @@
         }
         
         //POST Authentication login and receive Bearer Token
-        public async Task<TokenResponse> postAccessToken()
+        public async Task<TokenResponse> PostAccessToken(Login login)
         {
-            Login login = new Login();
-            using (StreamReader file = File.OpenText(@".\\login.json"))
-            
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                login = (Login) serializer.Deserialize(file, typeof(Login));
-            }
-
-            TokenResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Token"
-                .WithHeader("x-api-key", login.XApiKey
-                )
+            TokenResponse postResp = await (CheetahConfig.ApiUrlRoot + "Token")
+                .WithHeader("x-api-key", CheetahConfig.XApiKey)
                 .WithBasicAuth(login.Username, login.Password)
                 .PostAsync(null)
                 .ReceiveJson<TokenResponse>();
@@ -85,7 +90,7 @@
         //POST TransactionBatch
         public async Task<TransactionBatchResponse> postTransactionBatch(string bearerToken, TransactionBatchRequest request)
         {
-            TransactionBatchResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/TransactionBatches"
+            TransactionBatchResponse postResp = await (CheetahConfig.ApiUrlRoot + "TransactionBatches")
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
                 .PostJsonAsync(request)
@@ -97,7 +102,7 @@
         //POST Transaction
         private async Task<TransactionResponse> postTransaction(string bearerToken, TransactionRequest request)
         {
-            TransactionResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Transactions/Pending"
+            TransactionResponse postResp = await (CheetahConfig.ApiUrlRoot + "Transactions/Pending")
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
                 .PostJsonAsync(request)
@@ -120,7 +125,7 @@
                 urlSuffix = "/Post";
             }
             
-            await "https://asctrustv57webapi.accutech-systems.net/api/v6/TransactionBatches"
+            await (CheetahConfig.ApiUrlRoot + "TransactionBatches")
                 .AppendPathSegment(urlSuffix)
                 .SetQueryParam("TransactionBatchIds",batchId)
                 .WithHeader("Content-Type", "application/json")
@@ -131,7 +136,7 @@
         //GET analyzed Trade suggestions
         private async Task<TradeResponse> getTrades(string bearerToken, int accountId)
         {
-            TradeResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Accounts"
+            TradeResponse postResp = await (CheetahConfig.ApiUrlRoot + "Accounts")
                 .AppendPathSegment(accountId)
                 .AppendPathSegment("Trades")
                 .WithHeader("Content-Type", "application/json")
@@ -143,10 +148,10 @@
         }
         
         //Assemble list of Transactions from Assets list
-        private List<TransactionRequest> assembleTransactions(string bearerToken, int batchId, List<AssetInput> assets)
+        private List<TransactionRequest> AssembleTransactions(string bearerToken, int batchId, List<AssetInput> assets)
         {
             //Populate Dictionary of assets from Cheetah with a GET request
-            Dictionary<AssetIdentifier, int> allAssets = populateAssetsDictionary(bearerToken);
+            Dictionary<AssetIdentifier, int> allAssets = PopulateAssetsDictionary(bearerToken);
             
             //Instantiate TransactionRequest List
             List<TransactionRequest> transactionRequests = new List<TransactionRequest>();
@@ -170,7 +175,7 @@
             return transactionRequests;
         }
 
-        public Dictionary<AssetIdentifier, int> populateAssetsDictionary(string bearerToken)
+        public Dictionary<AssetIdentifier, int> PopulateAssetsDictionary(string bearerToken)
         {
             Dictionary<AssetIdentifier, int> assetsDictionary =
                 new Dictionary<AssetIdentifier, int>(new AssetIdentifier.AssetEqualityComparer());
@@ -190,7 +195,7 @@
 
         private async Task<LookupResponse> getLookupAssets(string bearerToken)
         {
-            LookupResponse postResp = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Lookup?LookupService=GetAssetValues"
+            LookupResponse postResp = await (CheetahConfig.ApiUrlRoot + "Lookup?LookupService=GetAssetValues")
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
                 .GetAsync()
@@ -199,9 +204,9 @@
             return postResp;
         }
 
-        private static async Task<IList<HoldingsShard>> RetrieveOriginalPortfolio(string jwt)
+        private static async Task<IList<HoldingsShard>> RetrieveOriginalPortfolio(string jwt, string accountId)
         {
-            var response = await "https://asctrustv57webapi.accutech-systems.net/api/v6/Accounts/1/Holdings"
+            var response = await (CheetahConfig.ApiUrlRoot + "Accounts/" + accountId + "/Holdings")
                 .WithOAuthBearerToken(jwt)
                 .GetStringAsync();
 
@@ -210,9 +215,9 @@
             return namedHoldings;
         }
 
-        private static async Task<IList<TradeShard>> RetrieveTradeProposal(string jwt)
+        private static async Task<IList<TradeShard>> RetrieveTradeProposal(string jwt, string accountId)
         {
-            var response = await "https://asctrustv57webapi.accutech-systems.net/Api/v6/Trades?AccountId=1"
+            var response = await (CheetahConfig.ApiUrlRoot + "Trades?AccountId=" + accountId)
                 .WithOAuthBearerToken(jwt)
                 .GetStringAsync();
             
@@ -273,11 +278,11 @@
         
         private static async Task<string> GetHoldingAssetName(int assetId, string jwt)
         {
-            var response = await ("https://asctrustv57webapi.accutech-systems.net/api/v6/Assets?AssetId=" + assetId)
+            string response = await (CheetahConfig.ApiUrlRoot + "Assets?AssetId=" + assetId)
                 .WithOAuthBearerToken(jwt)
                 .GetStringAsync();
             JArray parsedResponseArray = JArray.Parse(response);
-            var unarrayedParsedResponse = parsedResponseArray[0];
+            JToken unarrayedParsedResponse = parsedResponseArray[0];
             JToken responseName = unarrayedParsedResponse["Issuer"];
             string nameString = responseName.ToString();
             return nameString;
@@ -288,7 +293,7 @@
             IList<HoldingsShard> holdingShardList = new List<HoldingsShard>();
 
             JArray parsedResponse = JArray.Parse(jsonHoldingsString);
-            var unarrayedHoldingsJson = parsedResponse[0];
+            JToken unarrayedHoldingsJson = parsedResponse[0];
             IList<JToken> holdingTokenList = unarrayedHoldingsJson["Holdings"].Children().ToList();
             
             foreach (JToken holdingToken in holdingTokenList)

@@ -4,7 +4,7 @@ import { Layout } from './components/Layout';
 import { TabsPage } from "./components/TabsPage"
 
 export default class App extends Component {
-    displayName = App.name
+    displayName = App.name;
 
     render() {
         return (

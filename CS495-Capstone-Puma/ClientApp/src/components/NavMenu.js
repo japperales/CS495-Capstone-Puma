@@ -6,7 +6,7 @@ import './css/NavMenu.css';
 
 
 export class NavMenu extends Component {
-  displayName = NavMenu.name
+  displayName = NavMenu.name;
 
   render() {
     return (
