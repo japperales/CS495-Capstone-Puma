@@ -106,42 +106,12 @@ export class TabsPage extends React.Component {
                 
                 <Tabs>
                     <TabList>
-                        <Tab>Personal Info</Tab>
-                        <Tab>Bonds</Tab>
-                        <Tab>Loans</Tab>
-                        <Tab>Mutual Funds</Tab>
-                        <Tab>Stocks</Tab>
-                        <Tab>Properties</Tab>
-                        <Tab>Miscellaneous Assets</Tab>
+                        <Tab>Input Data</Tab>
                         <Tab>Results</Tab>
                     </TabList>
 
                     <TabPanel>
                         <PersonalInput personalCallback={this.personalCallback}/>
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Bonds</h3>
-                        <EditableTable columns={bondColumns} data={this.state.bonds} setParentData={this.bondCallback} />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Loans</h3>
-                        <EditableTable columns={loanColumns} data={this.state.loans} setParentData={this.loanCallback} />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Mutual Funds</h3>
-                        <EditableTable columns={mutualFundColumns} data={this.state.mutualFunds} setParentData={this.mutualFundCallback} />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Stocks</h3>
-                        <EditableTable columns={stockColumns} data={this.state.stocks} setParentData={this.stockCallback} />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Properties</h3>
-                        <EditableTable columns={propertyColumns} data={this.state.properties} setParentData={this.propertyCallback}/>
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Miscellaneous Assets</h3>
-                        <EditableTable columns={miscColumns} data={this.state.misc} setParentData={this.miscCallback} />
                     </TabPanel>
                     <TabPanel>
                         <Results outputIden={this.state.outputIden} sendPortfolio={this.sendPortfolio}/>
