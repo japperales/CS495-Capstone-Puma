@@ -10,8 +10,8 @@
 }
 /* label underline focus color */
 .row .input-field input:focus {
-    border-bottom: 1px solid #50d3ff !important;
-    box-shadow: 0 1px 0 0 #50d3ff !important;
+    border-bottom: 1px solid #ffffff !important;
+    box-shadow: 0 1px 0 0 #ffffff !important;
 }
 /* valid color */
 .input-field input[type=text].valid {

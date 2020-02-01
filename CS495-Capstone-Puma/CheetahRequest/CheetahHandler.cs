@@ -7,6 +7,7 @@
  using CS495_Capstone_Puma.DataStructure.JsonResponse;
  using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
  using CS495_Capstone_Puma.DataStructure.ResponseShards;
+ using Microsoft.AspNetCore.Mvc;
  using Newtonsoft.Json;
 
  namespace CS495_Capstone_Puma.Model 
@@ -37,7 +38,7 @@
             //If the login is incorrect, an exception is thrown and the login is not accepted
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("badlogin");
                 return "badLogin";
             }
         }

@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import {PersonalInput} from "./PersonalInput";
 import {Results} from "./Results"
+import {Login} from "./Login"
 import  './css/TabsPage.css'
 import EditableTable from "./EditableTable";
 import {bondColumns, loanColumns, mutualFundColumns, stockColumns, propertyColumns, miscColumns} from './TableColumns.js'
@@ -16,30 +17,17 @@ export class TabsPage extends React.Component {
             lastName: null,
             honorific: null,
             emailAddress: null,
-
-            outputFirstName: null,
-            outputMiddleName: null,
-            outputLastName: null,
-            outputHonorific: null,
-            outputEmailAddress: null,
-
-            bonds:[],
-            misc:[],
-            loans: [],
-            mutualFunds: [],
-            stocks: [],
-            properties: [],
-            outputIden: null                  
+            outputIden: null,
+            loginOutput: null,
+            bearerToken:null,
+            userName: null,
+            password: null
         };
         //React Binding because of nebulous this references
         this.personalCallback = this.personalCallback.bind(this);
-        this.bondCallback = this.bondCallback.bind(this);
-        this.miscCallback = this.miscCallback.bind(this);
-        this.loanCallback = this.loanCallback.bind(this);
-        this.mutualFundCallback = this.mutualFundCallback.bind(this);
-        this.stockCallback = this.stockCallback.bind(this);
-        this.propertyCallback = this.propertyCallback.bind(this);
         this.sendPortfolio = this.sendPortfolio.bind(this);
+        this.loginCallback = this.loginCallback.bind(this);
+        this.sendLogin = this.sendLogin.bind(this);
     }
     
     //A group of callback functions, one passed into its corresponding subcomponent,
@@ -48,39 +36,20 @@ export class TabsPage extends React.Component {
     personalCallback(firstName, middleName, lastName, honorific, emailAddress){
         this.setState({firstName: firstName, middleName: middleName, lastName: lastName, honorific: honorific, emailAddress: emailAddress});
     }
-
-    bondCallback(assets){
-        this.setState({bonds: assets});
+    
+    loginCallback(userName, password, bearerToken){
+        this.setState({userName: userName, password: password, bearerToken: bearerToken});
     }
-
-    miscCallback(assets){
-        this.setState({misc: assets});
-    }
-
-    loanCallback(assets){
-        this.setState({loans: assets});
-    }
-
-    mutualFundCallback(assets){
-        this.setState({mutualFunds: assets});
-    }
-
-    stockCallback(assets){
-        this.setState({stocks: assets});
-        console.log(this.state.stocks);
-    }
-
-    propertyCallback(assets){
-        this.setState({properties: assets});
-    }
+    
     //Here we take the pulled list of assets from each child component along with the personal data,
     //turn it into JSON, and send a Http request formatted for the Controller to understand. 
     //The response is a JSON object that contains the personal data and a list of revised assets from Cheetah
     sendPortfolio(event) {
         event.preventDefault();
-        fetch('api/Puma/PostLogin', {
+        fetch('api/Puma/PostAssets', {
             method: 'POST',
             headers: {
+                'jwt' : this.state.bearerToken,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json; charset=UTF-8',
             },
@@ -99,6 +68,36 @@ export class TabsPage extends React.Component {
                 this.setState({outputIden: data});
             });
     }
+    
+    sendLogin(event) {
+        event.preventDefault();
+        fetch('api/Puma/PostLogin', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify({
+                username: this.state.userName,
+                password: this.state.password
+            })})
+            .then(response => response.json())
+            .then(data => {
+                this.setState({bearerToken: data});
+                this.loginPopup(data);
+            });
+    }
+    
+    loginPopup(resp){
+        if (resp === "badLogin")
+        {
+            window.alert("Login Failed.\nCheck your credentials.")
+        }
+        else {
+            window.alert("Login Successful.\nProceed to Input Data Page.")
+        }
+    }
+    
     //Each Tab in the TabsList navigates to a corresponding TabPanel
     render() {
         return(
@@ -106,42 +105,16 @@ export class TabsPage extends React.Component {
                 
                 <Tabs>
                     <TabList>
-                        <Tab>Personal Info</Tab>
-                        <Tab>Bonds</Tab>
-                        <Tab>Loans</Tab>
-                        <Tab>Mutual Funds</Tab>
-                        <Tab>Stocks</Tab>
-                        <Tab>Properties</Tab>
-                        <Tab>Miscellaneous Assets</Tab>
+                        <Tab>Login</Tab>
+                        <Tab>Input Data</Tab>
                         <Tab>Results</Tab>
                     </TabList>
 
                     <TabPanel>
+                        <Login bearerToken={this.state.bearerToken} onChange={this.handleInputChange} sendLogin={this.sendLogin} loginCallback={this.loginCallback}/>
+                    </TabPanel>
+                    <TabPanel>
                         <PersonalInput personalCallback={this.personalCallback}/>
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Bonds</h3>
-                        <EditableTable columns={bondColumns} data={this.state.bonds} setParentData={this.bondCallback} />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Loans</h3>
-                        <EditableTable columns={loanColumns} data={this.state.loans} setParentData={this.loanCallback} />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Mutual Funds</h3>
-                        <EditableTable columns={mutualFundColumns} data={this.state.mutualFunds} setParentData={this.mutualFundCallback} />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Stocks</h3>
-                        <EditableTable columns={stockColumns} data={this.state.stocks} setParentData={this.stockCallback} />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Properties</h3>
-                        <EditableTable columns={propertyColumns} data={this.state.properties} setParentData={this.propertyCallback}/>
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Miscellaneous Assets</h3>
-                        <EditableTable columns={miscColumns} data={this.state.misc} setParentData={this.miscCallback} />
                     </TabPanel>
                     <TabPanel>
                         <Results outputIden={this.state.outputIden} sendPortfolio={this.sendPortfolio}/>
