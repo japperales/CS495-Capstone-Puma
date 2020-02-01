@@ -1,32 +1,35 @@
 # Using Puma
 
 ## Puma Feature
-- Multiple tabs for multiple different asset types
-- Fill out fields to set up your Account Holder Information
-- User friendly tables used to add, remove, and edit your assets
-- Puma stores the assets that you add as you add them
-- View your results after you're finished adding all the assets you want
+- Minimum amount of tabs for ease of use
+- A login screen to ensure security for Accutech Cheetah
+- Only one page of fields that are needed to fill out
+- Puma sends your inputed data through to Cheetah and gets information sent back
+- View your results after Cheetah has finished its calculations and sent them back to Puma
 
 ## Getting Started
 
-- Download the PumaVersion2.zip file and unzip it
-- Update login.json to fit your credentials
-  - These credentials are confidential to the team and Accetech. If needed we can give a demonstration
+- Download the PumaVersion3.zip file and unzip it
 - Locate CS495-Capstone-Puma.exe and run it
 - Once the executable has run, copy the https://localhost:5001 url into your preferred browser
-
+- Upon runnin, you will be greeted with a login screen. Use your Cheetah login to continue
+  - If you do not have a Cheetah login, contact any of the Puma team (*see below*) for a live demo
+  
 
 
 ## Using Puma
 
-- You will first be greated with the Account Holder Information fields
-  - You should fill these out first before moving on to any other tab
-- Click on whichever tab (located on the top of the page) you wish to add an asset to 
-- On the top right of the table to the right of the search bar is a '+' sign, click it
-- Once you have filled out an asset row, be sure to click the checkmark on the left side to save
-- Repeat the previous 3 steps for as many assets as you wish to submit
-- Once finished, move to the Results tab and click the Submit Info button
-- Wait for the the app to finish loading to see you results
+- Once logged in, you should first make your way to the "Input Data" tab
+- Here, you will be greeted with fields for:
+  - Asset Code
+  - Symbol
+  - Issue
+  - Issuer
+  - Quantity
+- You should now fill these out according to the data you would like to submit
+- Once filled out, navigate to the "Results Tab"
+- Here, you will be greeted with a "Submit Info" button. Click it to retrieve your results
+- After a short wait, you will be greeted with your results
 
 ## Contact
 - japerales@bsu.edu
