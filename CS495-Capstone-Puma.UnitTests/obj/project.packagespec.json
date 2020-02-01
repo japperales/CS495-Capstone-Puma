@@ -1,11 +1,14 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
+    "projectUniqueName": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
     "projectName": "CS495-Capstone-Puma.UnitTests",
-    "projectPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
-    "outputPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\obj\\",
+    "projectPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
+    "outputPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\obj\\",
     "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+    ],
     "originalTargetFrameworks": [
       "netcoreapp3.0"
     ],
@@ -16,8 +19,8 @@
     "frameworks": {
       "netcoreapp3.0": {
         "projectReferences": {
-          "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
-            "projectPath": "C:\\Users\\thoma\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
+          "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+            "projectPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
           }
         }
       }
@@ -63,7 +66,7 @@
           "privateAssets": "all"
         }
       },
-      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
     }
   }
 }

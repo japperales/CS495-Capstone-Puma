@@ -7,8 +7,8 @@
     <e p="C:\Users\John\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
     <e p="C:\Users\John\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
     <e p="C:\Users\John\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="C:\Users\John\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\John\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_CS495-Capstone-Puma.-1623170172.00" t="ExcludeRecursive" />
+    <e p="C:\Users\John\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\John\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CS495-Capstone-Puma.-1623170172.00" t="ExcludeRecursive" />
     <e p="D:\CS495-Capstone-Puma" t="IncludeFlat">
       <e p="CS495-Capstone-Puma" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
@@ -16,6 +16,7 @@
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="cheetah-config.json" t="Include" />
         <e p="ClientApp" t="Include">
           <e p=".gitignore" t="Include" />
           <e p="node_modules\@types" t="IncludeRecursive" />
@@ -75,7 +76,6 @@
         <e p="Controllers" t="Include">
           <e p="CheetahHandler.cs" t="Include" />
           <e p="PumaController.cs" t="Include" />
-          <e p="TradeProposal.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.csproj" t="IncludeRecursive" />
         <e p="DataStructure" t="Include">
@@ -98,6 +98,7 @@
             <e p="PriceHistory.cs" t="Include" />
             <e p="QualityRatingHistory.cs" t="Include" />
           </e>
+          <e p="CheetahConfig.cs" t="Include" />
           <e p="JsonRequest" t="Include">
             <e p="TransactionBatchRequest.cs" t="Include" />
             <e p="TransactionRequest.cs" t="Include" />
@@ -115,6 +116,7 @@
             <e p="TransactionBatchResponse.cs" t="Include" />
             <e p="TransactionResponse.cs" t="Include" />
           </e>
+          <e p="Login.cs" t="Include" />
           <e p="ResponseShards" t="Include">
             <e p="HoldingsShard.cs" t="Include" />
             <e p="LotShard.cs" t="Include" />
@@ -125,6 +127,7 @@
           <e p="Debug" t="Include">
             <e p="netcoreapp2.1" t="Include">
               <e p="CS495-Capstone-Puma.AssemblyInfo.cs" t="Include" />
+              <e p="CS495-Capstone-Puma.RazorAssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
