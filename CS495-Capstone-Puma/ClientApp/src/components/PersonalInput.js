@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import  './css/PersonalInput.css'
 import M from 'materialize-css'
+
 let state ={
     inputFirstName: null,
     inputMiddleName: null,
@@ -11,7 +12,7 @@ let state ={
 
 export class PersonalInput extends React.Component{
     componentDidMount(){
-        console.log("component did mount")
+        console.log("component did mount");
         M.AutoInit();
     }
 
