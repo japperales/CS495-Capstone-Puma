@@ -5,7 +5,7 @@ import Flexbox from 'flexbox-react';
 import LoadingSpinner from './LoadingSpinner';
 import {formatDoughnutChartValues} from "./ResultsParsing";
 import MaterialTable from "material-table";
-import {portfolioColumns, tradeColumns} from "./TableColumns";
+import {revisedPortfolioColumns, tradeColumns} from "./TableColumns";
 import CountUp from 'react-countup';
 
 
@@ -102,7 +102,7 @@ export class Results extends React.Component{
                     </div>
                     
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 1fr)", gridGap: 20 }}>
-                        <div><MaterialTable title={"Original Portfolio"} columns={portfolioColumns} data={this.state.portfolioResponse[0]}
+                        <div><MaterialTable title={"Original Portfolio"} columns={revisedPortfolioColumns} data={this.state.portfolioResponse[0]}
                                             options={{
                                                 rowStyle: {
                                                     fontSize: '14px',

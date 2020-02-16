@@ -15,12 +15,14 @@ export class TabsPage extends React.Component {
             issue: null,
             issuer: null,
             units: null,
+            totalValue: null,
             
             loginOutput: null,
             bearerToken:null,
             userName: null,
             password: null,
-            portfolioResponse: null
+            portfolioResponse: null,
+            currentPortfolio: []
         };
         //React Binding because of nebulous this references
         this.assetCallback = this.assetCallback.bind(this);
@@ -28,16 +30,17 @@ export class TabsPage extends React.Component {
         this.loginCallback = this.loginCallback.bind(this);
         this.sendLogin = this.sendLogin.bind(this);
         this.loginPopup = this.loginPopup.bind(this);
+        this.formatPortfolioToSend = this.formatPortfolioToSend.bind(this);
     }
     
     //A group of callback functions, one passed into its corresponding subcomponent,
     // to allow the subcomponent to send data back to the parent component.
     
-    assetCallback(assetCode, symbol, issue, issuer, units){
-        this.setState({assetCode: assetCode, symbol: symbol, issue: issue, issuer: issuer, units: units});
+    assetCallback(newCurrentPortfolio){
+        this.setState({currentPortfolio: newCurrentPortfolio});
     }
     
-    loginCallback(userName, password, bearerToken){
+    loginCallback(userName, password){
         this.setState({userName: userName, password: password});
     }
     
@@ -45,6 +48,7 @@ export class TabsPage extends React.Component {
     //turn it into JSON, and send a Http request formatted for the Controller to understand. 
     //The response is a JSON object that contains the personal data and a list of revised assets from Cheetah
     sendPortfolio(event) {
+        const formattedPortfolio = this.formatPortfolioToSend();
         if (this.state.bearerToken !== null) {
             event.preventDefault();
             fetch('api/Puma/PostAssets', {
@@ -54,16 +58,7 @@ export class TabsPage extends React.Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json; charset=UTF-8',
                 },
-                body: JSON.stringify([{
-                    AssetIdentifier:
-                        {
-                            AssetCode: this.state.assetCode,
-                            Symbol: this.state.symbol,
-                            Issue: this.state.issue,
-                            Issuer: this.state.issuer
-                        },
-                    Units: parseInt(this.state.units, 10)
-                }])
+                body: JSON.stringify(formattedPortfolio)
             }).then(response => response.json())
                 .then(data => {
                     this.setState({portfolioResponse: data});
@@ -102,10 +97,31 @@ export class TabsPage extends React.Component {
         }
     }
     
+    formatPortfolioToSend(){
+        const formattedPortfolio = [];
+            
+        for(let asset in this.state.currentPortfolio){
+            const formattedAsset = {
+                AssetIdentifier:
+                    {
+                        AssetCode: asset.assetCode,
+                        Symbol: asset.symbol,
+                        Issue: asset.issue,
+                        Issuer: asset.issuer
+                    },
+                Units: parseInt(asset.units, 10)
+            };
+            formattedPortfolio.push(formattedAsset);
+        }
+        console.log("Formatted Portfolio is: " + formattedPortfolio);
+        return formattedPortfolio;
+    }
+    
     //Each Tab in the TabsList navigates to a corresponding TabPanel
     render() {
         return(
             <div>
+                <text>{JSON.stringify(this.state.currentPortfolio)}</text>
                 <Tabs>
                     <TabList>
                         <Tab>Login</Tab>
@@ -117,7 +133,7 @@ export class TabsPage extends React.Component {
                         <Login bearerToken={this.state.bearerToken} sendLogin={this.sendLogin} loginCallback={this.loginCallback}/>
                     </TabPanel>
                     <TabPanel>
-                        <AssetInput assetCallback={this.assetCallback}/>
+                        <AssetInput assetCallback={this.assetCallback} currentPortfolio={this.state.currentPortfolio} />
                     </TabPanel>
                     <TabPanel>
                         <Results portfolioResponse={this.state.portfolioResponse} sendPortfolio={this.sendPortfolio}/>

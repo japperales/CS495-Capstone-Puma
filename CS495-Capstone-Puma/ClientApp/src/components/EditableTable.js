@@ -41,7 +41,7 @@ export default class EditableTable extends React.Component {
                         new Promise((resolve, reject) => {
                             setTimeout(() => {
                                 {
-                                    let data =[...this.state.data];
+                                    let data =[...this.props.data];
                                     const index = data.indexOf(oldData);
                                     data.splice(index, 1);
                                     this.props.setParentData(data);
