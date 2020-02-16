@@ -40,7 +40,7 @@ export class Login extends React.Component {
         await this.setState({
             [name]: value
         });
-        this.props.loginCallback(this.state.inputUserName, this.state.inputPassword, this.state.loginStatus);
+        this.props.loginCallback(this.state.inputUserName, this.state.inputPassword);
     }
 
     render(){

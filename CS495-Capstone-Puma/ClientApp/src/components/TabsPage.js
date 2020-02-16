@@ -38,7 +38,7 @@ export class TabsPage extends React.Component {
     }
     
     loginCallback(userName, password, bearerToken){
-        this.setState({userName: userName, password: password, bearerToken: bearerToken});
+        this.setState({userName: userName, password: password});
     }
     
     //Here we take the pulled list of assets from each child component along with the personal data,
@@ -85,18 +85,20 @@ export class TabsPage extends React.Component {
             })})
             .then(response => response.json())
             .then(data => {
-                this.setState({bearerToken: data});
-                this.loginPopup(this.state.bearerToken.WasSuccessful);
+                if(data.wasSuccessful) {
+                    this.setState({bearerToken: data});
+                }
+                this.loginPopup(data.wasSuccessful);
             });
     }
     
     loginPopup(wasSuccessful){
         if (wasSuccessful)
         {
-            window.alert("Login Failed.\nCheck your credentials.")
+            window.alert("Login Successful.\nProceed to Input Data Page.");
         }
         else {
-            window.alert("Login Successful.\nProceed to Input Data Page.")
+            window.alert("Login Failed.\nCheck your credentials.");
         }
     }
     
@@ -104,7 +106,6 @@ export class TabsPage extends React.Component {
     render() {
         return(
             <div>
-                <text>{JSON.stringify(this.state.bearerToken)}</text>
                 <Tabs>
                     <TabList>
                         <Tab>Login</Tab>
@@ -113,7 +114,7 @@ export class TabsPage extends React.Component {
                     </TabList>
 
                     <TabPanel>
-                        <Login bearerToken={this.state.bearerToken} onChange={this.handleInputChange} sendLogin={this.sendLogin} loginCallback={this.loginCallback}/>
+                        <Login bearerToken={this.state.bearerToken} sendLogin={this.sendLogin} loginCallback={this.loginCallback}/>
                     </TabPanel>
                     <TabPanel>
                         <AssetInput assetCallback={this.assetCallback}/>

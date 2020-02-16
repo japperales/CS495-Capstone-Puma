@@ -80,6 +80,7 @@ export class Results extends React.Component{
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 1fr)", gridGap: 20 }}>
                         <div><h3>Current Portfolio Composition</h3>
                             <Doughnut data={this.state.doughnutData}/></div>
+                        
                         <div><CountUp start={0}
                                       end={this.state.portfolioResponse[2]}
                                       duration={3}
@@ -88,6 +89,7 @@ export class Results extends React.Component{
                                       suffix=" Portfolio Value Increase"
                                       style={{color: "green", fontSize: "36px"}}/>
                             <br/>
+                            
                             <CountUp start={0}
                                      end={this.state.portfolioResponse[3]}
                                      duration={3}
@@ -96,7 +98,9 @@ export class Results extends React.Component{
                                      suffix=" Monthly Income Increase"
                                      style={{color: "green", fontSize: "36px"}}/>
                         </div>
+                        
                     </div>
+                    
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 1fr)", gridGap: 20 }}>
                         <div><MaterialTable title={"Original Portfolio"} columns={portfolioColumns} data={this.state.portfolioResponse[0]}
                                             options={{
@@ -116,6 +120,7 @@ export class Results extends React.Component{
                                                 }
                                             }
                                             }/></div>
+                        
                         <div><MaterialTable title={"Proposed Trades"} columns={tradeColumns} data={this.state.portfolioResponse[1]}
                                             options={{
                                                 rowStyle: {
