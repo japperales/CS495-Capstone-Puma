@@ -11,7 +11,9 @@ namespace CS495_Capstone_Puma.DataStructure.JsonResponse
         [JsonProperty("IssuedDateTime")] public string IssuedDateTime { get; set; }
 
         [JsonProperty("ExpirationDateTime")] public string ExpirationDateTime { get; set; }
-
+        
+        public bool WasSuccessful { get; set; }
+        
         public TokenResponse()
         {
             Jwt = "";
@@ -21,12 +23,13 @@ namespace CS495_Capstone_Puma.DataStructure.JsonResponse
         }
 
         [JsonConstructor]
-        public TokenResponse(string jwt, int expiresIn, string issuedDateTime, string expirationDateTime)
+        public TokenResponse(string jwt, int expiresIn, string issuedDateTime, string expirationDateTime, bool wasSuccessful)
         {
             Jwt = jwt;
             ExpiresIn = expiresIn;
             IssuedDateTime = issuedDateTime;
             ExpirationDateTime = expirationDateTime;
+            WasSuccessful = wasSuccessful;
         }
     }
 }

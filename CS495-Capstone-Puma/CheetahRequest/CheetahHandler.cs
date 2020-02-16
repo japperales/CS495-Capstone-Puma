@@ -28,19 +28,20 @@
         }
         
         //Coordinates Login (bearerToken retrieval) POST
-        public string PostLogin(Login login)
+        public TokenResponse PostLogin(Login login)
         {
             try
             {
                 TokenResponse bearerToken = LoginPost.PostAccessToken(_cheetahConfig, login).Result;
-                return bearerToken.Jwt;
+                return bearerToken;
             }
             //If the login is incorrect, an exception is thrown and the login is not accepted
             catch (Exception e)
             {
-                Console.WriteLine("badlogin");
-                return "badLogin";
+                Console.WriteLine("There was an error while attempting to retrieve an access token: " + e);
+                return new TokenResponse(null, -1, null, null, false);
             }
+            
         }
         
         //Coordinates Asset/Transaction POST

@@ -15,7 +15,7 @@ namespace CS495_Capstone_Puma.Model
                 .WithBasicAuth(login.Username, login.Password)
                 .PostAsync(null)
                 .ReceiveJson<TokenResponse>();
-                    
+            postResp.WasSuccessful = true;      
             return postResp;
         }
     }

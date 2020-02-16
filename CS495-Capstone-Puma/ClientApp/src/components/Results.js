@@ -7,10 +7,9 @@ import {formatDoughnutChartValues} from "./ResultsParsing";
 import MaterialTable from "material-table";
 import {portfolioColumns, tradeColumns} from "./TableColumns";
 import CountUp from 'react-countup';
-import {lightgreen} from "color-name";
 
 
-let state = {loading: false, stateOutputIden: null, doughnutData: null};
+let state = {loading: false, portfolioResponse: null, doughnutData: null};
 
 
 export class Results extends React.Component{
@@ -21,7 +20,7 @@ export class Results extends React.Component{
         this.onClickWrapperMethod = this.onClickWrapperMethod.bind(this);
         this.isLoading = this.isLoading.bind(this);
         this.readyToBeginRetrieving = this.readyToBeginRetrieving.bind(this);
-        this.state = {loading: false, stateOutputIden: state.stateOutputIden, doughnutData: state.doughnutData};
+        this.state = {loading: false, portfolioResponse: state.portfolioResponse, doughnutData: state.doughnutData};
         
     }
 
@@ -41,23 +40,26 @@ export class Results extends React.Component{
     }
     
     readyToDisplayResults(){
-        return !this.state.loading && this.props.outputIden!==null;
+        console.log("this.state.loading loading is false is equal to: " + !this.state.loading);
+        console.log("this.props.portfolioResponse is not null is: " + this.props.portfolioResponse !== null);
+        console.log("current props protfolio when readyToDisplayResults is called: " + JSON.stringify(this.props.portfolioResponse));
+        return (!this.state.loading && this.props.portfolioResponse !== null);
     }
     
     readyToBeginRetrieving(){
-        return !this.state.loading && this.props.outputIden === null;
+        return !this.state.loading && this.props.portfolioResponse === null;
     }
     
     componentWillReceiveProps(nextProps) {
-        if (nextProps.outputIden !== this.props.outputIden) {
-            this.setState({ stateOutputIden: nextProps.outputIden,
+        if (nextProps.portfolioResponse !== this.props.portfolioResponse) {
+            this.setState({ portfolioResponse: nextProps.portfolioResponse,
                                 loading: false});
             this.forceUpdate();
         }
     }
     
     isLoading(){
-        return this.state.loading && this.props.outputIden === null;
+        return this.state.loading && this.props.portfolioResponse === null;
     }
     
     StartLoading(){
@@ -66,19 +68,20 @@ export class Results extends React.Component{
     
     render() {
         if (this.readyToDisplayResults()) {
-            if (this.state.doughnutData ===null) {
-                this.state.doughnutData = formatDoughnutChartValues(this.state.stateOutputIden[0]);
+            if (this.state.doughnutData === null) {
+                this.setState({doughnutData: formatDoughnutChartValues(this.state.portfolioResponse[0])});
             }
             
             return (
                 <div>
-                    <button className="waves-effect waves-light btn" onClick={this.onClickWrapperMethod}>Submit Info
+                    <button className="waves-effect waves-light btn" onClick={this.onClickWrapperMethod}>
+                        Submit Info
                     </button>
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 1fr)", gridGap: 20 }}>
                         <div><h3>Current Portfolio Composition</h3>
                             <Doughnut data={this.state.doughnutData}/></div>
                         <div><CountUp start={0}
-                                      end={this.state.stateOutputIden[2]}
+                                      end={this.state.portfolioResponse[2]}
                                       duration={3}
                                       decimals={2}
                                       prefix="+$"
@@ -86,7 +89,7 @@ export class Results extends React.Component{
                                       style={{color: "green", fontSize: "36px"}}/>
                             <br/>
                             <CountUp start={0}
-                                     end={this.state.stateOutputIden[3]}
+                                     end={this.state.portfolioResponse[3]}
                                      duration={3}
                                      decimals={2}
                                      prefix="+$"
@@ -95,7 +98,7 @@ export class Results extends React.Component{
                         </div>
                     </div>
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 1fr)", gridGap: 20 }}>
-                        <div><MaterialTable title={"Original Portfolio"} columns={portfolioColumns} data={this.state.stateOutputIden[0]}
+                        <div><MaterialTable title={"Original Portfolio"} columns={portfolioColumns} data={this.state.portfolioResponse[0]}
                                             options={{
                                                 rowStyle: {
                                                     fontSize: '14px',
@@ -113,7 +116,7 @@ export class Results extends React.Component{
                                                 }
                                             }
                                             }/></div>
-                        <div><MaterialTable title={"Proposed Trades"} columns={tradeColumns} data={this.state.stateOutputIden[1]}
+                        <div><MaterialTable title={"Proposed Trades"} columns={tradeColumns} data={this.state.portfolioResponse[1]}
                                             options={{
                                                 rowStyle: {
                                                     fontSize: '14px',
