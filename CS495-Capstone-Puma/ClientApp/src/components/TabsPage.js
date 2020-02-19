@@ -49,6 +49,8 @@ export class TabsPage extends React.Component {
     //The response is a JSON object that contains the personal data and a list of revised assets from Cheetah
     sendPortfolio(event) {
         const formattedPortfolio = this.formatPortfolioToSend();
+        
+        console.log("Formatted Portfolio is: " + JSON.stringify(formattedPortfolio));
         if (this.state.bearerToken !== null) {
             event.preventDefault();
             fetch('api/Puma/PostAssets', {
@@ -100,7 +102,7 @@ export class TabsPage extends React.Component {
     formatPortfolioToSend(){
         const formattedPortfolio = [];
             
-        for(let asset in this.state.currentPortfolio){
+        for(let asset of this.state.currentPortfolio){
             const formattedAsset = {
                 AssetIdentifier:
                     {
