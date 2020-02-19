@@ -183,11 +183,13 @@
       </e>
       <e p="CS495-Capstone-Puma.sln" t="IncludeFlat" />
       <e p="CS495-Capstone-Puma.UnitTests" t="IncludeRecursive">
+        <e p=".gitignore" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="CheetahRequestTest" t="Include">
           <e p="HandlerLogicTests.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.UnitTests.csproj" t="IncludeRecursive" />
+        <e p="login.json" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">
