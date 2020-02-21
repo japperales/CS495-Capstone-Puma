@@ -40,9 +40,6 @@ export class Results extends React.Component{
     }
     
     readyToDisplayResults(){
-        console.log("this.state.loading loading is false is equal to: " + !this.state.loading);
-        console.log("this.props.portfolioResponse is not null is: " + this.props.portfolioResponse !== null);
-        console.log("current props protfolio when readyToDisplayResults is called: " + JSON.stringify(this.props.portfolioResponse));
         return (!this.state.loading && this.props.portfolioResponse !== null);
     }
     
@@ -147,7 +144,7 @@ export class Results extends React.Component{
         } else if (this.readyToBeginRetrieving()) {
             return (
                 <div>
-                    <button className="waves-effect waves-light btn" onClick={this.onClickWrapperMethod}>Submit Info
+                    <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>Submit Info
                     </button>
                 </div>
             );
@@ -155,8 +152,9 @@ export class Results extends React.Component{
         {
             return(
                 <div>
-                <button className="waves-effect waves-light btn" onClick={this.onClickWrapperMethod}>Submit Info</button>
-                <LoadingSpinner/>
+                    <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>Submit Info</button>
+                    <h3>Loading Comparison, Please Wait</h3>
+                    <LoadingSpinner/>
                 </div>
                 
             );

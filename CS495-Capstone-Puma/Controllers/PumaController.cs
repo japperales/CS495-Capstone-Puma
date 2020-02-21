@@ -34,7 +34,7 @@ namespace CS495_Capstone_Puma.Controllers
         [EnableCors("AllowAnyOrigin")]
         public JsonResult PostAssets([FromHeader] string jwt, [FromBody] List<AssetInput> assetInputs)
         {
-            Console.WriteLine("jwt is: " +jwt);
+            Console.WriteLine("jwt is: " + jwt);
             //Perform POSTs, preserving the bearerToken
             string bearerToken = _cheetah.PostAssets(jwt, assetInputs).Result;
             

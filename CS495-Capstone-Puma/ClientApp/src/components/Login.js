@@ -49,7 +49,7 @@ export class Login extends React.Component {
             <div className={"container"}>
                 <div className={"row"}>
                     <div className={"col s6 offset-s3"}>
-                        <div className={"card light-blue lighten-3"}>
+                        <div className={"card light-blue lighten-4"}>
                             <div className={"card-content black-text"}>
                                 <span className={"card-title"}>Login</span>
                                 <div className={"input-field"}>
@@ -65,7 +65,7 @@ export class Login extends React.Component {
                                 </div>
                             </div>
                             <div className={"card-action"}>
-                                <a className={"waves-effect waves-light btn grey darken-1"} onClick={this.onClickWrapperMethod}>Login</a>
+                                <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this.onClickWrapperMethod}>Login</a>
                             </div>
                         </div>
                     </div>

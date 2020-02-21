@@ -2,7 +2,7 @@
 .input-field label {
     color: #000;
     font-size: small;
-    font-family: Calibri;
+    font-family: Lato;
 }
 /* label focus color */
 .input-field input[type=text]:focus + label {
@@ -32,7 +32,7 @@ body {
     text-align: center;
     margin-left: 10%;
     margin-right: 10%;
-    font-family: Calibri;
+    font-family: Lato;
 
 }
 
@@ -41,5 +41,5 @@ form{
 }
 
 h3{
-    font-family: Calibri;
+    font-family: "Lato Semibold";
 }

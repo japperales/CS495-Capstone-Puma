@@ -1,8 +1,8 @@
-﻿import EditableTable from "./EditableTable";
-﻿import React from 'react';
+﻿﻿import React from 'react';
 import  './css/PersonalInput.css'
 import M from 'materialize-css'
 import {portfolioColumns} from "./TableColumns";
+import DeleteableTable from "./DeleteableTable";
 
 let state = {
     inputAssetCode: null,
@@ -47,10 +47,11 @@ export class AssetInput extends React.Component{
                 <div className="row">
                     <h3>Input</h3>
                     <br />
-                    <EditableTable title={"Current Portfolio"} columns={portfolioColumns} data={this.props.currentPortfolio} setParentData={this.props.assetCallback}/>
+                    <DeleteableTable title={"Current Portfolio"} columns={portfolioColumns} data={this.props.currentPortfolio} setParentData={this.props.assetCallback}/>
                 </div>
             </div>
         );
     }
 
 }
+//<EditableTable title={"Current Portfolio"} columns={portfolioColumns} data={this.props.currentPortfolio} setParentData={this.props.assetCallback}/>

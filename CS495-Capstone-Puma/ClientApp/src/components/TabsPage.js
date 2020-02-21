@@ -22,7 +22,7 @@ export class TabsPage extends React.Component {
             userName: null,
             password: null,
             portfolioResponse: null,
-            currentPortfolio: []
+            currentPortfolio: [{"assetCode":"21312312","symbol":"312123123","issue":"312123123","issuer":"231123123","units":"231123312","totalValue":"123123123","tableData":{"id":0}},{"assetCode":"3312123312","symbol":"31232","issue":"312123312","issuer":"321123","units":"32123123","totalValue":"3123123"}]
         };
         //React Binding because of nebulous this references
         this.assetCallback = this.assetCallback.bind(this);

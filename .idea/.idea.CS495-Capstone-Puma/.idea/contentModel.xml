@@ -97,6 +97,7 @@
                 <e p="ResultsStylesheet.css" t="Include" />
                 <e p="TabsPage.css" t="Include" />
               </e>
+              <e p="DeleteableTable.js" t="Include" />
               <e p="EditableTable.js" t="Include" />
               <e p="Layout.js" t="Include" />
               <e p="LoadingSpinner.js" t="Include" />
@@ -189,7 +190,6 @@
           <e p="HandlerLogicTests.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.UnitTests.csproj" t="IncludeRecursive" />
-        <e p="login.json" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">
