@@ -18,6 +18,8 @@ export class Login extends React.Component {
     componentDidMount(){
         console.log("component did mount");
         M.AutoInit();
+        M.updateTextFields();
+        
     }
 
     componentWillUnmount(){
@@ -51,14 +53,14 @@ export class Login extends React.Component {
                     <div className={"col s6 offset-s3"}>
                         <div className={"card light-blue lighten-4"}>
                             <div className={"card-content black-text"}>
-                                <span className={"card-title"}>Login</span>
+                                <h3>Login</h3>
                                 <div className={"input-field"}>
                                     <label>Username</label>
                                     <input type="text" name="inputUserName" className={"validate"} onChange={this.handleInputChange} value={this.state.inputUserName}/>
                                 </div>
                                 <div className={"input-field"}>
                                     <label>Password</label>
-                                    <input type="password" name="inputPassword" className={"validate"} onChange={this.handleInputChange} value={this.state.inputPassword}/>
+                                    <input type="password" id="password" name="inputPassword" className={"validate"} onChange={this.handleInputChange} value={this.state.inputPassword}/>
                                 </div>
                                 <div>
                                     <p>{this.state.loginStatus}</p>

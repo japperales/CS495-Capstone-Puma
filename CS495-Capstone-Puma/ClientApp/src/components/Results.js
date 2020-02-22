@@ -71,8 +71,8 @@ export class Results extends React.Component{
             
             return (
                 <div>
-                    <button className="waves-effect waves-light btn" onClick={this.onClickWrapperMethod}>
-                        Submit Info
+                    <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>
+                        Retrieve Again
                     </button>
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 1fr)", gridGap: 20 }}>
                         <div><h3>Current Portfolio Composition</h3>
@@ -144,7 +144,8 @@ export class Results extends React.Component{
         } else if (this.readyToBeginRetrieving()) {
             return (
                 <div>
-                    <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>Submit Info
+                    <h3>Results Comparison</h3>
+                    <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>Retrieve Results
                     </button>
                 </div>
             );
@@ -152,8 +153,8 @@ export class Results extends React.Component{
         {
             return(
                 <div>
-                    <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>Submit Info</button>
                     <h3>Loading Comparison, Please Wait</h3>
+                    <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>Retrieve Results</button>
                     <LoadingSpinner/>
                 </div>
                 

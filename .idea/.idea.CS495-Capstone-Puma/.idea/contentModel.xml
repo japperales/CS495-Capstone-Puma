@@ -90,6 +90,7 @@
             <e p="App.js" t="Include" />
             <e p="components" t="Include">
               <e p="AssetInput.js" t="Include" />
+              <e p="ControlledPopup.js" t="Include" />
               <e p="css" t="Include">
                 <e p="Login.css" t="Include" />
                 <e p="NavMenu.css" t="Include" />
@@ -97,6 +98,7 @@
                 <e p="ResultsStylesheet.css" t="Include" />
                 <e p="TabsPage.css" t="Include" />
               </e>
+              <e p="CurrentPortfolioPage.js" t="Include" />
               <e p="DeleteableTable.js" t="Include" />
               <e p="EditableTable.js" t="Include" />
               <e p="Layout.js" t="Include" />
@@ -108,6 +110,9 @@
               <e p="ResultsParsing.js" t="Include" />
               <e p="TableColumns.js" t="Include" />
               <e p="TabsPage.js" t="Include" />
+            </e>
+            <e p="Contexts" t="Include">
+              <e p="TokenContext.js" t="Include" />
             </e>
             <e p="index.css" t="Include" />
             <e p="index.js" t="Include" />
