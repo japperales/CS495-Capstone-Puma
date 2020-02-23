@@ -406,3 +406,4 @@ D:\CS495-Capstone-Puma\CS495-Capstone-Puma.UnitTests\obj\Debug\netcoreapp3.0\CS4
 D:\CS495-Capstone-Puma\CS495-Capstone-Puma.UnitTests\obj\Debug\netcoreapp3.0\CS495-Capstone-Puma.UnitTests.csproj.CopyComplete
 D:\CS495-Capstone-Puma\CS495-Capstone-Puma.UnitTests\obj\Debug\netcoreapp3.0\CS495-Capstone-Puma.UnitTests.dll
 D:\CS495-Capstone-Puma\CS495-Capstone-Puma.UnitTests\obj\Debug\netcoreapp3.0\CS495-Capstone-Puma.UnitTests.pdb
+D:\RiderProjects\CS495-Capstone-Puma\CS495-Capstone-Puma.UnitTests\bin\Debug\netcoreapp3.0\cheetah-config.json

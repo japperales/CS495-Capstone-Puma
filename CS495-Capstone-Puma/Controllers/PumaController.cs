@@ -43,7 +43,7 @@ namespace CS495_Capstone_Puma.Controllers
             return Json(returnJson);
         }
 
-        [HttpPost("AutoFill")]
+        [HttpGet("AutoFill")]
         [EnableCors("AllowAnyOrigin")]
         public JsonResult GetMatches([FromHeader] string value)
         {
