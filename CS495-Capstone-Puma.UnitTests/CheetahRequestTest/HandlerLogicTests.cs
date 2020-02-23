@@ -36,10 +36,9 @@ namespace CS495_Capstone_Puma.UnitTests.CheetahRequestTest
             {
                 
                 httpTest.RespondWithJson(new TokenResponse("djlkfaj3jlksj3e", 3599999,
-                    "2020-01-13T17:58:47.142089Z", "2020-01-13T18:58:47.141089Z"));
+                    "2020-01-13T17:58:47.142089Z", "2020-01-13T18:58:47.141089Z", true));
                 
-                CheetahHandler cheetahHandler = new CheetahHandler();
-                String testToken = cheetahHandler.PostLogin(new Login("test","test"));
+                string testToken = CheetahHandler.PostLogin(new Login("test","test")).Jwt;
 
                 httpTest.ShouldHaveCalled("*/Token")
                     .WithVerb(HttpMethod.Post);
@@ -53,14 +52,13 @@ namespace CS495_Capstone_Puma.UnitTests.CheetahRequestTest
         {
             using var httpTest = new HttpTest();
             httpTest.RespondWith("",401);
-                
-            CheetahHandler cheetahHandler = new CheetahHandler();
-            String testToken = cheetahHandler.PostLogin(new Login("test","test"));
+            
+            string testToken = CheetahHandler.PostLogin(new Login("test","test")).Jwt;
 
             httpTest.ShouldHaveCalled("*/Token")
                 .WithVerb(HttpMethod.Post);
                 
-            Assert.Equal("badLogin", testToken);
+            Assert.Null(testToken);
         }
 
         [Fact]
@@ -69,11 +67,10 @@ namespace CS495_Capstone_Puma.UnitTests.CheetahRequestTest
             output.WriteLine("This test communicates with the Cheetah API. Elevated permissions are required to test this.");
 
             Login login = LoadLogin();
-            CheetahHandler cheetah = new CheetahHandler();
 
-            string bearerToken = cheetah.PostLogin(login);
+            string bearerToken = CheetahHandler.PostLogin(login).Jwt;
             
-            Assert.NotEqual("badLogin", bearerToken);
+            Assert.NotNull(bearerToken);
         }
         
         [Fact]
@@ -82,16 +79,14 @@ namespace CS495_Capstone_Puma.UnitTests.CheetahRequestTest
             output.WriteLine("This test communicates with the Cheetah API. Elevated permissions are required to test this.");
 
             Login login = LoadLogin();
-            CheetahHandler cheetah = new CheetahHandler();
 
-            string bearerToken = cheetah.PostLogin(login);
-            Assert.NotEqual("badLogin", bearerToken);
-            
+            string bearerToken = CheetahHandler.PostLogin(login).Jwt;
+
             AssetInput assetInput = new AssetInput(new AssetIdentifier("","AAPL","",""), 12);
             List<AssetInput> assets = new List<AssetInput>{assetInput};
-
-            string resp = cheetah.PostAssets(bearerToken, assets).Result;
             
+
+            string resp = CheetahHandler.PostAssets(bearerToken, assets).Result;
             Assert.Equal("PostAssets Successful", resp);
         }
         
@@ -101,14 +96,13 @@ namespace CS495_Capstone_Puma.UnitTests.CheetahRequestTest
             output.WriteLine("This test communicates with the Cheetah API. Elevated permissions are required to test this.");
 
             Login login = LoadLogin();
-            CheetahHandler cheetah = new CheetahHandler();
 
-            string bearerToken = cheetah.PostLogin(login);
-            Assert.NotEqual("badLogin", bearerToken);
+            string bearerToken = CheetahHandler.PostLogin(login).Jwt;
+            Assert.NotNull(bearerToken);
             
             List<AssetInput> assets = new List<AssetInput>();
 
-            string resp = cheetah.PostAssets(bearerToken, assets).Result;
+            string resp = CheetahHandler.PostAssets(bearerToken, assets).Result;
             
             Assert.Equal("PostAssets Error", resp);
         }
