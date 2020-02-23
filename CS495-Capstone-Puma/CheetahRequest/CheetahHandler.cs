@@ -55,8 +55,6 @@
                 //Turn asset list into a list of transactions to POST
                 List<TransactionRequest> transactions = AssembleTransactions(bearerToken, batchId, assets);
                 
-                
-                
                 //POST each transaction
                 foreach (TransactionRequest transaction in transactions)
                 {
@@ -80,7 +78,7 @@
         }
         
         //Coordinates Proposed Trade GET
-        public static Object[] GetTradeProposal(string bearerToken, string accountId)
+        public static async Task<object[]> GetTradeProposal(string bearerToken, string accountId)
         {
             //await getTrades(bearerToken, accountId);
                     
@@ -93,6 +91,7 @@
             responseArray[1] = tradeProposal;
             responseArray[2] = 484934.46;
             responseArray[3] = 5891.01;
+            await ProposalGet.GetOriginalAndRevisedPortfolio(CheetahConfig, bearerToken, accountId);
             
             return responseArray;
         }

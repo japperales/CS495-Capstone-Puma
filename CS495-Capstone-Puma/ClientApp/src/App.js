@@ -8,9 +8,11 @@ export default class App extends Component {
 
     render() {
         return (
+            
             <Layout>
                 <Route path='/tabspage' component={TabsPage} />
             </Layout>
+            
         );
     }
 }

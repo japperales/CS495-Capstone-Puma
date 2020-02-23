@@ -92,6 +92,7 @@
             <e p="App.js" t="Include" />
             <e p="components" t="Include">
               <e p="AssetInput.js" t="Include" />
+              <e p="ControlledPopup.js" t="Include" />
               <e p="css" t="Include">
                 <e p="Login.css" t="Include" />
                 <e p="NavMenu.css" t="Include" />
@@ -99,6 +100,8 @@
                 <e p="ResultsStylesheet.css" t="Include" />
                 <e p="TabsPage.css" t="Include" />
               </e>
+              <e p="CurrentPortfolioPage.js" t="Include" />
+              <e p="DeleteableTable.js" t="Include" />
               <e p="EditableTable.js" t="Include" />
               <e p="Layout.js" t="Include" />
               <e p="LoadingSpinner.js" t="Include" />
@@ -109,6 +112,9 @@
               <e p="ResultsParsing.js" t="Include" />
               <e p="TableColumns.js" t="Include" />
               <e p="TabsPage.js" t="Include" />
+            </e>
+            <e p="Contexts" t="Include">
+              <e p="TokenContext.js" t="Include" />
             </e>
             <e p="index.css" t="Include" />
             <e p="index.js" t="Include" />
@@ -161,6 +167,7 @@
           </e>
           <e p="Login.cs" t="Include" />
           <e p="ResponseShards" t="Include">
+            <e p="AssetShard.cs" t="Include" />
             <e p="HoldingsShard.cs" t="Include" />
             <e p="LotShard.cs" t="Include" />
             <e p="TradeShard.cs" t="Include" />
@@ -193,7 +200,6 @@
           <e p="HandlerLogicTests.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.UnitTests.csproj" t="IncludeRecursive" />
-        <e p="login.json" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">

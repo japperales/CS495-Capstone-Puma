@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace CS495_Capstone_Puma.Controllers
-{
-
+{   
+    
     [EnableCors("AllowAnyOrigin")]
     [Route("api/[controller]")]
     public class PumaController : Controller
@@ -33,11 +33,11 @@ namespace CS495_Capstone_Puma.Controllers
         [EnableCors("AllowAnyOrigin")]
         public JsonResult PostAssets([FromHeader] string jwt, [FromBody] List<AssetInput> assetInputs)
         {
-            Console.WriteLine("jwt is: " +jwt);
+            Console.WriteLine("jwt is: " + jwt);
             //Perform POSTs, preserving the bearerToken
             string bearerToken = CheetahHandler.PostAssets(jwt, assetInputs).Result;
             
-            Object[] returnJson = CheetahHandler.GetTradeProposal(jwt, "1");
+            Object[] returnJson = CheetahHandler.GetTradeProposal(jwt, "1").Result;
             Console.WriteLine("Return JSON is: " + JsonConvert.SerializeObject(returnJson));
             //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
             return Json(returnJson);
