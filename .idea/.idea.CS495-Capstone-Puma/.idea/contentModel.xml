@@ -43,6 +43,7 @@
             <e p="react" t="IncludeRecursive" />
           </e>
           <e p="node_modules\bootstrap" t="IncludeRecursive" />
+          <e p="node_modules\chart.js" t="IncludeRecursive" />
           <e p="node_modules\clsx" t="IncludeRecursive" />
           <e p="node_modules\color-name" t="IncludeRecursive" />
           <e p="node_modules\csstype" t="IncludeRecursive" />
@@ -50,6 +51,8 @@
           <e p="node_modules\enzyme" t="IncludeRecursive" />
           <e p="node_modules\enzyme-adapter-react-16" t="IncludeRecursive" />
           <e p="node_modules\enzyme-to-json" t="IncludeRecursive" />
+          <e p="node_modules\es6-promise" t="IncludeRecursive" />
+          <e p="node_modules\flexbox-react" t="IncludeRecursive" />
           <e p="node_modules\hoist-non-react-statics" t="IncludeRecursive" />
           <e p="node_modules\is-in-browser" t="IncludeRecursive" />
           <e p="node_modules\jquery" t="IncludeRecursive" />
@@ -63,11 +66,12 @@
           <e p="node_modules\jss-plugin-vendor-prefixer" t="IncludeRecursive" />
           <e p="node_modules\material-table" t="IncludeRecursive" />
           <e p="node_modules\materialize-css" t="IncludeRecursive" />
-          <e p="node_modules\normalize-scroll-left" t="IncludeRecursive" />
+          <e p="node_modules\moment" t="IncludeRecursive" />
           <e p="node_modules\popper.js" t="IncludeRecursive" />
           <e p="node_modules\prop-types" t="IncludeRecursive" />
           <e p="node_modules\react" t="IncludeRecursive" />
           <e p="node_modules\react-bootstrap" t="IncludeRecursive" />
+          <e p="node_modules\react-chartjs-2" t="IncludeRecursive" />
           <e p="node_modules\react-countup" t="IncludeRecursive" />
           <e p="node_modules\react-dom" t="IncludeRecursive" />
           <e p="node_modules\react-json-view" t="IncludeRecursive" />
@@ -76,6 +80,7 @@
           <e p="node_modules\react-router-dom" t="IncludeRecursive" />
           <e p="node_modules\react-scripts" t="IncludeRecursive" />
           <e p="node_modules\react-tabs" t="IncludeRecursive" />
+          <e p="node_modules\reactjs-popup" t="IncludeRecursive" />
           <e p="node_modules\rifm" t="IncludeRecursive" />
           <e p="node_modules\rimraf" t="IncludeRecursive" />
           <e p="node_modules\sinon" t="IncludeRecursive" />
@@ -200,6 +205,7 @@
           <e p="HandlerLogicTests.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.UnitTests.csproj" t="IncludeRecursive" />
+        <e p="login.json" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">
