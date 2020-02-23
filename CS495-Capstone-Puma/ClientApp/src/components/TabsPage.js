@@ -1,10 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import {Results} from "./Results"
-import {Login} from "./Login"
-import  './css/TabsPage.css'
-import {AssetInput} from "./AssetInput";
+import {Results} from "./Results";
+import {Login} from "./Login";
+import  './css/TabsPage.css';
+import {CurrentPortfolioPage} from "./CurrentPortfolioPage";
+import {TokenContext} from "../Contexts/TokenContext.js";
+
 export class TabsPage extends React.Component {
 
     constructor(props){
@@ -22,7 +24,7 @@ export class TabsPage extends React.Component {
             userName: null,
             password: null,
             portfolioResponse: null,
-            currentPortfolio: []
+            currentPortfolio: [{"assetCode":"21312312","symbol":"312123123","issue":"312123123","issuer":"231123123","units":"231123312","totalValue":"123123123","tableData":{"id":0}},{"assetCode":"3312123312","symbol":"31232","issue":"312123312","issuer":"321123","units":"32123123","totalValue":"3123123"}]
         };
         //React Binding because of nebulous this references
         this.assetCallback = this.assetCallback.bind(this);
@@ -48,11 +50,11 @@ export class TabsPage extends React.Component {
     //turn it into JSON, and send a Http request formatted for the Controller to understand. 
     //The response is a JSON object that contains the personal data and a list of revised assets from Cheetah
     sendPortfolio(event) {
+        event.preventDefault();
         const formattedPortfolio = this.formatPortfolioToSend();
         
         console.log("Formatted Portfolio is: " + JSON.stringify(formattedPortfolio));
         if (this.state.bearerToken !== null) {
-            event.preventDefault();
             fetch('api/Puma/PostAssets', {
                 method: 'POST',
                 headers: {
@@ -122,26 +124,27 @@ export class TabsPage extends React.Component {
     //Each Tab in the TabsList navigates to a corresponding TabPanel
     render() {
         return(
-            <div>
-                <text>{JSON.stringify(this.state.currentPortfolio)}</text>
-                <Tabs>
-                    <TabList>
-                        <Tab>Login</Tab>
-                        <Tab>Input Data</Tab>
-                        <Tab>Results</Tab>
-                    </TabList>
+            <TokenContext.Provider value={this.state.bearerToken}>
+                <div>
+                 <Tabs>
+                        <TabList>
+                            <Tab>Login</Tab>
+                            <Tab>Input Data</Tab>
+                            <Tab>Results</Tab>
+                        </TabList>
 
-                    <TabPanel>
-                        <Login bearerToken={this.state.bearerToken} sendLogin={this.sendLogin} loginCallback={this.loginCallback}/>
-                    </TabPanel>
-                    <TabPanel>
-                        <AssetInput assetCallback={this.assetCallback} currentPortfolio={this.state.currentPortfolio} />
-                    </TabPanel>
-                    <TabPanel>
-                        <Results portfolioResponse={this.state.portfolioResponse} sendPortfolio={this.sendPortfolio}/>
-                    </TabPanel>
+                        <TabPanel>
+                            <Login bearerToken={this.state.bearerToken} sendLogin={this.sendLogin} loginCallback={this.loginCallback}/>
+                        </TabPanel>
+                        <TabPanel>
+                            <CurrentPortfolioPage assetCallback={this.assetCallback} currentPortfolio={this.state.currentPortfolio} />
+                        </TabPanel>
+                        <TabPanel>
+                            <Results portfolioResponse={this.state.portfolioResponse} sendPortfolio={this.sendPortfolio}/>
+                        </TabPanel>
                 </Tabs>
             </div>
+            </TokenContext.Provider>
         );
     }
 }

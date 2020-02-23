@@ -1,15 +1,115 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CS495_Capstone_Puma.DataStructure;
+using CS495_Capstone_Puma.DataStructure.Asset;
 using CS495_Capstone_Puma.DataStructure.ResponseShards;
 using Flurl.Http;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace CS495_Capstone_Puma.Model
 {
     public class ProposalGet
     {
+        public async Task<Object[]> GetOriginalAndRevisedPortfolio(CheetahConfig cheetahConfig, string bearerToken, string accountId)
+        {
+            IList<HoldingsShard> currentPortfolio = await RetrieveOriginalPortfolio(cheetahConfig, bearerToken, accountId);
+            
+            IList<TradeShard> currentTrades = await RetrieveTradeProposal(cheetahConfig, bearerToken, accountId);
+            
+            IList<HoldingsShard> copiedPortfolio = new List<HoldingsShard>();
+            
+            foreach (HoldingsShard holding in currentPortfolio)
+            {
+                copiedPortfolio.Add(new HoldingsShard
+                {
+                    AssetId = holding.AssetId, AssetName = holding.AssetName, TotalAmount = holding.TotalAmount,
+                    TotalValue = holding.TotalValue, AssetCategoryName = holding.AssetCategoryName,
+                    PricePerShare = holding.PricePerShare
+                });
+            }
+            IList<HoldingsShard> revisedPortfolio = await CompileNewPortfolio(cheetahConfig, bearerToken, copiedPortfolio, currentTrades);
+            Console.WriteLine("CURRENT PORTFOLIO IS: " + JsonConvert.SerializeObject(currentPortfolio));
+            Console.WriteLine("\n REVISED PORTFOLIO IS: " + JsonConvert.SerializeObject(revisedPortfolio));
+            Console.WriteLine("Are the two portfolios the same?: " + (currentPortfolio.Equals(revisedPortfolio)));
+            Object[] portfolios = new Object[2];
+            portfolios[0] = currentPortfolio;
+            portfolios[1] = revisedPortfolio;
+            return portfolios;
+        }
+
+        private async Task<IList<HoldingsShard>> CompileNewPortfolio(CheetahConfig cheetahConfig, string bearerToken, IList<HoldingsShard> currentPortfolio, IList<TradeShard> currentTrades)
+        {
+            IList<HoldingsShard> revisedPortfolio = currentPortfolio.ToList();
+
+            foreach (TradeShard trade in currentTrades)
+            {
+                if (trade.TradeTypeName == "Buy")
+                {
+                    revisedPortfolio = 
+                        AddBoughtAssetToPortfolio(cheetahConfig, bearerToken, revisedPortfolio, trade);
+                }
+                else if (trade.TradeTypeName == "Sell")
+                {
+                    revisedPortfolio =
+                        RemoveSoldAssetFromPortfolio(revisedPortfolio, trade);
+                }
+            }
+
+            return revisedPortfolio;
+
+        }
+
+        private IList<HoldingsShard> RemoveSoldAssetFromPortfolio(IList<HoldingsShard> revisedPortfolio, TradeShard trade)
+        {    IList<HoldingsShard> copiedPortfolio = revisedPortfolio.ToList();
+
+            foreach (HoldingsShard holding in copiedPortfolio)
+            {
+                if (holding.AssetId == trade.AssetId)
+                {
+                    holding.TotalAmount -= trade.UnitShares;
+                    holding.TotalValue -= (holding.PricePerShare * trade.UnitShares);
+                    return copiedPortfolio;
+                }
+            }
+
+            return null;
+        }
+
+        private IList<HoldingsShard> AddBoughtAssetToPortfolio(CheetahConfig cheetahConfig, string bearerToken, IList<HoldingsShard> revisedPortfolio, TradeShard trade)
+        {
+            IList<HoldingsShard> copiedPortfolio = revisedPortfolio.ToList();
+            
+            foreach (HoldingsShard holding in copiedPortfolio)
+            {
+                if (holding.AssetId == trade.AssetId)
+                {    
+                    holding.TotalAmount += trade.UnitShares;
+                    holding.TotalValue += (holding.PricePerShare * trade.UnitShares);
+                    return copiedPortfolio;
+                }
+            }
+
+            HoldingsShard newHolding = CreateNewHoldingFromTrade(cheetahConfig, bearerToken, trade);
+            copiedPortfolio.Add(newHolding);
+            
+            return copiedPortfolio;
+        }
+
+        private HoldingsShard CreateNewHoldingFromTrade(CheetahConfig cheetahConfig, string bearerToken, TradeShard trade)
+        {
+            AssetShard newAsset = GetAssetFromId(cheetahConfig, trade.AssetId, bearerToken).Result;
+            
+            HoldingsShard newHolding = 
+                new HoldingsShard {AssetId = trade.AssetId, TotalAmount = trade.UnitShares, PricePerShare = newAsset.Price, AssetName = newAsset.Issuer, AssetCategoryName = newAsset.AssetCategoryDisplayName};
+
+            return newHolding;
+        }
 
         public async Task<IList<HoldingsShard>> RetrieveOriginalPortfolio(CheetahConfig cheetahConfig, string bearerToken, string accountId)
         {
@@ -65,8 +165,9 @@ namespace CS495_Capstone_Puma.Model
         {
             foreach (HoldingsShard holding in holdingsShards)
             {
-                holding.AssetName = GetHoldingAssetName(cheetahConfig, holding.AssetId, bearerToken).Result;
-                
+                AssetShard asset = GetAssetFromId(cheetahConfig, holding.AssetId, bearerToken).Result;
+                holding.AssetName = asset.Issuer;
+
             }
 
             return holdingsShards;
@@ -76,25 +177,48 @@ namespace CS495_Capstone_Puma.Model
         {
             foreach (TradeShard tradeShard in tradeShards)
             {
-                tradeShard.AssetName = GetHoldingAssetName(cheetahConfig, tradeShard.AssetId, bearerToken).Result;
-                
+                AssetShard asset = GetAssetFromId(cheetahConfig, tradeShard.AssetId, bearerToken).Result;
+                tradeShard.AssetName = asset.Issuer;
             }
 
             return tradeShards;
         }
         
-        private async Task<string> GetHoldingAssetName(CheetahConfig cheetahConfig, int assetId, string bearerToken)
+        private async Task<AssetShard> GetAssetFromId(CheetahConfig cheetahConfig, int assetId, string bearerToken)
         {
             string response = await (cheetahConfig.ApiUrlRoot + "Assets?AssetId=" + assetId)
                 .WithOAuthBearerToken(bearerToken)
                 .GetStringAsync();
             JArray parsedResponseArray = JArray.Parse(response);
             JToken unarrayedParsedResponse = parsedResponseArray[0];
-            JToken responseName = unarrayedParsedResponse["Issuer"];
-            string nameString = responseName.ToString();
-            return nameString;
+            
+            AssetShard assetShard = CreateAssetShard(unarrayedParsedResponse);
+            return assetShard;
         }
-        
+
+        private AssetShard CreateAssetShard(JToken assetToken)
+        {
+            JToken pricePerShareToken = 0;
+            if (assetToken["PriceHistories"] != null)
+            {
+                 pricePerShareToken = assetToken["PriceHistories"][0]["Price"];
+            }
+
+            float pricePerShare = float.Parse(pricePerShareToken.ToString());
+
+            AssetShard asset = assetToken.ToObject<AssetShard>();
+
+            asset.Price = pricePerShare;
+            
+            Console.WriteLine("Price per share is: " + asset.Price);
+            Console.WriteLine("Asset ID is: " + asset.AssetId);
+            Console.WriteLine("Display Name is: " + asset.AssetCategoryDisplayName);
+            Console.WriteLine("Asset Name is: " + asset.Issuer);
+
+            return asset;
+
+        }
+
         private IList<HoldingsShard> ConvertHoldingTokenList(string jsonHoldingsString)
         {    
             IList<HoldingsShard> holdingShardList = new List<HoldingsShard>();

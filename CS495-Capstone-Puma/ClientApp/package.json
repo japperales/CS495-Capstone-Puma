@@ -23,7 +23,8 @@
     "color-name": "latest",
     "flexbox-react": "latest",
     "react-chartjs-2": "latest",
-    "chart.js": "latest"
+    "chart.js": "latest",
+    "reactjs-popup": "latest"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",

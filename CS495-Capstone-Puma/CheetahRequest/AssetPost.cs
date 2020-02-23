@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CS495_Capstone_Puma.DataStructure;
 using CS495_Capstone_Puma.DataStructure.JsonRequest;
 using CS495_Capstone_Puma.DataStructure.JsonResponse;
@@ -18,13 +19,14 @@ namespace CS495_Capstone_Puma.Model
                 .WithOAuthBearerToken(bearerToken)
                 .PostJsonAsync(request)
                 .ReceiveJson<TransactionBatchResponse>();
-
+            
             return postResp;
         }
 
         //POST Transaction
         public static async Task<TransactionResponse> PostTransaction(CheetahConfig cheetahConfig, string bearerToken, TransactionRequest request)
         {
+            Console.WriteLine(request.accountId);
             TransactionResponse postResp = await (cheetahConfig.ApiUrlRoot + "Transactions/Pending")
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
@@ -39,7 +41,7 @@ namespace CS495_Capstone_Puma.Model
         {
             var urlSuffix = "";
 
-            //If the batch is ready, send the post request. If the batch is not ready, send the ready request.
+            //If the batch is not yet ready, send the ready request. If the batch is ready, send the post request. 
             urlSuffix = isReadied ? "/Post" : "/Ready";
 
             await (cheetahConfig.ApiUrlRoot + "TransactionBatches")
@@ -47,7 +49,7 @@ namespace CS495_Capstone_Puma.Model
                 .SetQueryParam("TransactionBatchIds", batchId)
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)
-                .PostAsync(null);
+                .PostJsonAsync(null);
         }
     }
 }
