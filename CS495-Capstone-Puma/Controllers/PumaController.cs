@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CS495_Capstone_Puma.AutoFill;
 using CS495_Capstone_Puma.DataStructure;
 using CS495_Capstone_Puma.DataStructure.JsonResponse;
 using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
@@ -9,22 +10,20 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace CS495_Capstone_Puma.Controllers
-{   
-    
+{
+
     [EnableCors("AllowAnyOrigin")]
     [Route("api/[controller]")]
     public class PumaController : Controller
     {
-        //Global object used to communicate with Cheetah Api
-        private readonly CheetahHandler _cheetah = new CheetahHandler();
-        
         //Receive POST addressed to HostingAddress/api/Puma/PostLogin
         //Attempt Login and return bearer token
         [HttpPost("PostLogin")]
         [EnableCors("AllowAnyOrigin")]
         public  JsonResult PostLogin([FromBody] Login login)
         {
-            TokenResponse bearerToken = _cheetah.PostLogin(login);
+            TokenResponse bearerToken = CheetahHandler.PostLogin(login);
+            AssetMatcher.UpdateAssets(bearerToken.Jwt);
             return Json(bearerToken);
         }
 
@@ -36,14 +35,21 @@ namespace CS495_Capstone_Puma.Controllers
         {
             Console.WriteLine("jwt is: " +jwt);
             //Perform POSTs, preserving the bearerToken
-            string bearerToken = _cheetah.PostAssets(jwt, assetInputs).Result;
+            string bearerToken = CheetahHandler.PostAssets(jwt, assetInputs).Result;
             
-            Object[] returnJson = _cheetah.GetTradeProposal(jwt, "1");
+            Object[] returnJson = CheetahHandler.GetTradeProposal(jwt, "1");
             Console.WriteLine("Return JSON is: " + JsonConvert.SerializeObject(returnJson));
             //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
             return Json(returnJson);
         }
 
+        [HttpPost("AutoFill")]
+        [EnableCors("AllowAnyOrigin")]
+        public JsonResult GetMatches([FromHeader] string value)
+        {
+            return Json(AssetMatcher.GetMatches(value));
+        }
+        
         
     }
 } 

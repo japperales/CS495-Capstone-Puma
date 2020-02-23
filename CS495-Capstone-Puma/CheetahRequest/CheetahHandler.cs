@@ -12,10 +12,10 @@
 
  namespace CS495_Capstone_Puma.Model 
   {
-    public class CheetahHandler
+    public static class CheetahHandler
     {
-        private readonly CheetahConfig _cheetahConfig = LoadApiConfig();
-        private readonly ProposalGet _proposalGet = new ProposalGet();
+        private static readonly CheetahConfig CheetahConfig = LoadApiConfig();
+        private static readonly ProposalGet ProposalGet = new ProposalGet();
 
         public static CheetahConfig LoadApiConfig()
         {
@@ -28,11 +28,11 @@
         }
         
         //Coordinates Login (bearerToken retrieval) POST
-        public TokenResponse PostLogin(Login login)
+        public static TokenResponse PostLogin(Login login)
         {
             try
             {
-                TokenResponse bearerToken = LoginPost.PostAccessToken(_cheetahConfig, login).Result;
+                TokenResponse bearerToken = LoginPost.PostAccessToken(CheetahConfig, login).Result;
                 return bearerToken;
             }
             //If the login is incorrect, an exception is thrown and the login is not accepted
@@ -45,24 +45,29 @@
         }
         
         //Coordinates Asset/Transaction POST
-        public async Task<string> PostAssets(string bearerToken, List<AssetInput> assets)
+        public static async Task<string> PostAssets(string bearerToken, List<AssetInput> assets)
         {
             try
             {
                 //Create new Transaction Batch
-                int batchId = AssetPost.PostTransactionBatch(_cheetahConfig, bearerToken, new TransactionBatchRequest()).Result.transactionBatchId;
-                
+                int batchId = AssetPost.PostTransactionBatch(CheetahConfig, bearerToken, new TransactionBatchRequest()).Result.transactionBatchId;
+                Console.WriteLine(batchId);
                 //Turn asset list into a list of transactions to POST
                 List<TransactionRequest> transactions = AssembleTransactions(bearerToken, batchId, assets);
+                
+                
                 
                 //POST each transaction
                 foreach (TransactionRequest transaction in transactions)
                 {
-                    await AssetPost.PostTransaction(_cheetahConfig, bearerToken, transaction);
+                    Console.WriteLine(transaction.assetId);
+                    await AssetPost.PostTransaction(CheetahConfig, bearerToken, transaction);
                 }
                 
-                await AssetPost.PostTransactionBatchProcessor(_cheetahConfig, bearerToken, batchId, false);
-                await AssetPost.PostTransactionBatchProcessor(_cheetahConfig, bearerToken, batchId, true);
+                Console.WriteLine("success 1");
+                
+                await AssetPost.PostTransactionBatchProcessor(CheetahConfig, bearerToken, batchId, false);
+                await AssetPost.PostTransactionBatchProcessor(CheetahConfig, bearerToken, batchId, true);
 
                 return "PostAssets Successful";
 
@@ -75,13 +80,13 @@
         }
         
         //Coordinates Proposed Trade GET
-        public Object[] GetTradeProposal(string bearerToken, string accountId)
+        public static Object[] GetTradeProposal(string bearerToken, string accountId)
         {
             //await getTrades(bearerToken, accountId);
                     
-            IList<HoldingsShard> originalPortfolio = _proposalGet.RetrieveOriginalPortfolio(_cheetahConfig, bearerToken, accountId).Result;
+            IList<HoldingsShard> originalPortfolio = ProposalGet.RetrieveOriginalPortfolio(CheetahConfig, bearerToken, accountId).Result;
                     
-            IList<TradeShard> tradeProposal = _proposalGet.RetrieveTradeProposal(_cheetahConfig, bearerToken, accountId).Result;
+            IList<TradeShard> tradeProposal = ProposalGet.RetrieveTradeProposal(CheetahConfig, bearerToken, accountId).Result;
                     
             Object[] responseArray= new Object[4];
             responseArray[0] = originalPortfolio;
@@ -93,7 +98,7 @@
         }
 
         //Assemble list of Transactions from Assets list
-        private List<TransactionRequest> AssembleTransactions(string bearerToken, int batchId, List<AssetInput> assets)
+        private static List<TransactionRequest> AssembleTransactions(string bearerToken, int batchId, List<AssetInput> assets)
         {
             //Populate Dictionary of assets from Cheetah with a GET request
             Dictionary<AssetIdentifier, int> allAssets = PopulateAssetsDictionary(bearerToken);
@@ -122,12 +127,12 @@
         }
 
         //Dictionary to match assets to internal id
-        private Dictionary<AssetIdentifier, int> PopulateAssetsDictionary(string bearerToken)
+        private static Dictionary<AssetIdentifier, int> PopulateAssetsDictionary(string bearerToken)
         {
             Dictionary<AssetIdentifier, int> assetsDictionary =
                 new Dictionary<AssetIdentifier, int>(new AssetIdentifier.AssetEqualityComparer());
             
-            List<AssetLookupResponse> assetLookupResponses = Lookup.GetLookupAssets(_cheetahConfig, bearerToken).Result.items;
+            List<AssetLookupResponse> assetLookupResponses = Lookup.GetLookupAssets(CheetahConfig, bearerToken).Result.items;
             
             foreach (AssetLookupResponse assetLookupResponse in assetLookupResponses)
             {
@@ -138,6 +143,12 @@
                 catch (ArgumentException){}
             }
             return assetsDictionary;
+        }
+        
+        //Return Assets from Lookup
+        public static List<AssetLookupResponse> GetFullAssetList(string bearerToken)
+        {
+            return Lookup.GetLookupAssets(CheetahConfig, bearerToken).Result.items;
         }
     }
 }
