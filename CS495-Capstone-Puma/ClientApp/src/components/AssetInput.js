@@ -1,4 +1,4 @@
-﻿import {TokenContext} from "../Contexts/TokenContext.js";
+﻿import {TokenContext} from "../Contexts/TokenContext.jMade 
 
 ﻿import React from 'react';
 import  './css/PersonalInput.css'
@@ -55,7 +55,7 @@ export class AssetInput extends React.Component{
     }
     
     submitAsset(event){
-        console.log("WHY");
+        
         event.preventDefault();
         let token = this.context;
         console.log(token);

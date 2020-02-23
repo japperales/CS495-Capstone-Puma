@@ -165,6 +165,7 @@
           </e>
           <e p="Login.cs" t="Include" />
           <e p="ResponseShards" t="Include">
+            <e p="AssetShard.cs" t="Include" />
             <e p="HoldingsShard.cs" t="Include" />
             <e p="LotShard.cs" t="Include" />
             <e p="TradeShard.cs" t="Include" />
