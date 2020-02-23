@@ -34,11 +34,25 @@ namespace CS495_Capstone_Puma.Controllers
         [EnableCors("AllowAnyOrigin")]
         public JsonResult PostAssets([FromHeader] string jwt, [FromBody] List<AssetInput> assetInputs)
         {
-            Console.WriteLine("jwt is: " +jwt);
+            Console.WriteLine("jwt is: " + jwt);
             //Perform POSTs, preserving the bearerToken
             string bearerToken = _cheetah.PostAssets(jwt, assetInputs).Result;
             
-            Object[] returnJson = _cheetah.GetTradeProposal(jwt, "1");
+            Object[] returnJson = _cheetah.GetTradeProposal(jwt, "1").Result;
+            Console.WriteLine("Return JSON is: " + JsonConvert.SerializeObject(returnJson));
+            //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
+            return Json(returnJson);
+        }
+        
+        [HttpPost("ValidateAsset")]
+        [EnableCors("AllowAnyOrigin")]
+        public JsonResult ValidateAsset([FromHeader] string jwt, List<AssetInput> assetInput)
+        {
+            Console.WriteLine("jwt is: " + jwt);
+            //Perform POSTs, preserving the bearerToken
+            string bearerToken = _cheetah.PostAssets(jwt, assetInput).Result;
+            
+            Object[] returnJson = _cheetah.GetTradeProposal(jwt, "1").Result;
             Console.WriteLine("Return JSON is: " + JsonConvert.SerializeObject(returnJson));
             //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
             return Json(returnJson);
