@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { TabsPage } from "./components/TabsPage"
+import {TabsPage} from "./components/TabsPage";
 
 export default class App extends Component {
     displayName = App.name;
@@ -10,7 +10,7 @@ export default class App extends Component {
         return (
             
             <Layout>
-                <Route path='/tabspage' component={TabsPage} />
+                <Route path='/TabsPage' component={TabsPage} />
             </Layout>
             
         );
