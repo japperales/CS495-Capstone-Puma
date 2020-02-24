@@ -6,34 +6,37 @@ import {portfolioColumns} from "./TableColumns";
 import DeleteableTable from "./DeleteableTable";
 import {Doughnut} from "react-chartjs-2";
 
-
-
-
 let state = {
     inputAssetCode: null,
     inputSymbol: null,
     inputIssue: null,
     inputIssuer: null,
-    inputUnits: null
+    inputUnits: null,
+    currentPortfolio: []
 };
 
 export class CurrentPortfolioPage extends React.Component{
     componentDidMount(){
         console.log("component did mount");
         M.AutoInit();
-        console.log("Current Portfolio is: " + this.props.currentPortfolio)
     }
 
     constructor(props){
         super(props);
         this.state = state;
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.assetCallback = this.assetCallback.bind(this);
+        this.postAssets = this.postAssets.bind(this);
     }
-
+    
     componentWillUnmount() {
         state = this.state;
     }
-
+    
+    assetCallback(newCurrentPortfolio){
+        this.setState({currentPortfolio: newCurrentPortfolio});
+    }
+    
     async handleInputChange(event){
 
         const target = event.target;
@@ -43,16 +46,51 @@ export class CurrentPortfolioPage extends React.Component{
         await this.setState({
             [name]: value
         });
-        this.props.assetCallback(this.state.inputAssetCode, this.state.inputSymbol, this.state.inputIssue, this.state.inputIssuer, this.state.inputUnits);
+        
     }
-
+    
+    postAssets(event){
+        event.preventDefault();
+        const submissionArray = [];
+        for(let asset of this.state.currentPortfolio){
+            submissionArray.push({
+                id: asset.id,
+                quantity: asset.units
+            })
+        }
+        
+        console.log(JSON.stringify(submissionArray));
+        
+        if (this.context !== null) {
+            fetch('api/Puma/PostAssets', {
+                method: 'POST',
+                headers: {
+                    'jwt': this.context.Jwt,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+                body: JSON.stringify(submissionArray)
+            }).then(() => window.alert("Portfolio Submitted"));
+        }
+    }
+    
     render(){
+        let doughnutValues = [0,0,0,0];
+        for (let asset of this.state.currentPortfolio){
+            let index = ((this.state.currentPortfolio.indexOf(asset)%4));
+            let value = asset.units;
+            console.log(index);
+            let sum = (parseInt(doughnutValues[index]) + parseInt(value));
+            doughnutValues[index] = sum;
+            console.log(doughnutValues);
+            
+        }
         return(
             <div className="container">
                 <h3>Current Portfolio</h3>
                     <div className="row">
                         <div className="col s6">
-                            <AssetInput addAsset={this.props.assetCallback} />
+                            <AssetInput modifyPortfolio={this.assetCallback} currentPortfolio={this.state.currentPortfolio}/>
                         </div>
                         <div className="col s6">
                             <Doughnut data={{
@@ -63,7 +101,7 @@ export class CurrentPortfolioPage extends React.Component{
                                     'Loans & Notes Receivables'
                                 ],
                                 datasets: [{
-                                    data: [10,20,30],
+                                    data: doughnutValues,
                                     backgroundColor: [
                                         '#008080',
                                         '#1AE6E6',
@@ -78,7 +116,14 @@ export class CurrentPortfolioPage extends React.Component{
                                     ]
                                 }]}}/>
                                 <br />
-                            <DeleteableTable title={"Current Portfolio"} columns={portfolioColumns} data={this.props.currentPortfolio} setParentData={this.props.assetCallback}/>
+                            <DeleteableTable title={"Current Portfolio"} columns={portfolioColumns} data={this.state.currentPortfolio} setParentData={this.assetCallback}/>
+                            <div>
+                                <h3>Ready to submit your current portfolio? 
+                                    Hit "Submit Portfolio" below and then <a href="https://asctrustv57.accutech-systems.net/LogOn" target="_blank">Click The Link</a> to head over to 
+                                    Accutech to modify the portfolio.</h3>
+                                <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this.postAssets}>Submit Portfolio</a>
+                            </div>
+                                
                         </div>
                     </div>    
                     

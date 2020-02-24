@@ -32,5 +32,30 @@ namespace CS495_Capstone_Puma.AutoFill
 
             return matches;
         }
+
+        public static AssetLookupResponse GetValidatedAsset(AssetValidationForm assetLookup)
+        { 
+
+            foreach (AssetLookupResponse asset in _allAssets)
+            {
+                if (asset.value.symbol != null && assetLookup.value.symbol != null)
+                {
+                    if (asset.value.symbol.ToLower().Equals(assetLookup.value.symbol.ToLower()))
+                    {
+                        return asset;
+                    }
+                }
+
+                if (asset.value.issuer != null && assetLookup.value.issuer != null)
+                {
+                    if (asset.value.issuer.ToLower().Equals(assetLookup.value.issuer.ToLower()))
+                    {
+                        return asset;
+                    }
+                }
+            }
+            
+            return null;
+        }
     }
 }

@@ -7,7 +7,8 @@ export function formatDoughnutChartValues(assets){
             'Money Markets',
             'Common Stock',
             'Mutual Funds',
-            'Loans & Notes Receivables'
+            'Loans & Notes Receivables',
+            'Other'
         ],
         datasets: [{
             data: valueSumArray,
@@ -16,12 +17,14 @@ export function formatDoughnutChartValues(assets){
                 '#1AE6E6',
                 '#66FFFF',
                 '#B2FFFF',
+                '#DCDCDC'
             ],
             hoverBackgroundColor: [
                 '#FF6384',
                 '#36A2EB',
                 '#FFCE56',
-                '#66ff00'
+                '#66ff00',
+                '#FFC0CB'
             ]
         }]
     };
@@ -34,6 +37,7 @@ function sumDifferentAssetTypeValues(assets){
     let commonStockValue = 0;
     let mutualFundsValue = 0;
     let loansValue = 0;
+    let otherValue = 0;
     assets.forEach((asset) => {
         switch (asset.assetCategoryName) {
             case "Money Markets":
@@ -49,10 +53,11 @@ function sumDifferentAssetTypeValues(assets){
                 loansValue += asset.totalValue;
                 break;
             default:
+                otherValue += asset.totalValue;
             break;
         }
     });  
-    console.log([moneyMarketsValue,commonStockValue,mutualFundsValue,loansValue]);
-    return [moneyMarketsValue,commonStockValue,mutualFundsValue,loansValue];
+    console.log([moneyMarketsValue,commonStockValue,mutualFundsValue,loansValue, otherValue]);
+    return [moneyMarketsValue,commonStockValue,mutualFundsValue,loansValue, otherValue];
     
 }
