@@ -50,7 +50,7 @@ namespace CS495_Capstone_Puma.Controllers
         {
             try
             {
-                return Json(AssetMatcher.GetMatches(value));
+                return Json(AssetMatcher.GetAllAssets());
             }
             catch (Exception e)
             {
