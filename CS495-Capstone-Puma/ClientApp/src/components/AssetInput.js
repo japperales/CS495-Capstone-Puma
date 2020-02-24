@@ -1,20 +1,47 @@
 ﻿import {TokenContext} from "../Contexts/TokenContext.js";
-﻿import React from 'react';
+import React from 'react';
 import  './css/PersonalInput.css'
 import M from 'materialize-css';
 import Popup from "reactjs-popup";
+import Autosuggest from 'react-autosuggest';
 
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+let allAssets = [];
 
-const top100Films = [
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: 'Pulp Fiction', year: 1994 }];
+getRequest("none")
+    .then( value => {
+    allAssets = value;
+});
+
+const languages = [
+    {id: '1'},
+    {id: 'aa'},
+    {id: 'ab'}
+];
+
+const getSuggestions = value => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+    console.log(allAssets);
+
+    return inputLength === 0 ? [] : allAssets.filter(asset =>
+        asset.value.Symbol.toLowerCase().slice(0, inputLength) === inputValue
+    );
+};
+
+async function getRequest(value){
+    const allAssetsResponse = await fetch('api/Puma/AutoFill?value=none', {method: 'GET'});
+    const json = await allAssetsResponse.json();
+    console.log(json);
+    return json;
+}
+
+const getSuggestionValue = suggestion => suggestion.value.Issuer;
+
+const renderSuggestion = suggestion => (
+    <div>
+        {suggestion.value.Issuer}
+    </div>
+);
 
 let state = {
     inputAssetCode: null,
@@ -23,8 +50,7 @@ let state = {
     inputIssuer: null,
     inputUnits: null,
     inputValue: null,
-    popupOpen: false,
-    assetResponse: null
+    popupOpen: false
 };
 
 export class AssetInput extends React.Component{
@@ -33,6 +59,7 @@ export class AssetInput extends React.Component{
     
     componentDidMount(){
         M.AutoInit();
+        //console.log("Current Portfolio is: " + this.props.currentPortfolio)
         M.updateTextFields();
         
     }
@@ -46,12 +73,31 @@ export class AssetInput extends React.Component{
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
+    
+    onChange = (event, {newValue}) => {
+        this.setState({
+            value: newValue
+        })
+    };
+    
+    onSuggestionsFetchRequested = ({value}) => {
+        this.setState({
+            suggestions: getSuggestions(value)
+        });
+    };
+    
+    onSuggestionsClearRequested = () => {
+        this.setState({
+            suggestions: []
+        });
+    };
 
     componentWillUnmount() {
         state = this.state;
     }
 
     async handleInputChange(event){
+
         const target = event.target;
         const value = event.target.value;
         const name = target.name;
@@ -133,6 +179,14 @@ export class AssetInput extends React.Component{
     }
 
     render(){
+        const { value, suggestions} = this.state;
+        
+        const inputProps = {
+            placeholder: "Enter C",
+            value,
+            onChange: this.onChange
+        };
+        
         return(
             <div className={"card light-blue lighten-4"}>
                 <div className={"card-content black-text"}>
@@ -142,11 +196,18 @@ export class AssetInput extends React.Component{
                 <br />
                     <h5>Input asset code and symbol for Stocks, Mutual Funds, etc:</h5>
                 <br />
+                    <Autosuggest
+                        suggestions={suggestions}
+                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                        getSuggestionValue={getSuggestionValue}
+                        renderSuggestion={renderSuggestion}
+                        inputProps={inputProps}
+                    />
                     <div className={"input-field"}>
                         <label>Asset Code</label>
                         <input type="text" name="inputAssetCode" className={"validate"} onChange={this.handleInputChange} value={this.state.inputAssetCode}/>
                     </div>
-                    <br/>
                     <div className={"input-field"}>
                         <label>Symbol</label>
                         <input type="text" name="inputSymbol" className={"validate"} onChange={this.handleInputChange} value={this.state.inputSymbol}/>
@@ -160,7 +221,6 @@ export class AssetInput extends React.Component{
                         <label>Issue</label>
                         <input type="text" name="inputIssue" className={"validate"} onChange={this.handleInputChange} value={this.state.inputIssue}/>
                     </div>
-                    <br/>
                     <div className={"input-field"}>
                         <label>Issuer</label>
                         <input type="text" name="inputIssuer" className={"validate"} onChange={this.handleInputChange} value={this.state.inputIssuer}/>
