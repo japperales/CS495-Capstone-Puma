@@ -71,6 +71,7 @@ export class Results extends React.Component{
             
             return (
                 <div>
+                    <a className={"waves-effect waves-light btn light-blue lighten-3"}>Log out</a>
                     <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>
                         Retrieve Again
                     </button>
