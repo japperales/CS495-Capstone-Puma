@@ -8,6 +8,7 @@ import {CurrentPortfolioPage} from "./CurrentPortfolioPage";
 import {TokenContext} from "../Contexts/TokenContext.js";
 
 export class TabsPage extends React.Component {
+    
 
     constructor(props){
         super(props);
@@ -23,7 +24,13 @@ export class TabsPage extends React.Component {
             bearerToken:null,
             userName: null,
             password: null,
-            portfolioResponse: null
+
+            portfolioResponse: null,
+            currentPortfolio: [{"assetCode":"21312312","symbol":"312123123","issue":"312123123","issuer":"231123123","units":"231123312","totalValue":"123123123","tableData":{"id":0}},{"assetCode":"3312123312","symbol":"31232","issue":"312123312","issuer":"321123","units":"32123123","totalValue":"3123123"}],
+            loginTab: false,
+            inputTab: true,
+            resultTab: true
+            
         };
         
         //React Binding because of nebulous this references
@@ -89,6 +96,9 @@ export class TabsPage extends React.Component {
                     this.setState({bearerToken: data});
                 }
                 this.loginPopup(data.wasSuccessful);
+                this.setState({inputTab:false});
+                this.setState({resultTab: false});
+                this.setState({loginTab: true});
             });
     }
     
@@ -121,6 +131,11 @@ export class TabsPage extends React.Component {
         console.log("Formatted Portfolio is: " + formattedPortfolio);
         return formattedPortfolio;
     }
+
+    _refreshPage() {
+        console.log("this is working");
+        window.location.reload();
+    }
     
     retrievePortfolioComparison(event){
         event.preventDefault();
@@ -148,9 +163,9 @@ export class TabsPage extends React.Component {
                 <div>
                  <Tabs>
                         <TabList>
-                            <Tab>Login</Tab>
-                            <Tab>Input Data</Tab>
-                            <Tab>Results</Tab>
+                            <Tab disabled={this.state.loginTab}>Login</Tab>
+                            <Tab disabled={this.state.inputTab}>Input Data</Tab>
+                            <Tab disabled={this.state.resultTab}>Results</Tab>
                         </TabList>
 
                         <TabPanel>
@@ -163,6 +178,7 @@ export class TabsPage extends React.Component {
                             <Results portfolioResponse={this.state.portfolioResponse} sendPortfolio={this.retrievePortfolioComparison}/>
                         </TabPanel>
                 </Tabs>
+                    <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this._refreshPage}>Log out</a>
             </div>
             </TokenContext.Provider>
         );
