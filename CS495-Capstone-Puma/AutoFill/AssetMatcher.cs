@@ -32,5 +32,10 @@ namespace CS495_Capstone_Puma.AutoFill
 
             return matches;
         }
+
+        public static List<AssetLookupResponse> GetAllAssets()
+        {
+            return _allAssets;
+        }
     }
 }
