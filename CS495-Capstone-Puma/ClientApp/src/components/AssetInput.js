@@ -1,5 +1,5 @@
 ﻿import {TokenContext} from "../Contexts/TokenContext.js";
-﻿import React from 'react';
+import React from 'react';
 import  './css/PersonalInput.css'
 import M from 'materialize-css';
 import Popup from "reactjs-popup";

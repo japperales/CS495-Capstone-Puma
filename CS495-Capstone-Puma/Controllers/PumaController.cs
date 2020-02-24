@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using CS495_Capstone_Puma.AutoFill;
 using CS495_Capstone_Puma.DataStructure;
 using CS495_Capstone_Puma.DataStructure.JsonResponse;
@@ -45,12 +46,17 @@ namespace CS495_Capstone_Puma.Controllers
 
         [HttpGet("AutoFill")]
         [EnableCors("AllowAnyOrigin")]
-        public JsonResult GetMatches([FromHeader] string value)
+        public JsonResult GetMatches([FromQuery] string value)
         {
-            return Json(AssetMatcher.GetMatches(value));
+            try
+            {
+                return Json(AssetMatcher.GetMatches(value));
+            }
+            catch (Exception e)
+            {
+                return Json(HttpStatusCode.BadRequest);
+            }
         }
-        
-        
     }
 } 
 
