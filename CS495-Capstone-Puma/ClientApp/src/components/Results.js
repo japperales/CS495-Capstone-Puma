@@ -9,7 +9,7 @@ import {revisedPortfolioColumns, tradeColumns} from "./TableColumns";
 import CountUp from 'react-countup';
 
 
-let state = {loading: false, portfolioResponse: null, doughnutData: null};
+let state = {loading: false, portfolioResponse: null, doughnutData: null, newDoughnutData: null};
 
 
 export class Results extends React.Component{
@@ -20,7 +20,7 @@ export class Results extends React.Component{
         this.onClickWrapperMethod = this.onClickWrapperMethod.bind(this);
         this.isLoading = this.isLoading.bind(this);
         this.readyToBeginRetrieving = this.readyToBeginRetrieving.bind(this);
-        this.state = {loading: false, portfolioResponse: state.portfolioResponse, doughnutData: state.doughnutData};
+        this.state = {loading: false, portfolioResponse: state.portfolioResponse, doughnutData: state.doughnutData, newDoughnutData: state.newDoughnutData};
         
     }
 
@@ -67,6 +67,8 @@ export class Results extends React.Component{
         if (this.readyToDisplayResults()) {
             if (this.state.doughnutData === null) {
                 this.setState({doughnutData: formatDoughnutChartValues(this.state.portfolioResponse[0])});
+                this.setState({newDoughnutData: formatDoughnutChartValues(this.state.portfolioResponse[1])});
+                console.log(JSON.stringify(this.state.portfolioResponse[1]));
             }
             
             return (
@@ -75,10 +77,7 @@ export class Results extends React.Component{
                     <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>
                         Retrieve Again
                     </button>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 1fr)", gridGap: 20 }}>
-                        <div><h3>Current Portfolio Composition</h3>
-                            <Doughnut data={this.state.doughnutData}/></div>
-                        
+                    <div className="container">
                         <div><CountUp start={0}
                                       end={this.state.portfolioResponse[2]}
                                       duration={3}
@@ -87,7 +86,7 @@ export class Results extends React.Component{
                                       suffix=" Portfolio Value Increase"
                                       style={{color: "green", fontSize: "36px"}}/>
                             <br/>
-                            
+
                             <CountUp start={0}
                                      end={this.state.portfolioResponse[3]}
                                      duration={3}
@@ -95,48 +94,58 @@ export class Results extends React.Component{
                                      prefix="+$"
                                      suffix=" Monthly Income Increase"
                                      style={{color: "green", fontSize: "36px"}}/>
+                        <div className="row">
+                            <div className="col s6">
+                        <div><h3>Current Portfolio Composition</h3>
+                            <Doughnut data={this.state.doughnutData}/></div>
+                                <br/>
+                                <div><MaterialTable title={"Original Portfolio"} columns={revisedPortfolioColumns} data={this.state.portfolioResponse[0]}
+                                                    options={{
+                                                        rowStyle: {
+                                                            fontSize: '14px',
+                                                            fontFamily: 'sans-serif',
+                                                            textAlign: 'center',
+                                                            backgroundColor: 'aliceblue'
+                                                        },
+
+                                                        headerStyle: {
+                                                            backgroundColor: 'skyblue',
+                                                            color: '#FFF',
+                                                            fontSize: '14px',
+                                                            fontFamily: 'sans-serif',
+                                                            borderRadius: '0px',
+                                                        }
+                                                    }
+                                                    }/></div>
                         </div>
-                        
+                            
+                            
+                            
+                            <div className="col s6">
+                                <h3>Proposed Portfolio Composition</h3>
+                                <Doughnut data={this.state.newDoughnutData}/>
+                        <br/>
+                            <div><MaterialTable title={"Proposed Portfolio"} columns={revisedPortfolioColumns} data={this.state.portfolioResponse[1]}
+                                                options={{
+                                                    rowStyle: {
+                                                        fontSize: '14px',
+                                                        fontFamily: 'sans-serif',
+                                                        textAlign: 'center',
+                                                        backgroundColor: 'aliceblue'
+                                                    },
+
+                                                    headerStyle: {
+                                                        backgroundColor: 'skyblue',
+                                                        color: '#FFF',
+                                                        fontSize: '14px',
+                                                        fontFamily: 'sans-serif',
+                                                        borderRadius: '0px',
+                                                    }
+                                                }
+                                                }/></div>
+                        </div>
+                            </div>
                     </div>
-                    
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 1fr)", gridGap: 20 }}>
-                        <div><MaterialTable title={"Original Portfolio"} columns={revisedPortfolioColumns} data={this.state.portfolioResponse[0]}
-                                            options={{
-                                                rowStyle: {
-                                                    fontSize: '14px',
-                                                    fontFamily: 'sans-serif',
-                                                    textAlign: 'center',
-                                                    backgroundColor: 'aliceblue'
-                                                },
-
-                                                headerStyle: {
-                                                    backgroundColor: 'skyblue',
-                                                    color: '#FFF',
-                                                    fontSize: '14px',
-                                                    fontFamily: 'sans-serif',
-                                                    borderRadius: '0px',
-                                                }
-                                            }
-                                            }/></div>
-                        
-                        <div><MaterialTable title={"Proposed Trades"} columns={tradeColumns} data={this.state.portfolioResponse[1]}
-                                            options={{
-                                                rowStyle: {
-                                                    fontSize: '14px',
-                                                    fontFamily: 'sans-serif',
-                                                    textAlign: 'center',
-                                                    backgroundColor: 'aliceblue'
-                                                },
-
-                                                headerStyle: {
-                                                    backgroundColor: 'skyblue',
-                                                    color: '#FFF',
-                                                    fontSize: '14px',
-                                                    fontFamily: 'sans-serif',
-                                                    borderRadius: '0px',
-                                                }
-                                            }
-                                            }/></div>
 
                     </div>
 

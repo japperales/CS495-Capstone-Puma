@@ -37,7 +37,16 @@ namespace CS495_Capstone_Puma.Controllers
             Console.WriteLine("jwt is: " + jwt);
             //Perform POSTs, preserving the bearerToken
             string bearerToken = CheetahHandler.PostAssets(jwt, assetInputs).Result;
-            
+
+            //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
+            return null;
+        }
+        
+        [HttpGet("RetrievePortfolioComparison")]
+        [EnableCors("AllowAnyOrigin")]
+        public JsonResult RetrievePortfolioComparison([FromHeader] string jwt)
+        {
+            Console.WriteLine("jwt is: " + jwt);
             Object[] returnJson = CheetahHandler.GetTradeProposal(jwt, "1").Result;
             Console.WriteLine("Return JSON is: " + JsonConvert.SerializeObject(returnJson));
             //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
@@ -56,6 +65,14 @@ namespace CS495_Capstone_Puma.Controllers
             {
                 return Json(HttpStatusCode.BadRequest);
             }
+        }
+        
+        [HttpPost("ValidateAsset")]
+        [EnableCors("AllowAnyOrigin")]
+        public JsonResult ValidateAsset([FromBody] AssetValidationForm assetLookup)
+        {
+            Console.WriteLine("ASSETLOOKUP WE SEND IN IS: " + JsonConvert.SerializeObject(assetLookup));
+            return Json(AssetMatcher.GetValidatedAsset(assetLookup));
         }
     }
 } 

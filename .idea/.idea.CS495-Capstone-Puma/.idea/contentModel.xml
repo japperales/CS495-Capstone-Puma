@@ -162,6 +162,7 @@
               <e p="AssetIdentifier.cs" t="Include" />
               <e p="AssetInput.cs" t="Include" />
               <e p="AssetLookupResponse.cs" t="Include" />
+              <e p="AssetValidationForm.cs" t="Include" />
               <e p="LookupResponse.cs" t="Include" />
             </e>
             <e p="TokenResponse.cs" t="Include" />

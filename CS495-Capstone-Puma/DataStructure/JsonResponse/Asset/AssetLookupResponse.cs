@@ -29,5 +29,10 @@ namespace CS495_Capstone_Puma.DataStructure.JsonResponse.Asset
                 json["Issue"].ToString(), json["Issuer"].ToString());
         }
         
+        public AssetLookupResponse(string id, string assetCode, string symbol, string issue, string issuer)
+        {
+            this.id = id;
+            this.value = new AssetIdentifier(assetCode, symbol, issue, issuer);
+        }
     }
 }

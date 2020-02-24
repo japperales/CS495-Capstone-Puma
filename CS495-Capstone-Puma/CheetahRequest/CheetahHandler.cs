@@ -82,17 +82,18 @@
         {
             //await getTrades(bearerToken, accountId);
                     
-            IList<HoldingsShard> originalPortfolio = ProposalGet.RetrieveOriginalPortfolio(CheetahConfig, bearerToken, accountId).Result;
+            //IList<HoldingsShard> originalPortfolio = ProposalGet.RetrieveOriginalPortfolio(CheetahConfig, bearerToken, accountId).Result;
                     
-            IList<TradeShard> tradeProposal = ProposalGet.RetrieveTradeProposal(CheetahConfig, bearerToken, accountId).Result;
+            //IList<TradeShard> tradeProposal = ProposalGet.RetrieveTradeProposal(CheetahConfig, bearerToken, accountId).Result;
                     
             Object[] responseArray= new Object[4];
-            responseArray[0] = originalPortfolio;
-            responseArray[1] = tradeProposal;
+            //responseArray[0] = originalPortfolio;
+            //responseArray[1] = tradeProposal;
             responseArray[2] = 484934.46;
             responseArray[3] = 5891.01;
-            await ProposalGet.GetOriginalAndRevisedPortfolio(CheetahConfig, bearerToken, accountId);
-            
+            Object[] portfolioArrays = await ProposalGet.GetOriginalAndRevisedPortfolio(CheetahConfig, bearerToken, accountId);
+            responseArray[0] = portfolioArrays[0];
+            responseArray[1] = portfolioArrays[1];
             return responseArray;
         }
 

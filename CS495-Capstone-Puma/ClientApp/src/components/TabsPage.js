@@ -24,6 +24,7 @@ export class TabsPage extends React.Component {
             bearerToken:null,
             userName: null,
             password: null,
+
             portfolioResponse: null,
             currentPortfolio: [{"assetCode":"21312312","symbol":"312123123","issue":"312123123","issuer":"231123123","units":"231123312","totalValue":"123123123","tableData":{"id":0}},{"assetCode":"3312123312","symbol":"31232","issue":"312123312","issuer":"321123","units":"32123123","totalValue":"3123123"}],
             loginTab: false,
@@ -31,6 +32,7 @@ export class TabsPage extends React.Component {
             resultTab: true
             
         };
+        
         //React Binding because of nebulous this references
         this.assetCallback = this.assetCallback.bind(this);
         this.sendPortfolio = this.sendPortfolio.bind(this);
@@ -38,6 +40,7 @@ export class TabsPage extends React.Component {
         this.sendLogin = this.sendLogin.bind(this);
         this.loginPopup = this.loginPopup.bind(this);
         this.formatPortfolioToSend = this.formatPortfolioToSend.bind(this);
+        this.retrievePortfolioComparison = this.retrievePortfolioComparison.bind(this);
     }
     
     //A group of callback functions, one passed into its corresponding subcomponent,
@@ -134,6 +137,25 @@ export class TabsPage extends React.Component {
         window.location.reload();
     }
     
+    retrievePortfolioComparison(event){
+        event.preventDefault();
+
+        fetch('api/Puma/RetrievePortfolioComparison', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json; charset=UTF-8',
+                'jwt': this.state.bearerToken.Jwt
+                
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                    this.setState({portfolioResponse: data});
+                    console.log(this.state.portfolioResponse)
+            });
+    }
+    
     //Each Tab in the TabsList navigates to a corresponding TabPanel
     render() {
         return(
@@ -153,7 +175,7 @@ export class TabsPage extends React.Component {
                             <CurrentPortfolioPage assetCallback={this.assetCallback} currentPortfolio={this.state.currentPortfolio} />
                         </TabPanel>
                         <TabPanel>
-                            <Results portfolioResponse={this.state.portfolioResponse} sendPortfolio={this.sendPortfolio}/>
+                            <Results portfolioResponse={this.state.portfolioResponse} sendPortfolio={this.retrievePortfolioComparison}/>
                         </TabPanel>
                 </Tabs>
                     <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this._refreshPage}>Log out</a>

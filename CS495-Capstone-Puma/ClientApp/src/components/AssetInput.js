@@ -50,9 +50,7 @@ let state = {
     inputIssuer: null,
     inputUnits: null,
     inputValue: null,
-    popupOpen: false,
-    value: '',
-    suggestions: []
+    popupOpen: false
 };
 
 export class AssetInput extends React.Component{
@@ -60,7 +58,6 @@ export class AssetInput extends React.Component{
     static contextType = TokenContext;
     
     componentDidMount(){
-        console.log(JSON.stringify(this.context));
         M.AutoInit();
         //console.log("Current Portfolio is: " + this.props.currentPortfolio)
         M.updateTextFields();
@@ -124,26 +121,52 @@ export class AssetInput extends React.Component{
                     'Accept': 'application/json',
                     'Content-Type': 'application/json; charset=UTF-8',
                 },
-                body: JSON.stringify([{
-                    AssetIdentifier:
+                body: JSON.stringify({
+                    id: null,
+                    value:
                         {
                             AssetCode: this.state.inputAssetCode,
                             Symbol: this.state.inputSymbol,
                             Issue: this.state.inputIssue,
                             Issuer: this.state.inputIssuer
-                        },
-                    Units: parseInt(this.state.inputUnits, 10)
-                }])
+                        }
+                    
+                })
             }).then(response => response.json())
                 .then(data => {
-                    this.setState({portfolioResponse: data});
+                    if (data !== null) {
+                        console.log(JSON.stringify(data));
+                        const newAsset = {
+                            assetId: data.id,
+                            assetCode: data.value.AssetCode,
+                            symbol: data.value.Symbol,
+                            issue: data.value.Issue,
+                            issuer: data.value.Issuer,
+                            units: this.state.inputUnits
+                        };
+                        const copyOfCurrentPortfolio = [...this.props.currentPortfolio];
+                        copyOfCurrentPortfolio.push(newAsset);
+                        this.props.modifyPortfolio(copyOfCurrentPortfolio);
+                    }else{
+                        this.openModal();
+                    }
                 });
         }
-        this.openModal();
+        
     }
-    
+/*
+{ title: 'Asset ID', field: 'assetId'},
+{ title: 'Asset Name', field: 'assetName' },
+{ title: 'Asset Category', field: 'assetCategoryName'},
+{ title: 'Total Value', field: 'totalValue' },
+{ title: 'Total Amount', field: 'totalAmount'},
+{ title: 'Price Per Share', field: 'pricePerShare'},
+*/
     addCashToPortfolio(event){
-    event.preventDefault();
+        event.preventDefault();
+        const copyOfCurrentPortfolio = [...this.props.currentPortfolio];
+        copyOfCurrentPortfolio.push({assetId: 1, assetCode: "Cash", symbol: "CSH", issue: "Fed Service", issuer: "Fed", units: this.state.inputValue});
+        this.props.modifyPortfolio(copyOfCurrentPortfolio);
         this.closeModal();
     }
     
@@ -168,7 +191,6 @@ export class AssetInput extends React.Component{
             <div className={"card light-blue lighten-4"}>
                 <div className={"card-content black-text"}>
                     <h3>Input Assets </h3>
-                    {JSON.stringify(this.context)}
                 <br />
                     <h4>Enter Asset Identifiers in one of two ways:</h4>
                 <br />
@@ -207,7 +229,7 @@ export class AssetInput extends React.Component{
                     <h4>Enter Asset Quantity and Total Value:</h4>
                 <br />
                     <div className={"input-field"}>
-                        <label>Quantity</label>
+                        <label>Asset Quantity</label>
                         <input type="number" name="inputUnits" className={"validate"} onChange={this.handleInputChange} value={this.state.inputUnits}/>
                     </div>
                     <div className={"input-field"}>
@@ -215,7 +237,6 @@ export class AssetInput extends React.Component{
                         <input type="number" name="inputValue" className={"validate"} onChange={this.handleInputChange} value={this.state.inputValue}/>
                     </div>
                 <br />
-                <button onClick={this.submitAsset}/>
                     <div>
                         <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this.submitAsset}>Add Asset</a>
                     </div>
