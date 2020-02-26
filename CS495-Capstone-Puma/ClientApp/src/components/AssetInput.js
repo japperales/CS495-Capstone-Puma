@@ -12,12 +12,6 @@ getRequest("none")
     allAssets = value;
 });
 
-const languages = [
-    {id: '1'},
-    {id: 'aa'},
-    {id: 'ab'}
-];
-
 const getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -50,7 +44,9 @@ let state = {
     inputIssuer: null,
     inputUnits: null,
     inputValue: null,
-    popupOpen: false
+    popupOpen: false,
+    suggestions: [],
+    value: ""
 };
 
 export class AssetInput extends React.Component{
@@ -72,6 +68,8 @@ export class AssetInput extends React.Component{
         this.addCashToPortfolio = this.addCashToPortfolio.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
+        this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
     }
     
     onChange = (event, {newValue}) => {
@@ -179,7 +177,9 @@ export class AssetInput extends React.Component{
     }
 
     render(){
-        const { value, suggestions} = this.state;
+        const { value, suggestions } = this.state;
+        console.log("value is : " + JSON.stringify(value));
+        console.log("suggestions is : " + JSON.stringify(suggestions));
         
         const inputProps = {
             placeholder: "Enter C",
