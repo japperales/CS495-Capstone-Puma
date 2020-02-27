@@ -70,6 +70,8 @@ export class AssetInput extends React.Component{
         this.closeModal = this.closeModal.bind(this);
         this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
         this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
+        this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
     
     onChange = (event, {newValue}) => {
@@ -90,6 +92,13 @@ export class AssetInput extends React.Component{
         });
     };
 
+    onSuggestionSelected(event, suggestionValue){
+        console.log(JSON.stringify(suggestionValue));
+        const asset = suggestionValue.suggestion;
+        this.setState({inputIssuer: asset.value.Issuer, inputSymbol: asset.value.Symbol, inputAssetCode: asset.value.AssetCode, inputIssue: asset.value.Issue});
+        M.updateTextFields();
+    }
+    
     componentWillUnmount() {
         state = this.state;
     }
@@ -152,14 +161,7 @@ export class AssetInput extends React.Component{
         }
         
     }
-/*
-{ title: 'Asset ID', field: 'assetId'},
-{ title: 'Asset Name', field: 'assetName' },
-{ title: 'Asset Category', field: 'assetCategoryName'},
-{ title: 'Total Value', field: 'totalValue' },
-{ title: 'Total Amount', field: 'totalAmount'},
-{ title: 'Price Per Share', field: 'pricePerShare'},
-*/
+
     addCashToPortfolio(event){
         event.preventDefault();
         const copyOfCurrentPortfolio = [...this.props.currentPortfolio];
@@ -182,7 +184,7 @@ export class AssetInput extends React.Component{
         console.log("suggestions is : " + JSON.stringify(suggestions));
         
         const inputProps = {
-            placeholder: "Enter C",
+            placeholder: "Enter Value for Autofill Suggestions",
             value,
             onChange: this.onChange
         };
@@ -202,6 +204,7 @@ export class AssetInput extends React.Component{
                         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                         getSuggestionValue={getSuggestionValue}
                         renderSuggestion={renderSuggestion}
+                        onSuggestionSelected={this.onSuggestionSelected}
                         inputProps={inputProps}
                     />
                     <div className={"input-field"}>
