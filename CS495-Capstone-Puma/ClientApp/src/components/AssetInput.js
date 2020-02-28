@@ -55,9 +55,7 @@ export class AssetInput extends React.Component{
     
     componentDidMount(){
         M.AutoInit();
-        //console.log("Current Portfolio is: " + this.props.currentPortfolio)
         M.updateTextFields();
-        
     }
 
     constructor(props){
@@ -90,13 +88,13 @@ export class AssetInput extends React.Component{
         this.setState({
             suggestions: []
         });
+        M.updateTextFields();
     };
 
-    onSuggestionSelected(event, suggestionValue){
-        console.log(JSON.stringify(suggestionValue));
+    async onSuggestionSelected(event, suggestionValue){
         const asset = suggestionValue.suggestion;
         this.setState({inputIssuer: asset.value.Issuer, inputSymbol: asset.value.Symbol, inputAssetCode: asset.value.AssetCode, inputIssue: asset.value.Issue});
-        M.updateTextFields();
+        await M.updateTextFields();
     }
     
     componentWillUnmount() {
@@ -112,14 +110,16 @@ export class AssetInput extends React.Component{
         await this.setState({
             [name]: value
         });
-        //this.props.assetCallback(this.state.inputAssetCode, this.state.inputSymbol, this.state.inputIssue, this.state.inputIssuer, this.state.inputUnits);
+       
+        M.updateTextFields();
     }
     
+    //method for the submission of the input field values to the backend to find an asse3t that matches.
+    // If a match is found, the asset is added to the current portfolio. If no match is found, the cash substitution popup is shown
     submitAsset(event){
         
         event.preventDefault();
         let token = this.context;
-        console.log(token);
         if (this.context !== null) {
             fetch('api/Puma/ValidateAsset', {
                 method: 'POST',
@@ -142,7 +142,6 @@ export class AssetInput extends React.Component{
             }).then(response => response.json())
                 .then(data => {
                     if (data !== null) {
-                        console.log(JSON.stringify(data));
                         const newAsset = {
                             assetId: data.id,
                             assetCode: data.value.AssetCode,
@@ -162,6 +161,8 @@ export class AssetInput extends React.Component{
         
     }
 
+    
+    //Behaviors for Cash popup, if no asset match is found in when submitAsset() is called, the popup is shown
     addCashToPortfolio(event){
         event.preventDefault();
         const copyOfCurrentPortfolio = [...this.props.currentPortfolio];
@@ -180,8 +181,6 @@ export class AssetInput extends React.Component{
 
     render(){
         const { value, suggestions } = this.state;
-        console.log("value is : " + JSON.stringify(value));
-        console.log("suggestions is : " + JSON.stringify(suggestions));
         
         const inputProps = {
             placeholder: "Enter Value for Autofill Suggestions",
@@ -196,7 +195,8 @@ export class AssetInput extends React.Component{
                 <br />
                     <h4>Enter Asset Identifiers in one of two ways:</h4>
                 <br />
-                    <h5>Input asset code and symbol for Stocks, Mutual Funds, etc:</h5>
+                    <h5>Type in asset names below for autosuggest values to appear.</h5>
+                    <h5>Click on the suggestion to select it.</h5>
                 <br />
                     <Autosuggest
                         suggestions={suggestions}
@@ -207,6 +207,7 @@ export class AssetInput extends React.Component{
                         onSuggestionSelected={this.onSuggestionSelected}
                         inputProps={inputProps}
                     />
+                    <h5>Input asset code and symbol for Stocks, Mutual Funds, etc:</h5>
                     <div className={"input-field"}>
                         <label>Asset Code</label>
                         <input type="text" name="inputAssetCode" className={"validate"} onChange={this.handleInputChange} value={this.state.inputAssetCode}/>

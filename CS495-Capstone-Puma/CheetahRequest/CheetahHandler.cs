@@ -80,15 +80,7 @@
         //Coordinates Proposed Trade GET
         public static async Task<object[]> GetTradeProposal(string bearerToken, string accountId)
         {
-            //await getTrades(bearerToken, accountId);
-                    
-            //IList<HoldingsShard> originalPortfolio = ProposalGet.RetrieveOriginalPortfolio(CheetahConfig, bearerToken, accountId).Result;
-                    
-            //IList<TradeShard> tradeProposal = ProposalGet.RetrieveTradeProposal(CheetahConfig, bearerToken, accountId).Result;
-                    
             Object[] responseArray= new Object[4];
-            //responseArray[0] = originalPortfolio;
-            //responseArray[1] = tradeProposal;
             responseArray[2] = 484934.46;
             responseArray[3] = 5891.01;
             Object[] portfolioArrays = await ProposalGet.GetOriginalAndRevisedPortfolio(CheetahConfig, bearerToken, accountId);

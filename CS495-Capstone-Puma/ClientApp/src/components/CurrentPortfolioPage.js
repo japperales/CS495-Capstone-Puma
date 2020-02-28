@@ -59,8 +59,6 @@ export class CurrentPortfolioPage extends React.Component{
             })
         }
         
-        console.log(JSON.stringify(submissionArray));
-        
         if (this.context !== null) {
             fetch('api/Puma/PostAssets', {
                 method: 'POST',
@@ -79,10 +77,8 @@ export class CurrentPortfolioPage extends React.Component{
         for (let asset of this.state.currentPortfolio){
             let index = ((this.state.currentPortfolio.indexOf(asset)%4));
             let value = asset.units;
-            console.log(index);
             let sum = (parseInt(doughnutValues[index]) + parseInt(value));
             doughnutValues[index] = sum;
-            console.log(doughnutValues);
             
         }
         return(
@@ -133,4 +129,3 @@ export class CurrentPortfolioPage extends React.Component{
     }
 
 }
-//<EditableTable title={"Current Portfolio"} columns={portfolioColumns} data={this.props.currentPortfolio} setParentData={this.props.assetCallback}/>

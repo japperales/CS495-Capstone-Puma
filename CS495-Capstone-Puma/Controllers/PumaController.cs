@@ -46,9 +46,7 @@ namespace CS495_Capstone_Puma.Controllers
         [EnableCors("AllowAnyOrigin")]
         public JsonResult RetrievePortfolioComparison([FromHeader] string jwt)
         {
-            Console.WriteLine("jwt is: " + jwt);
             Object[] returnJson = CheetahHandler.GetTradeProposal(jwt, "1").Result;
-            Console.WriteLine("Return JSON is: " + JsonConvert.SerializeObject(returnJson));
             //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
             return Json(returnJson);
         }
@@ -71,7 +69,6 @@ namespace CS495_Capstone_Puma.Controllers
         [EnableCors("AllowAnyOrigin")]
         public JsonResult ValidateAsset([FromBody] AssetValidationForm assetLookup)
         {
-            Console.WriteLine("ASSETLOOKUP WE SEND IN IS: " + JsonConvert.SerializeObject(assetLookup));
             return Json(AssetMatcher.GetValidatedAsset(assetLookup));
         }
     }
