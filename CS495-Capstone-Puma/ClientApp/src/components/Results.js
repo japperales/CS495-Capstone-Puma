@@ -24,7 +24,6 @@ export class Results extends React.Component{
         
     }
 
-
     componentDidMount() {
        this.state = state;
     }
@@ -39,20 +38,13 @@ export class Results extends React.Component{
         this.forceUpdate()
     }
     
+    //methods that return booleans to track the state of loading for the component.
     readyToDisplayResults(){
         return (!this.state.loading && this.props.portfolioResponse !== null);
     }
     
     readyToBeginRetrieving(){
         return !this.state.loading && this.props.portfolioResponse === null;
-    }
-    
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.portfolioResponse !== this.props.portfolioResponse) {
-            this.setState({ portfolioResponse: nextProps.portfolioResponse,
-                                loading: false});
-            this.forceUpdate();
-        }
     }
     
     isLoading(){
@@ -63,12 +55,20 @@ export class Results extends React.Component{
         this.setState({loading: true})
     }
     
+    //method to check to see if results props has changed. If results props has changed, then the component rerenders.
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.portfolioResponse !== this.props.portfolioResponse) {
+            this.setState({ portfolioResponse: nextProps.portfolioResponse,
+                loading: false});
+            this.forceUpdate();
+        }
+    }
+    
     render() {
         if (this.readyToDisplayResults()) {
             if (this.state.doughnutData === null) {
                 this.setState({doughnutData: formatDoughnutChartValues(this.state.portfolioResponse[0])});
                 this.setState({newDoughnutData: formatDoughnutChartValues(this.state.portfolioResponse[1])});
-                console.log(JSON.stringify(this.state.portfolioResponse[1]));
             }
             
             return (

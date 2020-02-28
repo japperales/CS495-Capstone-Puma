@@ -27,7 +27,8 @@
     "react-scripts": "1.0.17",
     "react-tabs": "^3.0.0",
     "reactjs-popup": "latest",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "react-autosuggest": "latest"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",

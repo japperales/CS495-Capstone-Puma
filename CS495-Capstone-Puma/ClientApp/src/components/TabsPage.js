@@ -26,7 +26,7 @@ export class TabsPage extends React.Component {
             password: null,
 
             portfolioResponse: null,
-            currentPortfolio: [{"assetCode":"21312312","symbol":"312123123","issue":"312123123","issuer":"231123123","units":"231123312","totalValue":"123123123","tableData":{"id":0}},{"assetCode":"3312123312","symbol":"31232","issue":"312123312","issuer":"321123","units":"32123123","totalValue":"3123123"}],
+            currentPortfolio: [],
             loginTab: false,
             inputTab: true,
             resultTab: true
@@ -155,7 +155,7 @@ export class TabsPage extends React.Component {
                     console.log(this.state.portfolioResponse)
             });
     }
-    
+    //Token Context allows any child components to access the token data without passing it down explicitly
     //Each Tab in the TabsList navigates to a corresponding TabPanel
     render() {
         return(

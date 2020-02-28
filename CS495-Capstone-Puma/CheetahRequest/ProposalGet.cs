@@ -34,9 +34,6 @@ namespace CS495_Capstone_Puma.Model
                 });
             }
             IList<HoldingsShard> revisedPortfolio = await CompileNewPortfolio(cheetahConfig, bearerToken, copiedPortfolio, currentTrades);
-            Console.WriteLine("CURRENT PORTFOLIO IS: " + JsonConvert.SerializeObject(currentPortfolio));
-            Console.WriteLine("\n REVISED PORTFOLIO IS: " + JsonConvert.SerializeObject(revisedPortfolio));
-            Console.WriteLine("Are the two portfolios the same?: " + (currentPortfolio.Equals(revisedPortfolio)));
             Object[] portfolios = new Object[2];
             portfolios[0] = currentPortfolio;
             portfolios[1] = revisedPortfolio;
@@ -209,11 +206,6 @@ namespace CS495_Capstone_Puma.Model
             AssetShard asset = assetToken.ToObject<AssetShard>();
 
             asset.Price = pricePerShare;
-            
-            Console.WriteLine("Price per share is: " + asset.Price);
-            Console.WriteLine("Asset ID is: " + asset.AssetId);
-            Console.WriteLine("Display Name is: " + asset.AssetCategoryDisplayName);
-            Console.WriteLine("Asset Name is: " + asset.Issuer);
 
             return asset;
 
