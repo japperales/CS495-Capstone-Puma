@@ -109,7 +109,7 @@ export class Results extends React.Component{
                                                     options={{
                                                         rowStyle: {
                                                             fontSize: '14px',
-                                                            fontFamily: 'sans-serif',
+                                                            fontFamily: 'Veranda',
                                                             textAlign: 'center',
                                                             backgroundColor: 'aliceblue'
                                                         },
@@ -118,7 +118,7 @@ export class Results extends React.Component{
                                                             backgroundColor: 'skyblue',
                                                             color: '#FFF',
                                                             fontSize: '14px',
-                                                            fontFamily: 'sans-serif',
+                                                            fontFamily: 'Veranda',
                                                             borderRadius: '0px',
                                                         }
                                                     }
@@ -135,7 +135,7 @@ export class Results extends React.Component{
                                                 options={{
                                                     rowStyle: {
                                                         fontSize: '14px',
-                                                        fontFamily: 'sans-serif',
+                                                        fontFamily: 'Veranda',
                                                         textAlign: 'center',
                                                         backgroundColor: 'aliceblue'
                                                     },
@@ -144,7 +144,7 @@ export class Results extends React.Component{
                                                         backgroundColor: 'skyblue',
                                                         color: '#FFF',
                                                         fontSize: '14px',
-                                                        fontFamily: 'sans-serif',
+                                                        fontFamily: 'Veranda',
                                                         borderRadius: '0px',
                                                     }
                                                 }
