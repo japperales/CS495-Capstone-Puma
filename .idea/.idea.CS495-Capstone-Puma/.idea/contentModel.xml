@@ -21,6 +21,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="cheetah-config.json" t="Include" />
         <e p="CheetahRequest" t="Include">
+          <e p="AccountPost.cs" t="Include" />
           <e p="AssetPost.cs" t="Include" />
           <e p="CheetahHandler.cs" t="Include" />
           <e p="LoginPost.cs" t="Include" />
@@ -140,6 +141,10 @@
         </e>
         <e p="CS495-Capstone-Puma.csproj" t="IncludeRecursive" />
         <e p="DataStructure" t="Include">
+          <e p="Account" t="Include">
+            <e p="AccountRequest.cs" t="Include" />
+            <e p="AccountResponse.cs" t="Include" />
+          </e>
           <e p="Asset" t="Include">
             <e p="Asset.cs" t="Include" />
             <e p="AssetCategory" t="Include">
