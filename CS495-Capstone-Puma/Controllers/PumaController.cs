@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using CS495_Capstone_Puma.AutoFill;
 using CS495_Capstone_Puma.DataStructure;
+using CS495_Capstone_Puma.DataStructure.AccountResponse;
 using CS495_Capstone_Puma.DataStructure.JsonResponse;
 using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
 using CS495_Capstone_Puma.Model;
@@ -34,12 +35,11 @@ namespace CS495_Capstone_Puma.Controllers
         [EnableCors("AllowAnyOrigin")]
         public JsonResult PostAssets([FromHeader] string jwt, [FromBody] List<AssetInput> assetInputs)
         {
-            Console.WriteLine("jwt is: " + jwt);
+            Console.WriteLine("jwt in post assets in puma controller is: " + jwt);
             //Perform POSTs, preserving the bearerToken
-            string bearerToken = CheetahHandler.PostAssets(jwt, assetInputs).Result;
-
+            AccountResponse accountResponse= CheetahHandler.PostAssets(jwt, assetInputs).Result;
             //Serializes cheetah response into data structure understood by the frontend & returns that object as JSON
-            return null;
+            return Json(accountResponse);
         }
         
         [HttpGet("RetrievePortfolioComparison")]
@@ -71,6 +71,7 @@ namespace CS495_Capstone_Puma.Controllers
         {
             return Json(AssetMatcher.GetValidatedAsset(assetLookup));
         }
+        
     }
 } 
 

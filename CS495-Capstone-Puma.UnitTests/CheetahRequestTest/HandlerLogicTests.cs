@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using CS495_Capstone_Puma.DataStructure;
+using CS495_Capstone_Puma.DataStructure.AccountResponse;
 using CS495_Capstone_Puma.DataStructure.JsonResponse;
 using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
 using CS495_Capstone_Puma.Model;
@@ -86,8 +87,8 @@ namespace CS495_Capstone_Puma.UnitTests.CheetahRequestTest
             List<AssetInput> assets = new List<AssetInput>{assetInput};
             
 
-            string resp = CheetahHandler.PostAssets(bearerToken, assets).Result;
-            Assert.Equal("PostAssets Successful", resp);
+            AccountResponse resp = CheetahHandler.PostAssets(bearerToken, assets).Result;
+            Assert.NotEqual(resp.AccountId, -1);
         }
         
         [Fact]
@@ -102,9 +103,9 @@ namespace CS495_Capstone_Puma.UnitTests.CheetahRequestTest
             
             List<AssetInput> assets = new List<AssetInput>();
 
-            string resp = CheetahHandler.PostAssets(bearerToken, assets).Result;
+            AccountResponse resp = CheetahHandler.PostAssets(bearerToken, assets).Result;
             
-            Assert.Equal("PostAssets Error", resp);
+            Assert.NotEqual(resp.AccountId, -1);
         }
         
         

@@ -3,6 +3,7 @@
  using System.IO;
  using System.Threading.Tasks;
  using CS495_Capstone_Puma.DataStructure;
+ using CS495_Capstone_Puma.DataStructure.AccountResponse;
  using CS495_Capstone_Puma.DataStructure.JsonRequest;
  using CS495_Capstone_Puma.DataStructure.JsonResponse;
  using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
@@ -45,15 +46,18 @@
         }
         
         //Coordinates Asset/Transaction POST
-        public static async Task<string> PostAssets(string bearerToken, List<AssetInput> assets)
+        public static async Task<AccountResponse> PostAssets(string bearerToken, List<AssetInput> assets)
         {
             try
             {
+                AccountResponse accountResponse = AccountPost.PostAccount(bearerToken, CheetahConfig.ApiUrlRoot).Result;
+                Console.WriteLine("Account Id right after posting the account supposedly is: " + accountResponse.AccountId);
+                
                 //Create new Transaction Batch
                 int batchId = AssetPost.PostTransactionBatch(CheetahConfig, bearerToken, new TransactionBatchRequest()).Result.transactionBatchId;
                 Console.WriteLine(batchId);
                 //Turn asset list into a list of transactions to POST
-                List<TransactionRequest> transactions = AssembleTransactions(bearerToken, batchId, assets);
+                List<TransactionRequest> transactions = AssembleTransactions(bearerToken, batchId, assets, accountResponse.AccountId);
                 
                 //POST each transaction
                 foreach (TransactionRequest transaction in transactions)
@@ -67,13 +71,13 @@
                 await AssetPost.PostTransactionBatchProcessor(CheetahConfig, bearerToken, batchId, false);
                 await AssetPost.PostTransactionBatchProcessor(CheetahConfig, bearerToken, batchId, true);
 
-                return "PostAssets Successful";
+                return accountResponse;
 
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return "PostAssets Error";
+                return null;
             }
         }
         
@@ -90,7 +94,7 @@
         }
 
         //Assemble list of Transactions from Assets list
-        private static List<TransactionRequest> AssembleTransactions(string bearerToken, int batchId, List<AssetInput> assets)
+        private static List<TransactionRequest> AssembleTransactions(string bearerToken, int batchId, List<AssetInput> assets, int accountId)
         {
             //Populate Dictionary of assets from Cheetah with a GET request
             Dictionary<AssetIdentifier, int> allAssets = PopulateAssetsDictionary(bearerToken);
@@ -103,11 +107,13 @@
             {
                 try
                 {
+                    
+                    Console.WriteLine("current asset is: " + asset.units + " , " + asset.assetIdentifier);
                     int assetId = allAssets[asset.assetIdentifier];
                     
                     //Once found, build request and POST to the batch
                     transactionRequests.Add(new TransactionRequest(
-                        534, batchId, 26, 19, assetId, asset.units));
+                        accountId, batchId, 26, 19, assetId, asset.units));
                 }
                 catch (KeyNotFoundException e)
                 {
