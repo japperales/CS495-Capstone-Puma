@@ -48,31 +48,33 @@ export class Login extends React.Component {
     render(){
         return(
             <body>
-            <div className={"container"}>
-                <div className={"row"}>
-                    <div className={"col s6 offset-s3"}>
-                        <div className={"card light-blue lighten-4"}>
-                            <div className={"card-content black-text"}>
-                                <h3>Login</h3>
-                                <div className={"input-field"}>
-                                    <label>Username</label>
-                                    <input type="text" name="inputUserName" className={"validate"} onChange={this.handleInputChange} value={this.state.inputUserName}/>
-                                </div>
-                                <div className={"input-field"}>
-                                    <label>Password</label>
-                                    <input type="password" id="password" name="inputPassword" className={"validate"} onChange={this.handleInputChange} value={this.state.inputPassword}/>
-                                </div>
-                                <div>
-                                    <p>{this.state.loginStatus}</p>
+                
+                    <div className={"row"}>
+                        <div className="col s12 m4 l2"><p></p></div>
+                            <div className={"col s12 m4 l8"}>
+                                <div className={"card light-blue lighten-4"}>
+                                    <div className={"card-content black-text"}>
+                                        <h3>Login</h3>
+                                        <div className={"input-field"}>
+                                            <label>Username</label>
+                                            <input type="text" name="inputUserName" className={"validate"} onChange={this.handleInputChange} value={this.state.inputUserName}/>
+                                        </div>
+                                        <div className={"input-field"}>
+                                            <label>Password</label>
+                                            <input type="password" id="password" name="inputPassword" className={"validate"} onChange={this.handleInputChange} value={this.state.inputPassword}/>
+                                        </div>
+                                        <div>
+                                            <p>{this.state.loginStatus}</p>
+                                        </div>
+                                    </div>
+                                <div className={"card-action"}>
+                                    <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this.onClickWrapperMethod}>Login</a>
+                                </div>  
                                 </div>
                             </div>
-                            <div className={"card-action"}>
-                                <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this.onClickWrapperMethod}>Login</a>
-                            </div>
-                        </div>
+                        <div className="col s12 m4 l2"><p></p></div>
                     </div>
-                </div>
-            </div>
+                
             </body>
         );
     }
