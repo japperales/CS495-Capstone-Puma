@@ -114,10 +114,10 @@ export class CurrentPortfolioPage extends React.Component{
                                 datasets: [{
                                     data: doughnutValues,
                                     backgroundColor: [
-                                        '#008080',
-                                        '#1AE6E6',
-                                        '#66FFFF',
-                                        '#B2FFFF',
+                                        '#FF6384',
+                                        '#36A2EB',
+                                        '#FFCE56',
+                                        '#66ff00',
                                     ],
                                     hoverBackgroundColor: [
                                         '#FF6384',

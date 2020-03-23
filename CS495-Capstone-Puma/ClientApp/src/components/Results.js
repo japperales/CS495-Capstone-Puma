@@ -67,8 +67,10 @@ export class Results extends React.Component{
     render() {
         if (this.readyToDisplayResults()) {
             if (this.state.doughnutData === null) {
-                this.setState({doughnutData: formatDoughnutChartValues(this.state.portfolioResponse[0])});
+                this.setState({doughnutData: formatDoughnutChartValues(this.state.portfolioResponse[0]),
+                });
                 this.setState({newDoughnutData: formatDoughnutChartValues(this.state.portfolioResponse[1])});
+                
             }
             
             return (
@@ -78,11 +80,13 @@ export class Results extends React.Component{
                         Retrieve Again
                     </button>
                     <div className="container">
-                        <div><CountUp start={0}
+                        <div><CountUp start={100000}
                                       end={this.state.portfolioResponse[2]}
                                       duration={3}
+                                      decimal={"."}
                                       decimals={2}
-                                      prefix="+$"
+                                      separator=","
+                                      prefix="$ "
                                       suffix=" Portfolio Value Increase"
                                       style={{color: "green", fontSize: "36px"}}/>
                             <br/>
@@ -90,10 +94,12 @@ export class Results extends React.Component{
                             <CountUp start={0}
                                      end={this.state.portfolioResponse[3]}
                                      duration={3}
+                                     separator=","
+                                     decimal={"."}
                                      decimals={2}
-                                     prefix="+$"
+                                     prefix="$ "
                                      suffix=" Monthly Income Increase"
-                                     style={{color: "green", fontSize: "36px"}}/>
+                                     style={{color: "green", fontSize: "36px", font: "lato"}}/>
                         <div className="row">
                             <div className="col s6">
                         <div><h3>Current Portfolio Composition</h3>
@@ -103,7 +109,7 @@ export class Results extends React.Component{
                                                     options={{
                                                         rowStyle: {
                                                             fontSize: '14px',
-                                                            fontFamily: 'sans-serif',
+                                                            fontFamily: 'Veranda',
                                                             textAlign: 'center',
                                                             backgroundColor: 'aliceblue'
                                                         },
@@ -112,7 +118,7 @@ export class Results extends React.Component{
                                                             backgroundColor: 'skyblue',
                                                             color: '#FFF',
                                                             fontSize: '14px',
-                                                            fontFamily: 'sans-serif',
+                                                            fontFamily: 'Veranda',
                                                             borderRadius: '0px',
                                                         }
                                                     }
@@ -129,7 +135,7 @@ export class Results extends React.Component{
                                                 options={{
                                                     rowStyle: {
                                                         fontSize: '14px',
-                                                        fontFamily: 'sans-serif',
+                                                        fontFamily: 'Veranda',
                                                         textAlign: 'center',
                                                         backgroundColor: 'aliceblue'
                                                     },
@@ -138,7 +144,7 @@ export class Results extends React.Component{
                                                         backgroundColor: 'skyblue',
                                                         color: '#FFF',
                                                         fontSize: '14px',
-                                                        fontFamily: 'sans-serif',
+                                                        fontFamily: 'Veranda',
                                                         borderRadius: '0px',
                                                     }
                                                 }

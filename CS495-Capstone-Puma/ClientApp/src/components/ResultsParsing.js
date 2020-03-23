@@ -13,11 +13,11 @@ export function formatDoughnutChartValues(assets){
         datasets: [{
             data: valueSumArray,
             backgroundColor: [
-                '#008080',
-                '#1AE6E6',
-                '#66FFFF',
-                '#B2FFFF',
-                '#DCDCDC'
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56',
+                '#66ff00',
+                '#FFC0CB'
             ],
             hoverBackgroundColor: [
                 '#FF6384',
