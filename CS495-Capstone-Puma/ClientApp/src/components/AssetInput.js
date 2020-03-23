@@ -183,7 +183,6 @@ export class AssetInput extends React.Component{
         const { value, suggestions } = this.state;
         
         const inputProps = {
-            placeholder: "Enter Value for Autofill Suggestions",
             value,
             onChange: this.onChange
         };
@@ -198,6 +197,7 @@ export class AssetInput extends React.Component{
                     <h5>Type in asset names below for autosuggest values to appear.</h5>
                     <h5>Click on the suggestion to select it.</h5>
                 <br />
+                    <label>Enter Value for Autofill Suggestions</label>
                     <Autosuggest
                         suggestions={suggestions}
                         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
