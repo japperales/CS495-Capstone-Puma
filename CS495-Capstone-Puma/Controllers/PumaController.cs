@@ -104,16 +104,8 @@ namespace CS495_Capstone_Puma.Controllers
         public JsonResult PostImageWithBox([FromBody] ImageWithBox imageWithBox)
         {
             Console.WriteLine(Json(imageWithBox));
-            BoundingBox boxOne = new BoundingBox(5,5, 20, 20, "Wowser" );
-            BoundingBox boxTwo = new BoundingBox(50,5, 20, 20, "Neat" );
-            BoundingBox boxThree = new BoundingBox(12,100, 20, 20, "Lookie" );
-            BoundingBox boxFour = new BoundingBox(50,100, 20, 20, "Cool" );
-            BoundingBox[] arrayOfBoxes = new BoundingBox[4];
-            arrayOfBoxes[0] = boxOne;
-            arrayOfBoxes[1] = boxTwo;
-            arrayOfBoxes[2] = boxThree;
-            arrayOfBoxes[3] = boxFour;
-            return Json(imageWithBox);
+            //image with box contains the image string, needs to be parsed the same as in "PostImage" as well as the box in question that the user selected for the assets as a bounding box object.
+            return Json(null);
         }
     }
 } 

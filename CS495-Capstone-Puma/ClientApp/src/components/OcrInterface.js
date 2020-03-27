@@ -136,7 +136,7 @@ export class OcrInterface extends React.Component{
                 .then((data) => {
                     console.log(JSON.stringify(data));
                     if (data !== null) {
-                        for(asset of data) {
+                        for(let asset of data) {
                             const newAsset = {
                                 assetId: data.id,
                                 assetCode: data.value.AssetCode,
