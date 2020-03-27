@@ -54,6 +54,7 @@ export class OcrInterface extends React.Component{
         this.updateClickedIndex = this.updateClickedIndex.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.sendImage = this.sendImage.bind(this);
+        this.sendBoxWithImage = this.sendBoxWithImage.bind(this);
     }
     
     updateHoverIndex(num){
@@ -108,10 +109,36 @@ export class OcrInterface extends React.Component{
                 }).then(response => response.json())
                     .then((data) => {
                         console.log(JSON.stringify(data));
+                        params.boxes = data;
                         window.alert("Bounding boxes have been received.")
                     });
             }
         
+    }
+
+    sendBoxWithImage(event){
+        event.preventDefault();
+        console.log(this.context.Jwt);
+        console.log("IMAGE STUFF RIGHT BEFORE WE SEND IT IS: " + JSON.stringify(params.image));
+        if (this.context !== null) {
+            fetch('api/Puma/PostImageWithBox', {
+                method: 'POST',
+                headers: {
+                    'jwt': this.context.Jwt,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    image: params.image[0],
+                    box: params.boxes[this.state.clickedIndex]
+                })
+            }).then(response => response.json())
+                .then((data) => {
+                    console.log(JSON.stringify(data));
+                    
+                });
+        }
+
     }
     
     
@@ -146,6 +173,7 @@ export class OcrInterface extends React.Component{
                         
             </div>
                 <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this.sendImage}>Submit Image</a>
+                <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this.sendBoxWithImage}>Submit Selected Box</a>
             </div>
             
         );

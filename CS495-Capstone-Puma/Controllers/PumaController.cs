@@ -13,6 +13,8 @@ using CS495_Capstone_Puma.Model;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
+using CS495_Capstone_Puma.DataStructure.BoundingBoxes;
+using CS495_Capstone_Puma.DataStructure.Images;
 
 namespace CS495_Capstone_Puma.Controllers
 {   
@@ -83,14 +85,36 @@ namespace CS495_Capstone_Puma.Controllers
             var base64Data = Regex.Match(imageStream, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
             var binData = Convert.FromBase64String(base64Data);
             var stream = new MemoryStream(binData);
-            var image = Image.FromStream(stream);
-            var height = image.Height;
-            var width = image.Width;
-            Console.WriteLine("Height is: " + height);
-            Console.WriteLine("Width is: " + width);
-                return Json(imageStream);
+            int[] imageDimensions = ImageConverter.GetDimensionsOfMemoryStream(stream);
+            BoundingBox boxOne = new BoundingBox(5,5, 20, 20, "Wowser" );
+            BoundingBox boxTwo = new BoundingBox(50,5, 20, 20, "Neat" );
+            BoundingBox boxThree = new BoundingBox(12,100, 20, 20, "Lookie" );
+            BoundingBox boxFour = new BoundingBox(50,100, 20, 20, "Cool" );
+            BoundingBox[] arrayOfBoxes = new BoundingBox[4];
+            arrayOfBoxes[0] = boxOne;
+            arrayOfBoxes[1] = boxTwo;
+            arrayOfBoxes[2] = boxThree;
+            arrayOfBoxes[3] = boxFour;
+            Console.WriteLine(imageDimensions[0] + " " + " " + imageDimensions[1]);
+            return Json(arrayOfBoxes);
         }
         
+        [HttpPost("PostImageWithBox")]
+        [EnableCors("AllowAnyOrigin")]
+        public JsonResult PostImageWithBox([FromBody] ImageWithBox imageWithBox)
+        {
+            Console.WriteLine(Json(imageWithBox));
+            BoundingBox boxOne = new BoundingBox(5,5, 20, 20, "Wowser" );
+            BoundingBox boxTwo = new BoundingBox(50,5, 20, 20, "Neat" );
+            BoundingBox boxThree = new BoundingBox(12,100, 20, 20, "Lookie" );
+            BoundingBox boxFour = new BoundingBox(50,100, 20, 20, "Cool" );
+            BoundingBox[] arrayOfBoxes = new BoundingBox[4];
+            arrayOfBoxes[0] = boxOne;
+            arrayOfBoxes[1] = boxTwo;
+            arrayOfBoxes[2] = boxThree;
+            arrayOfBoxes[3] = boxFour;
+            return Json(imageWithBox);
+        }
     }
 } 
 

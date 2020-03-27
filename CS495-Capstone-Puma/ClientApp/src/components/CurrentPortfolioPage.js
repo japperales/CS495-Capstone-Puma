@@ -94,8 +94,8 @@ export class CurrentPortfolioPage extends React.Component{
             let value = asset.units;
             let sum = (parseInt(doughnutValues[index]) + parseInt(value));
             doughnutValues[index] = sum;
-            
         }
+        
         return(
             <div className="container">
                 <h3>Current Portfolio</h3>
