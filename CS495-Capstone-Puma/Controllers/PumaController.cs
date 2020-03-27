@@ -105,6 +105,8 @@ namespace CS495_Capstone_Puma.Controllers
         {
             Console.WriteLine(Json(imageWithBox));
             //image with box contains the image string, needs to be parsed the same as in "PostImage" as well as the box in question that the user selected for the assets as a bounding box object.
+            //you will need to return an array/list of assets to be added to be added into the current portfolio with their metrics ie. each asset should have {'assetId': int, assetCode: int, symbol: string
+            //issue: string, issuer: string, units: int}
             return Json(null);
         }
     }
