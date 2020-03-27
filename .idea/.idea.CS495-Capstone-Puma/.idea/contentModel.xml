@@ -120,6 +120,7 @@
               <e p="LoadingSpinner.js" t="Include" />
               <e p="Login.js" t="Include" />
               <e p="NavMenu.js" t="Include" />
+              <e p="OcrInterface.js" t="Include" />
               <e p="PersonalInput.js" t="Include" />
               <e p="Results.js" t="Include" />
               <e p="ResultsParsing.js" t="Include" />

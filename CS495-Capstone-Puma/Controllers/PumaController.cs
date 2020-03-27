@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Net.Mime;
 using CS495_Capstone_Puma.AutoFill;
 using CS495_Capstone_Puma.DataStructure;
 using CS495_Capstone_Puma.DataStructure.AccountResponse;
@@ -9,6 +11,7 @@ using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
 using CS495_Capstone_Puma.Model;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Newtonsoft.Json;
 
 namespace CS495_Capstone_Puma.Controllers
@@ -70,6 +73,14 @@ namespace CS495_Capstone_Puma.Controllers
         public JsonResult ValidateAsset([FromBody] AssetValidationForm assetLookup)
         {
             return Json(AssetMatcher.GetValidatedAsset(assetLookup));
+        }
+        
+        [HttpPost("PostImage")]
+        [EnableCors("AllowAnyOrigin")]
+        public JsonResult PostImage([FromBody] string imageStream)
+        {
+            Console.WriteLine(imageStream);
+            return Json(imageStream);
         }
         
     }

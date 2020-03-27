@@ -28,7 +28,11 @@
     "react-tabs": "^3.0.0",
     "reactjs-popup": "latest",
     "rimraf": "^2.6.2",
-    "react-autosuggest": "latest"
+    "react-autosuggest": "latest",
+    "react-bounding-box": "latest",
+    "react-bounding-box": "latest",
+    "react-images-upload": "latest",
+    "react-resize-detector": "latest"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",

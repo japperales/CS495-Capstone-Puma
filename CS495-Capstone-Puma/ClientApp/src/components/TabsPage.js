@@ -6,6 +6,7 @@ import {Login} from "./Login";
 import  './css/TabsPage.css';
 import {CurrentPortfolioPage} from "./CurrentPortfolioPage";
 import {TokenContext} from "../Contexts/TokenContext.js";
+import {OcrInterface} from "./OcrInterface";
 
 export class TabsPage extends React.Component {
     
@@ -164,12 +165,16 @@ export class TabsPage extends React.Component {
                  <Tabs>
                         <TabList>
                             <Tab disabled={this.state.loginTab}>Login</Tab>
+                            <Tab>OCR</Tab>
                             <Tab disabled={this.state.inputTab}>Input Data</Tab>
                             <Tab disabled={this.state.resultTab}>Results</Tab>
                         </TabList>
 
                         <TabPanel>
                             <Login bearerToken={this.state.bearerToken} sendLogin={this.sendLogin} loginCallback={this.loginCallback}/>
+                        </TabPanel>
+                        <TabPanel>
+                            <OcrInterface />
                         </TabPanel>
                         <TabPanel>
                             <CurrentPortfolioPage assetCallback={this.assetCallback} currentPortfolio={this.state.currentPortfolio} />

@@ -26,6 +26,18 @@ export default class DeleteableTable extends React.Component {
                                 resolve()
                             }, 1000)
                         }),
+                    onRowUpdate: (newData, oldData) =>
+                        new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                {
+                                    let data =[...this.props.data];
+                                    const index = data.indexOf(oldData);
+                                    data[index] = newData;
+                                    this.props.setParentData(data);
+                                }
+                                resolve()
+                            }, 1000)
+                        })
                 }}
                 options={{
                     rowStyle: {
