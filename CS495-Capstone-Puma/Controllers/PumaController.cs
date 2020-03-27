@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mime;
+using System.Text.RegularExpressions;
 using CS495_Capstone_Puma.AutoFill;
 using CS495_Capstone_Puma.DataStructure;
 using CS495_Capstone_Puma.DataStructure.AccountResponse;
@@ -11,8 +12,7 @@ using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
 using CS495_Capstone_Puma.Model;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
-using Newtonsoft.Json;
+using System.Drawing;
 
 namespace CS495_Capstone_Puma.Controllers
 {   
@@ -80,7 +80,15 @@ namespace CS495_Capstone_Puma.Controllers
         public JsonResult PostImage([FromBody] string imageStream)
         {
             Console.WriteLine(imageStream);
-            return Json(imageStream);
+            var base64Data = Regex.Match(imageStream, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
+            var binData = Convert.FromBase64String(base64Data);
+            var stream = new MemoryStream(binData);
+            var image = Image.FromStream(stream);
+            var height = image.Height;
+            var width = image.Width;
+            Console.WriteLine("Height is: " + height);
+            Console.WriteLine("Width is: " + width);
+                return Json(imageStream);
         }
         
     }
