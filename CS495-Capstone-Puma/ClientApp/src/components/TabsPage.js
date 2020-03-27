@@ -30,7 +30,8 @@ export class TabsPage extends React.Component {
             currentPortfolio: [],
             loginTab: false,
             inputTab: true,
-            resultTab: true
+            resultTab: true,
+            
             
         };
         
@@ -51,6 +52,8 @@ export class TabsPage extends React.Component {
         this.setState({currentPortfolio: newCurrentPortfolio});
     }
     
+
+
     loginCallback(userName, password){
         this.setState({userName: userName, password: password});
     }
@@ -174,7 +177,7 @@ export class TabsPage extends React.Component {
                             <Login bearerToken={this.state.bearerToken} sendLogin={this.sendLogin} loginCallback={this.loginCallback}/>
                         </TabPanel>
                         <TabPanel>
-                            <OcrInterface />
+                            <OcrInterface assetCallback={this.assetCallback} currentPortfolio={this.state.currentPortfolio}/>
                         </TabPanel>
                         <TabPanel>
                             <CurrentPortfolioPage assetCallback={this.assetCallback} currentPortfolio={this.state.currentPortfolio} />

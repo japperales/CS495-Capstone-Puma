@@ -135,7 +135,22 @@ export class OcrInterface extends React.Component{
             }).then(response => response.json())
                 .then((data) => {
                     console.log(JSON.stringify(data));
-                    
+                    if (data !== null) {
+                        for(asset of data) {
+                            const newAsset = {
+                                assetId: data.id,
+                                assetCode: data.value.AssetCode,
+                                symbol: data.value.Symbol,
+                                issue: data.value.Issue,
+                                issuer: data.value.Issuer,
+                                units: this.state.inputUnits
+                            };
+                            const copyOfCurrentPortfolio = [...this.props.currentPortfolio];
+                            copyOfCurrentPortfolio.push(newAsset);
+                            this.props.assetCallback(copyOfCurrentPortfolio);
+                        }
+                        
+                    }
                 });
         }
 

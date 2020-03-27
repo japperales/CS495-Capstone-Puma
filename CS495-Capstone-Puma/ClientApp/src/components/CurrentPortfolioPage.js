@@ -13,11 +13,11 @@ let state = {
     inputIssue: null,
     inputIssuer: null,
     inputUnits: null,
-    currentPortfolio: [],
     accountResponse: "Not submitted yet!"
 };
 
 export class CurrentPortfolioPage extends React.Component{
+    
     static contextType = TokenContext;
     
     componentDidMount(){
@@ -29,16 +29,11 @@ export class CurrentPortfolioPage extends React.Component{
         super(props);
         this.state = state;
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.assetCallback = this.assetCallback.bind(this);
         this.postAssets = this.postAssets.bind(this);
     }
     
     componentWillUnmount() {
         state = this.state;
-    }
-    
-    assetCallback(newCurrentPortfolio){
-        this.setState({currentPortfolio: newCurrentPortfolio});
     }
     
     async handleInputChange(event){
@@ -56,7 +51,7 @@ export class CurrentPortfolioPage extends React.Component{
     postAssets(event){
         event.preventDefault();
         const submissionArray = [];
-        for(let asset of this.state.currentPortfolio){
+        for(let asset of this.props.currentPortfolio){
             console.log(JSON.stringify(asset));
             submissionArray.push({
                 assetIdentifier: {
@@ -89,19 +84,19 @@ export class CurrentPortfolioPage extends React.Component{
     
     render(){
         let doughnutValues = [0,0,0,0];
-        for (let asset of this.state.currentPortfolio){
-            let index = ((this.state.currentPortfolio.indexOf(asset)%4));
+        for (let asset of this.props.currentPortfolio){
+            let index = ((this.props.currentPortfolio.indexOf(asset)%4));
             let value = asset.units;
             let sum = (parseInt(doughnutValues[index]) + parseInt(value));
             doughnutValues[index] = sum;
+            
         }
-        
         return(
             <div className="container">
                 <h3>Current Portfolio</h3>
                     <div className="row">
                         <div className="col s6">
-                            <AssetInput modifyPortfolio={this.assetCallback} currentPortfolio={this.state.currentPortfolio}/>
+                            <AssetInput modifyPortfolio={this.props.assetCallback} currentPortfolio={this.props.currentPortfolio}/>
                         </div>
                         <div className="col s6">
                             <Doughnut data={{
@@ -127,7 +122,7 @@ export class CurrentPortfolioPage extends React.Component{
                                     ]
                                 }]}}/>
                                 <br />
-                            <DeleteableTable title={"Current Portfolio"} columns={portfolioColumns} data={this.state.currentPortfolio} setParentData={this.assetCallback}/>
+                            <DeleteableTable title={"Current Portfolio"} columns={portfolioColumns} data={this.props.currentPortfolio} setParentData={this.props.assetCallback}/>
                             <div>
                                 <h3>Ready to submit your current portfolio? 
                                     Hit "Submit Portfolio" below and then <a href="https://asctrustv57.accutech-systems.net/LogOn" target="_blank">Click The Link</a> to head over to 
