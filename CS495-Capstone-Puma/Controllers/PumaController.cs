@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Net.Mime;
-using System.Text.RegularExpressions;
+using System.Threading;
 using CS495_Capstone_Puma.AutoFill;
 using CS495_Capstone_Puma.DataStructure;
 using CS495_Capstone_Puma.DataStructure.AccountResponse;
@@ -12,9 +12,14 @@ using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
 using CS495_Capstone_Puma.Model;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
+using Amazon;
 using CS495_Capstone_Puma.DataStructure.BoundingBoxes;
 using CS495_Capstone_Puma.DataStructure.Images;
+using CS495_Capstone_Puma.OCR.DataStructure;
+using CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects;
+using CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects.BlockObjects.GeometryObjects;
+using CS495_Capstone_Puma.OCR.TextAnalysis;
+using Microsoft.AspNetCore.Http;
 
 namespace CS495_Capstone_Puma.Controllers
 {   
@@ -79,31 +84,48 @@ namespace CS495_Capstone_Puma.Controllers
         
         [HttpPost("PostImage")]
         [EnableCors("AllowAnyOrigin")]
-        public JsonResult PostImage([FromBody] string imageStream)
+        public JsonResult PostImage([FromForm] IFormFile body)
         {
-            Console.WriteLine(imageStream);
-            var base64Data = Regex.Match(imageStream, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
-            var binData = Convert.FromBase64String(base64Data);
-            var stream = new MemoryStream(binData);
-            int[] imageDimensions = ImageConverter.GetDimensionsOfMemoryStream(stream);
-            BoundingBox boxOne = new BoundingBox(5,5, 20, 20, "Wowser" );
-            BoundingBox boxTwo = new BoundingBox(50,5, 20, 20, "Neat" );
-            BoundingBox boxThree = new BoundingBox(12,100, 20, 20, "Lookie" );
-            BoundingBox boxFour = new BoundingBox(50,100, 20, 20, "Cool" );
-            BoundingBox[] arrayOfBoxes = new BoundingBox[4];
-            arrayOfBoxes[0] = boxOne;
-            arrayOfBoxes[1] = boxTwo;
-            arrayOfBoxes[2] = boxThree;
-            arrayOfBoxes[3] = boxFour;
-            Console.WriteLine(imageDimensions[0] + " " + " " + imageDimensions[1]);
-            return Json(arrayOfBoxes);
+
+            byte[] imageBytes;
+            string newFileName = new TimeSpan(DateTime.Now.Ticks).TotalMilliseconds.ToString();
+            newFileName = newFileName.Substring(0, newFileName.IndexOf('.')) + ".png";
+            Image page = null;
+            using (var memoryStream = new MemoryStream())
+            {
+                body.CopyTo(memoryStream);
+                page = Image.FromStream(memoryStream);
+                OCR.S3Upload.Upload.UploadDocument("pdfidentify", newFileName, memoryStream, RegionEndpoint.USEast2);
+            }
+            Thread.Sleep(5000);
+            Console.Out.WriteLine(newFileName);
+            TextractResponse response = Analyze.AnalyzeFile(newFileName);
+            List<Block> blocks = response.FilterType("TABLE");
+            List<BoundingBoxIdentifier> boxes = new List<BoundingBoxIdentifier>();
+
+            foreach (var block in blocks)
+            {
+                BoundingBox boundingBox = block.Geometry.BoundingBox;
+                
+                //Convert relative location to absolute pixels
+                BoundingBoxIdentifier identifier = new BoundingBoxIdentifier((int) (page.Width * boundingBox.Left), 
+                    (int) (page.Height * boundingBox.Top),
+                    (int) (page.Width * boundingBox.Width),
+                    (int) (page.Height * boundingBox.Height), 
+                    block.Id);
+                boxes.Add(identifier);
+            }
+            
+
+            Console.Out.WriteLine(body.Length);
+            return Json(boxes);
         }
         
         [HttpPost("PostImageWithBox")]
         [EnableCors("AllowAnyOrigin")]
         public JsonResult PostImageWithBox([FromBody] ImageWithBox imageWithBox)
         {
-            Console.WriteLine(Json(imageWithBox));
+            Console.WriteLine(imageWithBox.Box);
             //image with box contains the image string, needs to be parsed the same as in "PostImage" as well as the box in question that the user selected for the assets as a bounding box object.
             //you will need to return an array/list of assets to be added to be added into the current portfolio with their metrics ie. each asset should have {'assetId': int, assetCode: int, symbol: string
             //issue: string, issuer: string, units: int}

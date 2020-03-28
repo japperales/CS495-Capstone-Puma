@@ -30,9 +30,9 @@
     "rimraf": "^2.6.2",
     "react-autosuggest": "latest",
     "react-bounding-box": "latest",
-    "react-bounding-box": "latest",
     "react-images-upload": "latest",
-    "react-resize-detector": "latest"
+    "react-resize-detector": "latest",
+    "react-pdf": "latest"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",

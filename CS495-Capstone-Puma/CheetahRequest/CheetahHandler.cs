@@ -7,8 +7,6 @@
  using CS495_Capstone_Puma.DataStructure.JsonRequest;
  using CS495_Capstone_Puma.DataStructure.JsonResponse;
  using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
- using CS495_Capstone_Puma.DataStructure.ResponseShards;
- using Microsoft.AspNetCore.Mvc;
  using Newtonsoft.Json;
 
  namespace CS495_Capstone_Puma.Model 
@@ -62,7 +60,7 @@
                 //POST each transaction
                 foreach (TransactionRequest transaction in transactions)
                 {
-                    Console.WriteLine(transaction.assetId);
+                    Console.WriteLine(transaction.AssetId);
                     await AssetPost.PostTransaction(CheetahConfig, bearerToken, transaction);
                 }
                 

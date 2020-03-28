@@ -4,36 +4,36 @@ namespace CS495_Capstone_Puma.DataStructure.JsonRequest
 {
     public class TransactionRequest
     {
-        public int accountId { get; set; }
-        
-        public DateTime dateTraded { get; }
-        
-        public DateTime dateSettled { get; }
+        public int AccountId { get; set; }
 
-        public int transactionBatchId { get; set; }
+        private DateTime DateTraded { get; }
 
-        public int transactionCategoryId { get; }
+        private DateTime DateSettled { get; }
 
-        public int locationTypeId { get; set; }
+        private int TransactionBatchId { get; set; }
 
-        public int registrationTypeId { get; set; }
+        private int TransactionCategoryId { get; }
 
-        public int assetId { get; set; }
+        private int LocationTypeId { get; set; }
 
-        public int units { get; set; }
+        private int RegistrationTypeId { get; set; }
+
+        public int AssetId { get; set; }
+
+        private int Units { get; set; }
 
         public TransactionRequest(int accountId, int transactionBatchId, int locationTypeId, int registrationTypeId,
             int assetId, int units)
         {
-            this.accountId = accountId;
-            dateTraded = DateTime.Now;
-            dateSettled = DateTime.Now;
-            this.transactionBatchId = transactionBatchId;
-            transactionCategoryId = 6750;
-            this.locationTypeId = locationTypeId;
-            this.registrationTypeId = registrationTypeId;
-            this.assetId = assetId;
-            this.units = units;
+            AccountId = accountId;
+            DateTraded = DateTime.Now;
+            DateSettled = DateTime.Now;
+            TransactionBatchId = transactionBatchId;
+            TransactionCategoryId = 6750;
+            LocationTypeId = locationTypeId;
+            RegistrationTypeId = registrationTypeId;
+            AssetId = assetId;
+            Units = units;
         }
     }
 }

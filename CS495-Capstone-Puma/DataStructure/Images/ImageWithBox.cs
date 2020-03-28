@@ -1,18 +1,18 @@
-﻿using CS495_Capstone_Puma.DataStructure.BoundingBoxes;
+﻿using CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects.BlockObjects.GeometryObjects;
 
 namespace CS495_Capstone_Puma.DataStructure.Images
 {
     public class ImageWithBox
     {
-        public string image { get; set; }
+        public string Image { get; set; }
         
-        public BoundingBox box { get; set; }
+        public BoundingBox Box { get; set; }
 
 
         public ImageWithBox(BoundingBox box, string image)
         {
-            this.image = image;
-            this.box = box;
+            Image = image;
+            Box = box;
         }
         
     }

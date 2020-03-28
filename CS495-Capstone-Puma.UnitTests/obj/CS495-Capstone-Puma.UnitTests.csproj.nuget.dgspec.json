@@ -1,37 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj": {}
+    "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj": {}
   },
   "projects": {
-    "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj": {
+    "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
+        "projectUniqueName": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
         "projectName": "CS495-Capstone-Puma.UnitTests",
-        "projectPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
-        "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
-        "outputPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\obj\\",
+        "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\CS495-Capstone-Puma.UnitTests.csproj",
+        "packagesPath": "C:\\Users\\rylan\\.nuget\\packages\\",
+        "outputPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma.UnitTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\rylan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "D:\\RiderProjects\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
-                "projectPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
+              "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+                "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj"
               }
             }
           }
@@ -44,64 +43,34 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
-          "dependencies": {
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[16.2.0, )"
-            },
-            "coverlet.collector": {
-              "target": "Package",
-              "version": "[1.0.1, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.4.0, )"
-            },
-            "xunit.runner.visualstudio": {
-              "target": "Package",
-              "version": "[2.4.0, )"
-            }
-          },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     },
-    "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
+    "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
+        "projectUniqueName": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
         "projectName": "CS495-Capstone-Puma",
-        "projectPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
-        "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
-        "outputPath": "D:\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\obj\\",
+        "projectPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\CS495-Capstone-Puma.csproj",
+        "packagesPath": "C:\\Users\\rylan\\.nuget\\packages\\",
+        "outputPath": "D:\\RiderProjects\\CS495-Capstone-Puma\\CS495-Capstone-Puma\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\rylan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "D:\\RiderProjects\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -118,6 +87,14 @@
       "frameworks": {
         "netcoreapp2.1": {
           "dependencies": {
+            "AWSSDK.Core": {
+              "target": "Package",
+              "version": "[3.5.0-beta, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.5.0-beta, )"
+            },
             "Flurl": {
               "target": "Package",
               "version": "[3.0.0-pre1, )"
@@ -156,23 +133,20 @@
               "version": "[2.1.1, )"
             },
             "Microsoft.NETCore.App": {
-              "suppressParent": "All",
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[5.0.0-preview.1.20120.5, )"
             }
           },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     }

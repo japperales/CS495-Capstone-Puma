@@ -1,14 +1,17 @@
-﻿import React from 'react';
+﻿import React from 'react'
+import { post } from 'axios';
 import  './css/PersonalInput.css'
 import M from 'materialize-css'
 import Boundingbox from 'react-bounding-box';
+import { Document, Page } from 'react-pdf';
 import ImageUploader from 'react-images-upload';
 import {TokenContext} from "../Contexts/TokenContext";
 
 let state ={
     hoverIndex: 0,
     clickedIndex: 0,
-    picture: null,
+    pictureData: null,
+    file: null,
     boundingHeight: 0,
     boundingWidth: 0
 };
@@ -18,11 +21,8 @@ const params = {
     boxes: [
         // coord(0,0) = top left corner of image
         //[x, y, width, height]
-        
-         {coord: [0, 0, 250, 250], label: ""},
-         {coord: [300, 0, 250, 250], label: "A"},
-         {coord: [700, 0, 300, 25], label: "B"},
-         {coord: [1100, 0, 25, 300], label: "C"}
+
+        {coord: [0, 0, 1, 1], label: ""}
     ],
     options: {
         colors: {
@@ -34,34 +34,21 @@ const params = {
     }
 };
 
-export class OcrInterface extends React.Component{
-    
-    static contextType = TokenContext;
-    
-    componentDidMount(){
-        console.log("component did mount");
-    }
-
-    componentWillUnmount() {
-        state = this.state;
-    }
-    
-    constructor(props){
+export class OcrInterface extends React.Component {
+    constructor(props) {
         super(props);
         this.state = state;
         this.handleInputChange = this.handleInputChange.bind(this);
         this.updateHoverIndex = this.updateHoverIndex.bind(this);
         this.updateClickedIndex = this.updateClickedIndex.bind(this);
-        this.onDrop = this.onDrop.bind(this);
-        this.sendImage = this.sendImage.bind(this);
         this.sendBoxWithImage = this.sendBoxWithImage.bind(this);
     }
-    
+
     updateHoverIndex(num){
         this.setState({hoverIndex: num});
         console.log("we have called update hover index")
     }
-    
+
     updateClickedIndex(e){
         e.preventDefault();
         const currentHover = this.state.hoverIndex;
@@ -71,17 +58,7 @@ export class OcrInterface extends React.Component{
             this.setState({clickedIndex: ""})
         }
     }
-    
-    onDrop(file, picture) {
-        this.setState({
-            picture: picture
-        });
-        console.log("Picture stuff is: " + JSON.stringify(picture));
-        params.image = picture;
-        console.log(typeof picture);
-        console.log("We have called the on drop function!");
-    }
-    
+
     async handleInputChange(event){
 
         const target = event.target;
@@ -93,38 +70,37 @@ export class OcrInterface extends React.Component{
         });
     }
 
-    sendImage(event){
-            event.preventDefault();
-            console.log(this.context.Jwt);
-            console.log("IMAGE STUFF RIGHT BEFORE WE SEND IT IS: " + JSON.stringify(params.image));
-            if (this.context !== null) {
-                fetch('api/Puma/PostImage', {
-                    method: 'POST',
-                    headers: {
-                        'jwt': this.context.Jwt,
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(params.image[0])
-                }).then(response => response.json())
-                    .then((data) => {
-                        console.log(JSON.stringify(data));
-                        params.boxes = data;
-                        window.alert("Bounding boxes have been received.")
-                    });
-            }
-        
+    async submit(e) {
+        e.preventDefault();
+
+        const url = `/api/Puma/PostImage`;
+        const formData = new FormData();
+        formData.append('body', this.state.file);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+            },
+        };
+        post(url, formData, config)
+            .then(response => {
+                console.log(JSON.stringify(response.data));
+                params.boxes = response.data;
+                window.alert("Bounding boxes have been received.")
+            });
+    }
+
+    setFile(e) {
+        this.setState({ file: e.target.files[0] });
+        params.image = URL.createObjectURL(e.target.files[0]);
     }
 
     sendBoxWithImage(event){
         event.preventDefault();
-        console.log(this.context.Jwt);
         console.log("IMAGE STUFF RIGHT BEFORE WE SEND IT IS: " + JSON.stringify(params.image));
         if (this.context !== null) {
             fetch('api/Puma/PostImageWithBox', {
                 method: 'POST',
                 headers: {
-                    'jwt': this.context.Jwt,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
@@ -149,49 +125,44 @@ export class OcrInterface extends React.Component{
                             copyOfCurrentPortfolio.push(newAsset);
                             this.props.assetCallback(copyOfCurrentPortfolio);
                         }
-                        
+
                     }
                 });
         }
 
     }
-    
-    
-    render(){
-        return(
+
+    render() {
+        return (
             <div className="container">
-                <h3>Current box selection is: {params.boxes[this.state.clickedIndex].label}</h3>
-                <ImageUploader
-                    withIcon={true}
-                    buttonText='Choose Image (.png)'
-                    onChange={this.onDrop}
-                    imgExtension={['.png']}
-                    maxFileSize={5242880}
-                    withLabel={false}
-                />
+                <form onSubmit={e => this.submit(e)}>
+                    <h1>File Upload</h1>
+                    <input type="file" onChange={e => this.setFile(e)} />
+                    <button type="submit">Upload</button>
+                    <p>After Upload, please wait while Textract analyzes your document.
+                        You will be prompted to provide input shortly.</p>
+                </form>
+
                 <div className="row">
                     <div className="col s6" >
                         <br />
                         <div onClick={this.updateClickedIndex} style={{textAlign: "center"}}>
-                                <div>
+                            <div>
                                 <Boundingbox
-                                         image={params.image}
-                                         boxes={params.boxes}
-                                         options={params.options}
-                                         onSelected={this.updateHoverIndex}
-                                         style={{textAlign: "center"}}
-                                         
+                                    image={params.image}
+                                    boxes={params.boxes}
+                                    options={params.options}
+                                    onSelected={this.updateHoverIndex}
+                                    style={{textAlign: "center"}}
                                 />
-                                </div>
+                            </div>
                         </div>
                     </div>
-                        
-            </div>
-                <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this.sendImage}>Submit Image</a>
+
+                </div>
                 <a className={"waves-effect waves-light btn light-blue lighten-3"} onClick={this.sendBoxWithImage}>Submit Selected Box</a>
             </div>
             
         );
     }
-
 }

@@ -26,7 +26,7 @@ namespace CS495_Capstone_Puma.Model
         //POST Transaction
         public static async Task<TransactionResponse> PostTransaction(CheetahConfig cheetahConfig, string bearerToken, TransactionRequest request)
         {
-            Console.WriteLine(request.accountId);
+            Console.WriteLine(request.AccountId);
             TransactionResponse postResp = await (cheetahConfig.ApiUrlRoot + "Transactions/Pending")
                 .WithHeader("Content-Type", "application/json")
                 .WithOAuthBearerToken(bearerToken)

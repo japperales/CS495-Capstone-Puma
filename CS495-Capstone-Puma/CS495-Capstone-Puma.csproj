@@ -10,6 +10,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AWSSDK.Core" Version="3.5.0-beta" />
+        <PackageReference Include="AWSSDK.S3" Version="3.5.0-beta" />
         <PackageReference Include="Flurl" Version="3.0.0-pre1" />
         <PackageReference Include="Flurl.Http" Version="3.0.0-pre1" />
         <PackageReference Include="Microsoft.AspNetCore" Version="2.1.7" />
@@ -26,6 +28,10 @@
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**" />
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="OCR" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

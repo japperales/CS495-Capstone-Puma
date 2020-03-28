@@ -31,6 +31,7 @@ export class TabsPage extends React.Component {
             loginTab: false,
             inputTab: true,
             resultTab: true,
+            ocrTab: false
             
             
         };
@@ -168,7 +169,7 @@ export class TabsPage extends React.Component {
                  <Tabs>
                         <TabList>
                             <Tab disabled={this.state.loginTab}>Login</Tab>
-                            <Tab disabled={this.state.inputTab}>OCR</Tab>
+                            <Tab disabled={this.state.ocrTab}>OCR</Tab>
                             <Tab disabled={this.state.inputTab}>Input Data</Tab>
                             <Tab disabled={this.state.resultTab}>Results</Tab>
                         </TabList>
