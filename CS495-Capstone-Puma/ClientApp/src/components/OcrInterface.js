@@ -72,7 +72,6 @@ export class OcrInterface extends React.Component {
 
     async submit(e) {
         e.preventDefault();
-
         const url = `/api/Puma/PostImage`;
         const formData = new FormData();
         formData.append('body', this.state.file);

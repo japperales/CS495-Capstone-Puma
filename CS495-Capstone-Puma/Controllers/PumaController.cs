@@ -77,9 +77,9 @@ namespace CS495_Capstone_Puma.Controllers
         
         [HttpPost("ValidateAsset")]
         [EnableCors("AllowAnyOrigin")]
-        public JsonResult ValidateAsset([FromBody] AssetValidationForm assetLookup)
+        public JsonResult ValidateAsset([FromHeader] string jwt, [FromBody] AssetValidationForm assetLookup)
         {
-            return Json(AssetMatcher.GetValidatedAsset(assetLookup));
+            return Json(AssetMatcher.GetValidatedAsset(assetLookup, jwt));
         }
         
         [HttpPost("PostImage")]

@@ -6,6 +6,7 @@ import {portfolioColumns} from "./TableColumns";
 import DeleteableTable from "./DeleteableTable";
 import {Doughnut} from "react-chartjs-2";
 import {TokenContext} from "../Contexts/TokenContext";
+import {sumDifferentAssetTypeValues} from "./ResultsParsing";
 
 let state = {
     inputAssetCode: null,
@@ -83,14 +84,8 @@ export class CurrentPortfolioPage extends React.Component{
     }
     
     render(){
-        let doughnutValues = [0,0,0,0];
-        for (let asset of this.props.currentPortfolio){
-            let index = ((this.props.currentPortfolio.indexOf(asset)%4));
-            let value = asset.units;
-            let sum = (parseInt(doughnutValues[index]) + parseInt(value));
-            doughnutValues[index] = sum;
-            
-        }
+        let doughnutValues = sumDifferentAssetTypeValues(this.props.currentPortfolio);
+        
         return(
             <div className="container">
                 <h3>Current Portfolio</h3>
@@ -104,7 +99,8 @@ export class CurrentPortfolioPage extends React.Component{
                                     'Money Markets',
                                     'Common Stock',
                                     'Mutual Funds',
-                                    'Loans & Notes Receivables'
+                                    'Loans & Notes Receivables',
+                                    'Other'
                                 ],
                                 datasets: [{
                                     data: doughnutValues,

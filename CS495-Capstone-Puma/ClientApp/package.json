@@ -32,7 +32,8 @@
     "react-bounding-box": "latest",
     "react-images-upload": "latest",
     "react-resize-detector": "latest",
-    "react-pdf": "latest"
+    "react-pdf": "latest",
+    "axios": "latest"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",

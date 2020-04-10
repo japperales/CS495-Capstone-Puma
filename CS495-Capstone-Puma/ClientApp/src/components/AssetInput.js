@@ -148,8 +148,12 @@ export class AssetInput extends React.Component{
                             symbol: data.value.Symbol,
                             issue: data.value.Issue,
                             issuer: data.value.Issuer,
-                            units: this.state.inputUnits
+                            units: this.state.inputUnits,
+                            pricePerShare: data.pricePerShare,
+                            totalValue: (data.pricePerShare * this.state.inputUnits),
+                            assetCategoryName: data.assetCategory
                         };
+                        console.log(data.assetCategory);
                         const copyOfCurrentPortfolio = [...this.props.currentPortfolio];
                         copyOfCurrentPortfolio.push(newAsset);
                         this.props.modifyPortfolio(copyOfCurrentPortfolio);
@@ -166,7 +170,8 @@ export class AssetInput extends React.Component{
     addCashToPortfolio(event){
         event.preventDefault();
         const copyOfCurrentPortfolio = [...this.props.currentPortfolio];
-        copyOfCurrentPortfolio.push({assetId: 1, assetCode: "Cash", symbol: "CSH", issue: "Fed Service", issuer: "Fed", units: this.state.inputValue});
+        copyOfCurrentPortfolio.push({assetId: 1, assetCode: "Cash", symbol: "CSH", issue: "Fed Service", issuer: "Fed", 
+            units: this.state.inputValue, assetCategoryName: "Money Market", pricePerShare: 1, totalValue:  this.state.inputValue});
         this.props.modifyPortfolio(copyOfCurrentPortfolio);
         this.closeModal();
     }

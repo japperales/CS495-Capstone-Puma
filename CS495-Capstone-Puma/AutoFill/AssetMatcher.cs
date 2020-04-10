@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using CS495_Capstone_Puma.DataStructure;
 using CS495_Capstone_Puma.DataStructure.JsonResponse.Asset;
+using CS495_Capstone_Puma.DataStructure.ResponseShards;
 using CS495_Capstone_Puma.Model;
+
 
 namespace CS495_Capstone_Puma.AutoFill
 {
     public static class AssetMatcher
     {
         private static List<AssetLookupResponse> _allAssets = new List<AssetLookupResponse>();
+        private static readonly CheetahConfig CheetahConfig = CheetahHandler.LoadApiConfig();
         
         public static void UpdateAssets(string bearerToken)
         {
@@ -38,7 +43,7 @@ namespace CS495_Capstone_Puma.AutoFill
             return _allAssets;
         }
         
-        public static AssetLookupResponse GetValidatedAsset(AssetValidationForm assetLookup)
+        public static AssetLookupResponse GetValidatedAsset(AssetValidationForm assetLookup, string bearerToken)
         { 
 
             foreach (AssetLookupResponse asset in _allAssets)
@@ -47,7 +52,8 @@ namespace CS495_Capstone_Puma.AutoFill
                 {
                     if (asset.value.symbol.ToLower().Equals(assetLookup.value.symbol.ToLower()))
                     {
-                        return asset;
+                        AssetLookupResponse pricedAsset = GetAssetPricePerShare(asset, bearerToken);
+                        return pricedAsset;
                     }
                 }
 
@@ -55,12 +61,31 @@ namespace CS495_Capstone_Puma.AutoFill
                 {
                     if (asset.value.issuer.ToLower().Equals(assetLookup.value.issuer.ToLower()))
                     {
-                        return asset;
+                        AssetLookupResponse pricedAsset = GetAssetPricePerShare(asset, bearerToken);
+                        return pricedAsset;
                     }
                 }
             }
 
             return null;
         }
+
+        private static AssetLookupResponse GetAssetPricePerShare(AssetLookupResponse asset, string bearerToken)
+        {
+            AssetShard shard = ProposalGet.GetAssetFromId(CheetahConfig, Int32.Parse(asset.id), bearerToken).Result;
+            asset.pricePerShare = shard.Price;
+            asset.AssetCategory = shard.AssetCategoryDisplayName;
+            Console.WriteLine("Asset Category Name is: " + shard.AssetCategoryDisplayName);
+            Console.WriteLine("Asset price per share equals: " + asset.pricePerShare);
+            return asset;
+        }
+        
+       /* private static AssetLookupResponse GetAssetCategory(AssetLookupResponse asset, string bearerToken)
+        {
+            AssetShard shard = ProposalGet.GetAssetFromId(CheetahConfig, Int32.Parse(asset.id), bearerToken).Result;
+            asset.pricePerShare = shard.Price;
+            Console.WriteLine("Asset price per share equals: " + asset.pricePerShare);
+            return asset;
+        }*/
     }
 }

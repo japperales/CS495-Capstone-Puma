@@ -88,7 +88,7 @@ export class Results extends React.Component{
                                       separator=","
                                       prefix="$ "
                                       suffix=" Portfolio Value Increase"
-                                      style={{color: "green", fontSize: "36px"}}/>
+                                      style={{color: "green", fontSize: "36px", font: "lato"}}/>
                             <br/>
 
                             <CountUp start={0}
