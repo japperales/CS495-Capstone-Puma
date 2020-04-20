@@ -5,6 +5,7 @@ import './css/Login.css'
 let state = {
     inputUserName: null,
     inputPassword: null,
+    inputApiKey: null,
     loginStatus: null,
     resp: ""
 };
@@ -42,7 +43,7 @@ export class Login extends React.Component {
         await this.setState({
             [name]: value
         });
-        this.props.loginCallback(this.state.inputUserName, this.state.inputPassword);
+        this.props.loginCallback(this.state.inputUserName, this.state.inputPassword, this.state.inputApiKey);
     }
 
     render(){
@@ -62,6 +63,10 @@ export class Login extends React.Component {
                                         <div className={"input-field"}>
                                             <label>Password</label>
                                             <input type="password" id="password" name="inputPassword" className={"validate"} onChange={this.handleInputChange} value={this.state.inputPassword}/>
+                                        </div>
+                                        <div className={"input-field"}>
+                                            <label>API Key</label>
+                                            <input type="password" id="inputApiKey" name="inputApiKey" className={"validate"} onChange={this.handleInputChange} value={this.state.inputApiKey}/>
                                         </div>
                                         <div>
                                             <p>{this.state.loginStatus}</p>

@@ -34,6 +34,7 @@ namespace CS495_Capstone_Puma.Controllers
         [EnableCors("AllowAnyOrigin")]
         public  JsonResult PostLogin([FromBody] Login login)
         {
+            Console.WriteLine("API key is: " + login.ApiKey);
             TokenResponse bearerToken = CheetahHandler.PostLogin(login);
             AssetMatcher.UpdateAssets(bearerToken.Jwt);
             return Json(bearerToken);
