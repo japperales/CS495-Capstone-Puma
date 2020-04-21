@@ -8,6 +8,7 @@ import CountUp from 'react-countup';
 import html2canvas from 'html2canvas';
 //const ref = React.createRef();
 import { saveAs } from 'file-saver';
+import domtoimage from 'dom-to-image';
 
 
 let state = {loading: false, portfolioResponse: null, doughnutData: null, newDoughnutData: null};
@@ -43,13 +44,17 @@ export class Results extends React.Component{
     
     downloadResults(){
         
-        const input = document.getElementById('resultsBlock');html2canvas(input)
-            .then((canvas) => {
-                canvas.toBlob(function(blob) {
-                    saveAs(blob, "resultsForm.png");
-                });
+        const input = document.getElementById('resultsBlock');
+        input.style.backgroundColor = "white";
+        domtoimage.toBlob(input)
+            .then(function (dataUrl) {
+                saveAs(dataUrl, "yay.png");
+                input.style.backgroundColor = "transparent";
             })
-        ;
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+                input.style.backgroundColor = "transparent";
+            });
     }
     
     //methods that return booleans to track the state of loading for the component.
@@ -138,7 +143,9 @@ export class Results extends React.Component{
                                                             fontSize: '14px',
                                                             fontFamily: 'Veranda',
                                                             borderRadius: '0px',
-                                                        }
+                                                        },
+                                                        search: false,
+                                                        paging: false
                                                     }
                                                     }/></div>
                         </div>
@@ -164,9 +171,12 @@ export class Results extends React.Component{
                                                         fontSize: '14px',
                                                         fontFamily: 'Veranda',
                                                         borderRadius: '0px',
-                                                    }
+                                                    },
+                                                    search: false,
+                                                    paging: false
                                                 }
-                                                }/></div>
+                                                }
+                            /></div>
                         </div>
                             </div>
                     </div>

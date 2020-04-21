@@ -37,7 +37,8 @@
     "react-to-pdf": "latest",
     "file-saver": "latest",
     "html2canvas": "latest",
-    "html2canvas": "latest"
+    "html2canvas": "latest",
+    "dom-to-image": "latest"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",
