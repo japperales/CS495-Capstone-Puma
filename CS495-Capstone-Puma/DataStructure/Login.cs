@@ -10,22 +10,22 @@ namespace CS495_Capstone_Puma.DataStructure
         [JsonProperty("password")]
         public string Password { get; set; }
         
-        [JsonProperty("apiKey")]
-        public string ApiKey { get; set; }
+        [JsonProperty("x-api-key")]
+        public string XApiKey { get; set; }
 
         public Login()
         {
             Username = "";
             Password = "";
-            ApiKey = "";
+            XApiKey = "";
         }
 
         [JsonConstructor]
-        public Login(string username, string password, string apiKey)
+        public Login(string username, string password, string xApiKey)
         {
             Username = username;
             Password = password;
-            ApiKey = apiKey;
+            XApiKey = xApiKey;
         }
     }
 }

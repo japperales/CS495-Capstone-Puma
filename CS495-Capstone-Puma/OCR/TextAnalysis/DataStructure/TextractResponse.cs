@@ -35,7 +35,7 @@
             JobStatus = jobStatus;
         }
         
-        //Filter blocks by confidence
+        //Filter rawBlocks by confidence
         //Threshold is a double between 0 and 100
         public List<Block> FilterConfidence(double threshold)
         {
@@ -51,7 +51,7 @@
             return matchingBlocks;
         }
         
-        //Filter blocks by type
+        //Filter rawBlocks by type
         //blockType is a string: PAGE, LINE, WORD, TABLE, CELL, or FIELD
         public List<Block> FilterType(string blockType)
         {
@@ -69,7 +69,7 @@
             return matchingBlocks;
         }
         
-        //Filter blocks by page
+        //Filter rawBlocks by page
         //Page is an int of the page number
         public List<Block> FilterPage(int page)
         {
@@ -85,7 +85,7 @@
             return matchingBlocks;
         }
         
-        //Filter blocks by text contents
+        //Filter rawBlocks by text contents
         //Page is a string to match Text
         public List<Block> FilterTextExact(string text)
         {
@@ -101,7 +101,7 @@
             return matchingBlocks;
         }
         
-        //Filter blocks by text contents
+        //Filter rawBlocks by text contents
         //Page is a string to match Text
         public List<Block> FilterTextContains(string text)
         {
@@ -113,9 +113,7 @@
                     matchingBlocks.Add(block);
                 }
             }
-
             return matchingBlocks;
         }
-        
     }
 }

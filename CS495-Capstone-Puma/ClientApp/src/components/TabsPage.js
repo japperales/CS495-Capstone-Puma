@@ -25,7 +25,7 @@ export class TabsPage extends React.Component {
             bearerToken:null,
             userName: null,
             password: null,
-            apiKey: null,
+            xApiKey: null,
 
             portfolioResponse: null,
             currentPortfolio: [],
@@ -56,8 +56,8 @@ export class TabsPage extends React.Component {
     
 
 
-    loginCallback(userName, password, apiKey){
-        this.setState({userName: userName, password: password, apiKey: apiKey});
+    loginCallback(userName, password, xApiKey){
+        this.setState({userName: userName, password: password, xApiKey: xApiKey});
     }
     
     //Here we take the pulled list of assets from each child component along with the personal data,
@@ -95,7 +95,7 @@ export class TabsPage extends React.Component {
             body: JSON.stringify({
                 username: this.state.userName,
                 password: this.state.password,
-                apiKey: this.state.apiKey
+                xApiKey: this.state.xApiKey
             })})
             .then(response => response.json())
             .then(data => {

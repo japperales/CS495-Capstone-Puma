@@ -49,18 +49,23 @@
             <e p="prop-types" t="IncludeRecursive" />
             <e p="react" t="IncludeRecursive" />
           </e>
+          <e p="node_modules\axios" t="IncludeRecursive" />
           <e p="node_modules\bootstrap" t="IncludeRecursive" />
           <e p="node_modules\chart.js" t="IncludeRecursive" />
           <e p="node_modules\clsx" t="IncludeRecursive" />
           <e p="node_modules\color-name" t="IncludeRecursive" />
+          <e p="node_modules\css-line-break" t="IncludeRecursive" />
           <e p="node_modules\csstype" t="IncludeRecursive" />
           <e p="node_modules\date-fns" t="IncludeRecursive" />
+          <e p="node_modules\dom-to-image" t="IncludeRecursive" />
           <e p="node_modules\enzyme" t="IncludeRecursive" />
           <e p="node_modules\enzyme-adapter-react-16" t="IncludeRecursive" />
           <e p="node_modules\enzyme-to-json" t="IncludeRecursive" />
           <e p="node_modules\es6-promise" t="IncludeRecursive" />
+          <e p="node_modules\file-saver" t="IncludeRecursive" />
           <e p="node_modules\flexbox-react" t="IncludeRecursive" />
           <e p="node_modules\hoist-non-react-statics" t="IncludeRecursive" />
+          <e p="node_modules\html2canvas" t="IncludeRecursive" />
           <e p="node_modules\is-in-browser" t="IncludeRecursive" />
           <e p="node_modules\jquery" t="IncludeRecursive" />
           <e p="node_modules\jss" t="IncludeRecursive" />
@@ -93,6 +98,7 @@
           <e p="node_modules\react-router-dom" t="IncludeRecursive" />
           <e p="node_modules\react-scripts" t="IncludeRecursive" />
           <e p="node_modules\react-tabs" t="IncludeRecursive" />
+          <e p="node_modules\react-to-pdf" t="IncludeRecursive" />
           <e p="node_modules\reactjs-popup" t="IncludeRecursive" />
           <e p="node_modules\rifm" t="IncludeRecursive" />
           <e p="node_modules\rimraf" t="IncludeRecursive" />

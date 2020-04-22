@@ -39,7 +39,7 @@ namespace CS495_Capstone_Puma.UnitTests.CheetahRequestTest
                 httpTest.RespondWithJson(new TokenResponse("djlkfaj3jlksj3e", 3599999,
                     "2020-01-13T17:58:47.142089Z", "2020-01-13T18:58:47.141089Z", true));
                 
-                string testToken = CheetahHandler.PostLogin(new Login("test","test")).Jwt;
+                string testToken = CheetahHandler.PostLogin(new Login("test","test","test")).Jwt;
 
                 httpTest.ShouldHaveCalled("*/Token")
                     .WithVerb(HttpMethod.Post);
@@ -54,7 +54,7 @@ namespace CS495_Capstone_Puma.UnitTests.CheetahRequestTest
             using var httpTest = new HttpTest();
             httpTest.RespondWith("",401);
             
-            string testToken = CheetahHandler.PostLogin(new Login("test","test")).Jwt;
+            string testToken = CheetahHandler.PostLogin(new Login("test","test","test")).Jwt;
 
             httpTest.ShouldHaveCalled("*/Token")
                 .WithVerb(HttpMethod.Post);

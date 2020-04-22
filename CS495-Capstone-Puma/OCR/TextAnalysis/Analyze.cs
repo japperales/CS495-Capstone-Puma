@@ -2,42 +2,57 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
- using CS495_Capstone_Puma.OCR.DataStructure;
- using Newtonsoft.Json;
+using System.Linq;
+using System.Threading.Tasks;
+using CS495_Capstone_Puma.OCR.DataStructure;
+using CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects;
+using CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects.BlockObjects;
+using Flurl;
+using Flurl.Http;
+using Newtonsoft.Json;
 
 namespace CS495_Capstone_Puma.OCR.TextAnalysis
 {
     public static class Analyze
     {
-        public static TextractResponse AnalyzeFile(string fileName)
+        public static async Task<TextractResponse> AnalyzeFile(string fileName)
         {
+            Dictionary<string, string> file = new Dictionary<string, string> {{"fileName", fileName}};
+            string ServerAddress = "https://localhost:5003";
+            
 
-            Console.Out.WriteLine("Executing Python...");
-            // 1) Create Process Info
-            var psi = new ProcessStartInfo {FileName = @"C:\Python27\python.exe"};
-            var script = @"..\..\CS495-Capstone-Puma\OCR\TextAnalysis\awsScript.py";
+            TextractResponse getResp = await (ServerAddress.AppendPathSegment(fileName))
+                .GetJsonAsync<TextractResponse>();
+
+            return getResp;
+        }
+        
+        public static List<Block> GetChildrenRecursive(Dictionary<string, Block> blockDictionary, Block block,
+            List<Block> targetList)
+        {
+            //Add this block to the list
+            targetList.Add(block);
             
-            psi.Arguments = $"\"{script}\" \"{fileName}\"";
-            psi.UseShellExecute = false;
-            psi.CreateNoWindow = false;
-            psi.RedirectStandardOutput = true;
-            psi.RedirectStandardError = true;
-            
-            TextractResponse textractResponse = new TextractResponse();
-            using(var process = Process.Start(psi))
+            //for each child not already in the list, navigate to that block
+            if (!(block.Relationships is null))
             {
-                if (process != null)
+                foreach (Relationship relationship in block.Relationships)
                 {
-                    StreamReader reader = process.StandardOutput;
-                    string pythonOutput = reader.ReadToEnd();
-                    Console.Out.WriteLine("read Output");
-                    Console.Out.WriteLine(pythonOutput.Length);
-
-                    textractResponse = JsonConvert.DeserializeObject<List<TextractResponse>>(pythonOutput)[0];
-                    process.WaitForExit();
+                    if (relationship.Type.Equals("CHILD"))
+                    {
+                        foreach (var id in relationship.Ids)
+                        {
+                            if (!targetList.Contains(blockDictionary[id]))
+                            {
+                                targetList = GetChildrenRecursive(blockDictionary, blockDictionary[id], targetList);
+                            }
+                            
+                            
+                        }
+                    }
                 }
             }
-            return textractResponse;
+            return targetList;
         }
     }
 }

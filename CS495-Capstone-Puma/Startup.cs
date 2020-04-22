@@ -1,3 +1,6 @@
+using System.Net.Http;
+using Flurl.Http;
+using Flurl.Http.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +15,10 @@ namespace CS495_Capstone_Puma
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
+            //Development HTTPS Client Certs
+            FlurlHttp.ConfigureClient("https://localhost:5003", cli =>
+                cli.Settings.HttpClientFactory = new UntrustedCertClientFactory());
         }
 
         public IConfiguration Configuration { get; }
@@ -19,6 +26,8 @@ namespace CS495_Capstone_Puma
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
             // In production, the React files will be served from this directory
@@ -52,6 +61,7 @@ namespace CS495_Capstone_Puma
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            
 
             app.UseMvc(routes =>
             {
@@ -69,6 +79,19 @@ namespace CS495_Capstone_Puma
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+        }
+    }
+    
+    
+//Development HTTPS Client Certs
+    public class UntrustedCertClientFactory : DefaultHttpClientFactory
+    {
+        public override HttpMessageHandler CreateMessageHandler()
+        {
+            return new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (a, b, c, d) => true
+            };
         }
     }
 }
