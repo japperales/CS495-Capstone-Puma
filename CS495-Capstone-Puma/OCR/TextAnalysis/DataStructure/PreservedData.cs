@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using CS495_Capstone_Puma.DataStructure.Asset.AssetCategory;
 using CS495_Capstone_Puma.DataStructure.BoundingBoxes;
+using CS495_Capstone_Puma.Model;
 using CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects;
+using CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects.BlockObjects;
+using CS495_Capstone_Puma.OCR.TextAnalysis;
 using Newtonsoft.Json;
 
 namespace CS495_Capstone_Puma.OCR.DataStructure
@@ -33,7 +36,10 @@ namespace CS495_Capstone_Puma.OCR.DataStructure
             foreach (var block in Blocks)
             {
                 allBlocks.Add(block.Id, block);
+                
             }
+            List<Block> children = new List<Block>();
+            return Analyze.GetChildrenRecursive(allBlocks, allBlocks[blockId], children);
         }
 
         public Block[,] ConstructTable(string tableId)
@@ -68,7 +74,10 @@ namespace CS495_Capstone_Puma.OCR.DataStructure
                     {
                         Block block = allBlocks[id];
                         //Adjust so Column 1 maps to index 0
-                        table[block.ColumnIndex - 1, block.RowIndex - 1] = block;
+                        if (block.BlockType.Equals("CELL"))
+                        {
+                            table[block.ColumnIndex - 1, block.RowIndex - 1] = block;
+                        }
                     }
                 }
             }
@@ -76,39 +85,76 @@ namespace CS495_Capstone_Puma.OCR.DataStructure
             return table;
         }
 
-        public int findAssetIndex(Block[,] table, List<Block> fullList)
+        public int[] FindIndex(Block[,] table, List<Block> fullList, List<string> searchParams)
         {
             Dictionary<string, Block> allBlocks = new Dictionary<string, Block>();
             foreach (var block in fullList)
             {
                 allBlocks.Add(block.Id, block);
             }
-            
-            //Check headers
-            for (int i = 0; i < table.GetLength(0); i++)
-            {
-                //get a CELL in ROW 1
-                Block cell = table[i, 0];
 
-                //check all of its children for the words Holdings or Assets
-                foreach (var relationship in cell.Relationships)
+            for (int y = 0; y < table.GetLength(1); y++)
+            {
+                for (int x = 0; x < table.GetLength(0); x++)
                 {
-                    if (relationship.Type.Equals("CHILD"))
+                    //get a CELL in ROW 1
+                    Block cell = table[x, y];
+                    if (!(cell.Relationships is null))
                     {
-                        foreach (var id in relationship.Ids)
+                        //check all of its children for the words Holdings or Assets
+                        foreach (var relationship in cell.Relationships)
                         {
-                            if ( allBlocks[id].Text.ToLower().Contains("asset") || allBlocks[id].Text.ToLower().Contains("holding"))
+                            if (relationship.Type.Equals("CHILD"))
                             {
-                                //return the column index
-                                return i;
+                                foreach (var id in relationship.Ids)
+                                {
+                                    if (searchParams.Contains(allBlocks[id].Text.ToLower()))
+                                    {
+                                        //return the column index
+                                        return new[] {x, y};
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
-// add other search cases
-// if nothing found, return 0
-            return -1;
+
+            // add other search cases
+        
+        
+            // if nothing found, return -1
+            return new[]{ -1, -1 };
+        }
+
+
+        public string GetAllTextFromCell(Block cell, List<Block> fullList)
+        {
+            Dictionary<string, Block> allBlocks = new Dictionary<string, Block>();
+            foreach (var block in fullList)
+            {
+                allBlocks.Add(block.Id, block);
+            }
+
+            string result = "";
+            if (!(cell.Relationships is null))
+            {
+                foreach (Relationship relationship in cell.Relationships)
+                {
+                    if (relationship.Type.Equals("CHILD"))
+                    {
+                        foreach (var id in relationship.Ids)
+                        {
+                            if (allBlocks[id].BlockType.Equals("WORD"))
+                            {
+                                result = result + " " + allBlocks[id].Text;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }

@@ -30,7 +30,10 @@ namespace CS495_Capstone_Puma.OCR.TextAnalysis
         public static List<Block> GetChildrenRecursive(Dictionary<string, Block> blockDictionary, Block block,
             List<Block> targetList)
         {
-            //for each child, add that block to the list
+            //Add this block to the list
+            targetList.Add(block);
+            
+            //for each child not already in the list, navigate to that block
             if (!(block.Relationships is null))
             {
                 foreach (Relationship relationship in block.Relationships)
@@ -41,10 +44,10 @@ namespace CS495_Capstone_Puma.OCR.TextAnalysis
                         {
                             if (!targetList.Contains(blockDictionary[id]))
                             {
-                                targetList.Add(blockDictionary[id]);
+                                targetList = GetChildrenRecursive(blockDictionary, blockDictionary[id], targetList);
                             }
                             
-                            targetList = GetChildrenRecursive(blockDictionary, blockDictionary[id], targetList);
+                            
                         }
                     }
                 }

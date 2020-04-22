@@ -16,6 +16,7 @@ let state ={
     boundingWidth: 0
 };
 
+let savedBlocks = [];
 const params = {
     image: "https://woodworkersbelfast.com/wp-content/uploads/2018/06/placeholder.png",
     boxes: [
@@ -84,6 +85,7 @@ export class OcrInterface extends React.Component {
             .then(response => {
                 console.log(JSON.stringify(response.data));
                 params.boxes = response.data["BoundingBoxIdentifiers"];
+                savedBlocks = response.data["Blocks"];
                 window.alert("Bounding boxes have been received.")
             });
     }
@@ -95,7 +97,12 @@ export class OcrInterface extends React.Component {
 
     sendBoxWithImage(event){
         event.preventDefault();
-        console.log("IMAGE STUFF RIGHT BEFORE WE SEND IT IS: " + JSON.stringify(params.image));
+        console.log("JSON RIGHT BEFORE WE SEND IT IS: ");
+        console.log(JSON.stringify({
+            Blocks: savedBlocks,
+            BoundingBoxIdentifiers: [params.boxes[this.state.clickedIndex]]
+        }));
+        
         if (this.context !== null) {
             fetch('api/Puma/PostImageWithBox', {
                 method: 'POST',
@@ -104,8 +111,8 @@ export class OcrInterface extends React.Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    image: params.image[0],
-                    box: params.boxes[this.state.clickedIndex]
+                    Blocks: savedBlocks,
+                    BoundingBoxIdentifiers: [params.boxes[this.state.clickedIndex]]
                 })
             }).then(response => response.json())
                 .then((data) => {
@@ -113,12 +120,12 @@ export class OcrInterface extends React.Component {
                     if (data !== null) {
                         for(let asset of data) {
                             const newAsset = {
-                                assetId: data.id,
-                                assetCode: data.value.AssetCode,
-                                symbol: data.value.Symbol,
-                                issue: data.value.Issue,
-                                issuer: data.value.Issuer,
-                                units: this.state.inputUnits
+                                assetId: 0,
+                                assetCode: asset.AssetIdentifier.AssetCode,
+                                symbol: asset.AssetIdentifier.Symbol,
+                                issue: asset.AssetIdentifier.Issue,
+                                issuer: asset.AssetIdentifier.Issuer,
+                                units: asset.Units
                             };
                             const copyOfCurrentPortfolio = [...this.props.currentPortfolio];
                             copyOfCurrentPortfolio.push(newAsset);
