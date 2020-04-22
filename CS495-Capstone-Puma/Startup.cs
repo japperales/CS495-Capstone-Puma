@@ -26,6 +26,8 @@ namespace CS495_Capstone_Puma
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
             // In production, the React files will be served from this directory
@@ -59,6 +61,7 @@ namespace CS495_Capstone_Puma
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            
 
             app.UseMvc(routes =>
             {

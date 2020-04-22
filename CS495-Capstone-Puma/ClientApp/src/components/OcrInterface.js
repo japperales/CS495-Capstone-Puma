@@ -84,7 +84,7 @@ export class OcrInterface extends React.Component {
         post(url, formData, config)
             .then(response => {
                 console.log(JSON.stringify(response.data));
-                params.boxes = response.data;
+                params.boxes = response.data["BoundingBoxIdentifiers"];
                 window.alert("Bounding boxes have been received.")
             });
     }

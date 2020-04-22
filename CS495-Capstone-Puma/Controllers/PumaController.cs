@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using CS495_Capstone_Puma.AutoFill;
 using CS495_Capstone_Puma.DataStructure;
@@ -13,6 +14,7 @@ using CS495_Capstone_Puma.Model;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Amazon;
+using CS495_Capstone_Puma.DataStructure.Asset.AssetCategory;
 using CS495_Capstone_Puma.DataStructure.BoundingBoxes;
 using CS495_Capstone_Puma.DataStructure.Images;
 using CS495_Capstone_Puma.OCR.DataStructure;
@@ -20,6 +22,7 @@ using CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects;
 using CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects.BlockObjects.GeometryObjects;
 using CS495_Capstone_Puma.OCR.TextAnalysis;
 using Microsoft.AspNetCore.Http;
+
 
 namespace CS495_Capstone_Puma.Controllers
 {   
@@ -86,7 +89,6 @@ namespace CS495_Capstone_Puma.Controllers
         [EnableCors("AllowAnyOrigin")]
         public JsonResult PostImage([FromForm] IFormFile body)
         {
-
             byte[] imageBytes;
             string newFileName = new TimeSpan(DateTime.Now.Ticks).TotalMilliseconds.ToString();
             newFileName = newFileName.Substring(0, newFileName.IndexOf('.')) + ".png";
@@ -98,37 +100,65 @@ namespace CS495_Capstone_Puma.Controllers
                 OCR.S3Upload.Upload.UploadDocument("pdfidentify", newFileName, memoryStream, RegionEndpoint.USEast2);
             }
             Thread.Sleep(5000);
+            
+            
             Console.Out.WriteLine(newFileName);
             TextractResponse response = Analyze.AnalyzeFile(newFileName).Result;
-            List<Block> blocks = response.FilterType("TABLE");
-            List<BoundingBoxIdentifier> boxes = new List<BoundingBoxIdentifier>();
+            
 
-            foreach (var block in blocks)
+            //Dictionary of every block indexed by ID
+            Dictionary<string, Block> allBlocks = new Dictionary<string, Block>();
+            foreach (var block in response.Blocks)
             {
-                BoundingBox boundingBox = block.Geometry.BoundingBox;
+                allBlocks.Add(block.Id, block);
+            }
+            
+            
+            //for each table block, save all children
+            //for each child, save all children
+            int i = 1;
+            List<Block> targetBlocks = new List<Block>(); 
+            List<BoundingBoxIdentifier> boundingBoxes = new List<BoundingBoxIdentifier>();
+            foreach (var table in response.FilterType("TABLE"))
+            {
+                Analyze.GetChildrenRecursive(allBlocks, table, targetBlocks);
                 
+                BoundingBox boundingBox = table.Geometry.BoundingBox;
                 //Convert relative location to absolute pixels
                 BoundingBoxIdentifier identifier = new BoundingBoxIdentifier((int) (page.Width * boundingBox.Left), 
                     (int) (page.Height * boundingBox.Top),
                     (int) (page.Width * boundingBox.Width),
                     (int) (page.Height * boundingBox.Height), 
-                    block.Id);
-                boxes.Add(identifier);
+                    i++.ToString(),
+                    table.Id);
+                
+                boundingBoxes.Add(identifier);
             }
             
+            PreservedData preservedData = new PreservedData(targetBlocks,boundingBoxes);
+            
 
-            Console.Out.WriteLine(body.Length);
-            return Json(boxes);
+            return Json(preservedData);
         }
         
         [HttpPost("PostImageWithBox")]
         [EnableCors("AllowAnyOrigin")]
-        public JsonResult PostImageWithBox([FromBody] ImageWithBox imageWithBox)
+        public JsonResult PostImageWithBox([FromBody] PreservedData preservedData)
         {
-            Console.WriteLine(imageWithBox.Box);
-            //image with box contains the image string, needs to be parsed the same as in "PostImage" as well as the box in question that the user selected for the assets as a bounding box object.
-            //you will need to return an array/list of assets to be added to be added into the current portfolio with their metrics ie. each asset should have {'assetId': int, assetCode: int, symbol: string
-            //issue: string, issuer: string, units: int}
+            //Only the correct bounding box identifier will be returned
+            string tableId = preservedData.BoundingBoxIdentifiers[0].Id;
+
+            List<Block> allBlocks = preservedData.Blocks;
+            preservedData.Blocks = preservedData.FilterToChildren(tableId);
+            
+            //Construct Table object
+            Block[,] table = preservedData.ConstructTable(tableId);
+            
+            
+            //Now, analyze the contexts of the cells to find the correct columns.
+            int assetColumnIndex = preservedData.findAssetIndex(table, allBlocks);
+            
+            //GLHF
             return Json(null);
         }
     }

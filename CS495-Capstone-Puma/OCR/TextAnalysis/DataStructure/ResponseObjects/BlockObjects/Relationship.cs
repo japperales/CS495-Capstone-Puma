@@ -1,5 +1,5 @@
 ﻿﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+ using Newtonsoft.Json;
 
 namespace CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects.BlockObjects
 {
@@ -23,5 +23,6 @@ namespace CS495_Capstone_Puma.OCR.DataStructure.ResponseObjects.BlockObjects
             Type = type;
             Ids = ids;
         }
+        
     }
 }

@@ -222,6 +222,7 @@
             <e p="Analyze.cs" t="Include" />
             <e p="awsScript.py" t="Include" />
             <e p="DataStructure" t="Include">
+              <e p="PreservedData.cs" t="Include" />
               <e p="ResponseObjects" t="Include">
                 <e p="Block.cs" t="Include" />
                 <e p="BlockObjects" t="Include">
@@ -234,6 +235,7 @@
                 </e>
                 <e p="DocumentMetadata.cs" t="Include" />
               </e>
+              <e p="Table.cs" t="Include" />
               <e p="TextractResponse.cs" t="Include" />
             </e>
           </e>

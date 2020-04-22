@@ -55,6 +55,54 @@
             Page = 0;
         }
         
+        //No Relationship
+        public Block(Geometry geometry, string text, double confidence, int rowSpan, int rowIndex, int columnSpan, int columnIndex, string blockType, string id, int page)
+        {
+            Geometry = geometry;
+            Text = text;
+            Relationships = new List<Relationship>();
+            Confidence = confidence;
+            RowSpan = rowSpan;
+            RowIndex = rowIndex;
+            ColumnSpan = columnSpan;
+            ColumnIndex = columnIndex;
+            BlockType = blockType;
+            Id = id;
+            Page = page;
+        }
+        
+        //No Text
+        public Block(Geometry geometry, List<Relationship> relationships, double confidence, int rowSpan, int rowIndex, int columnSpan, int columnIndex, string blockType, string id, int page)
+        {
+            Geometry = geometry;
+            Text = "";
+            Relationships = relationships;
+            Confidence = confidence;
+            RowSpan = rowSpan;
+            RowIndex = rowIndex;
+            ColumnSpan = columnSpan;
+            ColumnIndex = columnIndex;
+            BlockType = blockType;
+            Id = id;
+            Page = page;
+        }
+        
+        //No Relationship or Text
+        public Block(Geometry geometry, double confidence, int rowSpan, int rowIndex, int columnSpan, int columnIndex, string blockType, string id, int page)
+        {
+            Geometry = geometry;
+            Text = "";
+            Relationships = new List<Relationship>();
+            Confidence = confidence;
+            RowSpan = rowSpan;
+            RowIndex = rowIndex;
+            ColumnSpan = columnSpan;
+            ColumnIndex = columnIndex;
+            BlockType = blockType;
+            Id = id;
+            Page = page;
+        }
+        
         [JsonConstructor]
         public Block(Geometry geometry, string text, List<Relationship> relationships, double confidence, int rowSpan, int rowIndex, int columnSpan, int columnIndex, string blockType, string id, int page)
         {
@@ -70,5 +118,6 @@
             Id = id;
             Page = page;
         }
+        
     }
 }
