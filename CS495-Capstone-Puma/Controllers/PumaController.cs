@@ -185,7 +185,7 @@ namespace CS495_Capstone_Puma.Controllers
 
                         returnData.Add(new AssetInput(
                             new AssetIdentifier(
-                                0,
+                                "0",
                                 //NEEDS A MANNER OF LOOKUP FOR SYMBOL TO PROPERLY ADD ASSET
                                 preservedData.GetAllTextFromCell(table[assetIndex[0], row], allBlocks),
                                 "",
