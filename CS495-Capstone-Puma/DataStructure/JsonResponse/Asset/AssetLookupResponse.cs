@@ -12,10 +12,15 @@ namespace CS495_Capstone_Puma.DataStructure.JsonResponse.Asset
         [JsonProperty("value")]
         public AssetIdentifier value { get; set; }
 
+        public double pricePerShare { get; set; }
+        
+        public string AssetCategory { get; set; }
+        
         public AssetLookupResponse()
         {
             id = "";
             value = new AssetIdentifier();
+            pricePerShare = 0.0;
         }
 
         [JsonConstructor]

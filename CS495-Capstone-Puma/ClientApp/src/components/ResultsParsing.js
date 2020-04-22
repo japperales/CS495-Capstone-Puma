@@ -32,7 +32,7 @@ export function formatDoughnutChartValues(assets){
     return data;
 }
 
-function sumDifferentAssetTypeValues(assets){
+export function sumDifferentAssetTypeValues(assets){
     let moneyMarketsValue = 0;
     let commonStockValue = 0;
     let mutualFundsValue = 0;

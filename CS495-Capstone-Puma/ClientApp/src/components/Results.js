@@ -1,12 +1,14 @@
 ﻿import React, {component} from 'react' ;
-import ReactJson from 'react-json-view'
 import { Doughnut } from 'react-chartjs-2';
-import Flexbox from 'flexbox-react';
 import LoadingSpinner from './LoadingSpinner';
 import {formatDoughnutChartValues} from "./ResultsParsing";
 import MaterialTable from "material-table";
 import {revisedPortfolioColumns, tradeColumns} from "./TableColumns";
 import CountUp from 'react-countup';
+import html2canvas from 'html2canvas';
+//const ref = React.createRef();
+import { saveAs } from 'file-saver';
+import domtoimage from 'dom-to-image';
 
 
 let state = {loading: false, portfolioResponse: null, doughnutData: null, newDoughnutData: null};
@@ -20,6 +22,7 @@ export class Results extends React.Component{
         this.onClickWrapperMethod = this.onClickWrapperMethod.bind(this);
         this.isLoading = this.isLoading.bind(this);
         this.readyToBeginRetrieving = this.readyToBeginRetrieving.bind(this);
+        this.downloadResults = this.downloadResults.bind(this);
         this.state = {loading: false, portfolioResponse: state.portfolioResponse, doughnutData: state.doughnutData, newDoughnutData: state.newDoughnutData};
         
     }
@@ -27,6 +30,7 @@ export class Results extends React.Component{
     componentDidMount() {
        this.state = state;
     }
+    
     componentWillUnmount(){
         state = this.state;
     }
@@ -36,6 +40,15 @@ export class Results extends React.Component{
         this.props.sendPortfolio(event);
         this.StartLoading();
         this.forceUpdate()
+    }
+    
+    downloadResults(){
+
+        html2canvas(document.getElementById("resultsBlock")).then(resultsCanvas => {
+            resultsCanvas.toBlob(function(blob) {
+                saveAs(blob, "results.png");
+            })
+        });
     }
     
     //methods that return booleans to track the state of loading for the component.
@@ -75,11 +88,15 @@ export class Results extends React.Component{
             
             return (
                 <div>
+                    
                     <a className={"waves-effect waves-light btn light-blue lighten-3"}>Log out</a>
                     <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.onClickWrapperMethod}>
                         Retrieve Again
                     </button>
-                    <div className="container">
+                    <button className="waves-effect waves-light btn light-blue lighten-3" onClick={this.downloadResults}>
+                        Download Results
+                    </button>
+                    <div className="container" id="resultsBlock">
                         <div><CountUp start={100000}
                                       end={this.state.portfolioResponse[2]}
                                       duration={3}
@@ -88,7 +105,7 @@ export class Results extends React.Component{
                                       separator=","
                                       prefix="$ "
                                       suffix=" Portfolio Value Increase"
-                                      style={{color: "green", fontSize: "36px"}}/>
+                                      style={{color: "green", fontSize: "36px", font: "lato"}}/>
                             <br/>
 
                             <CountUp start={0}
@@ -120,7 +137,11 @@ export class Results extends React.Component{
                                                             fontSize: '14px',
                                                             fontFamily: 'Veranda',
                                                             borderRadius: '0px',
-                                                        }
+                                                        },
+                                                        search: false,
+                                                        paging: false,
+                                                        showTitle: false,
+                                                        toolbar: false
                                                     }
                                                     }/></div>
                         </div>
@@ -146,15 +167,21 @@ export class Results extends React.Component{
                                                         fontSize: '14px',
                                                         fontFamily: 'Veranda',
                                                         borderRadius: '0px',
-                                                    }
+                                                    },
+                                                    search: false,
+                                                    paging: false,
+                                                    showTitle: false,
+                                                    toolbar: false
+                                                    
                                                 }
-                                                }/></div>
+                                                }
+                            /></div>
                         </div>
                             </div>
                     </div>
 
                     </div>
-
+                    
                 </div>
             )
         } else if (this.readyToBeginRetrieving()) {

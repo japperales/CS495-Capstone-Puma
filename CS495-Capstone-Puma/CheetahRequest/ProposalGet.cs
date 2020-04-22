@@ -71,6 +71,10 @@ namespace CS495_Capstone_Puma.Model
                 {
                     holding.TotalAmount -= trade.UnitShares;
                     holding.TotalValue -= (holding.PricePerShare * trade.UnitShares);
+                    /*if (Math.Abs(holding.TotalAmount) <= 0)
+                    {
+                        copiedPortfolio.Remove(holding);
+                    }*/
                     return copiedPortfolio;
                 }
             }
@@ -119,7 +123,7 @@ namespace CS495_Capstone_Puma.Model
             return namedHoldings;
         }
 
-        public async Task<IList<TradeShard>> RetrieveTradeProposal(CheetahConfig cheetahConfig, string bearerToken, string accountId)
+        public static async Task<IList<TradeShard>> RetrieveTradeProposal(CheetahConfig cheetahConfig, string bearerToken, string accountId)
         {
             var response = await (cheetahConfig.ApiUrlRoot + "Trades?AccountId=" + accountId)
                 .WithOAuthBearerToken(bearerToken)
@@ -170,7 +174,7 @@ namespace CS495_Capstone_Puma.Model
             return holdingsShards;
         }
         
-        private IList<TradeShard> AddAssetNamesToTrades(CheetahConfig cheetahConfig, IList<TradeShard> tradeShards, string bearerToken)
+        private static IList<TradeShard> AddAssetNamesToTrades(CheetahConfig cheetahConfig, IList<TradeShard> tradeShards, string bearerToken)
         {
             foreach (TradeShard tradeShard in tradeShards)
             {
@@ -181,7 +185,7 @@ namespace CS495_Capstone_Puma.Model
             return tradeShards;
         }
         
-        private async Task<AssetShard> GetAssetFromId(CheetahConfig cheetahConfig, int assetId, string bearerToken)
+        public static async Task<AssetShard> GetAssetFromId(CheetahConfig cheetahConfig, int assetId, string bearerToken)
         {
             string response = await (cheetahConfig.ApiUrlRoot + "Assets?AssetId=" + assetId)
                 .WithOAuthBearerToken(bearerToken)
@@ -193,7 +197,7 @@ namespace CS495_Capstone_Puma.Model
             return assetShard;
         }
 
-        private AssetShard CreateAssetShard(JToken assetToken)
+        private static AssetShard CreateAssetShard(JToken assetToken)
         {
             JToken pricePerShareToken = 0;
             if (assetToken["PriceHistories"] != null)

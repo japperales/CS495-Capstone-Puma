@@ -8,8 +8,8 @@ import ImageUploader from 'react-images-upload';
 import {TokenContext} from "../Contexts/TokenContext";
 
 let state ={
-    hoverIndex: 0,
-    clickedIndex: 0,
+    hoverIndex: null,
+    clickedIndex: null,
     pictureData: null,
     file: null,
     boundingHeight: 0,
@@ -72,7 +72,6 @@ export class OcrInterface extends React.Component {
 
     async submit(e) {
         e.preventDefault();
-
         const url = `/api/Puma/PostImage`;
         const formData = new FormData();
         formData.append('body', this.state.file);
