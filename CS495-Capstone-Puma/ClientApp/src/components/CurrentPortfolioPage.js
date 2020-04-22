@@ -80,7 +80,7 @@ export class CurrentPortfolioPage extends React.Component{
                     if(data !== null || undefined) {
                         this.setState({accountResponse: data});
                     }else{
-                        this.setState({accountResponse: "Account number not available"})
+                        this.setState({accountResponse: {AccountNumber: "Account number not available"}})
                     }
                 window.alert("Portfolio Submitted")
             });
