@@ -77,7 +77,11 @@ export class CurrentPortfolioPage extends React.Component{
             }).then(response => response.json())
                 .then((data) => {
                     console.log(JSON.stringify(data));
-                this.setState({accountResponse: data});
+                    if(data !== null || undefined) {
+                        this.setState({accountResponse: data});
+                    }else{
+                        this.setState({accountResponse: "Account number not available"})
+                    }
                 window.alert("Portfolio Submitted")
             });
         }

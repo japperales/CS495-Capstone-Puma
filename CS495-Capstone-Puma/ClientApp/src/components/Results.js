@@ -43,18 +43,12 @@ export class Results extends React.Component{
     }
     
     downloadResults(){
-        
-        const input = document.getElementById('resultsBlock');
-        input.style.backgroundColor = "white";
-        domtoimage.toBlob(input)
-            .then(function (dataUrl) {
-                saveAs(dataUrl, "yay.png");
-                input.style.backgroundColor = "transparent";
+
+        html2canvas(document.getElementById("resultsBlock")).then(resultsCanvas => {
+            resultsCanvas.toBlob(function(blob) {
+                saveAs(blob, "results.png");
             })
-            .catch(function (error) {
-                console.error('oops, something went wrong!', error);
-                input.style.backgroundColor = "transparent";
-            });
+        });
     }
     
     //methods that return booleans to track the state of loading for the component.
@@ -145,7 +139,9 @@ export class Results extends React.Component{
                                                             borderRadius: '0px',
                                                         },
                                                         search: false,
-                                                        paging: false
+                                                        paging: false,
+                                                        showTitle: false,
+                                                        toolbar: false
                                                     }
                                                     }/></div>
                         </div>
@@ -173,7 +169,10 @@ export class Results extends React.Component{
                                                         borderRadius: '0px',
                                                     },
                                                     search: false,
-                                                    paging: false
+                                                    paging: false,
+                                                    showTitle: false,
+                                                    toolbar: false
+                                                    
                                                 }
                                                 }
                             /></div>
