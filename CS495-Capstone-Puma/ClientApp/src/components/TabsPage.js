@@ -25,6 +25,7 @@ export class TabsPage extends React.Component {
             bearerToken:null,
             userName: null,
             password: null,
+            apiKey: null,
 
             portfolioResponse: null,
             currentPortfolio: [],
@@ -55,8 +56,8 @@ export class TabsPage extends React.Component {
     
 
 
-    loginCallback(userName, password){
-        this.setState({userName: userName, password: password});
+    loginCallback(userName, password, apiKey){
+        this.setState({userName: userName, password: password, apiKey: apiKey});
     }
     
     //Here we take the pulled list of assets from each child component along with the personal data,
@@ -93,7 +94,8 @@ export class TabsPage extends React.Component {
             },
             body: JSON.stringify({
                 username: this.state.userName,
-                password: this.state.password
+                password: this.state.password,
+                apiKey: this.state.apiKey
             })})
             .then(response => response.json())
             .then(data => {
@@ -160,6 +162,8 @@ export class TabsPage extends React.Component {
                     console.log(this.state.portfolioResponse)
             });
     }
+    
+    
     //Token Context allows any child components to access the token data without passing it down explicitly
     //Each Tab in the TabsList navigates to a corresponding TabPanel
     render() {

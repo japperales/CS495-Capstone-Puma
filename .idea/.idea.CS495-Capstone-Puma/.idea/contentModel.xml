@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\rylan\.Rider2019.2\config\scratches" t="IncludeRecursive" />
-    <e p="C:\Users\rylan\.Rider2019.2\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\rylan\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_CS495-Capstone-Puma.295587292.00" t="ExcludeRecursive" />
-    <e p="D:\RiderProjects\CS495-Capstone-Puma" t="IncludeFlat">
+    <e p="C:\Users\John\.nuget\packages\microsoft.net.test.sdk\16.2.0\build\netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="C:\Users\John\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\John\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\John\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="C:\Users\John\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\John\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CS495-Capstone-Puma.-1623170172.00" t="ExcludeRecursive" />
+    <e p="D:\CS495-Capstone-Puma" t="IncludeFlat">
       <e p="CS495-Capstone-Puma" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
         <e p="app.config" t="Include" />
@@ -173,7 +178,7 @@
           <e p="Images" t="Include">
             <e p="ImageConverter.cs" t="Include" />
             <e p="ImageData.cs" t="Include" />
-            <e p="ImageWithBox.cs" t="Include" />
+            <e p="ImageWIthBox.cs" t="Include" />
           </e>
           <e p="JsonRequest" t="Include">
             <e p="TransactionBatchRequest.cs" t="Include" />
@@ -205,6 +210,7 @@
           <e p="Debug" t="Include">
             <e p="netcoreapp2.1" t="Include">
               <e p="CS495-Capstone-Puma.AssemblyInfo.cs" t="Include" />
+              <e p="CS495-Capstone-Puma.RazorAssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -234,15 +240,13 @@
             <e p="pythonScript.resx" t="Include" />
           </e>
         </e>
+        <e p="package-lock.json" t="Include" />
         <e p="Pages" t="Include">
           <e p="_ViewImports.cshtml" t="Include" />
           <e p="Error.cshtml" t="Include" />
           <e p="Error.cshtml.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
-        <e p="Properties" t="Include">
-          <e p="launchsettings.json" t="Include" />
-        </e>
         <e p="Startup.cs" t="Include" />
       </e>
       <e p="CS495-Capstone-Puma.sln" t="IncludeFlat" />
@@ -254,7 +258,6 @@
           <e p="HandlerLogicTests.cs" t="Include" />
         </e>
         <e p="CS495-Capstone-Puma.UnitTests.csproj" t="IncludeRecursive" />
-        <e p="login.json" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.0" t="Include">
