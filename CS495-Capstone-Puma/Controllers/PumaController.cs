@@ -99,7 +99,7 @@ namespace CS495_Capstone_Puma.Controllers
             }
             Thread.Sleep(5000);
             Console.Out.WriteLine(newFileName);
-            TextractResponse response = Analyze.AnalyzeFile(newFileName);
+            TextractResponse response = Analyze.AnalyzeFile(newFileName).Result;
             List<Block> blocks = response.FilterType("TABLE");
             List<BoundingBoxIdentifier> boxes = new List<BoundingBoxIdentifier>();
 

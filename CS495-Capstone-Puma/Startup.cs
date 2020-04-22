@@ -1,3 +1,6 @@
+using System.Net.Http;
+using Flurl.Http;
+using Flurl.Http.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +15,10 @@ namespace CS495_Capstone_Puma
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
+            //Development HTTPS Client Certs
+            FlurlHttp.ConfigureClient("https://localhost:5003", cli =>
+                cli.Settings.HttpClientFactory = new UntrustedCertClientFactory());
         }
 
         public IConfiguration Configuration { get; }
@@ -69,6 +76,19 @@ namespace CS495_Capstone_Puma
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+        }
+    }
+    
+    
+//Development HTTPS Client Certs
+    public class UntrustedCertClientFactory : DefaultHttpClientFactory
+    {
+        public override HttpMessageHandler CreateMessageHandler()
+        {
+            return new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (a, b, c, d) => true
+            };
         }
     }
 }
