@@ -1,4 +1,4 @@
-﻿
+﻿//configuration property for material tables
 export const portfolioColumns = [
     { title: 'Asset Code', field: 'assetCode' },
     { title: 'Symbol', field: 'symbol' },

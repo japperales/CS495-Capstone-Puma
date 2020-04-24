@@ -52,6 +52,7 @@ export class CurrentPortfolioPage extends React.Component{
     postAssets(event){
         event.preventDefault();
         const submissionArray = [];
+        //format current portfolio assets into structure the backend accepts
         for(let asset of this.props.currentPortfolio){
             console.log(JSON.stringify(asset));
             submissionArray.push({
@@ -64,7 +65,8 @@ export class CurrentPortfolioPage extends React.Component{
                 units: asset.units
             })
         }
-        console.log(this.context.Jwt);
+        
+        
         if (this.context !== null) {
             fetch('api/Puma/PostAssets', {
                 method: 'POST',

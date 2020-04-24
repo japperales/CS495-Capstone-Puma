@@ -1,7 +1,7 @@
 ﻿
 export function formatDoughnutChartValues(assets){
     let valueSumArray = sumDifferentAssetTypeValues(assets)
-
+//these are the currently supported types that the charts will recognize, with all other types being collected in 'other'
     const data = {
         labels: [
             'Money Markets',
@@ -31,7 +31,7 @@ export function formatDoughnutChartValues(assets){
 
     return data;
 }
-
+//adds up all worth of asset types four doughnut chart display
 export function sumDifferentAssetTypeValues(assets){
     let moneyMarketsValue = 0;
     let commonStockValue = 0;
@@ -56,8 +56,7 @@ export function sumDifferentAssetTypeValues(assets){
                 otherValue += asset.totalValue;
             break;
         }
-    });  
-    console.log([moneyMarketsValue,commonStockValue,mutualFundsValue,loansValue, otherValue]);
+    });
     return [moneyMarketsValue,commonStockValue,mutualFundsValue,loansValue, otherValue];
     
 }

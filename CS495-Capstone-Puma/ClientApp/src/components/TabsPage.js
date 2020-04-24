@@ -105,6 +105,7 @@ export class TabsPage extends React.Component {
                 this.loginPopup(data.wasSuccessful);
                 this.setState({inputTab:false});
                 this.setState({resultTab: false});
+                this.setState({ocrTab: false});
                 this.setState({loginTab: true});
             });
     }

@@ -49,23 +49,18 @@
             <e p="prop-types" t="IncludeRecursive" />
             <e p="react" t="IncludeRecursive" />
           </e>
-          <e p="node_modules\axios" t="IncludeRecursive" />
           <e p="node_modules\bootstrap" t="IncludeRecursive" />
           <e p="node_modules\chart.js" t="IncludeRecursive" />
           <e p="node_modules\clsx" t="IncludeRecursive" />
           <e p="node_modules\color-name" t="IncludeRecursive" />
-          <e p="node_modules\css-line-break" t="IncludeRecursive" />
           <e p="node_modules\csstype" t="IncludeRecursive" />
           <e p="node_modules\date-fns" t="IncludeRecursive" />
-          <e p="node_modules\dom-to-image" t="IncludeRecursive" />
           <e p="node_modules\enzyme" t="IncludeRecursive" />
           <e p="node_modules\enzyme-adapter-react-16" t="IncludeRecursive" />
           <e p="node_modules\enzyme-to-json" t="IncludeRecursive" />
           <e p="node_modules\es6-promise" t="IncludeRecursive" />
-          <e p="node_modules\file-saver" t="IncludeRecursive" />
           <e p="node_modules\flexbox-react" t="IncludeRecursive" />
           <e p="node_modules\hoist-non-react-statics" t="IncludeRecursive" />
-          <e p="node_modules\html2canvas" t="IncludeRecursive" />
           <e p="node_modules\is-in-browser" t="IncludeRecursive" />
           <e p="node_modules\jquery" t="IncludeRecursive" />
           <e p="node_modules\jss" t="IncludeRecursive" />
@@ -98,7 +93,6 @@
           <e p="node_modules\react-router-dom" t="IncludeRecursive" />
           <e p="node_modules\react-scripts" t="IncludeRecursive" />
           <e p="node_modules\react-tabs" t="IncludeRecursive" />
-          <e p="node_modules\react-to-pdf" t="IncludeRecursive" />
           <e p="node_modules\reactjs-popup" t="IncludeRecursive" />
           <e p="node_modules\rifm" t="IncludeRecursive" />
           <e p="node_modules\rimraf" t="IncludeRecursive" />
@@ -110,6 +104,7 @@
             <e p="favicon.ico" t="Include" />
             <e p="index.html" t="Include" />
             <e p="manifest.json" t="Include" />
+            <e p="placeholder.png" t="Include" />
             <e p="testdoc.pdf" t="Include" />
           </e>
           <e p="README.md" t="Include" />
@@ -228,6 +223,7 @@
             <e p="Analyze.cs" t="Include" />
             <e p="awsScript.py" t="Include" />
             <e p="DataStructure" t="Include">
+              <e p="PreservedData.cs" t="Include" />
               <e p="ResponseObjects" t="Include">
                 <e p="Block.cs" t="Include" />
                 <e p="BlockObjects" t="Include">
@@ -240,10 +236,9 @@
                 </e>
                 <e p="DocumentMetadata.cs" t="Include" />
               </e>
+              <e p="Table.cs" t="Include" />
               <e p="TextractResponse.cs" t="Include" />
             </e>
-            <e p="pythonScript.Designer.cs" t="Include" />
-            <e p="pythonScript.resx" t="Include" />
           </e>
         </e>
         <e p="package-lock.json" t="Include" />

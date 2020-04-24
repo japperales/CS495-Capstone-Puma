@@ -1,11 +1,7 @@
 ﻿import React from 'react'
 import { post } from 'axios';
 import  './css/PersonalInput.css'
-import M from 'materialize-css'
 import Boundingbox from 'react-bounding-box';
-import { Document, Page } from 'react-pdf';
-import ImageUploader from 'react-images-upload';
-import {TokenContext} from "../Contexts/TokenContext";
 
 let state ={
     hoverIndex: null,
@@ -20,8 +16,6 @@ let savedBlocks = [];
 const params = {
     image: "https://woodworkersbelfast.com/wp-content/uploads/2018/06/placeholder.png",
     boxes: [
-        // coord(0,0) = top left corner of image
-        //[x, y, width, height]
 
         {coord: [0, 0, 1, 1], label: ""}
     ],
@@ -47,14 +41,12 @@ export class OcrInterface extends React.Component {
 
     updateHoverIndex(num){
         this.setState({hoverIndex: num});
-        console.log("we have called update hover index")
     }
 
     updateClickedIndex(e){
         e.preventDefault();
         const currentHover = this.state.hoverIndex;
         this.setState({clickedIndex: currentHover});
-        console.log("WE HAVE CALLED UPDATE CLICKED INDEX");
         if(this.state.hoverIndex === -1 || this.state.hoverIndex === ""){
             this.setState({clickedIndex: ""})
         }
@@ -97,11 +89,7 @@ export class OcrInterface extends React.Component {
 
     sendBoxWithImage(event){
         event.preventDefault();
-        console.log("JSON RIGHT BEFORE WE SEND IT IS: ");
-        console.log(JSON.stringify({
-            Blocks: savedBlocks,
-            BoundingBoxIdentifiers: [params.boxes[this.state.clickedIndex]]
-        }));
+        
         
         if (this.context !== null) {
             fetch('api/Puma/PostImageWithBox', {

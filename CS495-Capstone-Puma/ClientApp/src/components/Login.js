@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import M from 'materialize-css'
 import './css/Login.css'
-
+//state is saved for when the component next renders here
 let state = {
     inputUserName: null,
     inputPassword: null,
