@@ -10,7 +10,7 @@
     "chart.js": "latest",
     "color-name": "latest",
     "flexbox-react": "latest",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "material-table": "latest",
     "materialize-css": "^1.0.0",
     "prop-types": "latest",
